@@ -9,6 +9,8 @@ import ClientesInfoView from '@/views/ClientesInfoView.vue'
 import ClientesOrdenesView from '@/views/ClientesOrdenesView.vue'
 import VehiculosMenuView from '@/views/VehiculosMenuView.vue'
 import ServiciosView from '@/views/ServiciosView.vue'
+import RegistroEmpleadoView from '@/views/RegistroEmpleadoView.vue'
+import RegistroVehiculoView from '@/views/RegistroVehiculoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +54,11 @@ const router = createRouter({
       component: InfoEmpleadosView
     },
     {
+      path:'/RegistroEmpleado',
+      name: 'RegistroEmpleado',
+      component: RegistroEmpleadoView
+    },
+    {
       path: '/Login',
       name: 'Login',
       component: LoginView
@@ -65,6 +72,11 @@ const router = createRouter({
       path: '/Vehiculos',
       name: 'Vehiculos',
       component: VehiculosMenuView,
+    },
+    {
+      path: '/RegistroVehiculo',
+      name: 'RegistroVehiculo',
+      component: RegistroVehiculoView,
     },
     {
       path: '/Servicios',
