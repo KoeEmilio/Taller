@@ -1,5 +1,23 @@
-
 <script setup>
+
+import { ref, onMounted } from 'vue'
+
+const datos = ref([])
+
+    const mostrarinfo  = () =>{
+        fetch('http://pruebapdo.com/ruta')
+        .then(response => response.json())
+        .then(json => {
+            if(json.status=200){
+                datos.value = json.data
+            }
+        })
+    }
+
+
+onMounted(() => {
+mostrarinfo()
+})
 
 </script>
 
