@@ -3,9 +3,10 @@
 import { ref, onMounted } from 'vue'
 
 const datos = ref([])
+const search = ref('')
 
     const mostrarinfo  = () =>{
-        fetch('http://testpdo.com/prueba')
+        fetch('http://testpdo.com/clientes')
         .then(response => response.json())
         .then(json => {
             if(json.status=200){
@@ -35,7 +36,7 @@ mostrarinfo()
     </v-app-bar>
 
     <v-card
-    title="Nutrition"
+    title="Clientes"
     flat
 >
     <template v-slot:text>
@@ -51,7 +52,7 @@ mostrarinfo()
 
     <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="datos"
     :search="search"
     ></v-data-table>
 </v-card>
