@@ -66,7 +66,7 @@ const submit = () => {
 
         <v-select
           v-model="state"
-          :items="['Activo', 'Inactivo']"
+          :items="['LIBRE', 'OCUPADO']"
           :rules="[v => !!v || 'Estado es requerido']"
           label="Estado"
           required
