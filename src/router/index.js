@@ -11,6 +11,7 @@ import VehiculosMenuView from '@/views/VehiculosMenuView.vue'
 import ServiciosView from '@/views/ServiciosView.vue'
 import RegistroEmpleadoView from '@/views/RegistroEmpleadoView.vue'
 import RegistroVehiculoView from '@/views/RegistroVehiculoView.vue'
+import VehiculosInfoView from '@/views/VehiculosInfoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -82,6 +83,11 @@ const router = createRouter({
       path: '/Servicios',
       name: 'Servicios',
       component: ServiciosView,
+    },
+    {
+      path: '/VehiculosInfo',
+      name: 'VehiculosInfo',
+      component:VehiculosInfoView,
     }
   ]
 })
