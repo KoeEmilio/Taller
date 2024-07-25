@@ -17,7 +17,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
       <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="4" class="d-flex justify-center">
-          <RouterLink to="" class="menu-button text-decoration-none">
+          <RouterLink to="/RegistroVehiculo" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-car-select</v-icon>
@@ -28,7 +28,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
-          <RouterLink to="" class="menu-button text-decoration-none">
+          <RouterLink to="/VehiculosInfo" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-car-search</v-icon>

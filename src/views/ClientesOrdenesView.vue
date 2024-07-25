@@ -14,7 +14,7 @@ const mostrarFormulario = () =>{
     }
 }
 
-const mostrarinfo  = () =>{
+const mostrarinfo = () =>{
         fetch('http://miproyecto.com/ordenes')
         .then(response => response.json())
         .then(json => {
@@ -60,6 +60,7 @@ onMounted(() => {
                                 <div v-show="showFormulario === true" >
                                     <v-card class="pa-5">
                                         <v-card-title>Registrar Orden</v-card-title>
+<<<<<<< HEAD
                                         <v-card-text class="scrollable-content">
                                             <v-text-field label="Fecha y Hora de Ingreso" v-model="fechaHoraIngreso"></v-text-field>
                                             <v-text-field label="Fecha y Hora Estimada de Salida" v-model="fechaHoraSalida"></v-text-field>
@@ -68,6 +69,16 @@ onMounted(() => {
                                             <v-text-field label="Motivo" v-model="motivo"></v-text-field>
                                             <v-select label="Cita" :items="citas" v-model="cita"></v-select>
                                             <v-select label="Estado" :items="estados" v-model="estado"></v-select>
+=======
+                                          <v-card-text class="scrollable-content">
+                                            <v-text-field class="custom-field" label="Fecha y Hora de Ingreso" v-model="fechaHoraIngreso"></v-text-field>
+                                            <v-text-field class="custom-field" label="Fecha y Hora Estimada de Salida" v-model="fechaHoraSalida"></v-text-field>
+                                            <v-select class="custom-field" label="Empleado" :items="empleados" v-model="empleado"></v-select>
+                                            <v-select class="custom-field" label="Vehículo" :items="vehiculos" v-model="vehiculo"></v-select>
+                                            <v-text-field class="custom-field" label="Motivo" v-model="motivo"></v-text-field>
+                                            <v-select class="custom-field" label="Cita" :items="citas" v-model="cita"></v-select>
+                                            <v-select class="custom-field" label="Estado" :items="estados" v-model="estado"></v-select>
+>>>>>>> 0aafd4dce60d093b9a5ce303a048a6e6ad47f0f4
                                             <v-btn class="BtnGuindo" @click="registrarOrden">Registrar</v-btn>
                                         </v-card-text>
                                     </v-card>  
@@ -96,18 +107,19 @@ onMounted(() => {
 .container{
     background-color: blue;
     width: 87vw;
-    height: 150vh;
+    height: 100vh;
     justify-content:space-around;
 }
 
 .agregar-text {
-  font-weight:bolder;
-  padding: 4%;
+    font-weight:bolder;
+    padding: 4%;
 }
 .scrollable-content{
     max-height: 300px;
     overflow-y: auto;
 }
+
 #Tabla{
     max-height: 500px;
     overflow-y: auto;
