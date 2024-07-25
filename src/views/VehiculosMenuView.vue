@@ -4,44 +4,46 @@ import { RouterLink, RouterView } from 'vue-router'</script>
 <template>
   <VApp>
     <VAppBar app color="#7d0100" dark>
-      <h1 class="text-center w-100">INICIO</h1>
-      <router-link to="Login">
+      <router-link to="/">
         <v-btn
         class="ma-3"
         color="white"
-        icon="mdi-account"
+        icon="mdi-arrow-left-bold-circle-outline"
       ></v-btn>
       </router-link>
+    <h1 class="text-center w-100">VEHICULOS</h1>
     </VAppBar>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="4" class="d-flex justify-center">
-          <RouterLink to="Clientes" class="menu-button text-decoration-none">
+          <RouterLink to="" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account</v-icon>
-                <h1>CLIENTE</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-car-select</v-icon>
+                <h2>REGISTRAR</h2>
+                <h2>VEHICULO</h2>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
-          <RouterLink to="Empleados" class="menu-button text-decoration-none">
+          <RouterLink to="" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account-tie</v-icon>
-                <h1>Empleados</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-car-search</v-icon>
+                <h2>VER</h2>
+                <h2>VEHICULOS</h2>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
-          <RouterLink to="/Vehiculos" class="menu-button text-decoration-none">
+          <RouterLink to="/Servicios" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-car-back</v-icon>
-                <h1>Vehiculos</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-car-wrench</v-icon>
+                <h1>SERVICIOS</h1>
               </div>
             </VBtn>
           </RouterLink>
