@@ -25,7 +25,7 @@ const submit = () => {
   <v-container></v-container>
   <V-App>
     <VAppBar app color="#7d0100" dark>
-      <router-link to="/">
+      <router-link to="/ClientesEmpleados">
         <v-btn
           class="ma-3"
           color="white"

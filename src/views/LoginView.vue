@@ -1,5 +1,21 @@
 <script setup>
-import video from '@/video/pixel_red.mp4'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import video from '@/video/pixel_red.mp4';
+
+const usuario = ref('');
+const contrasena1 = ref('');
+const router = useRouter();
+
+const IngresarFormulario = () => {
+  if (usuario.value === 'azael@gmail.com' && contrasena1.value === '1234') {
+    router.push({ name: 'MenuEmpleados' });
+  } else if (usuario.value === 'saul@gmail.com' && contrasena1.value === '1234') {
+    router.push({ name: 'Home' });
+  } else {
+    alert('Correo o contraseña incorrectos');
+  }
+};
 </script>
 
 <template>
@@ -7,87 +23,115 @@ import video from '@/video/pixel_red.mp4'
     <video autoplay muted loop id="background-video" :src="video"></video>
     <div class="contenedor">
       <v-container class="fill-height">
-        
         <v-row id="Contenedor-login">
-          <v-card  width="30vw" height="80vh">
-            <v-card-title id="titulo" style="text-align: center;">Inicia Sesión</v-card-title>
-              <div id="contenedor-formulario">
-                <v-card-text>
-                  <v-container>
+          <v-card class="transparente" width="30vw" height="80vh">
+            <v-card-title id="titulo" class="transparente-titulo" style="text-align: center;">INICIA SESIÓN</v-card-title>
+            <div id="contenedor-formulario" class="transparente">
+              <v-card-text>
+                <v-container>
                   <v-row id="UserRow">
-
-                    <v-text-field label="Usuario" variant="solo" clearable></v-text-field>
+                    <v-text-field
+                      v-model="usuario"
+                      label="Usuario"
+                      variant="solo"
+                      clearable
+                      :clear-icon-color="'black'"
+                    ></v-text-field>
                   </v-row>
                   <v-row id="PasswordRow">
-                    <v-text-field label="Contraseña" variant="solo" type="password" ></v-text-field>
+                    <v-text-field
+                      v-model="contrasena1"
+                      label="Contraseña"
+                      variant="solo"
+                      type="password"
+                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="showPassword = !showPassword"
+                    ></v-text-field>
                   </v-row>
-                  </v-container>
-                    </v-card-text>
-                      <v-card-actions>
-                        <v-container >
-                          <v-row>
-                            <v-col class="d-flex">
-                            <v-btn class="botones-color" block>Ingresar</v-btn>
-                            </v-col>
-                          </v-row>
-                        </v-container>
-                  </v-card-actions>
-                </div>
-              </v-card>
-            </v-row>
-        </v-container>
-      </div>
-    <router-view/>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-container>
+                  <v-row>
+                    <v-col class="d-flex">
+                      <v-btn class="botones-color" block @click="IngresarFormulario">Ingresar</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-actions>
+            </div>
+          </v-card>
+        </v-row>
+      </v-container>
+    </div>
+    <router-view />
   </div>
-  
-
 </template>
 
-
 <style>
-#background-video{
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+#background-video {
   position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
 }
-#Contenedor-login{
+
+#Contenedor-login {
   display: flex;
   align-items: center;
   justify-content: center;
   max-height: 80%;
 }
 
-#titulo{
-  background-color: rgb(230, 1, 1);
-  color: white;
-  box-shadow: -1px 2px 6px black;
-  
+.transparente {
+  background-color: rgba(255, 255, 255, 0.5) !important; /* Fondo blanco con 50% de opacidad */
+  box-shadow: none !important;
 }
 
-#contenedor-formulario{
-  width:100%;
+.transparente-titulo {
+  background-color: #7d0100; /* Fondo negro con 80% de opacidad */
+}
+
+#titulo {
+  color: white;
+  box-shadow: none;
+}
+
+#contenedor-formulario {
+  width: 100%;
   height: 90%;
   padding-block: 10px;
 }
 
-#UserRow{
+#UserRow {
   padding-block: 8px;
 }
-#PasswordRow{
+
+#PasswordRow {
   padding-block: 10px;
 }
 
-.v-btn.botones-color{
-  background-color: rgb(230, 1, 1) ;
-  color: white ;
+.v-btn.botones-color {
+  background-color: #7d0100;
+  color: white;
+  text-decoration: none;
 }
+
 .contenedor {
-    height: 80vh;
+  height: 80vh;
 }
 
-
-.O{
+.O {
   justify-content: center;
   text-decoration: none;
-
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+}
 </style>
+
