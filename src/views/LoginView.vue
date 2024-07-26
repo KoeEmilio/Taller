@@ -16,10 +16,10 @@ import video from '@/video/pixel_red.mp4'
                   <v-container>
                   <v-row id="UserRow">
 
-                    <v-text-field label="Usuario" variant="outlined"></v-text-field>
+                    <v-text-field label="Usuario" variant="solo" clearable></v-text-field>
                   </v-row>
                   <v-row id="PasswordRow">
-                    <v-text-field label="Contraseña" variant="outlined" type="password"></v-text-field>
+                    <v-text-field label="Contraseña" variant="solo" type="password" ></v-text-field>
                   </v-row>
                   </v-container>
                     </v-card-text>
@@ -35,13 +35,12 @@ import video from '@/video/pixel_red.mp4'
                           </v-row>
                           <v-row>
                             <v-col>
-                              <router-link to="/RegistroClientes">
+                              <router-link to="/RegistroEmpleados">
                                 <v-btn class="botones-color" block>Registrarse</v-btn>
                                 </router-link>
                             </v-col>
                           </v-row>
                             
-                          
                         </v-container>
                   </v-card-actions>
                 </div>

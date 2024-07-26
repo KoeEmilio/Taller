@@ -4,12 +4,12 @@ import ClientesMenuView from '@/views/ClientesMenuView.vue'
 import EmpleadosView from '@/views/EmpleadosView.vue'
 import InfoEmpleadosView from '@/views/InfoEmpleadosView.vue'
 import LoginView from '@/views/LoginView.vue'
-import RegistroClientesView from '@/views/RegistroClienteVIew.vue'
+import RegistroClienteView from '@/views/RegistroClienteVIew.vue'
 import ClientesInfoView from '@/views/ClientesInfoView.vue'
 import ClientesOrdenesView from '@/views/ClientesOrdenesView.vue'
 import VehiculosMenuView from '@/views/VehiculosMenuView.vue'
 import ServiciosView from '@/views/ServiciosView.vue'
-import RegistroEmpleadoView from '@/views/RegistroEmpleadoView.vue'
+import RegistroEmpleadosView from '@/views/RegistroEmpleadosView.vue'
 import RegistroVehiculoView from '@/views/RegistroVehiculoView.vue'
 import VehiculosInfoView from '@/views/VehiculosInfoView.vue'
 
@@ -55,9 +55,9 @@ const router = createRouter({
       component: InfoEmpleadosView
     },
     {
-      path:'/RegistroEmpleado',
-      name: 'RegistroEmpleado',
-      component: RegistroEmpleadoView
+      path:'/RegistroCliente',
+      name: 'RegistroCliente',
+      component: RegistroClienteView
     },
     {
       path: '/Login',
@@ -65,9 +65,9 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/RegistroClientes',
-      name: 'RegistroClientes',
-      component: RegistroClientesView
+      path: '/RegistroEmpleados',
+      name: 'RegistroEmpleados',
+      component: RegistroEmpleadosView
     },
     {
       path: '/Vehiculos',

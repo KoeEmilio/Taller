@@ -32,6 +32,9 @@ onMounted(() => {
 </script>
 
 <template>
+<div class="principal">
+
+
     <div class="container">
         <v-app>
             <v-app-bar app color="#7d0100" dark>
@@ -45,7 +48,6 @@ onMounted(() => {
                 <h1 class="text-center w-100">Ordenes</h1>
             </v-app-bar>
             
-
             <v-main>
                 <v-container>
                     <v-row>
@@ -93,23 +95,27 @@ onMounted(() => {
                 </v-container>
             </v-main>
         </v-app>
-    </div>                     
+    </div>   
+</div>                  
 </template>
 
 <style scoped>
+
 #Cont{
     display: flex;
     height: 67.7vh;
     width: 11.2vw;
     margin-left: 15%;
     justify-content: space-between;
+
 }
 
 .container{
-    background-color: blue;
     width: 87vw;
     height: 100vh;
-    justify-content:space-around;
+    justify-content:space-around; 
+  
+
 }
 
 .agregar-text {
