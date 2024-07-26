@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'</script>
+import { RouterLink} from 'vue-router'</script>
 
 <template>
 <VApp>
@@ -27,7 +27,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
         </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
-        <RouterLink to="/RegistroEmpleado" class="menu-button text-decoration-none">
+        <RouterLink to="/RegistroEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-sign</v-icon>
