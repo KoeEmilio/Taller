@@ -30,17 +30,6 @@ import video from '@/video/pixel_red.mp4'
                             <v-btn class="botones-color" block>Ingresar</v-btn>
                             </v-col>
                           </v-row>
-                          <v-row class="O">
-                            Ó
-                          </v-row>
-                          <v-row>
-                            <v-col>
-                              <router-link to="/RegistroEmpleados">
-                                <v-btn class="botones-color" block>Registrarse</v-btn>
-                                </router-link>
-                            </v-col>
-                          </v-row>
-                            
                         </v-container>
                   </v-card-actions>
                 </div>
