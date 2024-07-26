@@ -8,7 +8,7 @@ const datos = ref([])
         fetch('http://testpdo.com/prueba')
         .then(response => response.json())
         .then(json => {
-            if(json.status=200){
+            if(json.status===200){
                 datos.value = json.data
             }
         })
