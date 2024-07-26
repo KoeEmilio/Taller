@@ -31,7 +31,7 @@ import { ref } from 'vue';
 const form = ref({
     marca: '',
     modelo: '',
-    año: '',
+    anio: '',
     color: '',
     propietario: '',
     matricula: ''

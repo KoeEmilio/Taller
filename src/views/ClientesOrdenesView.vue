@@ -81,6 +81,7 @@ onMounted(() => {
 >>>>>>> 0aafd4dce60d093b9a5ce303a048a6e6ad47f0f4
                                             <v-btn class="BtnGuindo" @click="registrarOrden">Registrar</v-btn>
                                         </v-card-text>
+                                    </v-card-text>
                                     </v-card>  
                                 </div>
                             </v-dialog>
