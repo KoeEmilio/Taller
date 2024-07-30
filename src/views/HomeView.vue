@@ -1,101 +1,137 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'</script>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import video from '@/video/pixel_red.mp4';
+
+const usuario = ref('');
+const contrasena1 = ref('');
+const router = useRouter();
+
+const IngresarFormulario = () => {
+  if (usuario.value === 'azael@gmail.com' && contrasena1.value === '1234') {
+    router.push({ name: 'MenuEmpleados' });
+  } else if (usuario.value === 'saul@gmail.com' && contrasena1.value === '1234') {
+    router.push({ name: 'MenuPrincipal' });
+  } else {
+    alert('Correo o contraseña incorrectos');
+  }
+};
+</script>
 
 <template>
-  <VApp>
-    <VAppBar app color="#7d0100" dark>
-      <h1 class="text-center w-100">INICIO</h1>
-      <router-link to="Login">
-        <v-btn
-        class="ma-3"
-        color="white"
-        icon="mdi-account"
-      ></v-btn>
-      </router-link>
-    </VAppBar>
-    <VContainer class="d-flex flex-column align-center fill-height">
-      <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
-      <VRow class="menu flex-grow-1">
-        <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="Clientes" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
-              <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account</v-icon>
-                <h1>CLIENTE</h1>
-              </div>
-            </VBtn>
-          </RouterLink>
-        </VCol>
-        <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="Empleados" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
-              <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account-tie</v-icon>
-                <h1>Empleados</h1>
-              </div>
-            </VBtn>
-          </RouterLink>
-        </VCol>
-        <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/VerCitas" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
-              <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
-                <h1>Citas</h1>
-              </div>
-            </VBtn>
-          </RouterLink>
-        </VCol>
-        <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/Vehiculos" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
-              <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-car-back</v-icon>
-                <h1>Vehiculos</h1>
-              </div>
-            </VBtn>
-          </RouterLink>
-        </VCol>
-      </VRow>
-    </VContainer>
-  </VApp>
+  <div class="page-container">
+    <video autoplay muted loop id="background-video" :src="video"></video>
+    <div class="contenedor">
+      <v-container class="fill-height">
+        <v-row id="Contenedor-login">
+          <v-card class="transparente" width="30vw" height="80vh">
+            <v-card-title id="titulo" class="transparente-titulo" style="text-align: center;">INICIA SESIÓN</v-card-title>
+            <div id="contenedor-formulario" class="transparente">
+              <v-card-text>
+                <v-container>
+                  <v-row id="UserRow">
+                    <v-text-field
+                      v-model="usuario"
+                      label="Usuario"
+                      variant="solo"
+                      clearable
+                      :clear-icon-color="'black'"
+                    ></v-text-field>
+                  </v-row>
+                  <v-row id="PasswordRow">
+                    <v-text-field
+                      v-model="contrasena1"
+                      label="Contraseña"
+                      variant="solo"
+                      type="password"
+                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="showPassword = !showPassword"
+                    ></v-text-field>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-container>
+                  <v-row>
+                    <v-col class="d-flex">
+                      <v-btn class="botones-color" block @click="IngresarFormulario">Ingresar</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-actions>
+            </div>
+          </v-card>
+        </v-row>
+      </v-container>
+    </div>
+    <router-view />
+  </div>
 </template>
 
-<style scoped>
-.text-center {
-  text-align: center;
-}
-.w-100 {
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+#background-video {
+  position: fixed;
   width: 100%;
-}
-.h-100 {
   height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
 }
-.fill-height {
-  height: 100vh;
-}
-.menu {
+
+#Contenedor-login {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  width: 100%;
-}
-.menu-button {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 220px;
-  width: 220px;
-  border: 4px solid black;
-  border-radius: 5%;
+  max-height: 80%;
+}
+
+.transparente {
+  background-color: rgba(255, 255, 255, 0.5) !important; /* Fondo blanco con 50% de opacidad */
+  box-shadow: none !important;
+}
+
+.transparente-titulo {
+  background-color: #7d0100; /* Fondo negro con 80% de opacidad */
+}
+
+#titulo {
+  color: white;
+  box-shadow: none;
+}
+
+#contenedor-formulario {
+  width: 100%;
+  height: 90%;
+  padding-block: 10px;
+}
+
+#UserRow {
+  padding-block: 8px;
+}
+
+#PasswordRow {
+  padding-block: 10px;
+}
+
+.v-btn.botones-color {
   background-color: #7d0100;
   color: white;
-}
-.text-decoration-none {
   text-decoration: none;
 }
-.my-4 {
-  margin: 1rem 0;
+
+.contenedor {
+  height: 80vh;
+}
+
+.O {
+  justify-content: center;
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
 }
 </style>
+

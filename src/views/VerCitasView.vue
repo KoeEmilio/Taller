@@ -5,7 +5,7 @@
 <template>
     <v-app>
     <v-app-bar app color="#7d0100" dark>
-        <router-link to="/">
+        <router-link to="/MenuPrincipal">
         <v-btn
             class="ma-3"
             color="white"
