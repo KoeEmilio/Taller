@@ -19,14 +19,17 @@ const submit = () => {
     // Aquí puedes agregar la lógica para enviar los datos al servidor
   }
 };
-</script>
 
+const toUpperCase = (event) =>{
+  event.target.value = event.target.value.toUpperCase();
+}
+
+</script>
 
 <template>
       <video autoplay muted loop id="fondo-video" :src="video"></video>
 
   <v-app>
-      
       <div class="container">
         <v-card class="Card">
           <v-card-title id="titulo" >Registrar Empleado</v-card-title>
@@ -54,7 +57,7 @@ const submit = () => {
                     <v-col>
                       <v-text-field
                       v-model="numberPhone"
-                      :rules="[v => !!v || 'Número de teléfono es requerido', v => /^\d{10}$/.test(v) || 'El número de telefono debe tener 10 dígitos']"
+                      :rules="[v => !!v || 'Número de teléfono es requerido',v => /^\d+$/.test(v) || 'El número de teléfono solo puede contener números', v => /^\d{10}$/.test(v) || 'El número de telefono debe tener 10 dígitos']"
                       label="Telefono"
                       variant="solo"
                       required
@@ -68,6 +71,7 @@ const submit = () => {
                  
                   <v-text-field
                     v-model="rfc"
+                    @input="toUpperCase"
                     :rules="[v => !!v || 'RFC es requerido']"
                     label="RFC"
                     variant="solo"
@@ -85,7 +89,8 @@ const submit = () => {
 
                   <v-text-field
                     v-model="curp"
-                    :rules="[v => !!v || 'CURP es requerido']"
+                    @input="toUpperCase"
+                    :rules="[v => !!v || 'CURP es requerido', v => /^[A-Z0-9]{18}$/.test(v) || 'La CURP debe tener exactamente 18 caracteres y solo contener letras y números']"
                     label="CURP"
                     variant="solo"
                     required
@@ -99,16 +104,6 @@ const submit = () => {
                     required
                     type="email"
                   ></v-text-field>
-                  
-                  <v-text-field
-                    v-model="email"
-                    :rules="[v => !!v || 'Correo es requerido', v => /.+@.+\..+/.test(v) || 'Correo debe ser válido']"
-                    label="Correo"
-                    variant="solo"
-                    required
-                    type="email"
-                  ></v-text-field>
-                  
                   
                   <v-btn :disabled="!valid" color="#7d0100" @click="submit">
                     Registrar
