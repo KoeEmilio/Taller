@@ -16,7 +16,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
-        <VCol cols="12" sm="4" class="d-flex justify-center">
+        <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="Clientes" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
@@ -26,7 +26,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
             </VBtn>
           </RouterLink>
         </VCol>
-        <VCol cols="12" sm="4" class="d-flex justify-center">
+        <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="Empleados" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
@@ -36,7 +36,17 @@ import { RouterLink, RouterView } from 'vue-router'</script>
             </VBtn>
           </RouterLink>
         </VCol>
-        <VCol cols="12" sm="4" class="d-flex justify-center">
+        <VCol cols="12" sm="3" class="d-flex justify-center">
+          <RouterLink to="/VerCitas" class="menu-button text-decoration-none">
+            <VBtn color="#7d0100" dark class="w-100 h-100">
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
+                <h1>Citas</h1>
+              </div>
+            </VBtn>
+          </RouterLink>
+        </VCol>
+        <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/Vehiculos" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">

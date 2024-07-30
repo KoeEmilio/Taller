@@ -4,6 +4,7 @@
 
 <template>
     <v-app>
+        <v-container></v-container>
     <v-app-bar app color="#7d0100" dark>
         <router-link to="Empleados">
         <v-btn

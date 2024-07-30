@@ -21,6 +21,7 @@ import ServiciosEmpleadosView from '@/views/ServiciosEmpleadosView.vue'
 import VerClientesEmpleadosView from '@/views/VerClientesEmpleadosView.vue'
 import RegistroClientesEmpleadoView from '@/views/RegistroClientesEmpleadoView.vue'
 import OrdenEmpleadoView from '@/views/OrdenEmpleadoView.vue'
+import VerCitasView from '@/views/VerCitasView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -164,6 +165,12 @@ const router = createRouter({
       path: '/OrdenEmpleado',
       name: 'OrdenEmpleado',
       component:OrdenEmpleadoView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (CITAS)
+      path: '/VerCitas',
+      name: 'VerCitas',
+      component:VerCitasView
     },
     
 
