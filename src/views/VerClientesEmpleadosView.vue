@@ -8,12 +8,11 @@ const datos = ref([])
         fetch('http://testpdo.com/prueba')
         .then(response => response.json())
         .then(json => {
-            if(json.status===200){
+            if(json.status=200){
                 datos.value = json.data
             }
         })
     }
-
 
 onMounted(() => {
 mostrarinfo()
@@ -23,8 +22,10 @@ mostrarinfo()
 
 <template>
     <v-app>
+        <v-container></v-container>
+        <v-container></v-container>
     <v-app-bar app color="#7d0100" dark>
-        <router-link to="Clientes">
+        <router-link to="ClientesEmpleados">
         <v-btn
             class="ma-3"
             color="white"
