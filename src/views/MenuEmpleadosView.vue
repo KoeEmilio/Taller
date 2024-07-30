@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
   <VApp>
     <VAppBar app color="#7d0100" dark>
       <h1 class="text-center w-100">INICIO</h1>
-      <router-link to="Login">
+      <router-link to="/">
         <v-btn
         class="ma-3"
         color="white"

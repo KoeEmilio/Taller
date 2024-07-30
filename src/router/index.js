@@ -3,7 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import ClientesMenuView from '@/views/ClientesMenuView.vue'
 import EmpleadosView from '@/views/EmpleadosView.vue'
 import InfoEmpleadosView from '@/views/InfoEmpleadosView.vue'
-import LoginView from '@/views/LoginView.vue'
 import ClientesInfoView from '@/views/ClientesInfoView.vue'
 import ClientesOrdenesView from '@/views/ClientesOrdenesView.vue'
 import VehiculosMenuView from '@/views/VehiculosMenuView.vue'
@@ -77,12 +76,6 @@ const router = createRouter({
       path:'/RegistroClientes',
       name: 'RegistroClientes',
       component: RegistroClientesView
-    },
-    {
-      //VISTA DEL INICIO DE SESION
-      path: '/Login',
-      name: 'Login',
-      component: LoginView
     },
     {
       //VISTA DEL ADMINISTRADOR PARA REGISTRAR EMPLEADOS
