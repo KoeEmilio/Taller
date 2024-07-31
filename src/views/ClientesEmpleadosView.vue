@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
 <VApp>
     <VAppBar app color="#7d0100" dark>
-      <router-link to="/MenuPrincipal">
+      <router-link to="/MenuEmpleados">
         <v-btn
         class="ma-3"
         color="white"
@@ -18,7 +18,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
     <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="4" class="d-flex justify-center">
-        <RouterLink to="InfoClientes" class="menu-button text-decoration-none">
+        <RouterLink to="VerClientesEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account-eye</v-icon>
@@ -28,7 +28,7 @@ import { RouterLink, RouterView } from 'vue-router'
         </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
-        <RouterLink to="/RegistroClientes" class="menu-button text-decoration-none">
+        <RouterLink to="/RegistroClientesEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account-multiple-plus</v-icon>
@@ -38,7 +38,7 @@ import { RouterLink, RouterView } from 'vue-router'
         </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
-        <RouterLink to="InfoOrdenes" class="menu-button text-decoration-none">
+        <RouterLink to="OrdenEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document</v-icon>

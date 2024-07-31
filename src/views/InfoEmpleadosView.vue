@@ -4,7 +4,10 @@
 
 <template>
     <v-app>
-      <v-app-bar app color="#7d0100" dark>
+
+        <v-container></v-container>
+    <v-app-bar app color="#7d0100" dark>
+
         <router-link to="Empleados">
           <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
         </router-link>

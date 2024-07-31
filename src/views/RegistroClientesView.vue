@@ -11,7 +11,6 @@ const Tipo = ref(''); // Nuevo campo para tipo de cliente
 const submit = () => {
   if (form.value.validate()) {
     alert('Registro exitoso');
-    // Aquí puedes agregar la lógica para enviar los datos al servidor
   }
 };
 </script>

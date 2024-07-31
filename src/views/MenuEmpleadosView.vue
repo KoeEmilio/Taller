@@ -1,56 +1,54 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
+import { RouterLink, RouterView } from 'vue-router'</script>
 
 <template>
-<VApp>
+  <VApp>
     <VAppBar app color="#7d0100" dark>
-      <router-link to="/MenuPrincipal">
+      <h1 class="text-center w-100">INICIO</h1>
+      <router-link to="/">
         <v-btn
         class="ma-3"
         color="white"
-        icon="mdi-arrow-left-bold-circle-outline"
+        icon="mdi-account"
       ></v-btn>
       </router-link>
-    <h1 class="text-center w-100">CLIENTES</h1>
     </VAppBar>
     <VContainer class="d-flex flex-column align-center fill-height">
-    <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
-    <VRow class="menu flex-grow-1">
+      <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
+      <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="4" class="d-flex justify-center">
-        <RouterLink to="InfoClientes" class="menu-button text-decoration-none">
+          <RouterLink to="ClientesEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
-            <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account-eye</v-icon>
-                <h3>VER CLIENTES</h3>
-            </div>
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-account</v-icon>
+                <h1>CLIENTE</h1>
+              </div>
             </VBtn>
-        </RouterLink>
+          </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
-        <RouterLink to="/RegistroClientes" class="menu-button text-decoration-none">
+          <RouterLink to="/VehiculosEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
-            <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account-multiple-plus</v-icon>
-                <h3>REGISTRAR CLIENTES</h3>
-            </div>
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-car-back</v-icon>
+                <h1>Vehiculos</h1>
+              </div>
             </VBtn>
-        </RouterLink>
+          </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
-        <RouterLink to="InfoOrdenes" class="menu-button text-decoration-none">
+          <RouterLink to="/VerCitasEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
-            <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-file-document</v-icon>
-                <h1>Ordenes</h1>
-            </div>
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
+                <h1>Citas</h1>
+              </div>
             </VBtn>
-        </RouterLink>
+          </RouterLink>
         </VCol>
-    </VRow>
+      </VRow>
     </VContainer>
-</VApp>
-<RouterView/>
+  </VApp>
 </template>
 
 <style scoped>

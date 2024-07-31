@@ -174,5 +174,10 @@ const submit = async () => {
 
 #fondo-video{
   position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
 }
 </style>
