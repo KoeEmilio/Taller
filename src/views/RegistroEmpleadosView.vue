@@ -13,10 +13,39 @@ const email = ref('');
 const valid = ref(false);
 const form = ref(null);
 
-const submit = () => {
+const submit = async () => {
   if (form.value.validate()) {
-    alert('Registro exitoso');
-    // Aquí puedes agregar la lógica para enviar los datos al servidor
+    const datosregistro = {
+      Nombre: name.value,
+      Direccion: address.value,
+      Telefono: numberPhone.value, 
+      RFC: rfc.value,
+      Num_Seguro_Social: socialSecurityNumber.value,
+      CURP: curp.value,
+      correo: email.value,
+      Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual en formato YYYY-MM-DD
+      Estado: 'LIBRE'
+    };
+
+    try {
+      const response = await fetch('http://testpdo.com/empleado', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datosregistro)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Empleado registrado:', data);
+        alert('Registro exitoso');
+      } else {
+        console.error('Error al registrar empleado');
+      }
+    } catch (error) {
+      console.error('Error al conectar con el servidor:', error);
+    }
   }
 };
 
@@ -65,10 +94,10 @@ const toUpperCase = (event) =>{
                     </v-col>
 
                   </v-row>
-                 
+                
                   <br/>
                   <br/>
-                 
+                
                   <v-text-field
                     v-model="rfc"
                     @input="toUpperCase"
@@ -105,6 +134,11 @@ const toUpperCase = (event) =>{
                     type="email"
                   ></v-text-field>
                   
+<<<<<<< HEAD
+=======
+                  
+                  
+>>>>>>> 6fe6d7e20adfe8b2403e80324b7697822f3d0622
                   <v-btn :disabled="!valid" color="#7d0100" @click="submit">
                     Registrar
                   </v-btn>
@@ -148,5 +182,10 @@ const toUpperCase = (event) =>{
 
 #fondo-video{
   position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
 }
 </style>

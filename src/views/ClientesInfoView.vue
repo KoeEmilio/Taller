@@ -1,62 +1,136 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 
-import { ref, onMounted } from 'vue'
+const datos = ref([]);
+const search = ref('');
 
-const datos = ref([])
 
-    const mostrarinfo  = () =>{
-        fetch('http://testpdo.com/prueba')
-        .then(response => response.json())
-        .then(json => {
-            if(json.status===200){
-                datos.value = json.data
-            }
-        })
+const mostrarinfo = () => {
+fetch('http://testpdo.com/clientes')
+    .then(response => response.json())
+    .then(json => {
+    if (json.status === 200) {
+        datos.value = json.data;
     }
-
+    });
+};
 
 onMounted(() => {
-mostrarinfo()
-})
+mostrarinfo();
+});
 
+const showFormulario = ref(false);
+
+const mostrarFormulario = () => {
+  showFormulario.value = !showFormulario.value;
+};
 </script>
 
 <template>
+  <div class="container">
     <v-app>
-    <v-app-bar app color="#7d0100" dark>
+      <v-app-bar app color="#7d0100" dark>
         <router-link to="Clientes">
-        <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
+          <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"> </v-btn>
         </router-link>
-        <h1 class="text-center w-100">CLIENTES REGISTRADOS</h1>
-    </v-app-bar>
+        <h1 class="text-center w-100">Clientes Registrados</h1>
+      </v-app-bar>
 
-    <v-card
-    title="Clientes"
-    flat
->
-    <template v-slot:text>
-    <v-text-field
-        v-model="search"
-        label="Search"
-        prepend-inner-icon="mdi-magnify"
-        variant="outlined"
-        hide-details
-        single-line
-    ></v-text-field>
-    </template>
-
-    <v-data-table
-    :headers="headers"
-    :items="desserts"
-    :search="search"
-    ></v-data-table>
-</v-card>
+      <v-main>
+        <v-container>
+          <v-row>
+            <v-col cols="12" class="d-flex justify-end">
+              <v-text-field
+                v-model="search"
+                label="Buscar"
+                prepend-inner-icon="mdi-magnify"
+                hide-details
+                single-line
+                outlined
+                class="mx-4"
+              ></v-text-field>
+            </v-col>
+            <v-row justify="start">
+              <v-col cols="auto" class="d-flex align-center">
+                <div id="Cont">
+                  <p class="agregar-text">Agregar</p>
+                  <v-btn @click="mostrarFormulario" id="guindo-btn" icon="mdi-plus" size="x-small"></v-btn>
+                </div>
+              </v-col>
+              <v-dialog v-model="showFormulario" max-width="500px">
+                <div v-show="showFormulario === true">
+                  <v-card class="pa-5">
+                    <v-card-title>Registrar Orden</v-card-title>
+                    <v-card-text class="scrollable-content">
+                      <v-text-field label="Fecha y Hora de Ingreso" v-model="fechaHoraIngreso"></v-text-field>
+                      <v-text-field label="Fecha y Hora Estimada de Salida" v-model="fechaHoraSalida"></v-text-field>
+                      <v-select label="Empleado" :items="empleados" v-model="empleado"></v-select>
+                      <v-select label="Vehículo" :items="vehiculos" v-model="vehiculo"></v-select>
+                      <v-text-field label="Motivo" v-model="motivo"></v-text-field>
+                      <v-select label="Cita" :items="citas" v-model="cita"></v-select>
+                      <v-select label="Estado" :items="estados" v-model="estado"></v-select>
+                      <v-btn class="BtnGuindo" @click="registrarOrden">Registrar</v-btn>
+                    </v-card-text>
+                  </v-card>
+                </div>
+              </v-dialog>
+            </v-row>
+            <v-col cols="10">
+              <v-data-table
+                id="Tabla"
+                :items="datos"
+                :headers="headers"
+                :search="search"
+                class="elevation-1"
+              ></v-data-table>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
     </v-app>
+  </div>
 </template>
-<style scoped>
 
+<style scoped>
+#Cont {
+  display: flex;
+  height: 67.7vh;
+  width: 11.2vw;
+  margin-left: 15%;
+  justify-content: space-between;
+}
+
+.container {
+  background-color: blue;
+  width: 87vw;
+  height: 100vh;
+  justify-content: space-around;
+}
+
+.agregar-text {
+  font-weight: bolder;
+  padding: 4%;
+}
+
+.scrollable-content {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#Tabla {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+#guindo-btn {
+  background-color: #7d0100; /* Color guindo */
+  color: white; /* Color del icono */
+  margin-left: 10px; /* Margen izquierdo */
+  border-radius: 30%; /* Redondear el botón */
+}
+
+.BtnGuindo {
+  background-color: #7d0100;
+  color: white;
+}
 </style>

@@ -5,42 +5,53 @@
 <template>
     
     <v-app>
+<<<<<<< HEAD
         <v-container></v-container>
+=======
+
+>>>>>>> 6fe6d7e20adfe8b2403e80324b7697822f3d0622
         <v-container></v-container>
     <v-app-bar app color="#7d0100" dark>
+
         <router-link to="Empleados">
-        <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
+          <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
         </router-link>
         <h1 class="text-center w-100">EMPLEADOS REGISTRADOS</h1>
-    </v-app-bar>
-
-    <v-card
-    title=""
-    flat
->
-    <template v-slot:text>
-    <v-text-field
-        v-model="search"
-        label="Search"
-        prepend-inner-icon="mdi-magnify"
-        variant="outlined"
-        hide-details
-        single-line
-    ></v-text-field>
-    </template>
-
-    <v-data-table
-    :headers="headers"
-    :items="desserts"
-    :search="search"
-    ></v-data-table>
-</v-card>
+      </v-app-bar>
+  
+      <v-main>
+        <v-container>
+          <v-card flat>
+            <v-card-text>
+              <v-text-field
+                v-model="search"
+                label="Search"
+                prepend-inner-icon="mdi-magnify"
+                variant="outlined"
+                hide-details
+                single-line
+                class="mx-4"
+              ></v-text-field>
+            </v-card-text>
+            <v-data-table
+            :headers="headers"
+            :items="desserts"
+            :search="search"
+            ></v-data-table>
+        </v-card>
+        </v-container>
+      </v-main>
     </v-app>
-</template>
-<style scoped>
-
-</style>
+  </template>
+  
+  <style scoped>
+  .v-application {
+    background: #f5f5f5;
+  }
+  .v-card {
+    margin-top: 20px;
+  }
+  .v-data-table {
+    margin-top: 10px;
+  }
+  </style>

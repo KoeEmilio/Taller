@@ -3,7 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import ClientesMenuView from '@/views/ClientesMenuView.vue'
 import EmpleadosView from '@/views/EmpleadosView.vue'
 import InfoEmpleadosView from '@/views/InfoEmpleadosView.vue'
-import LoginView from '@/views/LoginView.vue'
 import ClientesInfoView from '@/views/ClientesInfoView.vue'
 import ClientesOrdenesView from '@/views/ClientesOrdenesView.vue'
 import VehiculosMenuView from '@/views/VehiculosMenuView.vue'
@@ -21,6 +20,9 @@ import ServiciosEmpleadosView from '@/views/ServiciosEmpleadosView.vue'
 import VerClientesEmpleadosView from '@/views/VerClientesEmpleadosView.vue'
 import RegistroClientesEmpleadoView from '@/views/RegistroClientesEmpleadoView.vue'
 import OrdenEmpleadoView from '@/views/OrdenEmpleadoView.vue'
+import VerCitasView from '@/views/VerCitasView.vue'
+import VerCitasEmpleadoView from '@/views/VerCitasEmpleadoView.vue'
+import MenuPrincipalView from '@/views/MenuPrincipalView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -74,12 +76,6 @@ const router = createRouter({
       path:'/RegistroClientes',
       name: 'RegistroClientes',
       component: RegistroClientesView
-    },
-    {
-      //VISTA DEL INICIO DE SESION
-      path: '/Login',
-      name: 'Login',
-      component: LoginView
     },
     {
       //VISTA DEL ADMINISTRADOR PARA REGISTRAR EMPLEADOS
@@ -164,6 +160,24 @@ const router = createRouter({
       path: '/OrdenEmpleado',
       name: 'OrdenEmpleado',
       component:OrdenEmpleadoView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (CITAS)
+      path: '/VerCitas',
+      name: 'VerCitas',
+      component:VerCitasView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (CITAS)
+      path: '/VerCitasEmpleado',
+      name: 'VerCitasEmpleado',
+      component:VerCitasEmpleadoView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (CITAS)
+      path: '/MenuPrincipal',
+      name: 'MenuPrincipal',
+      component:MenuPrincipalView
     },
     
 
