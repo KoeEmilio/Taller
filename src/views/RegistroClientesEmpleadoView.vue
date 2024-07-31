@@ -99,9 +99,4 @@ const submit = () => {
       </v-form>
     </v-container>
   </V-App>
-</template>
-
-<style scoped>
-  /* Puedes agregar estilos adicionales aquí si lo necesitas */
-</style>
-
+</template>;
