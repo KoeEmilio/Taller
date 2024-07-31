@@ -56,6 +56,9 @@
   
   <script setup>
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
+  
+  const router = useRouter()
   
   const form = ref({
     noOrden: '',
@@ -123,6 +126,7 @@
     if (validateForm()) {
       alert('Registro exitoso')
       resetForm()
+      router.push('/InfoClientes') 
     } else {
       alert(
         'Algo salió mal con el registro, inténtalo de nuevo y asegúrate de ingresar cada dato correctamente.'
@@ -148,7 +152,7 @@
   }
   
   const goBack = () => {
-    // Lógica para retroceder a la vista anterior
+    router.go(-1) // para regresar a la vista anterior 
   }
   </script>
   
@@ -157,7 +161,7 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 16px;
-    padding-top: 80px; /* Ajuste para la altura de la barra superior */
+    padding-top: 80px; 
   }
   
   .header {
@@ -171,7 +175,7 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    height: 60px; /* Ajusta la altura de la barra superior */
+    height: 60px;
   }
   
   .header-text {

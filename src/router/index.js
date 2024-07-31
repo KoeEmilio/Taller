@@ -20,9 +20,11 @@ import ServiciosEmpleadosView from '@/views/ServiciosEmpleadosView.vue'
 import VerClientesEmpleadosView from '@/views/VerClientesEmpleadosView.vue'
 import RegistroClientesEmpleadoView from '@/views/RegistroClientesEmpleadoView.vue'
 import OrdenEmpleadoView from '@/views/OrdenEmpleadoView.vue'
+import DetallesOrden from '@/views/DetallesOrden.vue'
 import VerCitasView from '@/views/VerCitasView.vue'
 import VerCitasEmpleadoView from '@/views/VerCitasEmpleadoView.vue'
 import MenuPrincipalView from '@/views/MenuPrincipalView.vue'
+import DetalleRefacciones from '@/views/DetalleRefacciones.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -160,6 +162,18 @@ const router = createRouter({
       path: '/OrdenEmpleado',
       name: 'OrdenEmpleado',
       component:OrdenEmpleadoView
+    },
+    {
+      //VISTA DE EMPLEADOS (DETALLES DE ORDENES)
+      path: '/DetallesOrden',
+      name: 'DetallesOrden',
+      component:DetallesOrden
+    },
+    {
+      //VISTA DE EMPLEADOS (DETALLES DE REFACCIONES)
+      path: '/DetalleRefacciones',
+      name: 'DetalleRefacciones',
+      component:DetalleRefacciones
     },
     {
       //VISTA DE ADMINISTRADOR (CITAS)

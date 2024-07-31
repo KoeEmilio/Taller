@@ -13,10 +13,39 @@ const email = ref('');
 const valid = ref(false);
 const form = ref(null);
 
-const submit = () => {
+const submit = async () => {
   if (form.value.validate()) {
-    alert('Registro exitoso');
-    // Aquí puedes agregar la lógica para enviar los datos al servidor
+    const datosregistro = {
+      Nombre: name.value,
+      Direccion: address.value,
+      Telefono: numberPhone.value, 
+      RFC: rfc.value,
+      Num_Seguro_Social: socialSecurityNumber.value,
+      CURP: curp.value,
+      correo: email.value,
+      Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual en formato YYYY-MM-DD
+      Estado: 'LIBRE'
+    };
+
+    try {
+      const response = await fetch('http://testpdo.com/empleado', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datosregistro)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Empleado registrado:', data);
+        alert('Registro exitoso');
+      } else {
+        console.error('Error al registrar empleado');
+      }
+    } catch (error) {
+      console.error('Error al conectar con el servidor:', error);
+    }
   }
 };
 </script>
@@ -62,10 +91,10 @@ const submit = () => {
                     </v-col>
 
                   </v-row>
-                 
+                
                   <br/>
                   <br/>
-                 
+                
                   <v-text-field
                     v-model="rfc"
                     :rules="[v => !!v || 'RFC es requerido']"
@@ -100,14 +129,6 @@ const submit = () => {
                     type="email"
                   ></v-text-field>
                   
-                  <v-text-field
-                    v-model="email"
-                    :rules="[v => !!v || 'Correo es requerido', v => /.+@.+\..+/.test(v) || 'Correo debe ser válido']"
-                    label="Correo"
-                    variant="solo"
-                    required
-                    type="email"
-                  ></v-text-field>
                   
                   
                   <v-btn :disabled="!valid" color="#7d0100" @click="submit">
