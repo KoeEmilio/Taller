@@ -25,7 +25,7 @@ const submit = () => {
 
   <v-app>
     <v-app-bar app color="transparent">
-        <router-link to="/Clientes">
+        <router-link to="/Vehiculos">
         <v-btn
             class="ma-3"
             color="white"
