@@ -4,7 +4,7 @@ import { RouterLink} from 'vue-router'</script>
 <template>
 <VApp>
     <VAppBar app color="#7d0100" dark>
-       <router-link to="/">
+       <router-link to="/MenuPrincipal">
         <v-btn
         class="ma-3"
         color="white"
