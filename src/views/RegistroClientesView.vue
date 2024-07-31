@@ -2,16 +2,11 @@
 import { ref } from 'vue';
 
 const name = ref('');
-const address = ref('');
-const phone = ref('');
-const username = ref('');
-const password = ref('');
-const confirmPassword = ref('');
-const showPassword = ref(false);
-const showConfirmPassword = ref(false);
+const email = ref('');
+const telefono = ref('');
 const valid = ref(false);
 const form = ref(null);
-const clientType = ref(''); // Nuevo campo para tipo de cliente
+const Tipo = ref(''); // Nuevo campo para tipo de cliente
 
 const submit = () => {
   if (form.value.validate()) {
@@ -22,87 +17,89 @@ const submit = () => {
 </script>
 
 <template>
-  <v-container></v-container>
-  <v-container></v-container>
-  <V-App>
-    <VAppBar app color="#7d0100" dark>
-      <router-link to="/">
-        <v-btn
-          class="ma-3"
-          color="white"
-          icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
-      </router-link>
-      <h1 class="text-center w-100">REGISTRAR CLIENTES</h1>
-    </VAppBar>
-    <v-container>
-      <v-form ref="form" v-model="valid">
-        <v-text-field
-          v-model="name"
-          :rules="[v => !!v || 'Nombre es requerido']"
-          label="Nombre"
-          required
-        ></v-text-field>
+  <video autoplay muted loop id="fondo-video" :src="video"></video>
 
-        <v-text-field
-          v-model="address"
-          :rules="[v => !!v || 'Dirección es requerida']"
-          label="Dirección"
-          required
-        ></v-text-field>
+<v-app>
+  
+  <div class="container">
+    <v-card class="Card">
+      <v-card-title id="titulo" >Registrar Cliente</v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-form id="interior-card" ref="form" v-model="valid">
+              
+              <v-text-field
+                v-model="name"
+                :rules="[v => !!v || 'Nombre es requerido']"
+                label="Nombre Completo"
+                variant="solo"
+              ></v-text-field>
 
-        <v-text-field
-          v-model="phone"
-          :rules="[v => !!v || 'Teléfono es requerido', v => /^\d+$/.test(v) || 'El teléfono debe ser un número válido']"
-          label="Teléfono"
-          required
-        ></v-text-field>
+              <v-text-field
+                v-model="email"
+                :rules="[v => !!v || 'Correo es requerido', v => /.+@.+\..+/.test(v) || 'Correo debe ser válido']"
+                label="Correo"
+                variant="solo"
+                required
+                type="email"
+              ></v-text-field>
+              
+              <v-text-field
+                      v-model="telefono"
+                      :rules="[v => !!v || 'Número de teléfono es requerido', v => /^\d{10}$/.test(v) || 'El número de telefono debe tener 10 dígitos']"
+                      label="Telefono"
+                      variant="solo"
+                      required
+                    ></v-text-field>
 
-        <v-text-field
-          v-model="username"
-          :rules="[v => !!v || 'Nombre de usuario es requerido']"
-          label="Nombre de Usuario"
-          required
-        ></v-text-field>
-
-        <v-text-field
-          v-model="password"
-          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="[v => !!v || 'Contraseña es requerida']"
-          :type="showPassword ? 'text' : 'password'"
-          label="Contraseña"
-          @click:append="showPassword = !showPassword"
-          required
-        ></v-text-field>
-
-        <v-text-field
-          v-model="confirmPassword"
-          :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="[
-            v => !!v || 'Confirmar contraseña es requerida',
-            v => v === password || 'Las contraseñas no coinciden'
-          ]"
-          :type="showConfirmPassword ? 'text' : 'password'"
-          label="Confirmar Contraseña"
-          @click:append="showConfirmPassword = !showConfirmPassword"
-          required
-        ></v-text-field>
-
-        <!-- Nuevo campo para tipo de cliente -->
-        <v-radio-group v-model="clientType" :rules="[v => !!v || 'Tipo de cliente es requerido']" label="Tipo de Cliente" required>
+                    <v-radio-group v-model="Tipo" :rules="[v => !!v || 'Tipo de cliente es requerido']" label="Tipo de Cliente" required>
           <v-radio label="Físico" value="fisico"></v-radio>
           <v-radio label="Moral" value="moral"></v-radio>
         </v-radio-group>
 
-        <v-btn :disabled="!valid" color="success" @click="submit">
-          Registrar
-        </v-btn>
-      </v-form>
-    </v-container>
-  </V-App>
+              
+              <v-btn :disabled="!valid" color="#7d0100" @click="submit">
+                Registrar
+              </v-btn>
+            </v-form>
+      
+          </v-container>
+        </v-card-text>
+    </v-card>
+  </div>
+</v-app>
 </template>
 
 <style scoped>
-  /* Puedes agregar estilos adicionales aquí si lo necesitas */
-</style>
 
+.container{
+display: flex;
+width: 100vw;
+height: 100vh;
+justify-content: center;
+align-items: center;
+}
+
+.Card{
+height: 80vh;
+width: 60vw;
+background-color:rgb(223, 223, 223) ;
+overflow-y: auto;
+
+}
+
+#titulo{
+background-color: rgb(230, 1, 1);
+color: white;
+box-shadow: -1px 2px 6px black;
+text-align: center;
+}
+
+.separador-datos-persona{
+display: flex;
+}
+
+#fondo-video{
+position: fixed;
+}
+</style>
