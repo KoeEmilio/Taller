@@ -14,7 +14,7 @@ const form = ref(null);
 const submit = () => {
   if (form.value.validate()) {
     alert('Registro exitoso');
-    // Aquí puedes agregar la lógica para enviar los datos al servidor
+    
   }
 };
 </script>

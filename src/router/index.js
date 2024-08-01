@@ -25,6 +25,7 @@ import VerCitasView from '@/views/VerCitasView.vue'
 import VerCitasEmpleadoView from '@/views/VerCitasEmpleadoView.vue'
 import MenuPrincipalView from '@/views/MenuPrincipalView.vue'
 import DetalleRefacciones from '@/views/DetalleRefacciones.vue'
+import  ConfirmacionesPagosview from '@/views/ConfirmacionesPagosview.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -193,7 +194,13 @@ const router = createRouter({
       name: 'MenuPrincipal',
       component:MenuPrincipalView
     },
-    
+    {
+      //VISTA DE ADMINISTRADOR (PAGOS DE SERVICIOS)
+      path: '/ConfirmacionesPagosview',
+      name: 'ConfirmacionesPagosview',
+      component:ConfirmacionesPagosview
+    },
+   
 
   ]
 })

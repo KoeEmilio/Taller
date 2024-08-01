@@ -111,10 +111,10 @@
       isValid = false
     }
   
-    const diasGarantia = parseFloat(form.value.diasGarantia)
-    if (isNaN(diasGarantia) || diasGarantia <= 0) {
-      errors.value.diasGarantia.push(
-        'Los días de garantía son requeridos y deben ser un número positivo.'
+    const   FechadeGarantia = parseFloat(form.value.FechadeGarantia)
+    if (isNaN(FechadeGarantia) || FechadeGarantia <= 0) {
+      errors.value.FechadeGarantia.push(
+        'La fecha de la Garantia es requerida.'
       )
       isValid = false
     }
@@ -126,7 +126,7 @@
     if (validateForm()) {
       alert('Registro exitoso')
       resetForm()
-      router.push('/InfoClientes') 
+      router.push('/info-clientes') // Cambia la ruta a la deseada
     } else {
       alert(
         'Algo salió mal con el registro, inténtalo de nuevo y asegúrate de ingresar cada dato correctamente.'
@@ -152,7 +152,7 @@
   }
   
   const goBack = () => {
-    router.go(-1) // para regresar a la vista anterior 
+    router.go(-1) // Navegar a la vista anterior
   }
   </script>
   
@@ -161,7 +161,7 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 16px;
-    padding-top: 80px; 
+    padding-top: 80px;
   }
   
   .header {

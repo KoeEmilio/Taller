@@ -7,14 +7,14 @@ const year = ref('');
 const color = ref('');
 const transmissionType = ref('');
 const registrationNumber = ref('');
-const ownerId = ref('');  // Campo para el ID del propietario
+const ownerId = ref('');  //indicar el id especifico del propietario
 const valid = ref(false);
 const form = ref(null);
 
 const submit = () => {
   if (form.value.validate()) {
     alert('Registro exitoso');
-    // Aquí puedes agregar la lógica para enviar los datos al servidor
+    
   }
 };
 </script>
@@ -97,7 +97,3 @@ const submit = () => {
     </v-container>
   </v-app>
 </template>
-
-<style scoped>
-/* Puedes agregar estilos personalizados aquí si es necesario */
-</style>

@@ -121,10 +121,10 @@ onMounted(() => {
 }
 
 #guindo-btn{
-  background-color: #7d0100 ; /* Color guindo */
-  color: white ; /* Color del icono */
-  margin-left: 10px; /* Margen izquierdo */
-  border-radius: 30%; /* Redondear el botón */
+  background-color: #7d0100 ; 
+  color: white ;
+  margin-left: 10px;
+  border-radius: 30%;
 }
 
 .BtnGuindo{

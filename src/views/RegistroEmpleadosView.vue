@@ -23,7 +23,7 @@ const submit = async () => {
       Num_Seguro_Social: socialSecurityNumber.value,
       CURP: curp.value,
       correo: email.value,
-      Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual en formato YYYY-MM-DD
+      Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual
       Estado: 'LIBRE'
     };
 
