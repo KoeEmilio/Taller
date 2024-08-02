@@ -36,57 +36,22 @@ const mostrarFormulario = () => {
         <h1 class="text-center w-100">Clientes Registrados</h1>
       </v-app-bar>
 
-      <v-main>
-        <v-container>
-          <v-row>
-            <v-col cols="12" class="d-flex justify-end">
-              <v-text-field
-                v-model="search"
-                label="Buscar"
-                prepend-inner-icon="mdi-magnify"
-                hide-details
-                single-line
-                outlined
-                class="mx-4"
-              ></v-text-field>
-            </v-col>
-            <v-row justify="start">
-              <v-col cols="auto" class="d-flex align-center">
-                <div id="Cont">
-                  <p class="agregar-text">Agregar</p>
-                  <v-btn @click="mostrarFormulario" id="guindo-btn" icon="mdi-plus" size="x-small"></v-btn>
-                </div>
-              </v-col>
-              <v-dialog v-model="showFormulario" max-width="500px">
-                <div v-show="showFormulario === true">
-                  <v-card class="pa-5">
-                    <v-card-title>Registrar Orden</v-card-title>
-                    <v-card-text class="scrollable-content">
-                      <v-text-field label="Fecha y Hora de Ingreso" v-model="fechaHoraIngreso"></v-text-field>
-                      <v-text-field label="Fecha y Hora Estimada de Salida" v-model="fechaHoraSalida"></v-text-field>
-                      <v-select label="Empleado" :items="empleados" v-model="empleado"></v-select>
-                      <v-select label="Vehículo" :items="vehiculos" v-model="vehiculo"></v-select>
-                      <v-text-field label="Motivo" v-model="motivo"></v-text-field>
-                      <v-select label="Cita" :items="citas" v-model="cita"></v-select>
-                      <v-select label="Estado" :items="estados" v-model="estado"></v-select>
-                      <v-btn class="BtnGuindo" @click="registrarOrden">Registrar</v-btn>
-                    </v-card-text>
-                  </v-card>
-                </div>
-              </v-dialog>
-            </v-row>
-            <v-col cols="10">
-              <v-data-table
-                id="Tabla"
-                :items="datos"
-                :headers="headers"
-                :search="search"
-                class="elevation-1"
-              ></v-data-table>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-main>
+    <template v-slot:text>
+    <v-text-field
+        v-model="search"
+        label="Search"
+        prepend-inner-icon="mdi-magnify"
+        variant="outlined"
+        hide-details
+        single-line
+    ></v-text-field>
+    </template>
+
+    <v-data-table
+    :headers="headers"
+    :items="datos"
+    :search="search"
+    ></v-data-table>
     </v-app>
   </div>
 </template>

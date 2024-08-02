@@ -2,34 +2,22 @@
 import { ref, onMounted } from 'vue'
 import { VDateInput } from 'vuetify/labs/VDateInput'
 
-
 const datos = ref([])
-const showFormulario = ref(false)
 
-const mostrarFormulario = () =>{
-    if(showFormulario.value === false){
-        showFormulario.value = true
-    }
-    else if (showFormulario.value === true){
-        showFormulario.value = false
-    }
-}
-
-const mostrarinfo = () =>{
-        fetch('http://miproyecto.com/ordenes')
+    const mostrarinfo  = () =>{
+        fetch('http://pruebapdo.com/Ordenes')
         .then(response => response.json())
         .then(json => {
-            if(json.status===200){
+            if(json.status=200){
                 datos.value = json.data
             }
         })
-        
     }
 
-onMounted(() => {
-    mostrarinfo()
-})
 
+onMounted(() => {
+mostrarinfo()
+})
 </script>
 
 <template>
