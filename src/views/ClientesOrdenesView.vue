@@ -27,7 +27,7 @@ mostrarinfo()
     <div class="container">
         <v-app>
             <v-app-bar app color="#7d0100" dark>
-                <router-link to="Clientes">
+                <router-link to="/MenuOrdenes">
                 <v-btn
                     class="ma-3"
                     color="white"

@@ -1,13 +1,20 @@
 <template>
+    <video autoplay muted loop id="fondo-video" :src="video"></video>
+  
     <div class="container">
       <div class="header">
-        <v-btn icon @click="goBack" class="back-btn">
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
+        <router-link to="/MenuOrdenesEmpleado">
+          <v-btn
+          class="ma-3"
+          color="white"
+          icon="mdi-arrow-left-bold-circle-outline"
+        ></v-btn>
+        </router-link>
         <span class="header-text">Detalles de la Orden</span>
       </div>
   
       <v-form @submit.prevent="submit">
+        <!-- Formulario de Detalles de la Orden -->
         <v-text-field
           v-model="form.noOrden"
           :error-messages="errors.noOrden"
@@ -47,6 +54,53 @@
           class="form-field"
         ></v-text-field>
   
+        <!-- Formulario de Refacciones -->
+        <v-text-field
+          v-model="form.ordenID"
+          :error-messages="errors.ordenID"
+          label="Numero de Orden"
+          class="form-field"
+          type="number"
+        ></v-text-field>
+  
+        <v-text-field
+          v-model="form.nombreRefaccion"
+          :error-messages="errors.nombreRefaccion"
+          label="Nombre de Refacción"
+          class="form-field"
+        ></v-text-field>
+  
+        <v-text-field
+          v-model="form.marca"
+          :error-messages="errors.marca"
+          label="Marca de la Refaccion"
+          class="form-field"
+        ></v-text-field>
+  
+        <v-text-field
+          v-model="form.cantidad"
+          :error-messages="errors.cantidad"
+          label="Cantidad de Refacciones"
+          type="number"
+          class="form-field"
+        ></v-text-field>
+  
+        <v-text-field
+          v-model="form.precio"
+          :error-messages="errors.precio"
+          label="Precio de Refacciones"
+          type="number"
+          class="form-field"
+        ></v-text-field>
+  
+        <v-select
+          v-model="form.comprador"
+          :error-messages="errors.comprador"
+          :items="compradores"
+          label="Comprador"
+          class="form-field"
+        ></v-select>
+  
         <v-btn type="submit" color="primary" class="submit-btn">
           Guardar Detalles
         </v-btn>
@@ -57,6 +111,7 @@
   <script setup>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
+  import video from '@/video/pixel_red.mp4'
   
   const router = useRouter()
   
@@ -66,6 +121,12 @@
     servicioProporcionado: '',
     costoManoObra: '',
     diasGarantia: '',
+    ordenID: '',
+    nombreRefaccion: '',
+    marca: '',
+    cantidad: '',
+    precio: '',
+    comprador: '',
   })
   
   const errors = ref({
@@ -74,6 +135,12 @@
     servicioProporcionado: [],
     costoManoObra: [],
     diasGarantia: [],
+    ordenID: [],
+    nombreRefaccion: [],
+    marca: [],
+    cantidad: [],
+    precio: [],
+    comprador: [],
   })
   
   const validateForm = () => {
@@ -84,6 +151,12 @@
       servicioProporcionado: [],
       costoManoObra: [],
       diasGarantia: [],
+      ordenID: [],
+      nombreRefaccion: [],
+      marca: [],
+      cantidad: [],
+      precio: [],
+      comprador: [],
     }
   
     if (!form.value.noOrden) {
@@ -119,6 +192,40 @@
       isValid = false
     }
   
+    if (!form.value.ordenID) {
+      errors.value.ordenID.push('El numero de la orden es requerido.')
+      isValid = false
+    }
+  
+    if (!form.value.nombreRefaccion) {
+      errors.value.nombreRefaccion.push(
+        'El nombre de la refacción es requerido.'
+      )
+      isValid = false
+    }
+  
+    if (!form.value.marca) {
+      errors.value.marca.push('La marca es requerida.')
+      isValid = false
+    }
+  
+    const cantidad = parseInt(form.value.cantidad)
+    if (isNaN(cantidad) || cantidad < 0) {
+      errors.value.cantidad.push('La cantidad debe ser un número positivo.')
+      isValid = false
+    }
+  
+    const precio = parseFloat(form.value.precio)
+    if (isNaN(precio) || precio < 0) {
+      errors.value.precio.push('El precio debe ser un número positivo.')
+      isValid = false
+    }
+  
+    if (!form.value.comprador) {
+      errors.value.comprador.push('El comprador es requerido.')
+      isValid = false
+    }
+  
     return isValid
   }
   
@@ -141,6 +248,12 @@
       servicioProporcionado: '',
       costoManoObra: '',
       diasGarantia: '',
+      ordenID: '',
+      nombreRefaccion: '',
+      marca: '',
+      cantidad: '',
+      precio: '',
+      comprador: '',
     }
     errors.value = {
       noOrden: [],
@@ -148,15 +261,33 @@
       servicioProporcionado: [],
       costoManoObra: [],
       diasGarantia: [],
+      ordenID: [],
+      nombreRefaccion: [],
+      marca: [],
+      cantidad: [],
+      precio: [],
+      comprador: [],
     }
   }
   
   const goBack = () => {
     router.go(-1) // Navegar a la vista anterior
   }
+  
+  const compradores = ref(['Cliente', 'Taller'])
   </script>
   
   <style scoped>
+  #fondo-video {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
   .container {
     max-width: 600px;
     margin: 0 auto;

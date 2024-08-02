@@ -38,7 +38,7 @@ import { RouterLink, RouterView } from 'vue-router'
         </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
-        <RouterLink to="OrdenEmpleado" class="menu-button text-decoration-none">
+        <RouterLink to="/MenuOrdenesEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document</v-icon>
