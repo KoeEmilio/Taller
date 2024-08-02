@@ -20,11 +20,15 @@ import ServiciosEmpleadosView from '@/views/ServiciosEmpleadosView.vue'
 import VerClientesEmpleadosView from '@/views/VerClientesEmpleadosView.vue'
 import RegistroClientesEmpleadoView from '@/views/RegistroClientesEmpleadoView.vue'
 import OrdenEmpleadoView from '@/views/OrdenEmpleadoView.vue'
-import DetallesOrden from '@/views/DetallesOrden.vue'
+import DetallesOrdenView from '@/views/DetallesOrdenView.vue'
 import VerCitasView from '@/views/VerCitasView.vue'
 import VerCitasEmpleadoView from '@/views/VerCitasEmpleadoView.vue'
 import MenuPrincipalView from '@/views/MenuPrincipalView.vue'
-import DetalleRefacciones from '@/views/DetalleRefacciones.vue'
+import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
+import VerDetalleView from '@/views/VerDetalleView.vue'
+import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
+import VerDetalleEmpleadoView from '@/views/VerDetalleEmpleadoView.vue'
+import DetalleOrdenEmpleadoView from '@/views/DetalleOrdenEmpleadoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -167,13 +171,7 @@ const router = createRouter({
       //VISTA DE EMPLEADOS (DETALLES DE ORDENES)
       path: '/DetallesOrden',
       name: 'DetallesOrden',
-      component:DetallesOrden
-    },
-    {
-      //VISTA DE EMPLEADOS (DETALLES DE REFACCIONES)
-      path: '/DetalleRefacciones',
-      name: 'DetalleRefacciones',
-      component:DetalleRefacciones
+      component:DetallesOrdenView
     },
     {
       //VISTA DE ADMINISTRADOR (CITAS)
@@ -182,17 +180,47 @@ const router = createRouter({
       component:VerCitasView
     },
     {
-      //VISTA DE ADMINISTRADOR (CITAS)
+      //VISTA DE EMPLEADO (CITAS)
       path: '/VerCitasEmpleado',
       name: 'VerCitasEmpleado',
       component:VerCitasEmpleadoView
     },
     {
-      //VISTA DE ADMINISTRADOR (CITAS)
+      //VISTA DE ADMINISTRADOR (INICIO)
       path: '/MenuPrincipal',
       name: 'MenuPrincipal',
       component:MenuPrincipalView
     },
+    {
+      //VISTA DE ADMINISTRADOR ()
+      path: '/MenuOrdenes',
+      name: 'MenuOrdenes',
+      component:MenuOrdenesView
+    },
+    {
+      //VISTA DE ADMINISTRADOR ()
+      path: '/VerDetalle',
+      name: 'VerDetalle',
+      component:VerDetalleView
+    },
+    {
+      //VISTA DE EMPLEADO ()
+      path: '/MenuOrdenesEmpleado',
+      name: 'MenuOrdenesEmpleado',
+      component:MenuOrdenesEmpleadoView
+    },
+    {
+      //VISTA DE EMPLEADO ()
+      path: '/VerDetalleEmpleado',
+      name: 'VerDetalleEmpleado',
+      component:VerDetalleEmpleadoView
+    },
+    {
+      //VISTA DE EMPLEADOS (DETALLES DE ORDENES)
+      path: '/DetalleOrdenEmpleado',
+      name: 'DetalleOrdenEmpleado',
+      component:DetalleOrdenEmpleadoView
+    }
     
 
   ]
