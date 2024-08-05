@@ -5,6 +5,7 @@ import video from '@/video/pixel_red.mp4';
 
 const usuario = ref('');
 const contrasena1 = ref('');
+const showPassword = ref(false);
 const router = useRouter();
 
 const IngresarFormulario = () => {
@@ -21,49 +22,33 @@ const IngresarFormulario = () => {
 <template>
   <div class="page-container">
     <video autoplay muted loop id="background-video" :src="video"></video>
-    <div class="contenedor">
-      <v-container class="fill-height">
-        <v-row id="Contenedor-login">
-          <v-card class="transparente" width="30vw" height="80vh">
-            <v-card-title id="titulo" class="transparente-titulo" style="text-align: center;">INICIA SESIÓN</v-card-title>
-            <div id="contenedor-formulario" class="transparente">
-              <v-card-text>
-                <v-container>
-                  <v-row id="UserRow">
-                    <v-text-field
-                      v-model="usuario"
-                      label="Usuario"
-                      variant="solo"
-                      clearable
-                      :clear-icon-color="'black'"
-                    ></v-text-field>
-                  </v-row>
-                  <v-row id="PasswordRow">
-                    <v-text-field
-                      v-model="contrasena1"
-                      label="Contraseña"
-                      variant="solo"
-                      type="password"
-                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                      @click:append="showPassword = !showPassword"
-                    ></v-text-field>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-              <v-card-actions>
-                <v-container>
-                  <v-row>
-                    <v-col class="d-flex">
-                      <v-btn class="botones-color" block @click="IngresarFormulario">Ingresar</v-btn>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-actions>
-            </div>
+    <v-container class="d-flex align-center justify-center fill-height">
+      <v-row justify="center">
+        <v-col cols="12" sm="8" md="2" lg="5" x->
+          <v-card class="transparente">
+            <v-card-title id="titulo" class="transparente-titulo" text-align="center">INICIA SESIÓN</v-card-title>
+            <v-card-text>
+              <v-text-field
+                v-model="usuario"
+                label="Usuario"
+                variant="solo"
+                clearable
+                clear-icon-color="black"
+              ></v-text-field>
+              <v-text-field
+                v-model="contrasena1"
+                label="Contraseña"
+                variant="solo"
+                type="password"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="showPassword = !showPassword"
+              ></v-text-field>
+              <v-btn class="botones-color" block @click="IngresarFormulario">Ingresar</v-btn>
+            </v-card-text>
           </v-card>
-        </v-row>
-      </v-container>
-    </div>
+        </v-col>
+      </v-row>
+    </v-container>
     <router-view />
   </div>
 </template>
@@ -78,13 +63,14 @@ const IngresarFormulario = () => {
   top: 0;
   left: 0;
   object-fit: cover;
+  z-index: -1; /* Ensure the video is behind other content */
 }
 
-#Contenedor-login {
+.page-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-height: 80%;
+  min-height: 100vh;
 }
 
 .transparente {
@@ -94,25 +80,12 @@ const IngresarFormulario = () => {
 
 .transparente-titulo {
   background-color: #7d0100; /* Fondo negro con 80% de opacidad */
+  text-align: center;
 }
 
 #titulo {
   color: white;
   box-shadow: none;
-}
-
-#contenedor-formulario {
-  width: 100%;
-  height: 90%;
-  padding-block: 10px;
-}
-
-#UserRow {
-  padding-block: 8px;
-}
-
-#PasswordRow {
-  padding-block: 10px;
 }
 
 .v-btn.botones-color {
@@ -121,17 +94,7 @@ const IngresarFormulario = () => {
   text-decoration: none;
 }
 
-.contenedor {
-  height: 80vh;
-}
-
-.O {
-  justify-content: center;
-  text-decoration: none;
-}
-
 body {
   font-family: 'Inter', sans-serif;
 }
 </style>
-

@@ -43,7 +43,7 @@ const submit = () => {
                 type="email"
               ></v-text-field>
               
-              <v-text-field
+                    <v-text-field
                       v-model="telefono"
                       :rules="[v => !!v || 'Número de teléfono es requerido', v => /^\d{10}$/.test(v) || 'El número de telefono debe tener 10 dígitos']"
                       label="Telefono"
@@ -52,9 +52,17 @@ const submit = () => {
                     ></v-text-field>
 
                     <v-radio-group v-model="Tipo" :rules="[v => !!v || 'Tipo de cliente es requerido']" label="Tipo de Cliente" required>
-          <v-radio label="Físico" value="fisico"></v-radio>
-          <v-radio label="Moral" value="moral"></v-radio>
-        </v-radio-group>
+                    <v-radio label="Físico" value="fisico"></v-radio>
+                    <v-radio label="Moral" value="moral"></v-radio>
+                    </v-radio-group>
+
+              <v-text-field
+                v-if="Tipo === 'moral'"
+                v-model="empresa"
+                :rules="[v => !!v || 'Nombre de la empresa es requerido']"
+                label="Nombre de la Empresa"
+                variant="solo"
+              ></v-text-field>
 
               
               <v-btn :disabled="!valid" color="#7d0100" @click="submit">
