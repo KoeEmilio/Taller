@@ -1,57 +1,51 @@
 <script setup>
-import { RouterLink } from 'vue-router'</script>
+import { RouterLink, RouterView } from 'vue-router'</script>
 
 <template>
   <VApp>
-    <VAppBar app color="#7d0100" dark>
-      <h1 class="text-center w-100">INICIO</h1>
-      <router-link to="/">
+    <v-app-bar app color="#7D0100">
+        <router-link to="/ClientesEmpleados">
         <v-btn
-        class="ma-3"
-        color="white"
-        icon="mdi-account"
-      ></v-btn>
-      </router-link>
-    </VAppBar>
+            class="ma-3"
+            color="white"
+            icon="mdi-arrow-left-bold-circle-outline"
+        ></v-btn>
+        </router-link>
+        <h1 class="text-center w-100">ORDENES</h1>
+        </v-app-bar>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="Clientes" class="menu-button text-decoration-none">
+          <RouterLink to="/OrdenEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account</v-icon>
-                <h1>CLIENTE</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-multiple</v-icon>
+                <br>
+                <h1>VER</h1>
+                <h1>ORDENES</h1>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="Empleados" class="menu-button text-decoration-none">
+          <RouterLink to="/DetalleOrdenEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account-tie</v-icon>
-                <h1>Empleados</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-plus</v-icon>
+                <h1>DETALLAR</h1>
+                <h1>ORDEN</h1>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/VerCitas" class="menu-button text-decoration-none">
+          <RouterLink to="/VerDetalleEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
-                <h1>Citas</h1>
-              </div>
-            </VBtn>
-          </RouterLink>
-        </VCol>
-        <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/Vehiculos" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
-              <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-car-back</v-icon>
-                <h1>Vehiculos</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
+                <h1>VER</h1>
+                <h1>DETALLES</h1>
               </div>
             </VBtn>
           </RouterLink>

@@ -1,34 +1,23 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-
+import { VDateInput } from 'vuetify/labs/VDateInput'
 
 const datos = ref([])
-const showFormulario = ref(false)
 
-const mostrarFormulario = () =>{
-    if(showFormulario.value === false){
-        showFormulario.value = true
-    }
-    else if (showFormulario.value === true){
-        showFormulario.value = false
-    }
-}
-
-const mostrarinfo = () =>{
-        fetch('http://miproyecto.com/ordenes')
+    const mostrarinfo  = () =>{
+        fetch('http://pruebapdo.com/Ordenes')
         .then(response => response.json())
         .then(json => {
-            if(json.status===200){
+            if(json.status=200){
                 datos.value = json.data
             }
         })
-        
     }
 
-onMounted(() => {
-    mostrarinfo()
-})
 
+onMounted(() => {
+mostrarinfo()
+})
 </script>
 
 <template>
@@ -38,7 +27,7 @@ onMounted(() => {
     <div class="container">
         <v-app>
             <v-app-bar app color="#7d0100" dark>
-                <router-link to="Clientes">
+                <router-link to="/MenuOrdenes">
                 <v-btn
                     class="ma-3"
                     color="white"
@@ -63,8 +52,7 @@ onMounted(() => {
                                     <v-card class="pa-5">
                                         <v-card-title>Registrar Orden</v-card-title>
                                         <v-card-text class="scrollable-content">
-                                            <v-text-field label="Fecha y Hora de Ingreso" v-model="fechaHoraIngreso"></v-text-field>
-                                            <v-text-field label="Fecha y Hora Estimada de Salida" v-model="fechaHoraSalida"></v-text-field>
+                                           <v-date-input label="Fecha de Ingreso" v-model="fechaIngreso"></v-date-input>
                                             <v-select label="Empleado" :items="empleados" v-model="empleado"></v-select>
                                             <v-select label="Vehículo" :items="vehiculos" v-model="vehiculo"></v-select>
                                             <v-text-field label="Motivo" v-model="motivo"></v-text-field>
@@ -81,6 +69,7 @@ onMounted(() => {
                         </v-col>
                     </v-row>
                 </v-container>
+
             </v-main>
         </v-app>
     </div>   

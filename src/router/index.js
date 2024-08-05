@@ -20,6 +20,7 @@ import ServiciosEmpleadosView from '@/views/ServiciosEmpleadosView.vue'
 import VerClientesEmpleadosView from '@/views/VerClientesEmpleadosView.vue'
 import RegistroClientesEmpleadoView from '@/views/RegistroClientesEmpleadoView.vue'
 import OrdenEmpleadoView from '@/views/OrdenEmpleadoView.vue'
+import DetallesOrdenView from '@/views/DetallesOrdenView.vue'
 import VerCitasView from '@/views/VerCitasView.vue'
 import VerCitasEmpleadoView from '@/views/VerCitasEmpleadoView.vue'
 import MenuPrincipalView from '@/views/MenuPrincipalView.vue'
@@ -162,19 +163,25 @@ const router = createRouter({
       component:OrdenEmpleadoView
     },
     {
+      //VISTA DE EMPLEADOS (DETALLES DE ORDENES)
+      path: '/DetallesOrden',
+      name: 'DetallesOrden',
+      component:DetallesOrdenView
+    },
+    {
       //VISTA DE ADMINISTRADOR (CITAS)
       path: '/VerCitas',
       name: 'VerCitas',
       component:VerCitasView
     },
     {
-      //VISTA DE ADMINISTRADOR (CITAS)
+      //VISTA DE EMPLEADO (CITAS)
       path: '/VerCitasEmpleado',
       name: 'VerCitasEmpleado',
       component:VerCitasEmpleadoView
     },
     {
-      //VISTA DE ADMINISTRADOR (CITAS)
+      //VISTA DE ADMINISTRADOR (INICIO)
       path: '/MenuPrincipal',
       name: 'MenuPrincipal',
       component:MenuPrincipalView
