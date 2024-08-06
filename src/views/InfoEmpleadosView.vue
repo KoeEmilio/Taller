@@ -6,9 +6,9 @@
     <v-app>
 
         <v-container></v-container>
-    <v-app-bar app color="#7d0100" dark>
+    <v-app-bar app color="#1a1a1a" dark>
 
-        <router-link to="Empleados">
+        <router-link to="MenuPrincipal">
           <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
         </router-link>
         <h1 class="text-center w-100">EMPLEADOS REGISTRADOS</h1>

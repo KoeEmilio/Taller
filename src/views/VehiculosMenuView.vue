@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
 
 <template>
   <VApp>
-    <VAppBar app color="#7d0100" dark>
+    <VAppBar app color="#1a1a1a" dark>
       <router-link to="/MenuPrincipal">
         <v-btn
         class="ma-3"
@@ -14,11 +14,11 @@ import { RouterLink, RouterView } from 'vue-router'</script>
     <h1 class="text-center w-100">VEHICULOS</h1>
     </VAppBar>
     <VContainer class="d-flex flex-column align-center fill-height">
-      <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
+      <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="4" class="d-flex justify-center">
           <RouterLink to="/RegistroVehiculo" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-car-select</v-icon>
                 <h2>REGISTRAR</h2>
@@ -29,7 +29,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
           <RouterLink to="/VehiculosInfo" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-car-search</v-icon>
                 <h2>VER</h2>
@@ -40,7 +40,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
           <RouterLink to="/Servicios" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-car-wrench</v-icon>
                 <h1>SERVICIOS</h1>

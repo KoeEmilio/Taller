@@ -77,7 +77,7 @@ const submit = () => {
                 variant="solo"
               ></v-text-field>
 
-              <v-btn :disabled="!valid" color="#7d0100" @click="submit">
+              <v-btn :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
               </v-btn>
             </v-form>
@@ -105,7 +105,7 @@ const submit = () => {
 }
 
 #titulo {
-  background-color: rgb(230, 1, 1);
+  background-color:#1a1a1a;
   color: white;
   box-shadow: -1px 2px 6px black;
   text-align: center;

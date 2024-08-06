@@ -26,7 +26,7 @@ mostrarinfo()
 
     <div class="container">
         <v-app>
-            <v-app-bar app color="#7d0100" dark>
+            <v-app-bar app color="#1a1a1a" dark>
                 <router-link to="/MenuOrdenes">
                 <v-btn
                     class="ma-3"
@@ -34,7 +34,7 @@ mostrarinfo()
                     icon="mdi-arrow-left-bold-circle-outline"
                 > </v-btn>
                 </router-link>
-                <h1 class="text-center w-100">Ordenes</h1>
+                <h1 class="text-center w-100">VER ORDENES</h1>
             </v-app-bar>
             
             <v-main>
@@ -110,14 +110,14 @@ mostrarinfo()
 }
 
 #guindo-btn{
-  background-color: #7d0100 ; /* Color guindo */
+  background-color: #1a1a1a ; /* Color guindo */
   color: white ; /* Color del icono */
   margin-left: 10px; /* Margen izquierdo */
   border-radius: 30%; /* Redondear el botón */
 }
 
 .BtnGuindo{
-    background-color: #7d0100 ;
+    background-color: #1a1a1a;
     color: white ;
 }
 </style>

@@ -69,11 +69,11 @@ const headers = [
 <template>
 <div class="container">
     <v-app>
-    <v-app-bar app color="#7d0100" dark>
+    <v-app-bar app color="#1a1a1a" dark>
         <router-link to="Clientes">
         <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
         </router-link>
-        <h1 class="text-center w-100">Clientes Registrados</h1>
+        <h1 class="text-center w-100">CLIENTES REGISTRADOS</h1>
       </v-app-bar>
 
       <v-main>
@@ -190,14 +190,14 @@ const headers = [
 }
 
 #guindo-btn {
-  background-color: #7d0100; /* Color guindo */
+  background-color:#1a1a1a;
   color: white; /* Color del icono */
   margin-left: 10px; /* Margen izquierdo */
   border-radius: 30%; /* Redondear el botón */
 }
 
 .BtnGuindo {
-  background-color: #7d0100;
+  background-color:#1a1a1a;
   color: white;
 }
 

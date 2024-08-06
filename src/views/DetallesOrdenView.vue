@@ -1,5 +1,5 @@
 <template>
-  <video autoplay muted loop id="fondo-video" :src="video"></video>
+
 
   <div class="container">
     <div class="header">
@@ -10,7 +10,7 @@
         icon="mdi-arrow-left-bold-circle-outline"
       ></v-btn>
       </router-link>
-      <span class="header-text">Detalles de la Orden</span>
+      <span class="header-text">DETALLAR ORDEN</span>
     </div>
 
     <v-form @submit.prevent="submit">
@@ -101,7 +101,7 @@
         class="form-field"
       ></v-select>
 
-      <v-btn type="submit" color="primary" class="submit-btn">
+      <v-btn type="submit" color="#1a1a1a" class="submit-btn">
         Guardar Detalles
       </v-btn>
     </v-form>
@@ -111,7 +111,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import video from '@/video/pixel_red.mp4'
+
 
 const router = useRouter()
 
@@ -298,7 +298,7 @@ const compradores = ref(['Cliente', 'Taller'])
 }
 
 .header {
-  background-color: #7d0100;
+  background-color:#1a1a1a;
   color: white;
   padding: 16px;
   display: flex;

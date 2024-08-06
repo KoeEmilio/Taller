@@ -52,7 +52,7 @@ const submit = async () => {
 
 
 <template>
-      <video autoplay muted loop id="fondo-video" :src="video"></video>
+      
 
   <v-app>
       
@@ -162,7 +162,7 @@ const submit = async () => {
 }
 
 #titulo{
-  background-color: rgb(230, 1, 1);
+  background-color: #1a1a1a;
   color: white;
   box-shadow: -1px 2px 6px black;
   text-align: center;
