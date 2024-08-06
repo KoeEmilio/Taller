@@ -1,17 +1,18 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import video from '@/video/pixel_red.mp4';
+import video from '@/video/taller.mp4';
 
 const usuario = ref('');
 const contrasena1 = ref('');
-const showPassword = ref(false);
 const router = useRouter();
 
 const IngresarFormulario = () => {
   if (usuario.value === 'azael@gmail.com' && contrasena1.value === '1234') {
     router.push({ name: 'MenuEmpleados' });
   } else if (usuario.value === 'saul@gmail.com' && contrasena1.value === '1234') {
+    router.push({ name: 'MenuPrincipal' });
+  } else if (usuario.value === 'sal@gmail.com' && contrasena1.value === '1234') {
     router.push({ name: 'MenuPrincipal' });
   } else {
     alert('Correo o contraseña incorrectos');
@@ -21,34 +22,50 @@ const IngresarFormulario = () => {
 
 <template>
   <div class="page-container">
-    <video autoplay muted loop id="background-video" :src="video"></video>
-    <v-container class="d-flex align-center justify-center fill-height">
-      <v-row justify="center">
-        <v-col cols="12" sm="8" md="2" lg="5" x->
-          <v-card class="transparente">
-            <v-card-title id="titulo" class="transparente-titulo" text-align="center">INICIA SESIÓN</v-card-title>
-            <v-card-text>
-              <v-text-field
-                v-model="usuario"
-                label="Usuario"
-                variant="solo"
-                clearable
-                clear-icon-color="black"
-              ></v-text-field>
-              <v-text-field
-                v-model="contrasena1"
-                label="Contraseña"
-                variant="solo"
-                type="password"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="showPassword = !showPassword"
-              ></v-text-field>
-              <v-btn class="botones-color" block @click="IngresarFormulario">Ingresar</v-btn>
-            </v-card-text>
+    <video autoplay muted loop playsinline id="background-video" :src="video"></video>
+    <div class="contenedor">
+      <v-container class="fill-height">
+        <v-row id="Contenedor-login">
+          <v-card class="transparente" width="30vw" height="80vh">
+            <v-card-title id="titulo" class="transparente-titulo" style="text-align: center;">INICIA SESIÓN</v-card-title>
+            <div id="contenedor-formulario" class="transparente">
+              <v-card-text>
+                <v-container>
+                  <v-row id="UserRow">
+                    <v-text-field
+                      v-model="usuario"
+                      label="Usuario"
+                      variant="solo"
+                      clearable
+                      :clear-icon-color="'black'"
+                    ></v-text-field>
+                  </v-row>
+                  <v-row id="PasswordRow">
+                    <v-text-field
+                      v-model="contrasena1"
+                      label="Contraseña"
+                      variant="solo"
+                      type="password"
+                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="showPassword = !showPassword"
+                    ></v-text-field>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-container>
+                  <v-row>
+                    <v-col class="d-flex">
+                      <v-btn class="botones-color" block @click="IngresarFormulario">Ingresar</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-actions>
+            </div>
           </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+        </v-row>
+      </v-container>
+    </div>
     <router-view />
   </div>
 </template>
@@ -63,14 +80,15 @@ const IngresarFormulario = () => {
   top: 0;
   left: 0;
   object-fit: cover;
-  z-index: -1; /* Ensure the video is behind other content */
+  pointer-events: none; /* Deshabilita la interacción con el video */
+  user-select: none; /* Evita la selección del video */
 }
 
-.page-container {
+#Contenedor-login {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  max-height: 80%;
 }
 
 .transparente {
@@ -79,8 +97,7 @@ const IngresarFormulario = () => {
 }
 
 .transparente-titulo {
-  background-color: #7d0100; /* Fondo negro con 80% de opacidad */
-  text-align: center;
+  background-color: rgba(0, 0, 0, 0.8) !important; /* Fondo negro con 80% de opacidad */
 }
 
 #titulo {
@@ -88,9 +105,32 @@ const IngresarFormulario = () => {
   box-shadow: none;
 }
 
+#contenedor-formulario {
+  width: 100%;
+  height: 90%;
+  padding-block: 10px;
+}
+
+#UserRow {
+  padding-block: 8px;
+}
+
+#PasswordRow {
+  padding-block: 10px;
+}
+
 .v-btn.botones-color {
-  background-color: #7d0100;
+  background-color: #000000;
   color: white;
+  text-decoration: none;
+}
+
+.contenedor {
+  height: 80vh;
+}
+
+.O {
+  justify-content: center;
   text-decoration: none;
 }
 
