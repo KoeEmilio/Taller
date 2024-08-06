@@ -24,6 +24,10 @@ import DetallesOrdenView from '@/views/DetallesOrdenView.vue'
 import VerCitasView from '@/views/VerCitasView.vue'
 import VerCitasEmpleadoView from '@/views/VerCitasEmpleadoView.vue'
 import MenuPrincipalView from '@/views/MenuPrincipalView.vue'
+import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
+import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
+import VerDetalleView from '@/views/VerDetalleView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -186,7 +190,25 @@ const router = createRouter({
       name: 'MenuPrincipal',
       component:MenuPrincipalView
     },
-    
+    {
+      //VISTA DE ADMINISTRADOR (ORDENES)
+      path: '/MenuOrdenes',
+      name: 'MenuOrdenes',
+      component:MenuOrdenesView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (ORDENES)
+      path: '/MenuOrdenesEmpleado',
+      name: 'MenuOrdenesEmpleado',
+      component:MenuOrdenesEmpleadoView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (ORDENES)
+      path: '/VerDetalle',
+      name: 'VerDetalle',
+      component:VerDetalleView
+    }
+
 
   ]
 })
