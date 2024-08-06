@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import video from '@/video/pixel_red.mp4';
+import video from '@/video/taller.mp4';
+import logo from '@/img/logonegro.png';  // Asegúrate de tener tu logo en esta ruta
 
 const usuario = ref('');
 const contrasena1 = ref('');
@@ -12,6 +13,8 @@ const IngresarFormulario = () => {
     router.push({ name: 'MenuEmpleados' });
   } else if (usuario.value === 'saul@gmail.com' && contrasena1.value === '1234') {
     router.push({ name: 'MenuPrincipal' });
+  } else if (usuario.value === 'sal@gmail.com' && contrasena1.value === '1234') {
+    router.push({ name: 'MenuPrincipal' });
   } else {
     alert('Correo o contraseña incorrectos');
   }
@@ -20,13 +23,16 @@ const IngresarFormulario = () => {
 
 <template>
   <div class="page-container">
-    <video autoplay muted loop id="background-video" :src="video"></video>
+    <video autoplay muted loop playsinline id="background-video" :src="video"></video>
     <div class="contenedor">
       <v-container class="fill-height">
         <v-row id="Contenedor-login">
-          <v-card class="transparente" width="30vw" height="80vh">
-            <v-card-title id="titulo" class="transparente-titulo" style="text-align: center;">INICIA SESIÓN</v-card-title>
+          <v-card class="transparente" width="30vw" height="90vh">  <!-- Reducir la altura a 60vh -->
+            <v-card-title id="titulo" class="transparente-titulo" style="text-align: center;">
+              <img :src="logo" alt="Logo" id="logo">  <!-- Agregar el logo -->
+            </v-card-title>
             <div id="contenedor-formulario" class="transparente">
+              <v-card-title id="titulo-formulario" style="text-align: center;">INICIA SESIÓN</v-card-title>
               <v-card-text>
                 <v-container>
                   <v-row id="UserRow">
@@ -78,27 +84,35 @@ const IngresarFormulario = () => {
   top: 0;
   left: 0;
   object-fit: cover;
+  pointer-events: none; /* Deshabilita la interacción con el video */
+  user-select: none; /* Evita la selección del video */
 }
 
 #Contenedor-login {
   display: flex;
-  align-items: center;
   justify-content: center;
   max-height: 80%;
+  margin-bottom: 40px;
 }
 
 .transparente {
-  background-color: rgba(255, 255, 255, 0.5) !important; /* Fondo blanco con 50% de opacidad */
+  background-color: rgba(255, 255, 255, 0.6) !important; /* Fondo blanco con 50% de opacidad */
   box-shadow: none !important;
 }
 
 .transparente-titulo {
-  background-color: #7d0100; /* Fondo negro con 80% de opacidad */
+  background-color: rgba(255, 255, 255, 0.6) !important; /* Fondo negro con 80% de opacidad */
 }
 
 #titulo {
   color: white;
   box-shadow: none;
+}
+
+#titulo-formulario {
+  color: rgb(0, 0, 0);
+  box-shadow: none;
+  margin-top: 10px;
 }
 
 #contenedor-formulario {
@@ -116,13 +130,18 @@ const IngresarFormulario = () => {
 }
 
 .v-btn.botones-color {
-  background-color: #7d0100;
+  background-color: #000000;
   color: white;
   text-decoration: none;
 }
 
 .contenedor {
   height: 80vh;
+}
+
+#logo {
+  width: 60%; /* Ajusta el tamaño del logo según tus necesidades */
+  margin: 0 auto;
 }
 
 .O {
@@ -134,4 +153,3 @@ body {
   font-family: 'Inter', sans-serif;
 }
 </style>
-

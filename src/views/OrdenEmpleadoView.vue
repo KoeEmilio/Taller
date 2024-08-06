@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { VDateInput } from 'vuetify/labs/VDateInput'
 
 
 const datos = ref([])
@@ -38,7 +39,7 @@ onMounted(() => {
     <div class="container">
         <v-app>
             <v-app-bar app color="#7d0100" dark>
-                <router-link to="ClientesEmpleados">
+                <router-link to="/MenuOrdenesEmpleado">
                 <v-btn
                     class="ma-3"
                     color="white"
@@ -62,16 +63,14 @@ onMounted(() => {
                                 <div v-show="showFormulario === true" >
                                     <v-card class="pa-5">
                                         <v-card-title>Registrar Orden</v-card-title>
-                                          <v-card-text class="scrollable-content">
-                                            <v-text-field class="custom-field" label="Fecha y Hora de Ingreso" v-model="fechaHoraIngreso"></v-text-field>
-                                            <v-text-field class="custom-field" label="Fecha y Hora Estimada de Salida" v-model="fechaHoraSalida"></v-text-field>
-                                            <v-select class="custom-field" label="Empleado" :items="empleados" v-model="empleado"></v-select>
-                                            <v-select class="custom-field" label="Vehículo" :items="vehiculos" v-model="vehiculo"></v-select>
-                                            <v-text-field class="custom-field" label="Motivo" v-model="motivo"></v-text-field>
-                                            <v-select class="custom-field" label="Cita" :items="citas" v-model="cita"></v-select>
-                                            <v-select class="custom-field" label="Estado" :items="estados" v-model="estado"></v-select>
-                                            <v-btn class="BtnGuindo" @click="registrarOrden">Registrar</v-btn>
-                                        </v-card-text>
+                                        <v-card-text class="scrollable-content">
+                                           <v-date-input label="Fecha de Ingreso" v-model="fechaIngreso"></v-date-input>
+                                            <v-select label="Empleado" :items="empleados" v-model="empleado"></v-select>
+                                            <v-select label="Vehículo" :items="vehiculos" v-model="vehiculo"></v-select>
+                                            <v-text-field label="Motivo" v-model="motivo"></v-text-field>
+                                            <v-select label="Cita" :items="citas" v-model="cita"></v-select>
+                                            <v-select label="Estado" :items="estados" v-model="estado"></v-select>
+                                    </v-card-text>
                                     </v-card>  
                                 </div>
                             </v-dialog>
@@ -81,6 +80,7 @@ onMounted(() => {
                         </v-col>
                     </v-row>
                 </v-container>
+
             </v-main>
         </v-app>
     </div>   
@@ -121,10 +121,10 @@ onMounted(() => {
 }
 
 #guindo-btn{
-  background-color: #7d0100 ; /* Color guindo */
-  color: white ; /* Color del icono */
-  margin-left: 10px; /* Margen izquierdo */
-  border-radius: 30%; /* Redondear el botón */
+  background-color: #7d0100 ; 
+  color: white ;
+  margin-left: 10px;
+  border-radius: 30%;
 }
 
 .BtnGuindo{

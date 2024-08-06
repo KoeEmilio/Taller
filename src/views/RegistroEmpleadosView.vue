@@ -23,7 +23,7 @@ const submit = async () => {
       Num_Seguro_Social: socialSecurityNumber.value,
       CURP: curp.value,
       correo: email.value,
-      Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual en formato YYYY-MM-DD
+      Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual
       Estado: 'LIBRE'
     };
 
@@ -56,7 +56,7 @@ const toUpperCase = (event) =>{
 </script>
 
 <template>
-      <video autoplay muted loop id="fondo-video" :src="video"></video>
+      
 
   <v-app>
       <div class="container">
@@ -165,7 +165,7 @@ const toUpperCase = (event) =>{
 }
 
 #titulo{
-  background-color: rgb(230, 1, 1);
+  background-color: #1a1a1a;
   color: white;
   box-shadow: -1px 2px 6px black;
   text-align: center;

@@ -5,7 +5,7 @@ import { ref, onMounted } from 'vue'
 const datos = ref([])
 
     const mostrarinfo  = () =>{
-        fetch('http://pruebapdo.com/ruta')
+        fetch('http://pruebapdo.com/Servicios')
         .then(response => response.json())
         .then(json => {
             if(json.status=200){
@@ -23,7 +23,7 @@ mostrarinfo()
 
 <template>
         <v-app>
-    <v-app-bar app color="#7d0100" dark>
+    <v-app-bar app color="#1a1a1a" dark>
         <router-link to="/Vehiculos">
         <v-btn
             class="ma-3"

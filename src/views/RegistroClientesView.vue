@@ -3,15 +3,15 @@ import { ref } from 'vue';
 import video from '@/video/pixel_red.mp4'
 
 const name = ref('');
-const email = ref('');
-const telefono = ref('');
+const address = ref('');
+
 const valid = ref(false);
 const form = ref(null);
-const Tipo = ref(''); // Nuevo campo para tipo de cliente
 
 const submit = () => {
   if (form.value.validate()) {
     alert('Registro exitoso');
+    // Aquí puedes agregar la lógica para enviar los datos al servidor
   }
 };
 </script>
@@ -28,7 +28,6 @@ const submit = () => {
         <v-card-text>
           <v-container>
             <v-form id="interior-card" ref="form" v-model="valid">
-              
               <v-text-field
                 v-model="name"
                 :rules="[v => !!v || 'Nombre es requerido']"
@@ -37,15 +36,14 @@ const submit = () => {
               ></v-text-field>
 
               <v-text-field
-                v-model="email"
-                :rules="[v => !!v || 'Correo es requerido', v => /.+@.+\..+/.test(v) || 'Correo debe ser válido']"
-                label="Correo"
+                v-model="address"
+                :rules="[v => !!v || 'Dirección es requerida']"
+                label="Dirección"
                 variant="solo"
                 required
-                type="email"
               ></v-text-field>
               
-              <v-text-field
+                    <v-text-field
                       v-model="telefono"
                       :rules="[v => !!v || 'Número de teléfono es requerido', v => /^\d{10}$/.test(v) || 'El número de telefono debe tener 10 dígitos']"
                       label="Telefono"
@@ -58,42 +56,46 @@ const submit = () => {
               <v-radio label="Moral" value="moral"></v-radio>
             </v-radio-group>
 
-              
-              <v-btn :disabled="!valid" color="#7d0100" @click="submit">
+              <v-text-field
+                v-if="Tipo === 'moral'"
+                v-model="empresa"
+                :rules="[v => !!v || 'Nombre de la empresa es requerido']"
+                label="Nombre de la Empresa"
+                variant="solo"
+              ></v-text-field>
+
+              <v-btn :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
               </v-btn>
             </v-form>
-      
           </v-container>
         </v-card-text>
-    </v-card>
-  </div>
-</v-app>
+      </v-card>
+    </div>
+  </v-app>
 </template>
 
 <style scoped>
-
-.container{
-display: flex;
-width: 100vw;
-height: 100vh;
-justify-content: center;
-align-items: center;
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
-.Card{
-height: 80vh;
-width: 60vw;
-background-color:rgb(223, 223, 223) ;
-overflow-y: auto;
-
+.Card {
+  height: 80vh;
+  width: 60vw;
+  background-color: rgb(223, 223, 223);
+  overflow-y: auto;
 }
 
-#titulo{
-background-color: rgb(230, 1, 1);
-color: white;
-box-shadow: -1px 2px 6px black;
-text-align: center;
+#titulo {
+  background-color:#1a1a1a;
+  color: white;
+  box-shadow: -1px 2px 6px black;
+  text-align: center;
 }
 
 .separador-datos-persona{
