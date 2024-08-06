@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import video from '@/video/pixel_red.mp4'
 
 const name = ref('');
 const email = ref('');
@@ -16,13 +17,14 @@ const submit = () => {
 </script>
 
 <template>
-  <video autoplay muted loop id="fondo-video" :src="video"></video>
 
 <v-app>
+    <video autoplay muted loop id="fondo-video" :src="video"></video>
   
   <div class="container">
     <v-card class="Card">
       <v-card-title id="titulo" >Registrar Cliente</v-card-title>
+      
         <v-card-text>
           <v-container>
             <v-form id="interior-card" ref="form" v-model="valid">
@@ -51,10 +53,10 @@ const submit = () => {
                       required
                     ></v-text-field>
 
-                    <v-radio-group v-model="Tipo" :rules="[v => !!v || 'Tipo de cliente es requerido']" label="Tipo de Cliente" required>
-          <v-radio label="Físico" value="fisico"></v-radio>
-          <v-radio label="Moral" value="moral"></v-radio>
-        </v-radio-group>
+            <v-radio-group v-model="Tipo" :rules="[v => !!v || 'Tipo de cliente es requerido']" label="Tipo de Cliente" required>
+              <v-radio label="Físico" value="fisico"></v-radio>
+              <v-radio label="Moral" value="moral"></v-radio>
+            </v-radio-group>
 
               
               <v-btn :disabled="!valid" color="#7d0100" @click="submit">
@@ -100,5 +102,10 @@ display: flex;
 
 #fondo-video{
 position: fixed;
+width: 100%;
+height: 100%;
+top: 0%;
+left: 0%;
+object-fit: cover;
 }
 </style>

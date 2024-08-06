@@ -4,13 +4,14 @@ import { RouterLink} from 'vue-router'</script>
 <template>
 <VApp>
     <VAppBar app color="#7d0100" dark>
-       <router-link to="/">
+       <router-link to="/MenuPrincipal">
         <v-btn
         class="ma-3"
         color="white"
         icon="mdi-arrow-left-bold-circle-outline"
       ></v-btn>
        </router-link>
+       
     <h1 class="text-center w-100">EMPLEADOS</h1>
     </VAppBar>
     <VContainer class="d-flex flex-column align-center fill-height">

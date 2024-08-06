@@ -5,11 +5,7 @@
 <template>
     
     <v-app>
-<<<<<<< HEAD
         <v-container></v-container>
-=======
-
->>>>>>> 6fe6d7e20adfe8b2403e80324b7697822f3d0622
         <v-container></v-container>
     <v-app-bar app color="#7d0100" dark>
 

@@ -134,11 +134,6 @@ const toUpperCase = (event) =>{
                     type="email"
                   ></v-text-field>
                   
-<<<<<<< HEAD
-=======
-                  
-                  
->>>>>>> 6fe6d7e20adfe8b2403e80324b7697822f3d0622
                   <v-btn :disabled="!valid" color="#7d0100" @click="submit">
                     Registrar
                   </v-btn>
