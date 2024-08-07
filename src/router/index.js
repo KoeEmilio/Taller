@@ -27,8 +27,7 @@ import MenuPrincipalView from '@/views/MenuPrincipalView.vue'
 import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
 import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
 import VerDetalleView from '@/views/VerDetalleView.vue'
-import RegistroUsuarioView from '@/views/RegistroUsuarioView.vue'
-
+import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -214,9 +213,9 @@ const router = createRouter({
     },
     //REGISTRO DE USUARIO
     {
-      path: '/RegistroUsuario',
-      name: 'RegistroUsuario',
-      component: RegistroUsuarioView
+      path: '/RegistrarUsuario',
+      name: 'RegistrarUsuario',
+      component: RegistrarUsuarioView
     }
 
   ]

@@ -47,7 +47,7 @@ import { RouterLink } from 'vue-router'</script>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/RegistroUsuario" class="menu-button text-decoration-none">
+          <RouterLink to="/RegistrarUsuario" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account-plus</v-icon>
