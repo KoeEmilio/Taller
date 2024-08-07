@@ -27,8 +27,8 @@ import { RouterLink } from 'vue-router'</script>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="Empleados" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+          <RouterLink to="InfoEmpleados" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account-tie</v-icon>
                 <h1>Empleados</h1>
@@ -37,11 +37,11 @@ import { RouterLink } from 'vue-router'</script>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/VerCitas" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+          <RouterLink to="/Vehiculos" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
-                <h1>Citas</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-car-back</v-icon>
+                <h1>Vehiculos</h1>
               </div>
             </VBtn>
           </RouterLink>
@@ -96,6 +96,6 @@ import { RouterLink } from 'vue-router'</script>
   text-decoration: none;
 }
 .my-4 {
-  margin: 1rem 0;
+  margin: 1rem 0;
 }
 </style>
