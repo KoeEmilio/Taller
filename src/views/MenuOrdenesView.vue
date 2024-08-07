@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
 
 <template>
   <VApp>
-    <v-app-bar app color="#7D0100">
+    <v-app-bar app color="#1a1a1a">
         <router-link to="/Clientes">
         <v-btn
             class="ma-3"
@@ -14,11 +14,11 @@ import { RouterLink, RouterView } from 'vue-router'</script>
         <h1 class="text-center w-100">ORDENES</h1>
         </v-app-bar>
     <VContainer class="d-flex flex-column align-center fill-height">
-      <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
+      <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/InfoOrdenes" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document-multiple</v-icon>
                 <br>
@@ -30,7 +30,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/DetallesOrden" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document-plus</v-icon>
                 <h1>DETALLAR</h1>
@@ -41,7 +41,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/VerDetalle" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
                 <h1>VER</h1>

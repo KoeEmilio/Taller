@@ -4,7 +4,7 @@ import ClientesMenuView from '@/views/ClientesMenuView.vue'
 import EmpleadosView from '@/views/EmpleadosView.vue'
 import InfoEmpleadosView from '@/views/InfoEmpleadosView.vue'
 import ClientesInfoView from '@/views/ClientesInfoView.vue'
-import ClientesOrdenesView from '@/views/ClientesOrdenesView.vue'
+import VerOrdenesView from '@/views/VerOrdenesView.vue'
 import VehiculosMenuView from '@/views/VehiculosMenuView.vue'
 import ServiciosView from '@/views/ServiciosView.vue'
 import RegistroEmpleadosView from '@/views/RegistroEmpleadosView.vue'
@@ -24,6 +24,10 @@ import DetallesOrdenView from '@/views/DetallesOrdenView.vue'
 import VerCitasView from '@/views/VerCitasView.vue'
 import VerCitasEmpleadoView from '@/views/VerCitasEmpleadoView.vue'
 import MenuPrincipalView from '@/views/MenuPrincipalView.vue'
+import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
+import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
+import VerDetalleView from '@/views/VerDetalleView.vue'
+import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -58,10 +62,11 @@ const router = createRouter({
       //VISTA ADMINISTRADOR (VER ORDENES)
       path:'/InfoOrdenes',
       name: 'InfoOrdenes',
-      component: ClientesOrdenesView
+      component: VerOrdenesView
     },
     {
       //VISTA DEL ADMINISTRADOR (MENU EMPLEADOS)
+      //Eliminar esta vista al final
       path: '/Empleados',
       name: 'Empleados',
       component: EmpleadosView
@@ -73,12 +78,14 @@ const router = createRouter({
       component: InfoEmpleadosView
     },
     {
+      //Eliminar esta vista al final
       //VISTA DEL ADMINISTRADOR PARA REGISTRAR CLIENTES
       path:'/RegistroClientes',
       name: 'RegistroClientes',
       component: RegistroClientesView
     },
     {
+      //Eliminar esta vista al final
       //VISTA DEL ADMINISTRADOR PARA REGISTRAR EMPLEADOS
       path: '/RegistroEmpleados',
       name: 'RegistroEmpleados',
@@ -109,13 +116,13 @@ const router = createRouter({
       component:VehiculosInfoView,
     },
     {
-      //VISTA DE EMPLEADOS (MENU PRINCIPAL DEL EMPLEADO)
+      //VISTA DE EMPLEADOS (MENU PRINCIPAL DE CUANDO SE INICIA COMO EMPLEADO)
       path: '/MenuEmpleados',
       name: 'MenuEmpleados',
       component:MenuEmpleadosView,
     },
     {
-      //VISTA DE EMPLEADOS  (MENU DEL APARTADO DE VEHICULOS)
+      //VISTA DE EMPLEADOS  (MENU DEL APARTADO DE VEHICULOS CUANDO SE INICIA COMO EMPLEADO)
       path: '/VehiculosEmpleados',
       name: 'VehiculosEmpleados',
       component:MenuVehiculosEmpleadosView,
@@ -186,7 +193,30 @@ const router = createRouter({
       name: 'MenuPrincipal',
       component:MenuPrincipalView
     },
-    
+    {
+      //VISTA DE ADMINISTRADOR (ORDENES)
+      path: '/MenuOrdenes',
+      name: 'MenuOrdenes',
+      component:MenuOrdenesView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (ORDENES)
+      path: '/MenuOrdenesEmpleado',
+      name: 'MenuOrdenesEmpleado',
+      component:MenuOrdenesEmpleadoView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (ORDENES)
+      path: '/VerDetalle',
+      name: 'VerDetalle',
+      component:VerDetalleView
+    },
+    //REGISTRO DE USUARIO
+    {
+      path: '/RegistrarUsuario',
+      name: 'RegistrarUsuario',
+      component: RegistrarUsuarioView
+    }
 
   ]
 })

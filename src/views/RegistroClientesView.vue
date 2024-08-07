@@ -1,18 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import video from '@/video/pixel_red.mp4'
 
 const name = ref('');
 const address = ref('');
-const phone = ref('');
-const username = ref('');
-const password = ref('');
-const confirmPassword = ref('');
-const showPassword = ref(false);
-const showConfirmPassword = ref(false);
+
 const valid = ref(false);
 const form = ref(null);
-const clientType = ref('');
 
 const submit = () => {
   if (form.value.validate()) {
@@ -23,21 +16,13 @@ const submit = () => {
 </script>
 
 <template>
-  <video autoplay muted loop id="fondo-video" :src="video"></video>
 
-  <v-app>
-    <v-app-bar app color="transparent">
-        <router-link to="/Clientes">
-        <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
-        </router-link>
-        </v-app-bar>
-    <div class="container">
-      <v-card class="Card">
-        <v-card-title id="titulo">Registrar Cliente</v-card-title>
+<v-app>
+  
+  <div class="container">
+    <v-card class="Card">
+      <v-card-title id="titulo" >Registrar Cliente</v-card-title>
+      
         <v-card-text>
           <v-container>
             <v-form id="interior-card" ref="form" v-model="valid">
@@ -64,10 +49,10 @@ const submit = () => {
                       required
                     ></v-text-field>
 
-                    <v-radio-group v-model="Tipo" :rules="[v => !!v || 'Tipo de cliente es requerido']" label="Tipo de Cliente" required>
-                    <v-radio label="Físico" value="fisico"></v-radio>
-                    <v-radio label="Moral" value="moral"></v-radio>
-                    </v-radio-group>
+            <v-radio-group v-model="Tipo" :rules="[v => !!v || 'Tipo de cliente es requerido']" label="Tipo de Cliente" required>
+              <v-radio label="Físico" value="fisico"></v-radio>
+              <v-radio label="Moral" value="moral"></v-radio>
+            </v-radio-group>
 
               <v-text-field
                 v-if="Tipo === 'moral'"
@@ -77,7 +62,7 @@ const submit = () => {
                 variant="solo"
               ></v-text-field>
 
-              <v-btn :disabled="!valid" color="#7d0100" @click="submit">
+              <v-btn :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
               </v-btn>
             </v-form>
@@ -105,18 +90,22 @@ const submit = () => {
 }
 
 #titulo {
-  background-color: rgb(230, 1, 1);
+  background-color:#1a1a1a;
   color: white;
   box-shadow: -1px 2px 6px black;
   text-align: center;
 }
 
-#fondo-video {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  object-fit: cover;
+.separador-datos-persona{
+display: flex;
+}
+
+#fondo-video{
+position: fixed;
+width: 100%;
+height: 100%;
+top: 0%;
+left: 0%;
+object-fit: cover;
 }
 </style>
