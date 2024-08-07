@@ -37,7 +37,11 @@ import { RouterLink, RouterView } from 'vue-router'
             </VBtn>
         </RouterLink>
         </VCol>
+<<<<<<< HEAD
         <VCol cols="12" sm="3" class="d-flex justify-center">
+=======
+        <VCol cols="12" sm="4" class="d-flex justify-center">
+>>>>>>> parent of e1dd426 (smn)
         <RouterLink to="MenuOrdenes" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
             <div class="text-center">
