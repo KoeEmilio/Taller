@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import video from '@/video/pixel_red.mp4';
 
 const brand = ref('');
 const model = ref('');

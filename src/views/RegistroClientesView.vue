@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import video from '@/video/pixel_red.mp4'
 
 const name = ref('');
 const address = ref('');
@@ -19,7 +18,6 @@ const submit = () => {
 <template>
 
 <v-app>
-    <video autoplay muted loop id="fondo-video" :src="video"></video>
   
   <div class="container">
     <v-card class="Card">

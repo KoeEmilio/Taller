@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import video from '@/video/taller.mp4';
 import logo from '@/img/logonegro.png';  // Asegúrate de tener tu logo en esta ruta
 
 const usuario = ref('');
