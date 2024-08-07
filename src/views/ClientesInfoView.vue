@@ -22,12 +22,20 @@ const showFormulario = ref(false);
 const showEditFormulario = ref(false);
 
 
-const selectedCliente = ref({
+const agregarCliente = ref({
   Nombre: '',
   Correo: '',
   Telefono: '',
-  Tipo: '',
-  PersonaID: '' // Asegúrate de incluir PersonaID
+  Tipo_De_Cliente: '',
+  PersonaID: ''
+})
+
+const ClienteSeleccionado = ref({
+  Nombre: '',
+  Correo: '',
+  Telefono: '',
+  Tipo_De_Cliente: '',
+  PersonaID: '' 
 })
 
 const mostrarFormulario = () => {
@@ -35,34 +43,36 @@ showFormulario.value = !showFormulario.value;
 }
 
 const mostrarEditFormulario = (cliente) => {
-selectedCliente.value = { ...cliente };
+ClienteSeleccionado.value = { ...cliente };
 showEditFormulario.value = true;
 }
+import { toRaw } from 'vue';
 
 const editarCliente = () => {
-fetch(`http://testpdo.com/actualizarclientes`, {
+  const cliente = toRaw(ClienteSeleccionado.value);
+  console.log(cliente);
+  fetch('http://testpdo.com/actualizarclientes', {
     method: 'PUT',
     headers: {
-    'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(selectedCliente.value)
-})
-.then(response => response.json())
-.then(json => {
-    if (json.status === 200) {
-    mostrarinfo();
-    showEditFormulario.value = false;
+    body: JSON.stringify(cliente) // Serializa el objeto original
+  })
+  .then(response => {
+    if (response.ok) {
+      mostrarinfo();
+      showEditFormulario.value = false;
     }
-})
-}
+  })
 
+};
 const headers = [
 { text: 'ID', value: 'ID' },
 { text: 'Nombre', value: 'Nombre' },
 { text: 'Correo', value: 'Correo' },
 { text: 'Telefono', value: 'Telefono' },
 { text: 'Tipo_De_Cliente', value: 'Tipo_De_Cliente' },
-{ text: 'Acciones', value: 'actions', sortable: false }
+{ text: 'Acciones', value: 'actions',sortable: false }
 ];
 </script>
 
@@ -100,7 +110,7 @@ const headers = [
               <v-dialog v-model="showFormulario" max-width="500px">
                 <div v-show="showFormulario === true">
                   <v-card class="pa-5">
-                    <v-card-title>Registrar Orden</v-card-title>
+                    <v-card-title>Registrar Cliente</v-card-title>
                     <v-card-text class="scrollable-content">
                       <v-text-field label="Fecha y Hora de Ingreso" v-model="fechaHoraIngreso"></v-text-field>
                       <v-text-field label="Fecha y Hora Estimada de Salida" v-model="fechaHoraSalida"></v-text-field>
@@ -120,14 +130,11 @@ const headers = [
                   <v-card class="pa-5">
                     <v-card-title>Editar Cliente</v-card-title>
                     <v-card-text class="scrollable-content">
-                      <v-text-field label="ID" v-model="selectedCliente.PersonaID"></v-text-field>
-                      <v-text-field label="Nombre Completo" v-model="selectedCliente.Nombre"></v-text-field>
-                      <v-text-field label="Correo" v-model="selectedCliente.Correo" type="email"></v-text-field>
-                      <v-text-field label="Telefono" v-model="selectedCliente.Telefono" type="number"></v-text-field>
-                      <v-radio-group v-model="selectedCliente.Tipo" label="Tipo de Cliente">
-                        <v-radio label="Físico" value="fisico"></v-radio>
-                        <v-radio label="Moral" value="moral"></v-radio>
-                      </v-radio-group>
+                      <v-text-field label="ID" v-model="ClienteSeleccionado.PersonaID"></v-text-field>
+                      <v-text-field label="Nombre Completo" v-model="ClienteSeleccionado.Nombre"></v-text-field>
+                      <v-text-field label="Correo" v-model="ClienteSeleccionado.Correo" type="email"></v-text-field>
+                      <v-text-field label="Telefono" v-model="ClienteSeleccionado.Telefono" type="number"></v-text-field>
+                      <v-text-field label="Tipo_De_Cliente" v-model="ClienteSeleccionado.Tipo_De_Cliente"></v-text-field>
                       <v-btn class="BtnGuindo" @click="editarCliente">Guardar</v-btn>
                     </v-card-text>
                   </v-card>

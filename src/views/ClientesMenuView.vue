@@ -38,6 +38,16 @@ import { RouterLink, RouterView } from 'vue-router'
         </RouterLink>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
+        <RouterLink to="/VerCitas" class="menu-button text-decoration-none">
+            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-account-multiple-plus</v-icon>
+                <h3>Citas</h3>
+            </div>
+            </VBtn>
+        </RouterLink>
+        </VCol>
+        <VCol cols="12" sm="4" class="d-flex justify-center">
         <RouterLink to="MenuOrdenes" class="menu-button text-decoration-none">
             <VBtn color="#7d0100" dark class="w-100 h-100">
             <div class="text-center">
