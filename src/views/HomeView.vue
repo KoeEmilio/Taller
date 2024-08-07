@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import logo from '@/img/logonegro.png';  // Asegúrate de tener tu logo en esta ruta
+import logo from '@/img/logonegro.png';
+import video from '../video/taller.mp4';  
 
 const usuario = ref('');
 const contrasena1 = ref('');
@@ -49,7 +50,7 @@ const IngresarFormulario = () => {
                       label="Contraseña"
                       variant="solo"
                       type="password"
-                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      :append-icon="showPassword ?  'mdi-eye' : 'mdi-eye-off'"
                       @click:append="showPassword = !showPassword"
                     ></v-text-field>
                   </v-row>
