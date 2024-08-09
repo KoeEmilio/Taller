@@ -14,7 +14,7 @@ import RegistroClientesView from '@/views/RegistroClientesView.vue'
 import MenuEmpleadosView from '@/views/MenuEmpleadosView.vue'
 import MenuVehiculosEmpleadosView from '@/views/MenuVehiculosEmpleadosView.vue'
 import RegistroVehiculoEmpleadoView from '@/views/RegistroVehiculoEmpleadoView.vue'
-import ClientesEmpleadosView from '@/views/ClientesEmpleadosView.vue'
+import ClientesEmpleadosView from '@/views/Empleados/ClientesEmpleadosView.vue'
 import VerVehiculosEmpleadosView from '@/views/VerVehiculosEmpleadosView.vue'
 import ServiciosEmpleadosView from '@/views/ServiciosEmpleadosView.vue'
 import VerClientesEmpleadosView from '@/views/VerClientesEmpleadosView.vue'
@@ -28,7 +28,12 @@ import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
 import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
 import VerDetalleView from '@/views/VerDetalleView.vue'
 import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
+<<<<<<< HEAD
+import ConfirmacionesPagosview from '@/views/ComprovacionesPagosview'
+
+=======
 import LoginView from '../views/LoginView.vue'
+>>>>>>> 35abbca003633e3dc62ab595e2585c1dcd5e9832
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -217,12 +222,21 @@ const router = createRouter({
       name: 'RegistrarUsuario',
       component: RegistrarUsuarioView
     },
+<<<<<<< HEAD
+    //
+    {
+      path: '/ConfirmacionesPagos',
+      name: 'ConfirmacionesPagos',
+      component: ConfirmacionesPagosview
+    }
+=======
     {
       path: '/Login',
       name: 'Login',
       component: LoginView
     },
 
+>>>>>>> 35abbca003633e3dc62ab595e2585c1dcd5e9832
 
   ]
 })

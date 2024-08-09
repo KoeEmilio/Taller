@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://testpdo.com/clientes')
+  fetch('http://pruebapdo.com/Clientes')
     .then(response => response.json())
     .then(json => {
     if (json.status === 200) {
@@ -122,7 +122,7 @@ const headers = [
                 :search="search"
                 class="elevation-1"
               >
-                <template #item.actions="{ item }">
+                <template #item="{ item }">
                   <v-btn icon @click="mostrarEditFormulario(item)">
                     <v-icon id="Editar">mdi-pencil</v-icon>
                   </v-btn>
