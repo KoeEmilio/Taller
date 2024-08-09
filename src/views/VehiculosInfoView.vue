@@ -1,5 +1,22 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 
+const datos = ref([]);
+const search = ref('');
+
+const mostrarinfo = () => {
+fetch('http://testpdo.com/vehiculos')
+    .then(response => response.json())
+    .then(json => {
+    if (json.status === 200) {
+        datos.value = json.data;
+    }
+    });
+};
+
+onMounted(() => {
+mostrarinfo();
+});
 </script>
 
 <template>
@@ -30,7 +47,7 @@
 
     <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="datos"
     :search="search"
     ></v-data-table>
 </v-card>

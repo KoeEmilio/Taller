@@ -186,7 +186,7 @@ const submit = () => {
   width: 100vw;
   justify-content: center;
   align-items: center;
-  margin-top: 60px; /* Ajustar según la altura del VAppBar */
+  margin-top: 60px;
   background-color: gray;
 }
 
@@ -208,11 +208,11 @@ const submit = () => {
   display: flex;
 }
 #btn-registrar{
-   transition: transform 0.2s ease; /* Transición suave */
+   transition: transform 0.2s ease; 
    
 }
 #btn-registrar:hover{
-  transform: translateY(4px); /* Desplazamiento hacia arriba al pasar el ratón */
+  transform: translateY(4px); 
 
 }
 </style>
