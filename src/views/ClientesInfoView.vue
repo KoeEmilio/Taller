@@ -39,21 +39,25 @@ selectedCliente.value = { ...cliente };
 showEditFormulario.value = true;
 }
 
-const editarCliente = () => {
-fetch(`http://testpdo.com/actualizarclientes`, {
-    method: 'PUT',
-    headers: {
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(selectedCliente.value)
-})
-.then(response => response.json())
-.then(json => {
-    if (json.status === 200) {
-    mostrarinfo();
-    showEditFormulario.value = false;
+const editarCliente = async () => {
+    try {
+        const response = await fetch(`http://testpdo.com/actualizarclientes`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(selectedCliente.value)
+        });
+
+        if (response.ok) {
+            mostrarinfo();
+            showEditFormulario.value = false;
+        } else {
+            console.error('Error updating client:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error occurred during fetch:', error);
     }
-})
 }
 
 const headers = [

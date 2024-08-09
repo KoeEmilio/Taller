@@ -1,4 +1,22 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+
+const datos = ref([]);
+const search = ref('');
+
+const mostrarinfo = () => {
+  fetch('http://testpdo.com/empleados')
+    .then(response => response.json())
+    .then(json => {
+    if (json.status === 200) {
+        datos.value = json.data;
+    }
+    });
+};
+
+onMounted(() => {
+mostrarinfo();
+});
 
 </script>
 
@@ -9,7 +27,7 @@
         <v-container></v-container>
     <v-app-bar app color="#1a1a1a" dark>
 
-        <router-link to="Empleados">
+        <router-link to="MenuPrincipal">
           <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
         </router-link>
         <h1 class="text-center w-100">EMPLEADOS REGISTRADOS</h1>
@@ -31,7 +49,7 @@
             </v-card-text>
             <v-data-table
             :headers="headers"
-            :items="desserts"
+            :items="datos"
             :search="search"
             ></v-data-table>
         </v-card>
