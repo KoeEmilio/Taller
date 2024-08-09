@@ -18,7 +18,7 @@ onMounted(() => {
 mostrarinfo();
 });
 
-const showFormulario = ref(false);
+
 const showEditFormulario = ref(false);
 
 
@@ -30,9 +30,6 @@ const selectedCliente = ref({
   PersonaID: '' // Asegúrate de incluir PersonaID
 })
 
-const mostrarFormulario = () => {
-showFormulario.value = !showFormulario.value;
-}
 
 const mostrarEditFormulario = (cliente) => {
 selectedCliente.value = { ...cliente };
@@ -95,29 +92,7 @@ const headers = [
               ></v-text-field>
             </v-col>
             <v-row justify="start">
-              <v-col cols="auto" class="d-flex align-center">
-                <div id="Cont">
-                  <p class="agregar-text">Agregar</p>
-                  <v-btn @click="mostrarFormulario" id="guindo-btn" icon="mdi-plus" size="x-small"></v-btn>
-                </div>
-              </v-col>
-              <v-dialog v-model="showFormulario" max-width="500px">
-                <div v-show="showFormulario === true">
-                  <v-card class="pa-5">
-                    <v-card-title>Registrar Orden</v-card-title>
-                    <v-card-text class="scrollable-content">
-                      <v-text-field label="Fecha y Hora de Ingreso" v-model="fechaHoraIngreso"></v-text-field>
-                      <v-text-field label="Fecha y Hora Estimada de Salida" v-model="fechaHoraSalida"></v-text-field>
-                      <v-select label="Empleado" :items="empleados" v-model="empleado"></v-select>
-                      <v-select label="Vehículo" :items="vehiculos" v-model="vehiculo"></v-select>
-                      <v-text-field label="Motivo" v-model="motivo"></v-text-field>
-                      <v-select label="Cita" :items="citas" v-model="cita"></v-select>
-                      <v-select label="Estado" :items="estados" v-model="estado"></v-select>
-                      <v-btn class="BtnGuindo" @click="registrarOrden">Registrar</v-btn>
-                    </v-card-text>
-                  </v-card>
-                </div>
-              </v-dialog>
+          
 
               <v-dialog v-model="showEditFormulario" max-width="500px">
                 <div v-show="showEditFormulario === true">
@@ -163,20 +138,6 @@ const headers = [
 </template>
 
 <style scoped>
-#Cont {
-  display: flex;
-  height: 67.7vh;
-  width: 11.2vw;
-  margin-left: 15%;
-  justify-content: space-between;
-}
-
-.container {
-  background-color: blue;
-  width: 87vw;
-  height: 100vh;
-  justify-content: space-around;
-}
 
 .agregar-text {
   font-weight: bolder;
@@ -189,6 +150,7 @@ const headers = [
 }
 
 #Tabla {
+  margin-top: 10px;
   max-height: 500px;
   overflow-y: auto;
 }
@@ -205,7 +167,11 @@ const headers = [
   color: white;
 }
 
-#Editar{
-  width: 50px;
-}
+.v-application {
+    background: #f5f5f5;
+  }
+  .v-card {
+    margin-top: 20px;
+  }
+
 </style>

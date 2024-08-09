@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const marca = ref('');
 const modelo = ref('');
@@ -7,38 +7,59 @@ const ano = ref('');
 const color = ref('');
 const tipoTransmision = ref('');
 const numeroMatricula = ref('');
-const propietario = ref('');
-
+const propietarioSeleccionado = ref(null);
 const tipoAutoEmpresarial = ref('');
 const numeroUnidad = ref('');
-
-const propietarios = ref([]);
-
-const esMoral = computed(() => {
-  const selectedPropietario = propietarios.value.find(p => p.id === propietario.value);
-  return selectedPropietario ? selectedPropietario.tipo === 'moral' : false;
-});
-
+const esMoral = ref(false);
 const valid = ref(false);
-const form = ref(null);
-
-const submit = () => {
-  if (form.value.validate()) {
-    alert('Registro exitoso');
-    // Aquí puedes agregar la lógica para enviar los datos al servidor
-  }
-};
+const propietarios = ref([]);
 
 const fetchPropietarios = async () => {
   try {
-    const response = await fetch('/api/propietarios'); // Ajusta la URL según tu API
-    if (!response.ok) {
-      throw new Error('Error fetching propietarios');
+    const response = await fetch('http://testpdo.com/clientes');
+    if (response.ok) {
+      propietarios.value = await response.json();
+    } else {
+      console.error('Error al obtener la lista de propietarios');
     }
-    const data = await response.json();
-    propietarios.value = data;
   } catch (error) {
-    console.error('Error fetching propietarios:', error);
+    console.error('Error de red:', error);
+  }
+};
+
+const submit = async () => {
+  if (valid.value) {
+    const data = {
+      marca: marca.value,
+      modelo: modelo.value,
+      ano: ano.value,
+      color: color.value,
+      tipoTransmision: tipoTransmision.value,
+      numeroMatricula: numeroMatricula.value,
+      propietario_id: propietarioSeleccionado.value,
+      tipoAutoEmpresarial: tipoAutoEmpresarial.value || null,
+      numeroUnidad: numeroUnidad.value || null,
+    };
+
+    try {
+      const response = await fetch('URL_DE_TU_API_DE_VEHICULOS', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log('Vehículo registrado exitosamente');
+        const responseData = await response.json();
+        // Emitir evento o realizar alguna acción adicional si es necesario
+      } else {
+        console.error('Error al registrar el vehículo');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+    }
   }
 };
 
@@ -109,7 +130,7 @@ onMounted(() => {
                         ></v-text-field>
 
                         <v-select
-                            v-model="propietario"
+                            v-model="propietarioSeleccionado"
                             :items="propietarios"
                             item-text="nombre"
                             item-value="id"
@@ -168,6 +189,6 @@ onMounted(() => {
 }
 
 #btn-registrar:hover{
-  transform: translateY(4px); /* Desplazamiento hacia arriba al pasar el ratón */
+  transform: translateY(4px); /* Desplazamiento hacia arriba al pasar el ratón */
 }
 </style>
