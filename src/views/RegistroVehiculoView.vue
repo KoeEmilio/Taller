@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import video from '@/video/pixel_red.mp4';
 
 const brand = ref('');
 const model = ref('');
@@ -21,18 +20,18 @@ const submit = () => {
 </script>
 
 <template>
-  <video autoplay muted loop id="fondo-video" :src="video"></video>
 
   <v-app>
-    <v-app-bar app color="transparent">
-        <router-link to="/Vehiculos">
+    <VAppBar app color="#1a1a1a" dark>
+       <router-link to="/Vehiculos">
         <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
-        </router-link>
-        </v-app-bar>
+        class="ma-3"
+        color="white"
+        icon="mdi-arrow-left-bold-circle-outline"
+      ></v-btn>
+       </router-link>
+    <h1 class="text-center w-100">REGISTRAR VEHICULO</h1>
+    </VAppBar>
     <div class="container">
       <v-card class="Card">
         <v-card-title id="titulo">Registrar Vehículo</v-card-title>
@@ -105,8 +104,6 @@ const submit = () => {
     </div>
   </v-app>
 </template>
-<<<<<<< HEAD
-=======
 
 <style scoped>
 .container {

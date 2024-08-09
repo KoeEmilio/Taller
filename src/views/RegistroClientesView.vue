@@ -1,18 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import video from '@/video/pixel_red.mp4'
 
 const name = ref('');
 const address = ref('');
-const phone = ref('');
-const username = ref('');
-const password = ref('');
-const confirmPassword = ref('');
-const showPassword = ref(false);
-const showConfirmPassword = ref(false);
+
 const valid = ref(false);
 const form = ref(null);
-const clientType = ref('');
 
 const submit = () => {
   if (form.value.validate()) {
@@ -23,21 +16,13 @@ const submit = () => {
 </script>
 
 <template>
-  <video autoplay muted loop id="fondo-video" :src="video"></video>
 
-  <v-app>
-    <v-app-bar app color="transparent">
-        <router-link to="/Clientes">
-        <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
-        </router-link>
-        </v-app-bar>
-    <div class="container">
-      <v-card class="Card">
-        <v-card-title id="titulo">Registrar Cliente</v-card-title>
+<v-app>
+  
+  <div class="container">
+    <v-card class="Card">
+      <v-card-title id="titulo" >Registrar Cliente</v-card-title>
+      
         <v-card-text>
           <v-container>
             <v-form id="interior-card" ref="form" v-model="valid">
@@ -55,54 +40,29 @@ const submit = () => {
                 variant="solo"
                 required
               ></v-text-field>
+              
+                    <v-text-field
+                      v-model="telefono"
+                      :rules="[v => !!v || 'Número de teléfono es requerido', v => /^\d{10}$/.test(v) || 'El número de telefono debe tener 10 dígitos']"
+                      label="Telefono"
+                      variant="solo"
+                      required
+                    ></v-text-field>
+
+            <v-radio-group v-model="Tipo" :rules="[v => !!v || 'Tipo de cliente es requerido']" label="Tipo de Cliente" required>
+              <v-radio label="Físico" value="fisico"></v-radio>
+              <v-radio label="Moral" value="moral"></v-radio>
+            </v-radio-group>
 
               <v-text-field
-                v-model="phone"
-                :rules="[v => !!v || 'Número de teléfono es requerido', v => /^\d{10}$/.test(v) || 'El número de teléfono debe tener 10 dígitos']"
-                label="Teléfono"
+                v-if="Tipo === 'moral'"
+                v-model="empresa"
+                :rules="[v => !!v || 'Nombre de la empresa es requerido']"
+                label="Nombre de la Empresa"
                 variant="solo"
-                required
               ></v-text-field>
 
-              <v-text-field
-                v-model="username"
-                :rules="[v => !!v || 'Nombre de usuario es requerido']"
-                label="Nombre de Usuario"
-                variant="solo"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                v-model="password"
-                :rules="[v => !!v || 'Contraseña es requerida']"
-                :type="showPassword ? 'text' : 'password'"
-                label="Contraseña"
-                variant="solo"
-                required
-                append-icon="mdi-eye"
-                @click:append="showPassword = !showPassword"
-              ></v-text-field>
-
-              <v-text-field
-                v-model="confirmPassword"
-                :rules="[v => !!v || 'Confirmación de contraseña es requerida', v => v === password.value || 'Las contraseñas no coinciden']"
-                :type="showConfirmPassword ? 'text' : 'password'"
-                label="Confirmar Contraseña"
-                variant="solo"
-                required
-                append-icon="mdi-eye"
-                @click:append="showConfirmPassword = !showConfirmPassword"
-              ></v-text-field>
-
-              <v-select
-                v-model="clientType"
-                :items="['Fisica', 'Moral']"
-                label="Tipo de Cliente"
-                variant="solo"
-                required
-              ></v-select>
-
-              <v-btn :disabled="!valid" color="#7d0100" @click="submit">
+              <v-btn :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
               </v-btn>
             </v-form>
@@ -130,18 +90,22 @@ const submit = () => {
 }
 
 #titulo {
-  background-color: rgb(230, 1, 1);
+  background-color:#1a1a1a;
   color: white;
   box-shadow: -1px 2px 6px black;
   text-align: center;
 }
 
-#fondo-video {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  object-fit: cover;
+.separador-datos-persona{
+display: flex;
+}
+
+#fondo-video{
+position: fixed;
+width: 100%;
+height: 100%;
+top: 0%;
+left: 0%;
+object-fit: cover;
 }
 </style>

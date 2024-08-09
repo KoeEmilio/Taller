@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import video from '@/video/pixel_red.mp4'
 
 const name = ref('');
 const numberPhone = ref();
@@ -48,14 +47,17 @@ const submit = async () => {
     }
   }
 };
+
+const toUpperCase = (event) =>{
+  event.target.value = event.target.value.toUpperCase();
+}
+
 </script>
 
-
 <template>
-      <video autoplay muted loop id="fondo-video" :src="video"></video>
+      
 
   <v-app>
-      
       <div class="container">
         <v-card class="Card">
           <v-card-title id="titulo" >Registrar Empleado</v-card-title>
@@ -83,7 +85,7 @@ const submit = async () => {
                     <v-col>
                       <v-text-field
                       v-model="numberPhone"
-                      :rules="[v => !!v || 'Número de teléfono es requerido', v => /^\d{10}$/.test(v) || 'El número de telefono debe tener 10 dígitos']"
+                      :rules="[v => !!v || 'Número de teléfono es requerido',v => /^\d+$/.test(v) || 'El número de teléfono solo puede contener números', v => /^\d{10}$/.test(v) || 'El número de telefono debe tener 10 dígitos']"
                       label="Telefono"
                       variant="solo"
                       required
@@ -97,6 +99,7 @@ const submit = async () => {
                 
                   <v-text-field
                     v-model="rfc"
+                    @input="toUpperCase"
                     :rules="[v => !!v || 'RFC es requerido']"
                     label="RFC"
                     variant="solo"
@@ -114,7 +117,8 @@ const submit = async () => {
 
                   <v-text-field
                     v-model="curp"
-                    :rules="[v => !!v || 'CURP es requerido']"
+                    @input="toUpperCase"
+                    :rules="[v => !!v || 'CURP es requerido', v => /^[A-Z0-9]{18}$/.test(v) || 'La CURP debe tener exactamente 18 caracteres y solo contener letras y números']"
                     label="CURP"
                     variant="solo"
                     required
@@ -128,8 +132,6 @@ const submit = async () => {
                     required
                     type="email"
                   ></v-text-field>
-                  
-                  
                   
                   <v-btn :disabled="!valid" color="#7d0100" @click="submit">
                     Registrar
@@ -162,7 +164,7 @@ const submit = async () => {
 }
 
 #titulo{
-  background-color: rgb(230, 1, 1);
+  background-color: #1a1a1a;
   color: white;
   box-shadow: -1px 2px 6px black;
   text-align: center;

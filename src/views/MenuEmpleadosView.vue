@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
 
 <template>
   <VApp>
-    <VAppBar app color="#7d0100" dark>
+    <VAppBar app color="#1a1a1a" dark>
       <h1 class="text-center w-100">INICIO</h1>
       <router-link to="/">
         <v-btn
@@ -14,11 +14,11 @@ import { RouterLink, RouterView } from 'vue-router'</script>
       </router-link>
     </VAppBar>
     <VContainer class="d-flex flex-column align-center fill-height">
-      <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
+      <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="4" class="d-flex justify-center">
           <RouterLink to="ClientesEmpleados" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account</v-icon>
                 <h1>CLIENTE</h1>
@@ -28,7 +28,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
           <RouterLink to="/VehiculosEmpleados" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-car-back</v-icon>
                 <h1>Vehiculos</h1>
@@ -38,7 +38,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
         </VCol>
         <VCol cols="12" sm="4" class="d-flex justify-center">
           <RouterLink to="/VerCitasEmpleado" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
                 <h1>Citas</h1>

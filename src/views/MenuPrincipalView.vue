@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'</script>
 
 <template>
   <VApp>
-    <VAppBar app color="#7d0100" dark>
+    <VAppBar app color="#1a1a1a" dark>
       <h1 class="text-center w-100">INICIO</h1>
       <router-link to="/">
         <v-btn
@@ -14,11 +14,11 @@ import { RouterLink } from 'vue-router'</script>
       </router-link>
     </VAppBar>
     <VContainer class="d-flex flex-column align-center fill-height">
-      <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
+      <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="Clientes" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account</v-icon>
                 <h1>CLIENTE</h1>
@@ -27,8 +27,8 @@ import { RouterLink } from 'vue-router'</script>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="Empleados" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+          <RouterLink to="InfoEmpleados" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account-tie</v-icon>
                 <h1>Empleados</h1>
@@ -37,21 +37,22 @@ import { RouterLink } from 'vue-router'</script>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/VerCitas" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+          <RouterLink to="/Vehiculos" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
-                <h1>Citas</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-car-back</v-icon>
+                <h1>Vehiculos</h1>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/Vehiculos" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+          <RouterLink to="/RegistrarUsuario" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-car-back</v-icon>
-                <h1>Vehiculos</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-account-plus</v-icon>
+                <h1>REGISTRAR</h1>
+                <h1>USUARIO</h1>
               </div>
             </VBtn>
           </RouterLink>
@@ -89,13 +90,12 @@ import { RouterLink } from 'vue-router'</script>
   width: 220px;
   border: 4px solid black;
   border-radius: 5%;
-  background-color: #7d0100;
   color: white;
 }
 .text-decoration-none {
   text-decoration: none;
 }
 .my-4 {
-  margin: 1rem 0;
+  margin: 1rem 0;
 }
 </style>
