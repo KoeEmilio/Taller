@@ -28,7 +28,12 @@ import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
 import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
 import VerDetalleView from '@/views/VerDetalleView.vue'
 import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
+<<<<<<< HEAD
+import ConfirmacionesPagosview from '@/views/ComprovacionesPagosview'
 
+=======
+import LoginView from '../views/LoginView.vue'
+>>>>>>> 35abbca003633e3dc62ab595e2585c1dcd5e9832
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -216,7 +221,22 @@ const router = createRouter({
       path: '/RegistrarUsuario',
       name: 'RegistrarUsuario',
       component: RegistrarUsuarioView
+    },
+<<<<<<< HEAD
+    //
+    {
+      path: '/ConfirmacionesPagos',
+      name: 'ConfirmacionesPagos',
+      component: ConfirmacionesPagosview
     }
+=======
+    {
+      path: '/Login',
+      name: 'Login',
+      component: LoginView
+    },
+
+>>>>>>> 35abbca003633e3dc62ab595e2585c1dcd5e9832
 
   ]
 })

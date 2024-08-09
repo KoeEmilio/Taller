@@ -1,31 +1,33 @@
 <template>
-  <div class="container">
-    <div class="header">
-      <v-btn icon @click="goBack" class="back-btn">
-        <v-icon>mdi-arrow-left</v-icon>
-      </v-btn>
-      <span class="header-text">Historial de Pagos</span>
-    </div>
+  <v-app>
+    <v-container class="container">
+      <div class="header">
+        <v-btn icon @click="goBack" class="back-btn">
+          <v-icon>mdi-arrow-left</v-icon>
+        </v-btn>
+        <span class="header-text">Historial de Pagos</span>
+      </div>
 
-    <v-card class="payment-card" v-for="pago in pagos" :key="pago.id">
-      <v-card-title>{{ pago.servicio }}</v-card-title>
-      <v-card-subtitle>Fecha: {{ pago.fecha }}</v-card-subtitle>
-      <v-card-text>
-        <div>Cliente: {{ pago.cliente }}</div>
-        <div>Monto: {{ pago.monto }}</div>
-        <div>Estatus: 
-          <v-chip :color="pago.estatus === 'completado' ? 'green' : 'red'" dark>
-            {{ pago.estatus }}
-          </v-chip>
-        </div>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn color="primary" @click="liberarPago(pago)" v-if="pago.estatus === 'pendiente'">Liberar</v-btn>
-        <v-btn color="error" @click="cancelarPago(pago)" v-if="pago.estatus === 'pendiente'">Cancelar</v-btn>
-        <v-btn color="secondary" @click="eliminarPago(pago)" v-if="pago.estatus === 'pendiente'">Eliminar</v-btn>
-      </v-card-actions>
-    </v-card>
-  </div>
+      <v-card class="payment-card" v-for="pago in pagos" :key="pago.id">
+        <v-card-title>{{ pago.servicio }}</v-card-title>
+        <v-card-subtitle>Fecha: {{ pago.fecha }}</v-card-subtitle>
+        <v-card-text>
+          <div>Cliente: {{ pago.cliente }}</div>
+          <div>Monto: {{ pago.monto }}</div>
+          <div>Estatus: 
+            <v-chip :color="pago.estatus === 'completado' ? 'green' : 'red'" dark>
+              {{ pago.estatus }}
+            </v-chip>
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="liberarPago(pago)" v-if="pago.estatus === 'pendiente'">Liberar</v-btn>
+          <v-btn color="error" @click="cancelarPago(pago)" v-if="pago.estatus === 'pendiente'">Cancelar</v-btn>
+          <v-btn color="secondary" @click="eliminarPago(pago)" v-if="pago.estatus === 'pendiente'">Eliminar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-container>
+  </v-app>
 </template>
 
 <script setup>
@@ -65,23 +67,32 @@ const goBack = () => {
   max-width: 600px;
   margin: 0 auto;
   padding: 16px;
-  padding-top: 80px;
+  padding-top: 100px;
 }
 
 .header {
-  background-color: #7d0100;
+  background-color: #1a1a1a;
   color: white;
   padding: 16px;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000}
+  z-index: 1000;
+}
 
+.back-btn {
+  position: absolute;
+  left: 16px;
+}
 
-.button-class {
-  transition: transform 0.2s ease;}
-.button-class:hover {
-  transform: scale(1.05);}
+.header-text {
+  font-size: 24px;
+}
+
+.payment-card {
+  margin-top: 20px;
+};

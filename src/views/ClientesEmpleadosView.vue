@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <VAppBar app color="#7d0100" dark>
       <router-link to="/MenuEmpleados">
         <v-btn
-        class="ma-3"
+        class="flecha"
         color="white"
         icon="mdi-arrow-left-bold-circle-outline"
       ></v-btn>

@@ -88,6 +88,6 @@ import { RouterLink, RouterView } from 'vue-router'
   text-decoration: none;
 }
 .my-4 {
-  margin: 1rem 0;
+  margin: 1rem 0;
 }
 </style>
