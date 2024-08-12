@@ -28,8 +28,20 @@ import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
 import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
 import VerDetalleView from '@/views/VerDetalleView.vue'
 import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
+
 import LoginView from '../views/LoginView.vue'
 import RegistrarUsuarioEmpleadoView from '@/views/RegistrarUsuarioEmpleadoView.vue'
+
+
+import LoginView from '../views/LoginView.vue'
+
+
+import MisVehiculosView from '@/views/MisVehiculosView.vue'
+import PerfilView from '@/views/PerfilView.vue'
+import DetalleDeMisOrdenesView from '@/views/DetalleDeMisOrdenesView.vue'
+import VistaClienteView from '@/views/VistaClienteView.vue'
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -55,13 +67,13 @@ const router = createRouter({
     },
     {
       //VISTA ADMINISTRADOR (VER CLIENTES)
-      path:'/InfoClientes',
+      path: '/InfoClientes',
       name: 'InfoClientes',
       component: ClientesInfoView
     },
     {
       //VISTA ADMINISTRADOR (VER ORDENES)
-      path:'/InfoOrdenes',
+      path: '/InfoOrdenes',
       name: 'InfoOrdenes',
       component: VerOrdenesView
     },
@@ -74,14 +86,14 @@ const router = createRouter({
     },
     {
       //VISTA DEL ADMINISTRADOR (VER EMPLEADOS)
-      path:'/InfoEmpleados',
+      path: '/InfoEmpleados',
       name: 'InfoEmpleados',
       component: InfoEmpleadosView
     },
     {
       //Eliminar esta vista al final
       //VISTA DEL ADMINISTRADOR PARA REGISTRAR CLIENTES
-      path:'/RegistroClientes',
+      path: '/RegistroClientes',
       name: 'RegistroClientes',
       component: RegistroClientesView
     },
@@ -114,103 +126,103 @@ const router = createRouter({
       //VISTA DE ADMINISTRADOR DEL APARTADO VER VEHICULOS
       path: '/VehiculosInfo',
       name: 'VehiculosInfo',
-      component:VehiculosInfoView,
+      component: VehiculosInfoView,
     },
     {
       //VISTA DE EMPLEADOS (MENU PRINCIPAL DE CUANDO SE INICIA COMO EMPLEADO)
       path: '/MenuEmpleados',
       name: 'MenuEmpleados',
-      component:MenuEmpleadosView,
+      component: MenuEmpleadosView,
     },
     {
       //VISTA DE EMPLEADOS  (MENU DEL APARTADO DE VEHICULOS CUANDO SE INICIA COMO EMPLEADO)
       path: '/VehiculosEmpleados',
       name: 'VehiculosEmpleados',
-      component:MenuVehiculosEmpleadosView,
+      component: MenuVehiculosEmpleadosView,
     },
     {
       //VISTA DE EMPLEADOS PARA EL REGISTRO DE VEHICULOS
       path: '/RegistroVehiculosEmpleados',
       name: 'RegistroVehiculosEmpleados',
-      component:RegistroVehiculoEmpleadoView,
+      component: RegistroVehiculoEmpleadoView,
     },
     {
       //VISTA DE EMPLEADOS (MENU DEL APARTADO DE CLIENTES)
       path: '/ClientesEmpleados',
       name: 'ClientesEmpleados',
-      component:ClientesEmpleadosView
+      component: ClientesEmpleadosView
     },
     {
       //VISTA DE EMPLEADOS (VER LOS VEHICULOS)
       path: '/VerVehiculosEmpleados',
       name: 'VerVehiculosEmpleados',
-      component:VerVehiculosEmpleadosView
+      component: VerVehiculosEmpleadosView
     },
     {
       //VISTA DE EMPLEADOS (VER LOS SERVICIOS)
       path: '/ServiciosEmpleados',
       name: 'ServiciosEmpleados',
-      component:ServiciosEmpleadosView
+      component: ServiciosEmpleadosView
     },
     {
       //VISTA DE EMPLEADOS (VER CLIENTES)
       path: '/VerClientesEmpleados',
       name: 'VerClientesEmpleados',
-      component:VerClientesEmpleadosView
+      component: VerClientesEmpleadosView
     },
     {
       //VISTA DE EMPLEADOS ( REGISTRO CLIENTES)
       path: '/RegistroClientesEmpleados',
       name: 'RegistroClientesEmpleados',
-      component:RegistroClientesEmpleadoView
+      component: RegistroClientesEmpleadoView
     },
     {
       //VISTA DE EMPLEADOS (ORDENES)
       path: '/OrdenEmpleado',
       name: 'OrdenEmpleado',
-      component:OrdenEmpleadoView
+      component: OrdenEmpleadoView
     },
     {
       //VISTA DE EMPLEADOS (DETALLES DE ORDENES)
       path: '/DetallesOrden',
       name: 'DetallesOrden',
-      component:DetallesOrdenView
+      component: DetallesOrdenView
     },
     {
       //VISTA DE ADMINISTRADOR (CITAS)
       path: '/VerCitas',
       name: 'VerCitas',
-      component:VerCitasView
+      component: VerCitasView
     },
     {
       //VISTA DE EMPLEADO (CITAS)
       path: '/VerCitasEmpleado',
       name: 'VerCitasEmpleado',
-      component:VerCitasEmpleadoView
+      component: VerCitasEmpleadoView
     },
     {
       //VISTA DE ADMINISTRADOR (INICIO)
       path: '/MenuPrincipal',
       name: 'MenuPrincipal',
-      component:MenuPrincipalView
+      component: MenuPrincipalView
     },
     {
       //VISTA DE ADMINISTRADOR (ORDENES)
       path: '/MenuOrdenes',
       name: 'MenuOrdenes',
-      component:MenuOrdenesView
+      component: MenuOrdenesView
     },
     {
       //VISTA DE ADMINISTRADOR (ORDENES)
       path: '/MenuOrdenesEmpleado',
       name: 'MenuOrdenesEmpleado',
-      component:MenuOrdenesEmpleadoView
+      component: MenuOrdenesEmpleadoView
     },
     {
       //VISTA DE ADMINISTRADOR (ORDENES)
       path: '/VerDetalle',
       name: 'VerDetalle',
-      component:VerDetalleView
+      component: VerDetalleView
     },
     //REGISTRO DE USUARIO
     {
@@ -220,7 +232,7 @@ const router = createRouter({
     },
     {
       path: '/Login',
-      name: 'Login',
+      name: 'pagos',
       component: LoginView
     },
     {
@@ -228,8 +240,32 @@ const router = createRouter({
       name: 'RegistrarUsuarioEmpleado',
       component: RegistrarUsuarioEmpleadoView
     },
+    [
+      path: '/VistaCliente',
+      name: 'VistaCliente',
+      redirect: '/VistaCliente/perfil',
+      component: VistaClienteView,
+      children:[
+        {
+          path: 'perfil',
+          name: 'perfil',
+          component: PerfilView
+        },
+        {
+          path: 'misVehiculos',
+          name: 'misVehiculos',
+          component: MisVehiculosView
+        },
+        {
+          path: 'detalleDeMisOrdenes',
+          name: 'detalleDeMisOrdenes',
+          component: DetalleDeMisOrdenesView
+        }
+    ]
 
 
+
+    }
   ]
 })
 

@@ -116,7 +116,7 @@ const headers = [
             :search="search"
             class="elevation-1"
           >
-            <template #item.actions="{ item }">
+            <template v-slot:[`item.actions`]="{ item }">
               <v-btn icon @click="mostrarEditFormulario(item)">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
