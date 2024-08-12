@@ -28,7 +28,6 @@ import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
 import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
 import VerDetalleView from '@/views/VerDetalleView.vue'
 import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
-import ConfirmacionesPagosView from '@/views/ConfirmacionesPagosView.vue'
 
 import LoginView from '../views/LoginView.vue'
 const router = createRouter({
@@ -218,11 +217,6 @@ const router = createRouter({
       path: '/RegistrarUsuario',
       name: 'RegistrarUsuario',
       component: RegistrarUsuarioView
-    },
-    {
-      path: '/ConfirmacionesPagos',
-      name: 'ConfirmacionesPagos',
-      component: ConfirmacionesPagosView
     },
     {
       path: '/Login',
