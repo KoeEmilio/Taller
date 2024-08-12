@@ -271,7 +271,7 @@ const resetForm = () => {
 }
 
 const goBack = () => {
-  router.go(-1) // para regresar a la vista anterior 
+  router.goBack(-1) // para regresar a la vista anterior 
 }
 
 const compradores = ref(['Cliente', 'Taller'])
