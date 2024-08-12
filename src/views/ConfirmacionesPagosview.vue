@@ -1,98 +1,157 @@
-<template>
-  <v-app>
-    <v-container class="container">
-      <div class="header">
-        <v-btn icon @click="goBack" class="back-btn">
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <span class="header-text">Historial de Pagos</span>
-      </div>
+<script>
+import { ref} from 'vue';
 
-      <v-card class="payment-card" v-for="pago in pagos" :key="pago.id">
-        <v-card-title>{{ pago.servicio }}</v-card-title>
-        <v-card-subtitle>Fecha: {{ pago.fecha }}</v-card-subtitle>
-        <v-card-text>
-          <div>Cliente: {{ pago.cliente }}</div>
-          <div>Monto: {{ pago.monto }}</div>
-          <div>Estatus: 
-            <v-chip :color="pago.estatus === 'completado' ? 'green' : 'red'" dark>
-              {{ pago.estatus }}
-            </v-chip>
-          </div>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" @click="liberarPago(pago)" v-if="pago.estatus === 'pendiente'">Liberar</v-btn>
-          <v-btn color="error" @click="cancelarPago(pago)" v-if="pago.estatus === 'pendiente'">Cancelar</v-btn>
-          <v-btn color="secondary" @click="eliminarPago(pago)" v-if="pago.estatus === 'pendiente'">Eliminar</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-container>
-  </v-app>
-</template>
+const datos = ref([]);
+const search = ref('');
 
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+const mostrarinfo = () => {
+  fetch('http://testpdo.com/pagos')
+    .then(response => response.json())
+    .then(json => {
+    if (json.status === 200) {
+        datos.value = json.data;
+    }
+    });
+};
 
-const router = useRouter()
 
-const pagos = ref([
-  { id: 1, servicio: 'Mantenimiento', fecha: '2024-08-01', cliente: 'Juan Perez', monto: 1500, estatus: 'pendiente' },
-  { id: 2, servicio: 'Reparación', fecha: '2024-08-02', cliente: 'María Lopez', monto: 2000, estatus: 'completado' },
-  // Agrega más pagos según sea necesario
-])
 
-const liberarPago = (pago) => {
-  pago.estatus = 'completado'
+
+const showEditFormulario = ref(false);
+
+
+const selectedCliente = ref({
+  Nombre: '',
+  Correo: '',
+  Telefono: '',
+  Tipo: '',
+  PersonaID: '' // Asegúrate de incluir PersonaID
+})
+
+
+const mostrarEditFormulario = (cliente) => {
+selectedCliente.value = { ...cliente };
+showEditFormulario.value = true;
 }
 
-const cancelarPago = (pago) => {
-  pago.estatus = 'cancelado'
+const editarCliente = async () => {
+    try {
+        const response = await fetch(`http://testpdo.com/actualizarclientes`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(selectedCliente.value)
+        });
+
+        if (response.ok) {
+            mostrarinfo();
+            showEditFormulario.value = false;
+        } else {
+            console.error('Error updating client:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error occurred during fetch:', error);
+    }
 }
 
-const eliminarPago = (pago) => {
-  const index = pagos.value.findIndex(p => p.id === pago.id)
-  if (index !== -1) {
-    pagos.value.splice(index, 1)
-  }
-}
-
-const goBack = () => {
-  router.go(-1)
-}
+const headers = [
+{ text: 'ID', value: 'ID' },
+{ text: 'Nombre', value: 'Nombre' },
+{ text: 'Correo', value: 'Correo' },
+{ text: 'Telefono', value: 'Telefono' },
+{ text: 'Tipo_De_Cliente', value: 'Tipo_De_Cliente' },
+{ text: 'Acciones', value: 'actions', sortable: false }
+];
 </script>
 
+
+<template>
+  <div class="container">
+    <v-app>
+      <v-app-bar app color="#1a1a1a" dark>
+        <router-link to="Pagos">
+          <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
+        </router-link>
+        <h1 class="text-center w-100">PAGOS REALIZADOS</h1>
+      </v-app-bar>
+
+      <v-main>
+        <v-container>
+          <v-row>
+            <v-col cols="12" class="d-flex justify-end">
+              <v-text-field
+                v-model="search"
+                label="Buscar"
+                prepend-inner-icon="mdi-magnify"
+                hide-details
+                single-line
+                outlined
+                class="mx-4"
+              ></v-text-field>
+            </v-col>
+            <v-row justify="start">
+
+              <v-dialog v-model="showEditFormulario" max-width="500px">
+                <div v-show="showEditFormulario === true">
+                  <v-card class="pa-5">
+                    <v-card-title>Editar Pago</v-card-title>
+                    <v-card-text class="scrollable-content">
+                      <v-text-field label="ID Orden de Servicio" v-model="selectedPago.OrdenServicioID"></v-text-field>
+                      <v-text-field label="Monto" v-model="selectedPago.Monto" type="number"></v-text-field>
+                      <v-text-field label="Método de Pago" v-model="selectedPago.MetodoPago"></v-text-field>
+                      <v-text-field label="Fecha" v-model="selectedPago.Fecha" type="date"></v-text-field>
+                      <v-btn class="BtnGuindo" @click="editarPago">Guardar</v-btn>
+                    </v-card-text>
+                  </v-card>
+                </div>
+              </v-dialog>
+            </v-row>
+
+            <v-col cols="10">
+              <v-data-table
+                id="Tabla"
+                :items="datos"
+                :headers="headers"
+                :search="search"
+                class="elevation-1"
+              >
+                <template #item="{ item }">
+                  <v-btn icon @click="mostrarEditFormulario(item)">
+                    <v-icon id="Editar">mdi-pencil</v-icon>
+                  </v-btn>
+                  <!-- Botón de eliminar puede ser añadido aquí -->
+                </template>
+              </v-data-table>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+</template>
+
 <style scoped>
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
-  padding-top: 100px;
+.scrollable-content {
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-.header {
+#Tabla {
+  margin-top: 10px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.BtnGuindo {
   background-color: #1a1a1a;
   color: white;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
 }
 
-.back-btn {
-  position: absolute;
-  left: 16px;
+.v-application {
+  background: #f5f5f5;
 }
-
-.header-text {
-  font-size: 24px;
-}
-
-.payment-card {
+.v-card {
   margin-top: 20px;
-};
+}
+</style>
