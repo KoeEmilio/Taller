@@ -24,7 +24,7 @@ mostrarinfo()
     <v-app>
         <v-container></v-container>
         <v-container></v-container>
-    <v-app-bar app color="#7d0100" dark>
+    <v-app-bar app color="#1a1a1a" dark>
         <router-link to="ClientesEmpleados">
         <v-btn
             class="ma-3"
@@ -36,7 +36,6 @@ mostrarinfo()
     </v-app-bar>
 
     <v-card
-    title="Clientes"
     flat
 >
     <template v-slot:text>

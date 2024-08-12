@@ -14,7 +14,7 @@ import RegistroClientesView from '@/views/RegistroClientesView.vue'
 import MenuEmpleadosView from '@/views/MenuEmpleadosView.vue'
 import MenuVehiculosEmpleadosView from '@/views/MenuVehiculosEmpleadosView.vue'
 import RegistroVehiculoEmpleadoView from '@/views/RegistroVehiculoEmpleadoView.vue'
-import ClientesEmpleadosView from '@/views/ClientesEmpleadosView.vue'
+import ClientesEmpleadosView from '@/views/Empleados/ClientesEmpleadosView.vue'
 import VerVehiculosEmpleadosView from '@/views/VerVehiculosEmpleadosView.vue'
 import ServiciosEmpleadosView from '@/views/ServiciosEmpleadosView.vue'
 import VerClientesEmpleadosView from '@/views/VerClientesEmpleadosView.vue'
@@ -30,6 +30,14 @@ import VerDetalleView from '@/views/VerDetalleView.vue'
 import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
 
 import LoginView from '../views/LoginView.vue'
+
+
+import MisVehiculosView from '@/views/MisVehiculosView.vue'
+import PerfilView from '@/views/PerfilView.vue'
+import DetalleDeMisOrdenesView from '@/views/DetalleDeMisOrdenesView.vue'
+import VistaClienteView from '@/views/VistaClienteView.vue'
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -220,9 +228,35 @@ const router = createRouter({
     },
     {
       path: '/Login',
-      name: 'Login',
+      name: 'pagos',
       component: LoginView
     },
+    {
+      path: '/VistaCliente',
+      name: 'VistaCliente',
+      redirect: '/VistaCliente/perfil',
+      component: VistaClienteView,
+      children:[
+        {
+          path: 'perfil',
+          name: 'perfil',
+          component: PerfilView
+        },
+        {
+          path: 'misVehiculos',
+          name: 'misVehiculos',
+          component: MisVehiculosView
+        },
+        {
+          path: 'detalleDeMisOrdenes',
+          name: 'detalleDeMisOrdenes',
+          component: DetalleDeMisOrdenesView
+        }
+    ]
+
+
+
+    }
   ]
 })
 
