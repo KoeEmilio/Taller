@@ -41,7 +41,7 @@ const submit = () => {
 <template>
   <v-app>
     <VAppBar app color="#1a1a1a" dark>
-      <router-link to="/MenuPrincipal">
+      <router-link to="/MenuEmpleados">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
       <h1 class="text-center w-100">REGISTRAR USUARIO</h1>
@@ -113,7 +113,6 @@ const submit = () => {
                 required
               >
                 <v-radio label="Cliente" value="cliente"></v-radio>
-                <v-radio label="Empleado" value="empleado"></v-radio>
               </v-radio-group>
 
               <v-form v-if="esEmpleado" ref="form" v-model="valid">
