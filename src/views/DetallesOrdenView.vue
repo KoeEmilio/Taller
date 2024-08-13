@@ -1,17 +1,17 @@
 <template>
 
 
-  <div class="container">
-    <div class="header">
-      <router-link to="/MenuOrdenes">
+  <v-app class="container">
+    <v-app-bar app color="#1a1a1a">
+        <router-link to="/MenuOrdenes">
         <v-btn
-        class="ma-3"
-        color="white"
-        icon="mdi-arrow-left-bold-circle-outline"
-      ></v-btn>
-      </router-link>
-      <span class="header-text">DETALLAR ORDEN</span>
-    </div>
+            class="ma-3"
+            color="white"
+            icon="mdi-arrow-left-bold-circle-outline"
+        ></v-btn>
+        </router-link>
+        <h1 class="text-center w-100">DETALLAR ORDEN</h1>
+        </v-app-bar>
 
     <v-form @submit.prevent="submit">
       <!-- Formulario de Detalles de la Orden -->
@@ -105,7 +105,7 @@
         Guardar Detalles
       </v-btn>
     </v-form>
-  </div>
+  </v-app>
 </template>
 
 <script setup>
@@ -270,9 +270,6 @@ const resetForm = () => {
   }
 }
 
-const goBack = () => {
-  router.go(-1) // para regresar a la vista anterior 
-}
 
 const compradores = ref(['Cliente', 'Taller'])
 </script>
@@ -308,8 +305,9 @@ const compradores = ref(['Cliente', 'Taller'])
   left: 0;
   right: 0;
   z-index: 1000;
-  height: 60px;
+  height: 64px;
 }
+
 
 .header-text {
   flex-grow: 1;

@@ -16,6 +16,8 @@ const esEmpleado = computed(()=> puestoPersona.value === 'empleado')
 const Tipo_Cliente = ref('')
 const Nombre_empresa = ref('')
 
+const tipoCliente = ref('');
+const nombreEmpresa = ref('');
 
 // Valor del campo de contraseña
 const Usuario = ref('')
@@ -28,8 +30,8 @@ const showPassword = ref(false);
 const togglePasswordVisibility = () => {
   // Cambia el valor de 'showPassword' entre verdadero y falso
 showPassword.value = !showPassword.value;
+  showPassword.value = !showPassword.value;
 };
-
 
 const valid = ref(false);
 const form = ref(null);
@@ -79,20 +81,14 @@ if (valid.value) {
 </script>
 
 <template>
-
-<v-app>  
+  <v-app>
     <VAppBar app color="#1a1a1a" dark>
-        <router-link to="/MenuPrincipal">
-            <v-btn
-                color="white"
-                icon="mdi-arrow-left-bold-circle-outline"
-            ></v-btn>
-        </router-link>
-        <h1 class="text-center w-100">REGISTRAR USUARIO</h1>
+      <router-link to="/MenuPrincipal">
+        <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
+      </router-link>
+      <h1 class="text-center w-100">REGISTRAR USUARIO</h1>
     </VAppBar>
 
-    
-    
     <div class="container">
         <div class="Card">
         
@@ -153,10 +149,13 @@ if (valid.value) {
                             </v-row>
                             <br>
 
-                        <v-radio-group v-model="puestoPersona" :rules="[v => !!v || 'Tipo de cliente es requerido']" label="Tipo de usuario" required>
-                        <v-radio label="Empleado" value="empleado"></v-radio>
-                        <v-radio label="Cliente" value="cliente"></v-radio>
-                        </v-radio-group>
+              <v-text-field
+                v-model="correo"
+                :rules="[v => !!v || 'Correo electronico es requerido', v => /.+@.+\..+/.test(v) || 'El correo electrónico debe ser válido']"
+                label="Correo Electronico"
+                variant="solo"
+                required
+              ></v-text-field>
 
                         <v-form v-if = "esEmpleado === true"  ref="form" v-model="valid">
                             <v-text-field
@@ -229,21 +228,19 @@ if (valid.value) {
 }
 
 #titulo {
-  background-color:#1a1a1a;
+  background-color: #1a1a1a;
   color: white;
   box-shadow: -1px 2px 6px black;
   text-align: center;
 }
 
-.separador-datos-persona{
+.separador-datos-persona {
   display: flex;
 }
-#btn-registrar{
-   transition: transform 0.2s ease; 
-   
+#btn-registrar {
+  transition: transform 0.2s ease;
 }
-#btn-registrar:hover{
-  transform: translateY(4px); 
-
+#btn-registrar:hover {
+  transform: translateY(4px);
 }
 </style>

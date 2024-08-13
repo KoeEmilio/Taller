@@ -47,7 +47,7 @@
             :items="datos"
             :search="search"
           >
-            <template #item.action="{ item }">
+            <template v-slot:[`item.actions`]="{ item }">
               <v-btn color="" @click="mostrarEditFormulario(item)">
                 <v-icon left>mdi-pencil</v-icon>
               </v-btn>

@@ -66,9 +66,11 @@ const headers = [
 </script>
 
 <template>
+  <v-container></v-container>
+  <v-container></v-container>
   <v-app>
     <v-app-bar app color="#1a1a1a" dark>
-      <router-link to="Clientes">
+      <router-link to="MenuEmpleados">
         <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
       <h1 class="text-center w-100">CLIENTES REGISTRADOS</h1>
@@ -88,25 +90,7 @@ const headers = [
           ></v-text-field>
         </v-col>
 
-        <v-col cols="12" class="d-flex justify-end">
-          <v-btn @click="mostrarFormulario" icon="mdi-plus" class="ma-2">Agregar</v-btn>
-        </v-col>
 
-        <v-dialog v-model="showFormulario" max-width="500px">
-          <v-card>
-            <v-card-title>Registrar Cliente</v-card-title>
-            <v-card-text>
-              <v-text-field label="Nombre Completo" v-model="selectedCliente.Nombre"></v-text-field>
-              <v-text-field label="Correo" v-model="selectedCliente.Correo" type="email"></v-text-field>
-              <v-text-field label="Telefono" v-model="selectedCliente.Telefono" type="number"></v-text-field>
-              <v-radio-group v-model="selectedCliente.Tipo" label="Tipo de Cliente">
-                <v-radio label="Físico" value="fisico"></v-radio>
-                <v-radio label="Moral" value="moral"></v-radio>
-              </v-radio-group>
-              <v-btn class="BtnGuindo" @click="editarCliente">Guardar</v-btn>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
 
         <v-dialog v-model="showEditFormulario" max-width="500px">
           <v-card>
@@ -132,7 +116,7 @@ const headers = [
             :search="search"
             class="elevation-1"
           >
-            <template #item.actions="{ item }">
+            <template v-slot:[`item.actions`]="{ item }">
               <v-btn icon @click="mostrarEditFormulario(item)">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>

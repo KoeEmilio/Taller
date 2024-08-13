@@ -22,6 +22,7 @@ mostrarinfo()
 
 <template>
     <v-app>
+        
         <v-container></v-container>
         <v-container></v-container>
     <v-app-bar app color="#1a1a1a" dark>

@@ -1,5 +1,30 @@
 <script>
 export default {
+  data() {
+    return {
+      showDialog: false,
+      selectedDate: null,
+      selectedTime: null,
+      motivo: '',
+      times: [
+        "10:30 AM",
+        "11:00 AM",
+        "11:30 AM",
+        "12:00 PM",
+        "12:30 PM",
+        "01:00 PM",
+        "01:30 PM",
+        "02:00 PM",
+        "02:30 PM",
+        "03:00 PM",
+        "03:30 PM",
+        "04:00 PM",
+        "04:30 PM",
+        "05:00 PM",
+        "05:30 PM"
+      ],
+    };
+  },
   methods: {
     clicklogo() {
       document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' });
@@ -12,6 +37,20 @@ export default {
     },
     clickcontacto() {
       document.getElementById('contactos').scrollIntoView({ behavior: 'smooth' });
+    },
+    openDialog() {
+      this.showDialog = true;
+    },
+    closeDialog() {
+      this.showDialog = false;
+    },
+    submitForm() {
+      if (this.selectedDate && this.selectedTime && this.motivo) {
+        alert(`Cita agendada para el ${this.selectedDate} a las ${this.selectedTime} por el motivo: ${this.motivo}`);
+        this.closeDialog();
+      } else {
+        alert("Por favor, completa todos los campos.");
+      }
     }
   }
 };
@@ -19,173 +58,210 @@ export default {
 
 <template>
 
-<div class="page-container"> 
-          <header id="inicio">
-
-            <div class="header__contenedor">
-                <div class="contenedor__imagen" >
-                  <v-img id="logo" src="src/img/logo blanco.png" @click="clicklogo"> </v-img>
-                </div>
-                <div class="navegacion">
-                  <v-btn variant="plain" class="navegacion__letras" @click="clicklogo">Inicio</v-btn>
-                  <v-btn variant="plain" class="navegacion__letras" @click="clickconocenos">Conocenos</v-btn>
-                  <v-btn variant="plain" class="navegacion__letras" @click="clickcitas">Citas</v-btn>
-                  <v-btn variant="plain" class="navegacion__letras" @click="clickcontacto">Contacto</v-btn>
-                </div>
-              <div class="usuario">
-
-                  <a  href="#" class="usuario__icon">
-                    <router-link to="/Login" >
-                          <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                          <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                          <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                          </svg>
-                    </router-link>
-                  </a> 
-
-
-
-            </div>
-          </div>
-
-          <div class="somos">
-                        <h2>EN</h2>
-                        <h2>DE LA ROSA MOTORS </h2>
-                        <h2 >SOMOS TU MEJOR OPCIÓN</h2>
-                        <h2>MEJOR OPCIÓN</h2>
-                      </div>
-        </header>
-
-          <main class="contenedor">
-
-              <section class="servicios">
-
-              <div class="servicios__informacion">
-                <div class="servicios_informacion_texto">
-                <h2 class="informacion-titulo centrar-texto">AQUÍ EN DE LA ROSA MOTORS SOMOS EXPERTOS EN AUTOS.</h2>
-                <ul class="servicios_informacion_texto--lista">
-                  <li>Mecánica en general</li>
-                  <li>Afineaciones</li>
-                  <li>Frenos</li>
-                  <li>Suspensiones</li>
-                  <li>Transmisiones y direcciones</li>
-                  <li>Reparación de motores</li>
-                  <li>Clutch</li>
-                  <li>Distribución</li>
-                  <li>Fuel injection</li>
-                  <li>Servicio de escáner</li>
-                  <li>Restauración de motores</li>
-                </ul>
-              </div>
-                <div class="informacion__imagen">
-                  <img  src="@/img/image.png" alt="informacion-imagen">
-                </div>
-            </div>
-          </section>
-
-
-
-            <section id="conocenos">
-
-
-              <div class="contenedor-conocenos">
-
-                      <h1 class="centrar-texto">CONOCE UN POCO DE NUESTRA HISTORIA...</h1>
-
-                      <p class="texto-principal centrar-texto">
-                        La historia comienza en 1978 con un joven Manuel De La Rosa.
-                        Para sacar adelante a su familia con sus habilidades en atención al detalle, dando soluciones a pequeñas reparaciones de automóviles y motocicletas,
-                        así como la resolución de complejos problemas electrónicos con un enfoque amigable, flexible y adaptable en su propio taller mecánico.
-                        Desde entonces, se han enfocado en ofrecer servicios de reparación, revisiones generales, asistencia en carretera y mantenimiento preventivo.
-                      </p>
-                      <p class="texto-principal centrar-texto">
-                        Con el paso del tiempo, y el arduo trabajo y dedicación, fueron ganando prestigio en la comunidad.
-                        Siguiendo el ejemplo de su fundador, sus hijos decidieron formarse en mecánica automotriz para continuar con el legado de su padre.
-                        Hoy en día, los hijos de Manuel De La Rosa,
-                        habiendo aprendido todas sus habilidades y contando con conocimientos en nuevas tecnologías,
-                        están al frente del negocio ofreciendo soluciones eficientes y manteniendo la misma atención al detalle que caracterizaba a su padre.
-                      </p>
-                </div>
-
-
-
-                <div class="contenedor__imagenes_taller">
-                  <img class="imagen_taller" src="@/img/taller1.jpeg" alt="">
-                  <img class="imagen_taller" src="@/img/taller2.jpeg" alt="">
-                  <img class="imagen_taller" src="@/img/taller3.jpeg" alt="">
-                    </div>
-            </section>
-
-
-
-            <section id="citas">
-                <div class="cita__contenedor">
-                  <div class="cita__contenedor--texto">
-                    <h1 class="titulo-cita centrar-texto">Agenda Tu Cita</h1>
-                    <p class="centrar-texto">Agenda una cita con Nosotros</p>
-                    <p class="centrar-texto">Tenemos estos Horarios Disponibles:</p>
-                    <p class="centrar-texto">De 3 p.m a 5 p.m</p>
-                    <div class="contenedor-boton">
-                    <a class="boton-agendar " href="#">Agendar Cita</a>
+  <div class="page-container"> 
+            <header id="inicio">
+  
+              <div class="header__contenedor">
+                  <div class="contenedor__imagen" >
+                    <v-img id="logo" src="src/img/logo blanco.png" @click="clicklogo"> </v-img>
                   </div>
-                  <p class="informacion-cita">Para poder hacer una cita tienes que tener un perfil creado en la pagina, si necesitas mas informacion por favor contactanos</p>
-                </div>
-
-                <div class="contenedor__imagen--cita">
-                  <img src="@/img/car-parts-repair-garage.jpg" alt="">
-                </div>
-
-              </div>
-              </section>
-
-
-      <section id="contactos">
-
-              <h1 class=" titulo-c centrar-texto"> Contacto</h1>
-            <div class="contacto">
-              <div class="contacto__informacion">
-                <div class="contacto__informacion--texto">
-                <p class="contacto-titulo">Direccion</p>
-                <p>Tlahuacas 290, Santa María, 27020, Torreón, Coah.</p>
-              </div>
-              <div class="contacto__informacion--texto">
-                <p class="contacto-titulo">Correo Electronico</p>
-                <p>Delarosamotors@gmail.com</p>
-              </div>
-                <div class="contacto__informacion--texto">
-                <p class="contacto-titulo">Telefonos</p>
-                <p>871-896-7175</p>
-                <p>871-220-1575</p>
-              </div>
-                <div class="contacto__informacion--texto">
-                <p class="contacto-titulo">Horarios</p>
-                <p>Lunes-Viernes: 10:30 AM a 6:00 PM</p>
-                <p>Sabado: 10:30 AM a 1:00 PM</p>
-              </div>
-              </div>
-
-              <div class="contacto__mapa">
-                <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d899.8647938548273!2d-103.42430253048818!3d25.55638590848562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868fdbb4681aac8b%3A0x1649ebebea998f9!2sTlahuacas%20220%2C%20Santa%20Mar%C3%ADa%2C%2027020%20Torre%C3%B3n%2C%20Coah.!5e0!3m2!1ses-419!2smx!4v1722271861156!5m2!1ses-419!2smx" width="300" height="300" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  <div class="navegacion">
+                    <v-btn variant="plain" class="navegacion__letras" @click="clicklogo">Inicio</v-btn>
+                    <v-btn variant="plain" class="navegacion__letras" @click="clickconocenos">Conocenos</v-btn>
+                    <v-btn variant="plain" class="navegacion__letras" @click="clickcitas">Citas</v-btn>
+                    <v-btn variant="plain" class="navegacion__letras" @click="clickcontacto">Contacto</v-btn>
+                  </div>
+                <div class="usuario">
+  
+                    <a  href="#" class="usuario__icon">
+                      <router-link to="/Login" >
+                            <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                            </svg>
+                      </router-link>
+                    </a> 
+  
+  
+  
               </div>
             </div>
-
-       </section>
-
-          </main>
-
-          <footer class="footer">
-                <div class="contenedor__footer">
-                  <h3  class="centrar-texto"> CONTACTANOS</h3>
-                  <h3  class="centrar-texto"> Telefono: 871-220-1575</h3>
-                  <h3  class="centrar-texto"> Correo: Delarosamotors@gmail.com</h3>
+  
+            <div class="somos">
+                          <h2>EN</h2>
+                          <h2>DE LA ROSA MOTORS </h2>
+                          <h2 >SOMOS TU MEJOR</h2>
+                          <h2>OPCIÓN</h2>
+                        </div>
+          </header>
+  
+            <main class="contenedor">
+  
+                <section class="servicios">
+  
+                <div class="servicios__informacion">
+                  <div class="servicios_informacion_texto">
+                  <h2 class="informacion-titulo centrar-texto">AQUÍ EN DE LA ROSA MOTORS SOMOS EXPERTOS EN AUTOS.</h2>
+                  <ul class="servicios_informacion_texto--lista">
+                    <li>Mecánica en general</li>
+                    <li>Afineaciones</li>
+                    <li>Frenos</li>
+                    <li>Suspensiones</li>
+                    <li>Transmisiones y direcciones</li>
+                    <li>Reparación de motores</li>
+                    <li>Clutch</li>
+                    <li>Distribución</li>
+                    <li>Fuel injection</li>
+                    <li>Servicio de escáner</li>
+                    <li>Restauración de motores</li>
+                  </ul>
                 </div>
-            </footer>
-
-</div>
-
-
-</template>
+                  <div class="informacion__imagen">
+                    <img  src="@/img/image.png" alt="informacion-imagen">
+                  </div>
+              </div>
+            </section>
+  
+  
+  
+              <section id="conocenos">
+  
+  
+                <div class="contenedor-conocenos">
+  
+                        <h1 class="centrar-texto">CONOCE UN POCO DE NUESTRA HISTORIA...</h1>
+  
+                        <p class="texto-principal centrar-texto">
+                          La historia comienza en 1978 con un joven Manuel De La Rosa.
+                          Para sacar adelante a su familia con sus habilidades en atención al detalle, dando soluciones a pequeñas reparaciones de automóviles y motocicletas,
+                          así como la resolución de complejos problemas electrónicos con un enfoque amigable, flexible y adaptable en su propio taller mecánico.
+                          Desde entonces, se han enfocado en ofrecer servicios de reparación, revisiones generales, asistencia en carretera y mantenimiento preventivo.
+                        </p>
+                        <p class="texto-principal centrar-texto">
+                          Con el paso del tiempo, y el arduo trabajo y dedicación, fueron ganando prestigio en la comunidad.
+                          Siguiendo el ejemplo de su fundador, sus hijos decidieron formarse en mecánica automotriz para continuar con el legado de su padre.
+                          Hoy en día, los hijos de Manuel De La Rosa,
+                          habiendo aprendido todas sus habilidades y contando con conocimientos en nuevas tecnologías,
+                          están al frente del negocio ofreciendo soluciones eficientes y manteniendo la misma atención al detalle que caracterizaba a su padre.
+                        </p>
+                  </div>
+  
+  
+  
+                  <div class="contenedor__imagenes_taller">
+                    <img class="imagen_taller" src="@/img/taller1.jpeg" alt="">
+                    <img class="imagen_taller" src="@/img/taller2.jpeg" alt="">
+                    <img class="imagen_taller" src="@/img/taller3.jpeg" alt="">
+                      </div>
+              </section>
+  
+  
+  
+              <section id="citas">
+                  <div class="cita__contenedor">
+                    <div class="cita__contenedor--texto">
+                      <h1 class="titulo-cita centrar-texto">Agenda Tu Cita</h1>
+                      <p class="centrar-texto">Agenda una cita con Nosotros</p>
+                      <p class="centrar-texto">Tenemos estos Horarios Disponibles:</p>
+                      <p class="centrar-texto">De 3 p.m a 5 p.m</p>
+                      <div class="contenedor-boton">
+                      <v-btn class="boton-agendar" @click="openDialog">Agendar Cita</v-btn>
+                    </div>
+                    <p class="informacion-cita">Para poder hacer una cita tienes que tener un perfil creado en la pagina, si necesitas mas informacion por favor contactanos</p>
+                  </div>
+  
+                  <div class="contenedor__imagen--cita">
+                    <img src="@/img/car-parts-repair-garage.jpg" alt="">
+                  </div>
+  
+                </div>
+                </section>
+  
+  
+        <section id="contactos">
+  
+                <h1 class=" titulo-c centrar-texto"> Contacto</h1>
+              <div class="contacto">
+                <div class="contacto__informacion">
+                  <div class="contacto__informacion--texto">
+                  <p class="contacto-titulo">Direccion</p>
+                  <p>Tlahuacas 290, Santa María, 27020, Torreón, Coah.</p>
+                </div>
+                <div class="contacto__informacion--texto">
+                  <p class="contacto-titulo">Correo Electronico</p>
+                  <p>Delarosamotors@gmail.com</p>
+                </div>
+                  <div class="contacto__informacion--texto">
+                  <p class="contacto-titulo">Telefonos</p>
+                  <p>871-896-7175</p>
+                  <p>871-220-1575</p>
+                </div>
+                  <div class="contacto__informacion--texto">
+                  <p class="contacto-titulo">Horarios</p>
+                  <p>Lunes-Viernes: 10:30 AM a 6:00 PM</p>
+                  <p>Sabado: 10:30 AM a 1:00 PM</p>
+                </div>
+                </div>
+  
+                <div class="contacto__mapa">
+                  <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d899.8647938548273!2d-103.42430253048818!3d25.55638590848562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868fdbb4681aac8b%3A0x1649ebebea998f9!2sTlahuacas%20220%2C%20Santa%20Mar%C3%ADa%2C%2027020%20Torre%C3%B3n%2C%20Coah.!5e0!3m2!1ses-419!2smx!4v1722271861156!5m2!1ses-419!2smx" width="300" height="300" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+              </div>
+  
+         </section>
+  
+            </main>
+  
+            <footer class="footer">
+                  <div class="contenedor__footer">
+                    <h3  class="centrar-texto"> CONTACTANOS</h3>
+                    <h3  class="centrar-texto"> Telefono: 871-220-1575</h3>
+                    <h3  class="centrar-texto"> Correo: Delarosamotors@gmail.com</h3>
+                  </div>
+              </footer>
+  
+  </div>
+  
+  <!-- Modal de agendar cita -->
+  <v-dialog v-model="showDialog" max-width="500px">
+    <v-card>
+      <v-card-title class="headline">Agendar Cita</v-card-title>
+      <v-card-text>
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field 
+                label="Fecha" 
+                type="date" 
+                v-model="selectedDate"
+                :min="new Date().toISOString().substr(0, 10)"
+                required>
+              </v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <v-select
+                v-model="selectedTime"
+                :items="times"
+                label="Hora"
+                required>
+              </v-select>
+            </v-col>
+            <v-col cols="12">
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="blue darken-1" text @click="closeDialog">Cancelar</v-btn>
+        <v-btn color="blue darken-1" text @click="submitForm">Agendar</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+  
+  </template>
+  
 
 <style scoped>
  /** Globales **/

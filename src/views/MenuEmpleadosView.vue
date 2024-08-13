@@ -16,7 +16,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
-        <VCol cols="12" sm="4" class="d-flex justify-center">
+        <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="ClientesEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
@@ -26,7 +26,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
             </VBtn>
           </RouterLink>
         </VCol>
-        <VCol cols="12" sm="4" class="d-flex justify-center">
+        <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/VehiculosEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
@@ -36,12 +36,23 @@ import { RouterLink, RouterView } from 'vue-router'</script>
             </VBtn>
           </RouterLink>
         </VCol>
-        <VCol cols="12" sm="4" class="d-flex justify-center">
+        <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/VerCitasEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
                 <h1>Citas</h1>
+              </div>
+            </VBtn>
+          </RouterLink>
+        </VCol>
+        <VCol cols="12" sm="3" class="d-flex justify-center">
+          <RouterLink to="/RegistrarUsuarioEmpleado" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-account-plus</v-icon>
+                <h1>REGISTRAR</h1>
+                <h1>USUARIO</h1>
               </div>
             </VBtn>
           </RouterLink>
