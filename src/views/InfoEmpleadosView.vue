@@ -31,7 +31,7 @@ mostrarinfo();
         </router-link>
         <h1 class="text-center w-100">EMPLEADOS REGISTRADOS</h1>
       </v-app-bar>
-  
+      
       <v-main>
         <v-container>
           <v-card flat>

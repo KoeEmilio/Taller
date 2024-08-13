@@ -51,7 +51,7 @@ onMounted(() => {
 
 <v-app>  
     <VAppBar app color="#1a1a1a" dark>
-        <router-link to="/MenuEmpleados">
+        <router-link to="/VehiculosEmpleados">
             <v-btn
                 color="white"
                 icon="mdi-arrow-left-bold-circle-outline"
