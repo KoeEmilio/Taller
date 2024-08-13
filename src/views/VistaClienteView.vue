@@ -1,6 +1,6 @@
 <script setup>
 import { useProfileStore } from '@/stores/counter';
-import { computed, ref } from 'vue';
+import { computed, ref} from 'vue';
 import { RouterLink } from 'vue-router';
 
 const drawer = ref(true);
@@ -9,13 +9,14 @@ const rail = ref(true);
 const store = useProfileStore()
 const nombreUsuario = computed(() => store.title); // Computed para reflejar el estado reactivo
 
+const imagenUrl = computed(() => store.profileImage);
+const tempImagen = ref(imagenUrl.value)
 const dialog = ref(false)
-const imagenUrl = ref("https://randomuser.me/api/portraits/men/85.jpg")
-const tempImagen = ref("")
+
 
 
 const openDialog = () => {
-  tempImagen.value = imagenUrl.value
+  tempImagen.value = imagenUrl.value  // Cargar la URL actual en el campo de entrada
   dialog.value = true
 }
 
@@ -23,21 +24,30 @@ const closeDialog = () => {
   dialog.value = false
 }
 
-const aceptDialog = () => {
-  imagenUrl.value = tempImagen.value;
-  dialog.value = false
-} 
+const updateImage = () => {
+  store.setImagenPerfil(tempImagen.value); // Actualizar el perfil con la nueva URL
+  closeDialog();
+};
 
 const onImageChange = (event) => {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      tempImagen.value = e.target.result;
+      tempImagen.value = e.target.result; // Actualizar la vista previa de la imagen
     };
     reader.readAsDataURL(file);
   }
 };
+
+// Función para manejar el cierre del diálogo sin guardar cambios
+const handleCloseDialog = () => {
+  // Revertir la vista previa a la imagen original si se cancela
+  tempImagen.value = imagenUrl.value;
+  closeDialog();
+};
+
+
 
 // Referencia al input file oculto
 const fileInput = ref(null)
@@ -100,6 +110,7 @@ const triggerFileInput = () => {
           <router-link to="/">
             <v-list-item prepend-icon="mdi-home" title="Ir a Inicio" value="home"></v-list-item>
           </router-link>
+            <v-list-item prepend-icon="mdi-logout" title="Cerrar sesión" value="logout"></v-list-item>
 
         </v-list>
        
@@ -147,10 +158,10 @@ const triggerFileInput = () => {
 
             <div class="botones">
               <div>
-                <v-btn class="btn-cancelar" @click="closeDialog">Cancelar</v-btn>
+                <v-btn class="btn-cancelar" @click="handleCloseDialog">Cancelar</v-btn>
               </div>
               <div>
-                <v-btn class="btn-aceptar" @click="aceptDialog">Aceptar</v-btn>
+                <v-btn class="btn-aceptar" @click="updateImage">Aceptar</v-btn>
               </div>
             </div>
               
@@ -219,6 +230,6 @@ const triggerFileInput = () => {
 }
 .btn-home{
   width: 100vw;
-  margin-top: 340px;
+  margin-top: 300px;
 }
 </style>

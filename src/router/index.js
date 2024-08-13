@@ -28,7 +28,7 @@ import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
 import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
 import VerDetalleView from '@/views/VerDetalleView.vue'
 import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
-
+import PagosView from '@/views/PagosView.vue'
 import LoginView from '../views/LoginView.vue'
 
 
@@ -72,6 +72,11 @@ const router = createRouter({
       path: '/InfoOrdenes',
       name: 'InfoOrdenes',
       component: VerOrdenesView
+    },
+    {
+      path: '/Pagos',
+      name: 'Pagos',
+      component: PagosView
     },
     {
       //VISTA DEL ADMINISTRADOR (MENU EMPLEADOS)
@@ -210,9 +215,13 @@ const router = createRouter({
     },
     {
       //VISTA DE ADMINISTRADOR (ORDENES)
+
+      // FALTA CHECAR ESTA, Es la MISMA que la vista de ARRIBA............................................
       path: '/MenuOrdenesEmpleado',
       name: 'MenuOrdenesEmpleado',
       component: MenuOrdenesEmpleadoView
+
+
     },
     {
       //VISTA DE ADMINISTRADOR (ORDENES)
