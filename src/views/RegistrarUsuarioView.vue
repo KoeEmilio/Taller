@@ -143,13 +143,7 @@ if (form.value.validate()) {
                                 label="CURP"
                                 variant="solo"
                             ></v-text-field>
-
-                            <v-text-field
-                                v-model="numSeguroSocial"
-                                :rules="[v => !!v || 'Número de seguro social es requerido', v => /^\d{11}$/.test(v) || 'El número de seguro social debe tener 11 dígitos']"
-                                label="Número de seguro social "
-                                variant="solo"
-                            ></v-text-field>
+                            
                         </v-form>  
                         <v-form v-if = "esCliente === true"  ref="form" v-model="valid">
                                 <v-select

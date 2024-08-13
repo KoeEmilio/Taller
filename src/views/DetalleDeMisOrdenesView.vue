@@ -108,6 +108,7 @@ onMounted(() => {
                                                 <v-row>
                                                     <v-col>
                                                         <p>N° Orden</p>
+                                                        <v-divider></v-divider>
                                                         <v-card-text> {{ ordenSeleccionada['N° Orden'] }} </v-card-text>
                                                     </v-col>
                                                 </v-row>
@@ -117,6 +118,7 @@ onMounted(() => {
                                                 <v-row>
                                                     <v-col> 
                                                         <p>Fecha De Entrega</p>
+                                                        <v-divider></v-divider>
                                                         <v-card-text>{{ ordenSeleccionada['Fecha de Entrega'] }} </v-card-text>
                                                     </v-col>
                                                 </v-row>
@@ -126,6 +128,7 @@ onMounted(() => {
                                                 <v-row> 
                                                     <v-col>
                                                         <p>Servicio</p>
+                                                        <v-divider></v-divider>
                                                         <v-card-text> {{ ordenSeleccionada['Servicio'] }}  </v-card-text>
                                                     </v-col>
                                                     
@@ -136,6 +139,7 @@ onMounted(() => {
                                                 <v-row>
                                                     <v-col>
                                                         <p>Mano De Obra</p>
+                                                        <v-divider></v-divider>
                                                         <v-card-text> {{ ordenSeleccionada['Costo de mano de obra'] }}</v-card-text>
                                                     </v-col>
                                                                                                 
@@ -146,6 +150,7 @@ onMounted(() => {
                                                 <v-row>
                                                     <v-col>
                                                         <p>Fin Garantía</p>
+                                                        <v-divider></v-divider>
                                                         <v-card-text cols="4"> {{ ordenSeleccionada['Fecha Fin De Garantía'] }}</v-card-text>
                                                     </v-col>
                                                     
