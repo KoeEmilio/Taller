@@ -96,6 +96,6 @@ import { RouterLink } from 'vue-router'</script>
   text-decoration: none;
 }
 .my-4 {
-  margin: 1rem 0;
+  margin: 1rem 0;
 }
 </style>

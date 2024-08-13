@@ -28,7 +28,7 @@ const showPassword = ref(false);
 // Función para alternar la visibilidad de la contraseña
 const togglePasswordVisibility = () => {
   // Cambia el valor de 'showPassword' entre verdadero y falso
-  showPassword.value = !showPassword.value;
+showPassword.value = !showPassword.value;
 };
 
 
@@ -36,10 +36,10 @@ const valid = ref(false);
 const form = ref(null);
 
 const submit = () => {
-  if (form.value.validate()) {
+if (form.value.validate()) {
     alert('Registro exitoso');
     // Aquí puedes agregar la lógica para enviar los datos al servidor
-  }
+}
 };
 </script>
 
