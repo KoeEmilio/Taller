@@ -34,9 +34,9 @@ import MisVehiculosView from '@/views/MisVehiculosView.vue'
 import PerfilView from '@/views/PerfilView.vue'
 import DetalleDeMisOrdenesView from '@/views/DetalleDeMisOrdenesView.vue'
 import VistaClienteView from '@/views/VistaClienteView.vue'
-
-
 import PagosView from '@/views/PagosView.vue'
+import VistaCitasClientes from '@/views/VistaCitasClientes.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -263,6 +263,11 @@ const router = createRouter({
           component: DetalleDeMisOrdenesView
         }
       ]
+    },
+    {
+      path: '/VistaCitasClientes',
+      name: 'VistaCitasClientes',
+      component:VistaCitasClientes
     }
   ]
 })
