@@ -57,8 +57,8 @@ function Agregar() {
                                 <v-card-text v-if="seleccionTipoPersona === 'Moral'">Nombre De la Empresa</v-card-text>
                                 <v-text-field variant="solo" v-if="seleccionTipoPersona === 'Moral'" > </v-text-field>
                                 
-                                
-                                <v-btn id="btn-agregar" @click="Agregar">Agregar</v-btn>
+                                <v-btn class="btn-agregar" title="Pulsa para agregar" @click="Agregar">Agregar</v-btn> 
+                               
                             </v-col>
                         </v-row>
 
@@ -89,11 +89,12 @@ function Agregar() {
     background-color: white;
 }
 
-#btn-agregar{
+.btn-agregar{
     background-color: rgb(220, 224, 245);
     transition: transform 0.2s ease; /* Transición suave */
 }
-#btn-agregar:hover {
+.btn-agregar:hover {
     transform: translateY(4px); /* Desplazamiento hacia arriba al pasar el ratón */
 }
+
 </style>

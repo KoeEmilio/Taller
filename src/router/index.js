@@ -28,6 +28,10 @@ import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
 import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
 import VerDetalleView from '@/views/VerDetalleView.vue'
 import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
+<<<<<<< HEAD
+=======
+import PagosView from '@/views/PagosView.vue'
+>>>>>>> 90c1e5ef06ced70b5d93a53e19e9e0721cca06b8
 import LoginView from '../views/LoginView.vue'
 import RegistrarUsuarioEmpleadoView from '@/views/RegistrarUsuarioEmpleadoView.vue'
 import MisVehiculosView from '@/views/MisVehiculosView.vue'
@@ -66,6 +70,11 @@ const router = createRouter({
       path: '/InfoOrdenes',
       name: 'InfoOrdenes',
       component: VerOrdenesView
+    },
+    {
+      path: '/Pagos',
+      name: 'Pagos',
+      component: PagosView
     },
     {
       //VISTA DEL ADMINISTRADOR (MENU EMPLEADOS)
@@ -204,9 +213,13 @@ const router = createRouter({
     },
     {
       //VISTA DE ADMINISTRADOR (ORDENES)
+
+      // FALTA CHECAR ESTA, Es la MISMA que la vista de ARRIBA............................................
       path: '/MenuOrdenesEmpleado',
       name: 'MenuOrdenesEmpleado',
       component: MenuOrdenesEmpleadoView
+
+
     },
     {
       //VISTA DE ADMINISTRADOR (ORDENES)
@@ -219,6 +232,12 @@ const router = createRouter({
       path: '/RegistrarUsuario',
       name: 'RegistrarUsuario',
       component: RegistrarUsuarioView
+    },
+
+    {
+      path: '/Pagos',
+      name: 'Pagos',
+      component: PagosView
     },
     {
       path: '/Login',

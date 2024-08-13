@@ -12,7 +12,7 @@ import { RouterLink, RouterView } from 'vue-router'
         icon="mdi-arrow-left-bold-circle-outline"
       ></v-btn>
       </router-link>
-    <h1 class="text-center w-100">CLIENTES</h1>
+      <h1 class="text-center w-100">CLIENTES</h1>
     </VAppBar>
     <VContainer class="d-flex flex-column align-center fill-height">
     <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
@@ -22,7 +22,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account-eye</v-icon>
-                <h3>VER CLIENTES</h3>
+                <h2>VER CLIENTES</h2>
             </div>
             </VBtn>
         </RouterLink>
@@ -32,7 +32,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
-                <h1>Citas</h1>
+                <h2>Citas</h2>
               </div>
             </VBtn>
           </RouterLink>
@@ -42,7 +42,17 @@ import { RouterLink, RouterView } from 'vue-router'
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document</v-icon>
-                <h1>Ordenes</h1>
+                <h2>Ordenes</h2>
+            </div>
+            </VBtn>
+        </RouterLink>
+        </VCol>
+        <VCol cols="12" sm="3" class="d-flex justify-center">
+        <RouterLink to="Pagos" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
+            <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-cash</v-icon>
+                <h2>Pagos</h2>
             </div>
             </VBtn>
         </RouterLink>
@@ -88,6 +98,6 @@ import { RouterLink, RouterView } from 'vue-router'
   text-decoration: none;
 }
 .my-4 {
-  margin: 1rem 0;
+  margin: 1rem 0;
 }
 </style>
