@@ -235,6 +235,12 @@ const router = createRouter({
       name: 'RegistrarUsuario',
       component: RegistrarUsuarioView
     },
+
+    {
+      path: '/Pagos',
+      name: 'Pagos',
+      component: PagosView
+    },
     {
       path: '/Login',
       name: 'pagos',
