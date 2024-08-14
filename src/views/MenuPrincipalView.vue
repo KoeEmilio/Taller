@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'</script>
 <template>
   <VApp>
     <VAppBar app color="#1a1a1a" dark>
-      <h1 class="text-center w-100">INICIO</h1>
+      <h1 class="text-center w-100">ㅤㅤINICIO</h1>
       <router-link to="/">
         <v-btn
         class="ma-3"
@@ -13,6 +13,7 @@ import { RouterLink } from 'vue-router'</script>
       ></v-btn>
       </router-link>
     </VAppBar>
+    <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">

@@ -5,6 +5,7 @@ const nombre = ref('');
 const direccion = ref('');
 const numTelefono = ref();
 const correo = ref('');
+const usuario = ref(''); // Crear una referencia separada para 'Usuario'
 const numSeguroSocial = ref();
 const curp = ref('');
 
@@ -25,7 +26,6 @@ const showPassword = ref(false);
 // Función para alternar la visibilidad de la contraseña
 const togglePasswordVisibility = () => {
   // Cambia el valor de 'showPassword' entre verdadero y falso
-showPassword.value = !showPassword.value;
   showPassword.value = !showPassword.value;
 };
 
@@ -33,15 +33,15 @@ const valid = ref(false);
 const form = ref(null);
 
 const submit = () => {
-if (form.value.validate()) {
+  if (form.value.validate()) {
     alert('Registro exitoso');
     // Aquí puedes agregar la lógica para enviar los datos al servidor
-}
+  }
 };
 </script>
 
 <template>
-  <v-app>
+  <v-app style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
     <VAppBar app color="#1a1a1a" dark>
       <router-link to="/MenuPrincipal">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
@@ -59,7 +59,7 @@ if (form.value.validate()) {
                   <v-card-subtitle>Usuario</v-card-subtitle>
                   <v-text-field
                     variant="solo"
-                    v-model="correo"
+                    v-model="usuario" 
                     :rules="[v => !!v || 'Usuario es requerido']"
                     label="Usuario"
                     required
@@ -101,7 +101,7 @@ if (form.value.validate()) {
               ></v-text-field>
 
               <v-text-field
-                v-model="correo"
+                v-model="correo" 
                 :rules="[v => !!v || 'Correo electronico es requerido', v => /.+@.+\..+/.test(v) || 'El correo electrónico debe ser válido']"
                 label="Correo Electronico"
                 variant="solo"
@@ -179,9 +179,10 @@ if (form.value.validate()) {
 .container {
   display: flex;
   width: 100vw;
+  height: 100vh; /* Asegura que la altura ocupe toda la ventana */
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 0;
   background-color: gray;
 }
 
