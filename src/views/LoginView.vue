@@ -28,7 +28,7 @@ const IngresarFormulario = () => {
     <div class="contenedor">
       <v-container class="fill-height">
         <v-row id="Contenedor-login">
-          <v-card class="transparente" width="30vw" height="90vh">  
+          <v-card  class="contenedor-inicio-sesion transparente">  
             <v-card-title id="titulo" class="transparente-titulo" style="text-align: center;">
               <img :src="logo" alt="Logo" id="logo">  
             </v-card-title>
@@ -85,24 +85,32 @@ const IngresarFormulario = () => {
   top: 0;
   left: 0;
   object-fit: cover;
-  pointer-events: none; /* Deshabilita la interacción con el video */
-  user-select: none; /* Evita la selección del video */
+  pointer-events: none;
+  user-select: none; 
 }
 
 #Contenedor-login {
   display: flex;
   justify-content: center;
   max-height: 80%;
-  margin-bottom: 40px;
 }
 
+.contenedor-inicio-sesion{
+width: 90%;
+height: 100%;
+}
+@media (min-width: 768px) {
+  .contenedor-inicio-sesion{
+width: 400px;
+} 
+}
 .transparente {
-  background-color: rgba(255, 255, 255, 0.6) !important; /* Fondo blanco con 50% de opacidad */
+  background-color: rgba(255, 255, 255, 0.6) !important;
   box-shadow: none !important;
 }
 
 .transparente-titulo {
-  background-color: rgba(255, 255, 255, 0.6) !important; /* Fondo negro con 80% de opacidad */
+  background-color: rgba(255, 255, 255, 0.6) !important; 
 }
 
 #titulo {
