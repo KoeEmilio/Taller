@@ -1,17 +1,32 @@
 <script setup>
-import { RouterLink } from 'vue-router'</script>
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
+
+// Estado para controlar el menú desplegable
+const menu = ref(false);
+</script>
 
 <template>
   <VApp>
     <VAppBar app color="#1a1a1a" dark>
-      <h1 class="text-center w-100">INICIO</h1>
-      <router-link to="/">
-        <v-btn
-        class="ma-3"
-        color="white"
-        icon="mdi-account"
-      ></v-btn>
-      </router-link>
+      <h1 class="text-center w-100 TITULO">INICIO</h1>
+      <VMenu v-model="menu" offset-y>
+        <template #activator="{ props }">
+          <v-app-bar-nav-icon v-bind="props"></v-app-bar-nav-icon>
+        </template>
+        <v-list>
+          <v-list-item>
+            <RouterLink to="/Ingresos" class="texto-menu text-decoration-none">
+              <v-list-item-title>Ingresos</v-list-item-title>
+            </RouterLink>
+          </v-list-item>
+          <v-list-item>
+            <RouterLink to="/CerrarSesion" class="texto-menu text-decoration-none">
+              <v-list-item-title>Cerrar sesión</v-list-item-title>
+            </RouterLink>
+          </v-list-item>
+        </v-list>
+      </VMenu>
     </VAppBar>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
@@ -97,5 +112,13 @@ import { RouterLink } from 'vue-router'</script>
 }
 .my-4 {
   margin: 1rem 0;
+}
+
+.TITULO {
+  align-items: center;
+  padding-left: 60px;
+}
+.texto-menu{
+  color: black;
 }
 </style>
