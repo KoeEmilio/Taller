@@ -11,7 +11,7 @@
         ></v-btn>
         </router-link>
         <h1 class="text-center w-100">DETALLAR ORDEN</h1>
-        </v-app-bar>
+    </v-app-bar>
 
     <v-form @submit.prevent="submit">
       <!-- Formulario de Detalles de la Orden -->
