@@ -54,26 +54,7 @@ onMounted(() => {
                     <v-row>
                         <v-row  justify="start">
                             <v-col cols="auto" class="d-flex align-center">
-                                <div id="Cont">
-                                    <p class="agregar-text">Agregar</p>
-                                    <v-btn @click="mostrarFormulario" id="guindo-btn" icon="mdi-plus" size="x-small" ></v-btn>  
-                                </div>
                             </v-col>
-                            <v-dialog v-model="showFormulario" max-width="500px">
-                                <div v-show="showFormulario === true" >
-                                    <v-card class="pa-5">
-                                        <v-card-title>Registrar Orden</v-card-title>
-                                        <v-card-text class="scrollable-content">
-                                           <v-date-input label="Fecha de Ingreso" v-model="fechaIngreso"></v-date-input>
-                                            <v-select label="Empleado" :items="empleados" v-model="empleado"></v-select>
-                                            <v-select label="Vehículo" :items="vehiculos" v-model="vehiculo"></v-select>
-                                            <v-text-field label="Motivo" v-model="motivo"></v-text-field>
-                                            <v-select label="Cita" :items="citas" v-model="cita"></v-select>
-                                            <v-select label="Estado" :items="estados" v-model="estado"></v-select>
-                                    </v-card-text>
-                                    </v-card>  
-                                </div>
-                            </v-dialog>
                         </v-row>
                         <v-col cols="10">
                             <v-data-table id="Tabla" :items="datos" :headers="headers" class="elevation-1">  </v-data-table> 

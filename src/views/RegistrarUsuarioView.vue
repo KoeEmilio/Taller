@@ -1,7 +1,13 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-
+const nombre = ref('');
+const direccion = ref('');
+const numTelefono = ref();
+const correo = ref('');
+const usuario = ref(''); // Crear una referencia separada para 'Usuario'
+const numSeguroSocial = ref();
+const curp = ref('');
 const Nombre = ref('');
 const Direccion = ref('');
 const Telefono = ref()
@@ -29,59 +35,23 @@ const showPassword = ref(false);
 // Función para alternar la visibilidad de la contraseña
 const togglePasswordVisibility = () => {
   // Cambia el valor de 'showPassword' entre verdadero y falso
-showPassword.value = !showPassword.value;
   showPassword.value = !showPassword.value;
 };
 
 const valid = ref(false);
 const form = ref(null);
 
-const submit = async () => {
-if (valid.value) {
-    const data = {
-    Nombre: Nombre.value,
-    Direccion: Direccion.value,
-    Telefono: Telefono.value,
-    Correo: Correo.value,
-    RFC: RFC.value,
-    Num_Seguro_Social: Num_Seguro_Social.value,
-    CURP: CURP.value,
-    Tipo_Cliente: Tipo_Cliente.value,
-    Nombre_empresa: Nombre_empresa.value,
-    };
-
-    try {
-    const response = await fetch('http://testpdo.com/registrovehiculos', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    });
-
-      const responseText = await response.text(); // Obtener la respuesta como texto
-    console.log('Respuesta del servidor:', responseText);
-
-    try {
-        const responseData = JSON.parse(responseText); // Intentar analizar como JSON
-        if (response.ok) {
-        console.log('Vehículo registrado exitosamente', responseData);
-        } else {
-        console.error('Error al registrar el vehículo:', responseData);
-        }
-    } catch (error) {
-        console.error('Error al analizar la respuesta como JSON:', error);
-    }
-    } catch (error) {
-    console.error('Error de red:', error);
-    }
-}
+const submit = () => {
+  if (form.value.validate()) {
+    alert('Registro exitoso');
+    // Aquí puedes agregar la lógica para enviar los datos al servidor
+  }
 };
 
 </script>
 
 <template>
-  <v-app>
+  <v-app style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
     <VAppBar app color="#1a1a1a" dark>
       <router-link to="/MenuPrincipal">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
@@ -90,17 +60,32 @@ if (valid.value) {
     </VAppBar>
 
     <div class="container">
-        <div class="Card">
-        
-            <v-card-text>
-                <v-container>
-                    <v-form  ref="form" v-model="valid">
-                            <v-text-field
-                                v-model="Nombre"
-                                :rules="[v => !!v || 'Nombre es requerido']"
-                                label="Nombre Completo"
-                                variant="solo"
-                            ></v-text-field>
+      <div class="Card">
+        <v-card-text>
+          <v-container>
+            <v-form ref="form" v-model="valid">
+              <v-row>
+                <v-col>
+                  <v-card-subtitle>Usuario</v-card-subtitle>
+                  <v-text-field
+                    variant="solo"
+                    v-model="usuario" 
+                    :rules="[v => !!v || 'Usuario es requerido']"
+                    label="Usuario"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col>
+                  <v-card-subtitle>Contraseña</v-card-subtitle>
+                  <v-text-field
+                    variant="solo"
+                    v-model="password"
+                    :type="showPassword ? 'text' : 'password'"
+                    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                    @click:append="togglePasswordVisibility"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
 
                             <v-text-field
                                 v-model="Direccion"
@@ -150,7 +135,7 @@ if (valid.value) {
                             <br>
 
               <v-text-field
-                v-model="correo"
+                v-model="correo" 
                 :rules="[v => !!v || 'Correo electronico es requerido', v => /.+@.+\..+/.test(v) || 'El correo electrónico debe ser válido']"
                 label="Correo Electronico"
                 variant="solo"
@@ -214,9 +199,10 @@ if (valid.value) {
 .container {
   display: flex;
   width: 100vw;
+  height: 100vh; /* Asegura que la altura ocupe toda la ventana */
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 0;
   background-color: gray;
 }
 

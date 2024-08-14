@@ -35,6 +35,8 @@ import MisVehiculosView from '@/views/MisVehiculosView.vue'
 import PerfilView from '@/views/PerfilView.vue'
 import DetalleDeMisOrdenesView from '@/views/DetalleDeMisOrdenesView.vue'
 import VistaClienteView from '@/views/VistaClienteView.vue'
+import PagosView from '@/views/PagosView.vue'
+import RegistrarOrdenView from '@/views/RegistrarOrdenView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -211,7 +213,7 @@ const router = createRouter({
     {
       //VISTA DE ADMINISTRADOR (ORDENES)
 
-      // FALTA CHECAR ESTA, Es la MISMA que la vista de ARRIBA............................................
+      // FALTA CHECAR ESTA, Es la MISMA que la vista de ARRIBA
       path: '/MenuOrdenesEmpleado',
       name: 'MenuOrdenesEmpleado',
       component: MenuOrdenesEmpleadoView
@@ -230,21 +232,20 @@ const router = createRouter({
       name: 'RegistrarUsuario',
       component: RegistrarUsuarioView
     },
-
-    {
-      path: '/Pagos',
-      name: 'Pagos',
-      component: PagosView
-    },
     {
       path: '/Login',
-      name: 'pagos',
+      name: 'Login',
       component: LoginView
     },
     {
       path: '/RegistrarUsuarioEmpleado',
       name: 'RegistrarUsuarioEmpleado',
       component: RegistrarUsuarioEmpleadoView
+    },
+    {
+      path: '/RegistrarOrden',
+      name: 'RegistrarOrden',
+      component: RegistrarOrdenView
     },
     {
       path: '/VistaCliente',
@@ -268,7 +269,13 @@ const router = createRouter({
           component: DetalleDeMisOrdenesView
         }
       ]
+    },
+    {
+      path: '/VistaCitasClientes',
+      name: 'VistaCitasClientes',
+      component:VistaCitasClientes
     }
+    
   ]
 })
 
