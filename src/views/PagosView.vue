@@ -1,105 +1,165 @@
+<script setup>
+import { onMounted, ref } from 'vue';
+import { computed } from 'vue';
+
+
+
+const datos = ref([])
+const mostrarPagos = () => {
+  fetch('http://miproyecto.com/pagos')
+    .then(response => response.json())
+    .then(json => {
+      if (json.status === 200) {
+        datos.value = json.data;
+      }
+    })
+}
+onMounted(() => {
+  mostrarPagos()
+});
+
+// Propiedad computada para filtrar los datos basados en la búsqueda
+const search = ref('')
+const filteredDatos = computed(() => {
+  if (!search.value) return datos.value;
+  return datos.value.filter(pago =>
+    pago.Cliente.toLowerCase().includes(search.value.toLowerCase())
+  );
+});
+
+</script>
+
 <template>
   <v-app>
-    <v-container class="container">
-      <div class="header">
-        <v-btn icon class="back-btn" @click="goBack">
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <span class="header-text">Pagos</span>
-      </div>
-
-      <v-card class="payment-card" v-for="pago in pagos" :key="pago.id">
-        <v-card-title>{{ pago.servicio }}</v-card-title>
-        <v-card-subtitle>Fecha: {{ pago.fecha }}</v-card-subtitle>
-        <v-card-text>
-          <div>Cliente: {{ pago.cliente }}</div>
-          <div>Monto: {{ pago.monto }}</div>
-          <div>Estatus del pago: 
-            <v-chip :color="pago.estatus === 'completado' ? 'green' : 'red'" dark>
-              {{ pago.estatus }}
-            </v-chip>
-          </div>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" @click="liberarPago(pago)" v-if="pago.estatus === 'pendiente'">Liberar</v-btn>
-          <v-btn color="error" @click="cancelarPago(pago)" v-if="pago.estatus === 'pendiente'">Cancelar</v-btn>
-          <v-btn color="secondary" @click="eliminarPago(pago)" v-if="pago.estatus === 'pendiente'">Eliminar</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-container>
+    <v-app-bar app color="#1a1a1a">
+        <router-link to="/Clientes">
+        <v-btn
+            class="ma-3"
+            color="white"
+            icon="mdi-arrow-left-bold-circle-outline"
+        ></v-btn>
+        </router-link>
+        <h1 class="text-center w-100">Pagos</h1>
+        </v-app-bar>
+        <br>
+        <br>
+        <br>
+        <v-container class="container">
+          <v-col>
+          
+          <v-text-field
+            v-model="search"
+            label="Buscar cliente"
+            class="my-4"
+            append-icon="mdi-magnify"
+          ></v-text-field>
+          <v-row>
+            <v-card class="card" v-for="(pago,index) in filteredDatos" :key="index">
+            <v-col>
+              <v-row class="titulo">
+                <h5>{{ pago.Nombre_servicio }}</h5>
+              </v-row>
+              <v-row>
+                <v-divider></v-divider>
+              </v-row>
+            </v-col>
+            <v-col>
+              <div>
+                <br>
+                <v-row>
+                  
+                  <h5>Fecha: {{ pago.Fecha }}</h5>
+                  <br>
+                  <br>
+                </v-row>
+                <v-row>
+                  <h5>Cliente: {{ pago.Cliente }}</h5>
+                  <br>
+                  <br>
+                </v-row>
+                <v-row>
+                  <h5>Forma de pago: {{ pago.Forma_Pago }}</h5>
+                  <br>
+                  <br>
+                </v-row>
+                <v-row>
+                  <h5>Monto: {{ pago.Cantidad_Total }}</h5>
+                  <br>
+                  <br>
+                </v-row>
+                <v-row>
+                  <h5>Estado de pago: </h5>
+                  <div class="estatus">&nbsp; {{ pago.Estatus_del_pago }}</div>
+                  <br>
+                  <br>
+                </v-row>
+                <v-row id="container-botones">
+                  <p class="btn" id="btn-liberar">Liberar</p>
+                  <p class="btn" id="btn-cancelar">Cancelar</p>
+                  <p class="btn" id="btn-abonar">Abonar</p>
+                </v-row>
+              </div>
+            </v-col>
+            
+          </v-card>
+          </v-row>
+          
+          </v-col>
+        </v-container>
   </v-app>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-const pagos = ref([
-  { id: 1, servicio: 'Mantenimiento', fecha: '2024-08-01', cliente: 'Juan Perez', monto: 1500, estatus: 'pendiente' },
-  { id: 2, servicio: 'Reparación', fecha: '2024-08-02', cliente: 'María Lopez', monto: 2000, estatus: 'completado' },
-])
-
-const liberarPago = (pago) => {
-  pago.estatus = 'completado'
-}
-
-const cancelarPago = (pago) => {
-  pago.estatus = 'cancelado'
-}
-
-const eliminarPago = (pago) => {
-  const index = pagos.value.findIndex(p => p.id === pago.id)
-  if (index !== -1) {
-    pagos.value.splice(index, 1)
-  }
-}
-
-const goBack = () => {
-  router.go(-1)
-}
-</script>
-
 <style scoped>
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
-  padding-top: 100px;
-}
-
-.header {
-  background-color: #1a1a1a;
-  color: white;
-  padding: 16px;
+.container{
   display: flex;
-  align-items: center;
+  height:99vh;
+  width:100vw;
+}
+.card{
+  background-color: rgb(245, 245, 245);
+  color: rgb(80, 80, 80);
+  width: 272px;
+  height: 350px;
+  margin: 10px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+.card:hover{
+  filter: brightness(96%); /* Oscurece la tarjeta al pasar el ratón */
+}
+.titulo{
   justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  height: 60px;
+  align-items:center ;
+  height: 50px;
+  color: black ;
 }
 
-.back-btn {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
+.estatus{
+  border-radius: 10px;
+  margin-top: -2px;
+}
+#container-botones{
+  display: flex;
+  text-align: center;  
+}
+.btn{
+  width: 90px;
+  margin-left: 0px;
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+
+}
+.btn:hover{
+    filter: brightness(99%); /* Oscurece la tarjeta al pasar el ratón */
+    
+}
+#btn-liberar:hover {
+  color: #4caf50; /* Color de fondo para 'Liberar' */
+}
+#btn-cancelar:hover{
+  color: #f30000; /* Color de fondo para 'Cancelar' */
+}
+#btn-abonar:hover {
+  color: #21dbf3; /* Color de fondo para 'Abonar' */
 }
 
-.header-text {
-  font-size: 24px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.payment-card {
-  margin-top: 20px;
-  border: 2px solid black;
-  border-radius: 8px;
-}
 </style>
