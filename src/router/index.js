@@ -28,13 +28,16 @@ import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
 import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
 import VerDetalleView from '@/views/VerDetalleView.vue'
 import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
+import PagosView from '@/views/PagosView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegistrarUsuarioEmpleadoView from '@/views/RegistrarUsuarioEmpleadoView.vue'
 import MisVehiculosView from '@/views/MisVehiculosView.vue'
 import PerfilView from '@/views/PerfilView.vue'
 import DetalleDeMisOrdenesView from '@/views/DetalleDeMisOrdenesView.vue'
 import VistaClienteView from '@/views/VistaClienteView.vue'
-import PagosView from '@/views/PagosView.vue'
+import RegistrarOrdenView from '@/views/RegistrarOrdenView.vue'
+import VistaCitasClientes from '@/views/VistaCitasClientes.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -210,7 +213,7 @@ const router = createRouter({
     {
       //VISTA DE ADMINISTRADOR (ORDENES)
 
-      // FALTA CHECAR ESTA, Es la MISMA que la vista de ARRIBA............................................
+      // FALTA CHECAR ESTA, Es la MISMA que la vista de ARRIBA
       path: '/MenuOrdenesEmpleado',
       name: 'MenuOrdenesEmpleado',
       component: MenuOrdenesEmpleadoView
@@ -231,13 +234,18 @@ const router = createRouter({
     },
     {
       path: '/Login',
-      name: 'pagos',
+      name: 'Login',
       component: LoginView
     },
     {
       path: '/RegistrarUsuarioEmpleado',
       name: 'RegistrarUsuarioEmpleado',
       component: RegistrarUsuarioEmpleadoView
+    },
+    {
+      path: '/RegistrarOrden',
+      name: 'RegistrarOrden',
+      component: RegistrarOrdenView
     },
     {
       path: '/VistaCliente',
@@ -261,7 +269,14 @@ const router = createRouter({
           component: DetalleDeMisOrdenesView
         }
       ]
-    }
+    },
+    {
+      path: '/VistaCitasClientes',
+      name: 'VistaCitasClientes',
+      component:VistaCitasClientes
+    },
+    
+    
   ]
 })
 
