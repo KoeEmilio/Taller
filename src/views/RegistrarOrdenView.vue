@@ -19,14 +19,14 @@
               <v-date-input label="Fecha de Ingreso"></v-date-input>
 
               <div>
-                <label for="horarioSeleccionado">Seleccione un Horario:</label>
+                <label for="horarioSeleccionado">Ingrese una hora:</label>
                 <select id="horarioSeleccionado">
-                  <option value="" disabled selected>Seleccione un horario</option>
+                  <option value="" disabled selected>Seleccione un horario:</option>
                 </select>
               </div>
 
               <div>
-                <label for="empleado">Empleado:</label>
+                <label for="empleado">Seleccione un empleado:</label>
                 <select id="empleado">
                   <option value="" disabled selected>Seleccione un empleado</option>
                 </select>
@@ -35,7 +35,7 @@
               <div>
                 <label for="vehiculo">Vehículo:</label>
                 <select id="vehiculo">
-                  <option value="" disabled selected>Seleccione un vehículo</option>
+                  <option value="" disabled selected>Seleccione un vehículo:</option>
                 </select>
               </div>
 
@@ -47,14 +47,14 @@
               <div>
                 <label for="cita">Cita:</label>
                 <select id="cita">
-                  <option value="" disabled selected>Seleccione una cita</option>
+                  <option value="" disabled selected>Seleccione una cita:</option>
                 </select>
               </div>
 
               <div>
                 <label for="estado">Estado:</label>
                 <select id="estado">
-                  <option value="" disabled selected>Seleccione un estado</option>
+                  <option value="" disabled selected>Estado de la orden:</option>
                 </select>
               </div>
 
