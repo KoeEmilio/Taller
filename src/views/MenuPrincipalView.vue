@@ -28,14 +28,7 @@ const menu = ref(false);
           </v-list-item>
         </v-list>
       </VMenu>
-      <h1 class="text-center w-100">INICIO</h1>
-      <router-link to="/">
-        <v-btn
-        class="ma-3"
-        color="white"
-        icon="mdi-account"
-      ></v-btn>
-      </router-link>
+    
     </VAppBar>
     <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">
