@@ -1,12 +1,16 @@
 <template>
     <v-app>
       <v-container class="container">
-        <div class="header">
-          <v-btn icon class="back-btn" @click="goBack">
-            <v-icon>mdi-arrow-left</v-icon> 
-          </v-btn>
-          <span class="header-text">Ingresos</span>
-        </div>
+        <v-app-bar app color="#1a1a1a">
+        <router-link to="/Clientes">
+        <v-btn
+            class="ma-3"
+            color="white"
+            icon="mdi-arrow-left-bold-circle-outline"
+        ></v-btn>
+        </router-link>
+        <h1 class="text-center w-100">INGRESOS</h1>
+        </v-app-bar>
   
         <v-row class="summary-options" justify="center">
           <v-btn @click="verResumen('semana')">Resumen de la Semana</v-btn>
@@ -40,10 +44,8 @@
   
   <script setup>
   import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
   import { isWithinInterval, subDays, subMonths } from 'date-fns'
   
-  const router = useRouter()
   
   const ordenes = ref([
     { id: 1, servicio: 'Cambio de Aceite', fecha: '2024-08-05', costo: 500, tecnico: 'Pepinillo Rick', detalles: 'Se realizó un cambio de aceite completo con filtro nuevo.', cliente: 'Juan Perez' },
@@ -83,9 +85,7 @@
     return ordenes.value.filter(orden => orden.cliente === cliente)
   }
   
-  const goBack = () => {
-    router.go(-1)
-  }
+  
   </script>
   
   <style scoped>
