@@ -5,7 +5,6 @@ export default {
       showDialog: false,
       selectedDate: null,
       selectedTime: null,
-      motivo: '',
       times: [
         "10:30 AM",
         "11:00 AM",
@@ -45,15 +44,16 @@ export default {
       this.showDialog = false;
     },
     submitForm() {
-      if (this.selectedDate && this.selectedTime && this.motivo) {
-        alert(`Cita agendada para el ${this.selectedDate} a las ${this.selectedTime} por el motivo: ${this.motivo}`);
-        this.closeDialog();
-      } else {
-        alert("Por favor, completa todos los campos.");
-      }
+  if (this.selectedDate && this.selectedTime) {
+    alert(`Cita agendada para el ${this.selectedDate} a las ${this.selectedTime}`);
+    this.closeDialog();
+  } else {
+    alert("Por favor, completa todos los campos.");
+  }
+}
+
     }
   }
-};
 </script>
 
 <template>

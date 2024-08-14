@@ -11,8 +11,9 @@ import { RouterLink, RouterView } from 'vue-router'</script>
         icon="mdi-arrow-left-bold-circle-outline"
       ></v-btn>
       </router-link>
-    <h1 class="text-center w-100">VEHICULOS</h1>
+    <h1 class="text-center w-100">VEHICULOSㅤㅤ</h1>
     </VAppBar>
+    <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">

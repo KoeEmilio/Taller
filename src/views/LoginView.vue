@@ -1,23 +1,47 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import logo from '@/img/logonegro.png';
 import video from '../video/taller.mp4';  
+import { useUserStore } from '@/stores/userStorage';
+import router from '@/router';
 
-const usuario = ref('');
-const contrasena1 = ref('');
+
+const userStore = useUserStore();
+const Usuario = ref('');
+const Contrasena = ref('');
+
+;
 const showPassword = ref(false);
-const router = useRouter();
 
-const IngresarFormulario = () => {
-  if (usuario.value === 'azael@gmail.com' && contrasena1.value === '1234') {
-    router.push({ name: 'MenuEmpleados' });
-  } else if (usuario.value === 'saul@gmail.com' && contrasena1.value === '1234') {
-    router.push({ name: 'MenuPrincipal' });
-  } else if (usuario.value === 'sal@gmail.com' && contrasena1.value === '1234') {
-    router.push({ name: 'MenuPrincipal' });
-  } else {
-    alert('Correo o contraseña incorrectos');
+const login = async () => {
+  try {
+    const response = await fetch('http://testpdo.com/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        Usuario: Usuario.value,
+        Contrasena: Contrasena.value      
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Error en la autenticación');
+    }
+
+    const data = await response.json();
+
+    if (data.msg === 'success') {
+      userStore.setUsuario(data.data.usuario);
+      userStore.setToken(data.data._token);
+      router.push({
+        name:'MenuPrincipal',
+      })
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('TONOTO');
   }
 };
 </script>
@@ -38,7 +62,7 @@ const IngresarFormulario = () => {
                 <v-container>
                   <v-row id="UserRow">
                     <v-text-field
-                      v-model="usuario"
+                      v-model="Usuario"
                       label="Usuario"
                       variant="solo"
                       clearable
@@ -47,7 +71,7 @@ const IngresarFormulario = () => {
                   </v-row>
                   <v-row id="PasswordRow">
                     <v-text-field
-                      v-model="contrasena1"
+                      v-model="Contrasena"
                       label="Contraseña"
                       variant="solo"
                       :type="showPassword ? 'text' : 'password'"
@@ -61,7 +85,7 @@ const IngresarFormulario = () => {
                 <v-container>
                   <v-row>
                     <v-col class="d-flex">
-                      <v-btn class="botones-color" block @click="IngresarFormulario">Ingresar</v-btn>
+                      <v-btn class="botones-color" block @click="login">Ingresar</v-btn>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -85,8 +109,8 @@ const IngresarFormulario = () => {
   top: 0;
   left: 0;
   object-fit: cover;
-  pointer-events: none; /* Deshabilita la interacción con el video */
-  user-select: none; /* Evita la selección del video */
+  pointer-events: none;
+  user-select: none; 
 }
 
 #Contenedor-login {
@@ -105,12 +129,12 @@ width: 400px;
 } 
 }
 .transparente {
-  background-color: rgba(255, 255, 255, 0.6) !important; /* Fondo blanco con 50% de opacidad */
+  background-color: rgba(255, 255, 255, 0.6) !important;
   box-shadow: none !important;
 }
 
 .transparente-titulo {
-  background-color: rgba(255, 255, 255, 0.6) !important; /* Fondo negro con 80% de opacidad */
+  background-color: rgba(255, 255, 255, 0.6) !important; 
 }
 
 #titulo {

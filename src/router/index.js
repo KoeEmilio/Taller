@@ -34,8 +34,10 @@ import MisVehiculosView from '@/views/MisVehiculosView.vue'
 import PerfilView from '@/views/PerfilView.vue'
 import DetalleDeMisOrdenesView from '@/views/DetalleDeMisOrdenesView.vue'
 import VistaClienteView from '@/views/VistaClienteView.vue'
+import IngresosView from '@/views/IngresosView.vue'
+import RegistrarOrdenView from '@/views/RegistrarOrdenView.vue'
+import VistaCitasClientesView from '@/views/VistaCitasClientesView.vue'
 import PagosView from '@/views/PagosView.vue'
-import VistaCitasClientes from '@/views/VistaCitasClientes.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,11 +70,6 @@ const router = createRouter({
       path: '/InfoOrdenes',
       name: 'InfoOrdenes',
       component: VerOrdenesView
-    },
-    {
-      path: '/Pagos',
-      name: 'Pagos',
-      component: PagosView
     },
     {
       //VISTA DEL ADMINISTRADOR (MENU EMPLEADOS)
@@ -237,9 +234,24 @@ const router = createRouter({
       component: LoginView
     },
     {
+      path: '/Ingresos',
+      name: 'Ingresos',
+      component: IngresosView
+    },
+    {
       path: '/RegistrarUsuarioEmpleado',
       name: 'RegistrarUsuarioEmpleado',
       component: RegistrarUsuarioEmpleadoView
+    },
+    {
+      path: '/RegistrarOrden',
+      name: 'RegistrarOrden',
+      component: RegistrarOrdenView
+    },
+    {
+      path: '/Pagos',
+      name: 'Pagos',
+      component: PagosView
     },
     {
       path: '/VistaCliente',
@@ -265,10 +277,12 @@ const router = createRouter({
       ]
     },
     {
-      path: '/VistaCitasClientes',
-      name: 'VistaCitasClientes',
-      component:VistaCitasClientes
-    }
+      path:'/VistaCitasClientes',
+      name:'VistaCitasClientes',
+      component: VistaCitasClientesView
+    },
+    
+    
   ]
 })
 
