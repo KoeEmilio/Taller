@@ -1,128 +1,28 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-const fechaIngreso = ref(''); // Selección de fecha de ingreso
-const horarioSeleccionado = ref(null); // Nuevo campo para seleccionar un horario
-const empleado = ref(null);
-const vehiculo = ref(null);
+const fechaIngreso = ref(''); 
+const horarioSeleccionado = ref(''); 
+const empleado = ref('');
+const vehiculo = ref('');
 const motivo = ref('');
-const cita = ref(null);
-const estado = ref(null);
-
-const empleados = ref([]);
-const vehiculos = ref([]);
-const citas = ref([]);      
-const horarios = ref([]); // Almacena los horarios obtenidos
-const estados = ref([]);    
+const cita = ref('');
+const estado = ref('');
+const empleados = ref('');
+const vehiculos = ref('');
+const citas = ref('');      
+const horarios = ref(''); 
+const estados = ref('');    
 
 const valid = ref(false);
 
-const fetchEmpleados = async () => {
-  try {
-    const response = await fetch('http://testpdo.com/empleados');
-    if (response.ok) {
-      const json = await response.json();
-      empleados.value = json.data; 
-      console.log('Empleados obtenidos exitosamente', empleados.value);
-    } else {
-      console.error('Error al obtener la lista de empleados');
-    }
-  } catch (error) {
-    console.error('Error de red:', error);
+const submit = () => {
+  if (form.value.validate()) {
+    alert('Registro exitoso');
   }
 };
 
-const fetchVehiculos = async () => {
-  try {
-    const response = await fetch('http://testpdo.com/vehiculos');
-    if (response.ok) {
-      const json = await response.json();
-      vehiculos.value = json.data; 
-      console.log('Vehículos obtenidos exitosamente', vehiculos.value);
-    } else {
-      console.error('Error al obtener la lista de vehículos');
-    }
-  } catch (error) {
-    console.error('Error de red:', error);
-  }
-};
 
-const fetchCitas = async () => {
-  try {
-    const response = await fetch('http://testpdo.com/citas');
-    if (response.ok) {
-      const json = await response.json();
-      citas.value = json.data; 
-      console.log('Citas obtenidas exitosamente', citas.value);
-    } else {
-      console.error('Error al obtener la lista de citas');
-    }
-  } catch (error) {
-    console.error('Error de red:', error);
-  }
-};
-
-const fetchHorarios = async () => {
-  try {
-    const response = await fetch('http://testpdo.com/horarios');
-    if (response.ok) {
-      const json = await response.json();
-      horarios.value = json.data; 
-      console.log('Horarios obtenidos exitosamente', horarios.value);
-    } else {
-      console.error('Error al obtener la lista de horarios');
-    }
-  } catch (error) {
-    console.error('Error de red:', error);
-  }
-};
-
-const submit = async () => {
-  if (valid.value) {
-    const data = {
-      FechaIngreso: fechaIngreso.value,
-      Hora_Ingreso: horarioSeleccionado.value, // Se añade al envío de datos
-      Empleado: empleado.value,
-      Vehiculo: vehiculo.value,
-      Motivo: motivo.value,
-      Cita: cita.value,
-      Estado: estado.value,
-    };
-
-    try {
-      const response = await fetch('http://testpdo.com/registrarorden', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const responseText = await response.text(); // Obtener la respuesta como texto
-      console.log('Respuesta del servidor:', responseText);
-
-      try {
-        const responseData = JSON.parse(responseText); // Intentar analizar como JSON
-        if (response.ok) {
-          console.log('Orden registrada exitosamente', responseData);
-        } else {
-          console.error('Error al registrar la orden:', responseData);
-        }
-      } catch (error) {
-        console.error('Error al analizar la respuesta como JSON:', error);
-      }
-    } catch (error) {
-      console.error('Error de red:', error);
-    }
-  }
-};
-
-onMounted(() => {
-  fetchEmpleados();
-  fetchVehiculos();
-  fetchCitas();
-  fetchHorarios(); 
-});
 </script>
 
 <template>
