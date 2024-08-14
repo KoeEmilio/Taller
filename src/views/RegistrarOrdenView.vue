@@ -1,27 +1,4 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-
-const fechaIngreso = ref(''); 
-const horarioSeleccionado = ref(''); 
-const empleado = ref('');
-const vehiculo = ref('');
-const motivo = ref('');
-const cita = ref('');
-const estado = ref('');
-const empleados = ref('');
-const vehiculos = ref('');
-const citas = ref('');      
-const horarios = ref(''); 
-const estados = ref('');    
-
-const valid = ref(false);
-
-const submit = () => {
-  if (form.value.validate()) {
-    alert('Registro exitoso');
-  }
-};
-
 
 </script>
 
@@ -38,68 +15,50 @@ const submit = () => {
       <div class="Card">
         <v-card-text>
           <v-container>
-            <v-form ref="form" v-model="valid">
-              <v-date-input label="Fecha de Ingreso" v-model="fechaIngreso"></v-date-input>
+            <v-form ref="form">
+              <v-date-input label="Fecha de Ingreso"></v-date-input>
 
               <div>
                 <label for="horarioSeleccionado">Seleccione un Horario:</label>
-                <select id="horarioSeleccionado" v-model="horarioSeleccionado">
+                <select id="horarioSeleccionado">
                   <option value="" disabled selected>Seleccione un horario</option>
-                  <option v-for="horario in horarios" :key="horario.HorarioID" :value="horario.HorarioID">
-                    {{ horario.Hora_Inicio }} - {{ horario.Hora_Fin }}
-                  </option>
                 </select>
               </div>
 
-        
               <div>
                 <label for="empleado">Empleado:</label>
-                <select id="empleado" v-model="empleado">
+                <select id="empleado">
                   <option value="" disabled selected>Seleccione un empleado</option>
-                  <option v-for="emp in empleados" :key="emp.id" :value="emp.id">
-                    {{ emp.nombre }}
-                  </option>
                 </select>
               </div>
 
-            
               <div>
                 <label for="vehiculo">Vehículo:</label>
-                <select id="vehiculo" v-model="vehiculo">
+                <select id="vehiculo">
                   <option value="" disabled selected>Seleccione un vehículo</option>
-                  <option v-for="veh in vehiculos" :key="veh.id" :value="veh.id">
-                    {{ veh.modelo }}
-                  </option>
                 </select>
               </div>
 
-              
               <div>
                 <label for="motivo">Motivo:</label>
-                <input type="text" id="motivo" v-model="motivo" placeholder="Ingrese el motivo">
+                <input type="text" id="motivo" placeholder="Ingrese el motivo">
               </div>
 
               <div>
                 <label for="cita">Cita:</label>
-                <select id="cita" v-model="cita">
+                <select id="cita">
                   <option value="" disabled selected>Seleccione una cita</option>
-                  <option v-for="cit in citas" :key="cit.id" :value="cit.id">
-                    {{ cit.detalle }}
-                  </option>
                 </select>
               </div>
 
               <div>
                 <label for="estado">Estado:</label>
-                <select id="estado" v-model="estado">
+                <select id="estado">
                   <option value="" disabled selected>Seleccione un estado</option>
-                  <option v-for="est in estados" :key="est.id" :value="est.id">
-                    {{ est.nombre }}
-                  </option>
                 </select>
               </div>
 
-              <v-btn id="btn-registrar" :disabled="!valid" color="#1a1a1a" @click="submit">
+              <v-btn id="btn-registrar" color="#1a1a1a">
                 Registrar
               </v-btn>
             </v-form>
@@ -128,6 +87,8 @@ const submit = () => {
 }
 
 #btn-registrar{
+  margin-top: 16px;
+  margin-left: 950px;
   transition: transform 0.2s ease;
 }
 

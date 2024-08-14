@@ -28,7 +28,6 @@ import MenuOrdenesView from '@/views/MenuOrdenesView.vue'
 import MenuOrdenesEmpleadoView from '@/views/MenuOrdenesEmpleadoView.vue'
 import VerDetalleView from '@/views/VerDetalleView.vue'
 import RegistrarUsuarioView from '@/views/RegistrarUsuarioView.vue'
-import PagosView from '@/views/PagosView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegistrarUsuarioEmpleadoView from '@/views/RegistrarUsuarioEmpleadoView.vue'
 import MisVehiculosView from '@/views/MisVehiculosView.vue'
@@ -69,11 +68,6 @@ const router = createRouter({
       path: '/InfoOrdenes',
       name: 'InfoOrdenes',
       component: VerOrdenesView
-    },
-    {
-      path: '/Pagos',
-      name: 'Pagos',
-      component: PagosView
     },
     {
       //VISTA DEL ADMINISTRADOR (MENU EMPLEADOS)
@@ -248,6 +242,11 @@ const router = createRouter({
       component: RegistrarOrdenView
     },
     {
+      path: '/Pagos',
+      name: 'Pagos',
+      component: PagosView
+    },
+    {
       path: '/VistaCliente',
       name: 'VistaCliente',
       redirect: '/VistaCliente/perfil',
@@ -270,11 +269,7 @@ const router = createRouter({
         }
       ]
     },
-    {
-      path: '/VistaCitasClientes',
-      name: 'VistaCitasClientes',
-      component:VistaCitasClientes
-    }
+    
     
   ]
 })

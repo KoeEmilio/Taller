@@ -192,7 +192,7 @@ onMounted(() => {
 }
 
 #btn-registrar:hover{
-  transform: translateY(4px); /* Desplazamiento hacia arriba al pasar el ratón */
+  transform: translateY(4px); /* Desplazamiento hacia arriba al pasar el ratón */
 }
 
 .propietario {

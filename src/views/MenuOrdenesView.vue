@@ -1,5 +1,6 @@
 <script setup>
-import { RouterLink } from 'vue-router'</script>
+import { RouterLink } from 'vue-router'
+</script>
 
 <template>
   <VApp>
