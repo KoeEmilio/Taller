@@ -93,9 +93,9 @@ const ordenesCliente = (cliente) => {
 }
 
 .summary-options {
-  margin-top: -4px; /* Asegura que los botones estén justo debajo de la barra */
+  margin-top: -4px; 
   margin-bottom: 20px;
-  padding-top: 4px; /* Añade un pequeño espacio entre los botones y la barra superior */
+  padding-top: 4px; 
 }
 
 .summary-options v-btn {
