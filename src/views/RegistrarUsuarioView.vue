@@ -70,8 +70,15 @@ const submit = async () => {
         alert('Registro exitoso');
       } else {
         const responseData = await response.json();
-        if (responseData.message === 'El nombre de usuario ya existe. Por favor, elige otro.') {
+        // Maneja los errores específicos del backend
+        if (responseData.message.includes('El nombre de usuario ya existe')) {
           alert('Error: El nombre de usuario ya existe. Por favor, elige otro.');
+        } else if (responseData.message.includes('Ya existe un empleado con el mismo RFC')) {
+          alert('Error: Ya existe un empleado con el mismo RFC. El RFC debe ser único.');
+        } else if (responseData.message.includes('Ya existe un empleado con el mismo número de seguro social')) {
+          alert('Error: Ya existe un empleado con el mismo número de seguro social. El número de seguro social debe ser único.');
+        } else if (responseData.message.includes('Ya existe un empleado con la misma CURP')) {
+          alert('Error: Ya existe un empleado con la misma CURP. La CURP debe ser única.');
         } else {
           alert('Error al registrar el usuario. Por favor, inténtelo de nuevo.');
           console.error('Error al registrar el usuario:', responseData);
