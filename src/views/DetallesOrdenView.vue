@@ -115,10 +115,10 @@ const resetForm = () => {
 <template>
   <v-app>
     <v-app-bar app color="#1a1a1a" dark>
-      <router-link to="MenuPrincipal">
+      <router-link to="/MenuOrdenes">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="text-center w-100">REGISTRAR DETALLE</h1>
+      <h1 class="texto-ordenes text-center w-100">REGISTRAR DETALLE</h1>
     </v-app-bar>
 
     <div class="container">
@@ -274,5 +274,16 @@ input[type="date"] {
   .Card {
     padding: 12px;
   }
+}
+
+.texto-ordenes{
+  padding-right: 30px;
+  font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .texto-ordenes{
+  align-items: center;
+}
 }
 </style>

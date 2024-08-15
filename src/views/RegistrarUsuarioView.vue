@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 
+
 const Nombre = ref('');
 const Direccion = ref('');
 const Telefono = ref();
@@ -8,21 +9,21 @@ const Correo = ref('');
 const RFC = ref('');
 const Num_Seguro_Social = ref();
 const CURP = ref('');
+
 const puestoPersona = ref('');
 const esCliente = computed(() => puestoPersona.value === 'cliente');
 const esEmpleado = computed(() => puestoPersona.value === 'empleado');
 
 const Tipo_Cliente = ref('');
 const Nombre_empresa = ref('');
-
-// Valor del campo de contraseña
 const Usuario = ref('');
+
 const Contrasena = ref('');
 
-// Controla si la contraseña debe ser visible o no
+
 const showPassword = ref(false);
 
-// Función para alternar la visibilidad de la contraseña
+
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
@@ -30,9 +31,10 @@ const togglePasswordVisibility = () => {
 const valid = ref(false);
 const form = ref(null);
 
-const submit = async () => {
-  if (valid.value && puestoPersona.value === 'empleado') {
-    const data = {
+const submit = async () => 
+{if (valid.value && puestoPersona.value === 'empleado') {
+    const data = 
+    {
       Nombre: Nombre.value,
       Direccion: Direccion.value,
       Telefono: Telefono.value,
@@ -43,29 +45,28 @@ const submit = async () => {
       Num_Seguro_Social: Num_Seguro_Social.value,
       CURP: CURP.value,
     };
-    try {
-      const response = await fetch('http://testpdo.com/registrousuario', {
+    try 
+    {const response = await fetch('http://testpdo.com/registrousuario', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
-      });
+        body: JSON.stringify(data),});
       const responseText = await response.text();
       console.log('Respuesta del servidor:', responseText);
-      try {
+      try 
+      {
         const responseData = JSON.parse(responseText);
         if (response.ok) {
           console.log('Vehículo registrado exitosamente', responseData);
         } else {
           console.error('Error al registrar el vehículo:', responseData);
         }
-      } catch (error) {
+      } catch (error) 
+      {
         console.error('Error al analizar la respuesta como JSON:', error);
       }
-    } catch (error) {
-      console.error('Error de red:', error);
-    }
+    } catch (error) {console.error('Error de red:', error);}
   }
 };
 </script>
@@ -141,7 +142,6 @@ const submit = async () => {
                   ></v-text-field>
                 </v-col>
               </v-row>
-
               <v-form v-if="esEmpleado" ref="form" v-model="valid">
                 <v-text-field
                   v-model="RFC"
@@ -186,6 +186,7 @@ const submit = async () => {
               <v-btn id="btn-registrar" :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
               </v-btn>
+
 
             </v-form>
           </v-container>
