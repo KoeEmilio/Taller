@@ -117,10 +117,21 @@ export default {
       <section id="conocenos">
         <div class="contenedor-conocenos">
           <h1 class="centrar-texto">CONOCE UN POCO DE NUESTRA HISTORIA...</h1>
-          <p class="texto-principal centrar-texto">
-            La historia comienza en 1978 con un joven Manuel De La Rosa...
-          </p>
-        </div>
+  
+  <p class="texto-principal centrar-texto">
+    La historia comienza en 1978 con un joven Manuel De La Rosa.
+    Para sacar adelante a su familia con sus habilidades en atención al detalle, dando soluciones a pequeñas reparaciones de automóviles y motocicletas,
+    así como la resolución de complejos problemas electrónicos con un enfoque amigable, flexible y adaptable en su propio taller mecánico.
+    Desde entonces, se han enfocado en ofrecer servicios de reparación, revisiones generales, asistencia en carretera y mantenimiento preventivo.
+  </p>
+  <p class="texto-principal centrar-texto">
+    Con el paso del tiempo, y el arduo trabajo y dedicación, fueron ganando prestigio en la comunidad.
+    Siguiendo el ejemplo de su fundador, sus hijos decidieron formarse en mecánica automotriz para continuar con el legado de su padre.
+    Hoy en día, los hijos de Manuel De La Rosa,
+    habiendo aprendido todas sus habilidades y contando con conocimientos en nuevas tecnologías,
+    están al frente del negocio ofreciendo soluciones eficientes y manteniendo la misma atención al detalle que caracterizaba a su padre.
+  </p>
+</div>
         <div class="contenedor__imagenes_taller">
           <img class="imagen_taller" src="@/img/taller1.jpeg" alt="">
           <img class="imagen_taller" src="@/img/taller2.jpeg" alt="">
@@ -475,7 +486,7 @@ export default {
   padding-top: 50px;
   padding-right:40px;
   padding-bottom: 20px;
-  font-size: 10px;
+  font-size: 15px;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
   padding-left:30px;
