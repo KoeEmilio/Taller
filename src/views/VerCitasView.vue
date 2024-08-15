@@ -56,13 +56,12 @@ const actualizarCita = async (estado) => {
   }
 };
 
-const headers = [ 
-  { text: 'Cliente', value: 'NombreCliente' }, // Encabezado para el nombre del cliente.
-  { text: 'Fecha', value: 'Fecha_Cita' }, 
-  {text: 'Hora', value: 'Hora'},
-  { text: 'Estado', value: 'Estado' }, 
-  { text: 'Empleado', value: 'NombreEmpleado' }, 
-  { text: 'Acciones', value: 'action', sortable: false } 
+const headers = [
+  { text: 'Cliente', value: 'Cliente' },
+  { text: 'Fecha_Cita', value: 'Fecha_Cita' },
+  { text: 'Hora', value: 'Hora' },
+  { text: 'Estado', value: 'Estado' },
+  { text: 'Acciones', value: 'action', sortable: false }
 ];
 </script>
 
@@ -89,28 +88,18 @@ const headers = [
               class="mx-4"
             ></v-text-field>
           </v-card-text>
-          <div class="container-table">
-
-            <v-row>
-              <v-col cols="10" offset="1">
-                <v-data-table-virtual
-                  :headers="headers"
-                  :items="datos"
-                  :search="search" 
-                  >
-                    <template  v-slot:[`item.action`]="{ item }">
-                      <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
-                        <v-icon left>mdi-pencil</v-icon> 
-                        Editar
-                      </v-btn>
-                    </template>
-                  </v-data-table-virtual>
-              </v-col>
-                  
-                
-            </v-row>
-            
-          </div>              
+          <v-data-table
+            :headers="headers"
+            :items="datos"
+            :search="search"
+          >
+          <template v-slot:[`item.action`]="{ item }">
+  <v-btn class="boton-separado" color="#1a1a1a" @click="mostrarEditFormulario(item)">
+    <v-icon left>mdi-pencil</v-icon> 
+    Editar
+  </v-btn>
+</template>
+          </v-data-table>
         </v-card>
         
         <v-dialog v-model="showEditFormulario" max-width="500px">
@@ -119,7 +108,7 @@ const headers = [
               <v-card-title>Editar Cita</v-card-title>
               <v-card-text class="scrollable-content">
                 <v-text-field label="Cliente" v-model="selectedCita.Cliente"></v-text-field>
-                <v-text-field label="Fecha" v-model="selectedCita.Fecha" type="date"></v-text-field>
+                <v-text-field label="Fecha_Cita" v-model="selectedCita.Fecha" type="date"></v-text-field>
                 <v-text-field label="Hora" v-model="selectedCita.Hora" type="time"></v-text-field>
                 <v-text-field label="Estado" v-model="selectedCita.Estado" readonly></v-text-field>
                 <v-btn color="#1a1a1a" @click="actualizarCita(selectedCita.value.Estado)">
@@ -140,6 +129,8 @@ const headers = [
   background: #f5f5f5;
 }
 
+
+
 .v-card {
   margin-top: 20px;
 }
@@ -150,6 +141,10 @@ const headers = [
 
 .texto-citas{
   padding-right: 40px;
+}
+.boton-separado {
+  margin-right: 10px; 
+  
 }
 
 @media (min-width: 768px) {
