@@ -74,7 +74,7 @@ const headers = [
       <router-link to="MenuPrincipal">
         <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="text-center w-100">Empleados Registrados</h1>
+      <h1 class="titulo-empleados text-center w-100">Empleados Registrados</h1>
     </v-app-bar>
 
     <v-main>
@@ -137,5 +137,16 @@ const headers = [
 
 .v-data-table {
   margin-top: 10px;
+}
+.titulo-empleados{
+  font-size: 20px;
+  padding-right: 40px;
+}
+
+@media (min-width: 768px) {
+  .titulo-empleados{
+  font-size: 40px;
+  align-items: center;
+}
 }
 </style>

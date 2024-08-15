@@ -50,7 +50,7 @@ const eliminarServicio = (item) => {
                     icon="mdi-arrow-left-bold-circle-outline"
                 ></v-btn>
             </router-link>
-            <h1 class="text-center w-100">SERVICIOS</h1>
+            <h1 class="titulo-servicios text-center w-100">SERVICIOS</h1>
         </v-app-bar>
 
         <v-container>
@@ -80,7 +80,14 @@ const eliminarServicio = (item) => {
             </v-data-table>
         </v-container>
     </v-app>
+
+
+    
 </template>
 
 <style scoped>
+.titulo-servicios{
+padding-right: 40px;
+}
 </style>
+
