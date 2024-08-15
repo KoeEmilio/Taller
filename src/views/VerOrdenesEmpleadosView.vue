@@ -42,7 +42,7 @@ mostrarinfo()
     <div class="container">
         <v-app>
             <v-app-bar app color="#1a1a1a" dark>
-                <router-link to="/MenuOrdenes">
+                <router-link to="/MenuOrdenesEmpleado">
                 <v-btn
                     class="ma-3"
                     color="white"

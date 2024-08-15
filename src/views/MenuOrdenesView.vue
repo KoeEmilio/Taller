@@ -12,7 +12,7 @@ import { RouterLink } from 'vue-router'
             icon="mdi-arrow-left-bold-circle-outline"
         ></v-btn>
         </router-link>
-        <h1 class="text-center w-100">ORDENES</h1>
+        <h1 class="text-center w-100">ÓRDENES</h1>
         </v-app-bar>
         <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">
@@ -37,7 +37,7 @@ import { RouterLink } from 'vue-router'
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document-multiple</v-icon>
                 <br>
                 <h1>VER</h1>
-                <h1>ORDENES</h1>
+                <h1>ÓRDENES</h1>
               </div>
             </VBtn>
           </RouterLink>
