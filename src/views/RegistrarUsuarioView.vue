@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 
+<<<<<<< HEAD
 const Nombre = ref('');
 const Direccion = ref('');
 const Telefono = ref();
@@ -8,6 +9,22 @@ const Correo = ref('');
 const RFC = ref('');
 const Num_Seguro_Social = ref();
 const CURP = ref('');
+=======
+const nombre = ref('');
+const direccion = ref('');
+const numTelefono = ref('');
+const correo = ref('');
+const usuario = ref('');
+const numSeguroSocial = ref('');
+const curp = ref('');
+const Nombre = ref('');
+const Direccion = ref('');
+const Telefono = ref('');
+const Correo = ref('');
+const RFC = ref('');
+const Num_Seguro_Social = ref('');
+const Curp = ref('');
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
 const puestoPersona = ref('');
 const esCliente = computed(() => puestoPersona.value === 'cliente');
 const esEmpleado = computed(() => puestoPersona.value === 'empleado');
@@ -15,7 +32,14 @@ const esEmpleado = computed(() => puestoPersona.value === 'empleado');
 const Tipo_Cliente = ref('');
 const Nombre_empresa = ref('');
 
+<<<<<<< HEAD
 // Valor del campo de contraseña
+=======
+const tipoCliente = ref('');
+const nombreEmpresa = ref('');
+
+// Campos para usuario y contraseña
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
 const Usuario = ref('');
 const Contrasena = ref('');
 
@@ -31,6 +55,7 @@ const valid = ref(false);
 const form = ref(null);
 
 const submit = async () => {
+<<<<<<< HEAD
   if (valid.value && puestoPersona.value === 'empleado') {
     const data = {
       Nombre: Nombre.value,
@@ -45,12 +70,31 @@ const submit = async () => {
     };
     try {
       const response = await fetch('http://testpdo.com/registrousuario', {
+=======
+  if (form.value.validate()) {
+    const data = {
+      Usuario: Usuario.value,
+      Contrasena: Contrasena.value,
+      Direccion: Direccion.value,
+      Telefono: Telefono.value,
+      Correo: Correo.value,
+      RFC: RFC.value,
+      Num_Seguro_Social: Num_Seguro_Social.value,
+      Curp: Curp.value,
+      Tipo_Cliente: Tipo_Cliente.value,
+      Nombre_empresa: Nombre_empresa.value,
+    };
+
+    try {
+      const response = await fetch('http://testpdo.com/registroUsuarios', {
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
+<<<<<<< HEAD
       const responseText = await response.text();
       console.log('Respuesta del servidor:', responseText);
       try {
@@ -64,6 +108,31 @@ const submit = async () => {
         console.error('Error al analizar la respuesta como JSON:', error);
       }
     } catch (error) {
+=======
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Usuario registrado exitosamente', responseData);
+        alert('Registro exitoso');
+      } else {
+        const responseData = await response.json();
+        // Maneja los errores específicos del backend
+        if (responseData.message.includes('El nombre de usuario ya existe')) {
+          alert('Error: El nombre de usuario ya existe. Por favor, elige otro.');
+        } else if (responseData.message.includes('Ya existe un empleado con el mismo RFC')) {
+          alert('Error: Ya existe un empleado con el mismo RFC. El RFC debe ser único.');
+        } else if (responseData.message.includes('Ya existe un empleado con el mismo número de seguro social')) {
+          alert('Error: Ya existe un empleado con el mismo número de seguro social. El número de seguro social debe ser único.');
+        } else if (responseData.message.includes('Ya existe un empleado con la misma CURP')) {
+          alert('Error: Ya existe un empleado con la misma CURP. La CURP debe ser única.');
+        } else {
+          alert('Error al registrar el usuario. Por favor, inténtelo de nuevo.');
+          console.error('Error al registrar el usuario:', responseData);
+        }
+      }
+    } catch (error) {
+      alert('Error de red: No se pudo conectar con el servidor.');
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
       console.error('Error de red:', error);
     }
   }
@@ -128,6 +197,12 @@ const submit = async () => {
                   <v-text-field
                     variant="solo"
                     v-model="Usuario"
+<<<<<<< HEAD
+=======
+                    :rules="[v => !!v || 'Usuario es requerido']"
+                    label="Usuario"
+                    required
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
                   ></v-text-field>
                 </v-col>
                 <v-col>
@@ -142,6 +217,33 @@ const submit = async () => {
                 </v-col>
               </v-row>
 
+<<<<<<< HEAD
+=======
+              <v-text-field
+                v-model="Direccion"
+                :rules="[v => !!v || 'Dirección es requerida']"
+                label="Dirección"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="Telefono"
+                :rules="[v => !!v || 'Número de teléfono es requerido', v => /^\d+$/.test(v) || 'Solo se aceptan números', v => /^\d{10}$/.test(v) || 'El número de telefono debe tener 10 dígitos']"
+                label="Telefono"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="Correo"
+                :rules="[v => !!v || 'Correo electronico es requerido', v => /.+@.+\..+/.test(v) || 'El correo electrónico debe ser válido']"
+                label="Correo Electronico"
+                variant="solo"
+                required
+              ></v-text-field>
+
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
               <v-form v-if="esEmpleado" ref="form" v-model="valid">
                 <v-text-field
                   v-model="RFC"
@@ -158,12 +260,20 @@ const submit = async () => {
                 ></v-text-field>
 
                 <v-text-field
+<<<<<<< HEAD
                   v-model="CURP"
+=======
+                  v-model="Curp"
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
                   :rules="[v => !!v || 'CURP es requerida', v => v.length === 18 || 'CURP debe tener 18 caracteres', v => /^[A-Z0-9]{18}$/.test(v) || 'La CURP debe tener exactamente 18 caracteres y solo contener letras y números']"
                   label="CURP"
                   variant="solo"
                 ></v-text-field>
+<<<<<<< HEAD
               </v-form>  
+=======
+              </v-form>
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
 
               <v-form v-if="esCliente" ref="form" v-model="valid">
                 <v-select
@@ -175,7 +285,11 @@ const submit = async () => {
                 ></v-select>
 
                 <v-text-field
+<<<<<<< HEAD
                   v-if="Tipo_Cliente === 'Moral'"
+=======
+                  v-if="tipoCliente === 'Moral'"
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
                   v-model="Nombre_empresa"
                   :rules="[v => !!v || 'Nombre de la empresa es requerido']"
                   label="Nombre de la empresa"
@@ -186,7 +300,10 @@ const submit = async () => {
               <v-btn id="btn-registrar" :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
               </v-btn>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
             </v-form>
           </v-container>
         </v-card-text>
