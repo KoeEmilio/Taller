@@ -52,14 +52,18 @@ const submit = async () => {
       });
 
       const responseText = await response.text(); // Obtener la respuesta como texto
-      console.log('Respuesta del servidor:', responseText);
 
       try {
         const responseData = JSON.parse(responseText); // Intentar analizar como JSON
         if (response.ok) {
           console.log('Vehículo registrado exitosamente', responseData);
         } else {
-          console.error('Error al registrar el vehículo:', responseData);
+          // Manejo específico para el error de matrícula duplicada
+          if (responseData.message === 'Ya existe un vehículo con los mismos datos y matrícula. No se puede duplicar.') {
+            alert('Error: Ya existe un vehículo con los mismos datos y matrícula.');
+          } else {
+            console.error('Error al registrar el vehículo:', responseData);
+          }
         }
       } catch (error) {
         console.error('Error al analizar la respuesta como JSON:', error);
@@ -70,9 +74,16 @@ const submit = async () => {
   }
 };
 
+
+
+
 onMounted(() => {
   fetchPropietarios();
 });
+
+
+
+
 </script>
 
 <template>

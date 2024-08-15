@@ -1,119 +1,5 @@
-<template>
-
-
-  <v-app class="container">
-    <v-app-bar app color="#1a1a1a">
-        <router-link to="/MenuOrdenes">
-        <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
-        </router-link>
-        <h1 class="text-center w-100">DETALLAR ORDEN</h1>
-    </v-app-bar>
-
-    <v-form @submit.prevent="submit">
-      <!-- Formulario de Detalles de la Orden -->
-      <v-text-field
-        v-model="form.noOrden"
-        :error-messages="errors.noOrden"
-        label="Número de Orden"
-        class="form-field"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="form.fechaEntrega"
-        :error-messages="errors.fechaEntrega"
-        label="Fecha de Entrega"
-        class="form-field"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="form.servicioProporcionado"
-        :error-messages="errors.servicioProporcionado"
-        label="Servicio Proporcionado"
-        class="form-field"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="form.costoManoObra"
-        :error-messages="errors.costoManoObra"
-        label="Costo de Mano de Obra"
-        type="number"
-        step="0.01"
-        class="form-field"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="form.diasGarantia"
-        :error-messages="errors.diasGarantia"
-        label="Días de Garantía"
-        type="number"
-        step="1"
-        class="form-field"
-      ></v-text-field>
-
-      <!-- Formulario de Refacciones -->
-      <v-text-field
-        v-model="form.ordenID"
-        :error-messages="errors.ordenID"
-        label="Numero de Orden"
-        class="form-field"
-        type="number"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="form.nombreRefaccion"
-        :error-messages="errors.nombreRefaccion"
-        label="Nombre de Refacción"
-        class="form-field"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="form.marca"
-        :error-messages="errors.marca"
-        label="Marca de la Refaccion"
-        class="form-field"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="form.cantidad"
-        :error-messages="errors.cantidad"
-        label="Cantidad de Refacciones"
-        type="number"
-        class="form-field"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="form.precio"
-        :error-messages="errors.precio"
-        label="Precio de Refacciones"
-        type="number"
-        class="form-field"
-      ></v-text-field>
-
-      <v-select
-        v-model="form.comprador"
-        :error-messages="errors.comprador"
-        :items="compradores"
-        label="Comprador"
-        class="form-field"
-      ></v-select>
-
-      <v-btn type="submit" color="#1a1a1a" class="submit-btn">
-        Guardar Detalles
-      </v-btn>
-    </v-form>
-  </v-app>
-</template>
-
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-
-
-const router = useRouter()
+import { ref, onMounted } from 'vue';
 
 const form = ref({
   noOrden: '',
@@ -127,119 +13,87 @@ const form = ref({
   cantidad: '',
   precio: '',
   comprador: '',
-})
+});
 
-const errors = ref({
-  noOrden: [],
-  fechaEntrega: [],
-  servicioProporcionado: [],
-  costoManoObra: [],
-  diasGarantia: [],
-  ordenID: [],
-  nombreRefaccion: [],
-  marca: [],
-  cantidad: [],
-  precio: [],
-  comprador: [],
-})
+const compradores = ref(['Cliente', 'Taller']);
+const servicios = ref([]);
+const ordenes = ref([]);
 
-const validateForm = () => {
-  let isValid = true
-  errors.value = {
-    noOrden: [],
-    fechaEntrega: [],
-    servicioProporcionado: [],
-    costoManoObra: [],
-    diasGarantia: [],
-    ordenID: [],
-    nombreRefaccion: [],
-    marca: [],
-    cantidad: [],
-    precio: [],
-    comprador: [],
+// Obtener la lista de servicios disponibles
+const fetchServicios = async () => {
+  try {
+    const response = await fetch('/api/servicios', {
+      method: 'GET',
+    });
+    const data = await response.json();
+    if (response.ok) {
+      servicios.value = data.servicios;
+    } else {
+      alert('Error al obtener servicios: ' + data.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
   }
+};
 
-  if (!form.value.noOrden) {
-    errors.value.noOrden.push('El número de orden es requerido.')
-    isValid = false
+// Obtener la lista de órdenes disponibles
+const fetchOrdenes = async () => {
+  try {
+    const response = await fetch('/api/ordenes', {
+      method: 'GET',
+    });
+    const data = await response.json();
+    if (response.ok) {
+      ordenes.value = data.ordenes;
+    } else {
+      alert('Error al obtener órdenes: ' + data.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
   }
+};
 
-  if (!form.value.fechaEntrega) {
-    errors.value.fechaEntrega.push('La fecha de entrega es requerida.')
-    isValid = false
+// Ejecutar fetchServicios y fetchOrdenes cuando el componente se monte
+onMounted(() => {
+  fetchServicios();
+  fetchOrdenes();
+});
+
+const submit = async () => {
+  const datosRegistro = {
+    noOrden: form.value.noOrden,
+    fechaEntrega: form.value.fechaEntrega,
+    servicioProporcionado: form.value.servicioProporcionado,
+    costoManoObra: form.value.costoManoObra,
+    diasGarantia: form.value.diasGarantia,
+    ordenID: form.value.ordenID,
+    nombreRefaccion: form.value.nombreRefaccion,
+    marca: form.value.marca,
+    cantidad: form.value.cantidad,
+    precio: form.value.precio,
+    comprador: form.value.comprador,
+  };
+
+  try {
+    const response = await fetch('/api/detalle-orden', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datosRegistro),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      alert('Registro exitoso');
+      resetForm();
+    } else {
+      console.error('Error en el registro');
+    }
+  } catch (error) {
+    console.error('Error al conectar con el servidor:', error);
   }
-
-  if (!form.value.servicioProporcionado) {
-    errors.value.servicioProporcionado.push(
-      'El servicio proporcionado es requerido.'
-    )
-    isValid = false
-  }
-
-  const costoManoObra = parseFloat(form.value.costoManoObra)
-  if (isNaN(costoManoObra) || costoManoObra <= 0) {
-    errors.value.costoManoObra.push(
-      'El costo de mano de obra es requerido y debe ser un número positivo.'
-    )
-    isValid = false
-  }
-
-  const diasGarantia = parseFloat(form.value.diasGarantia)
-  if (isNaN(diasGarantia) || diasGarantia <= 0) {
-    errors.value.diasGarantia.push(
-      'Los días de garantía son requeridos y deben ser un número positivo.'
-    )
-    isValid = false
-  }
-
-  if (!form.value.ordenID) {
-    errors.value.ordenID.push('El numero de la orden es requerido.')
-    isValid = false
-  }
-
-  if (!form.value.nombreRefaccion) {
-    errors.value.nombreRefaccion.push(
-      'El nombre de la refacción es requerido.'
-    )
-    isValid = false
-  }
-
-  if (!form.value.marca) {
-    errors.value.marca.push('La marca es requerida.')
-    isValid = false
-  }
-
-  const cantidad = parseInt(form.value.cantidad)
-  if (isNaN(cantidad) || cantidad < 0) {
-    errors.value.cantidad.push('La cantidad debe ser un número positivo.')
-    isValid = false
-  }
-
-  const precio = parseFloat(form.value.precio)
-  if (isNaN(precio) || precio < 0) {
-    errors.value.precio.push('El precio debe ser un número positivo.')
-    isValid = false
-  }
-
-  if (!form.value.comprador) {
-    errors.value.comprador.push('El comprador es requerido.')
-    isValid = false
-  }
-
-  return isValid
-}
-
-const submit = () => {
-  if (validateForm()) {
-    alert('Registro exitoso')
-    resetForm()
-    router.push('/InfoClientes') 
-  } else {
-    alert(
-      'Algo salió mal con el registro, inténtalo de nuevo y asegúrate de ingresar cada dato correctamente.'
-    )
-  }
-}
+};
 
 const resetForm = () => {
   form.value = {
@@ -254,79 +108,171 @@ const resetForm = () => {
     cantidad: '',
     precio: '',
     comprador: '',
-  }
-  errors.value = {
-    noOrden: [],
-    fechaEntrega: [],
-    servicioProporcionado: [],
-    costoManoObra: [],
-    diasGarantia: [],
-    ordenID: [],
-    nombreRefaccion: [],
-    marca: [],
-    cantidad: [],
-    precio: [],
-    comprador: [],
-  }
-}
-
-
-const compradores = ref(['Cliente', 'Taller'])
+  };
+};
 </script>
 
+<template>
+  <v-app>
+    <v-app-bar app color="#1a1a1a" dark>
+      <router-link to="MenuPrincipal">
+        <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
+      </router-link>
+      <h1 class="text-center w-100">REGISTRAR DETALLE</h1>
+    </v-app-bar>
+
+    <div class="container">
+      <v-card class="Card">
+        <v-card-text>
+          <v-container>
+            <v-form @submit.prevent="submit">
+              <div class="form-group">
+                <label for="noOrden">Seleccionar Número de Orden</label>
+                <select id="noOrden" v-model="form.noOrden">
+                  <option value="" disabled selected>Seleccione una orden</option>
+                  <option v-for="orden in ordenes" :key="orden.id" :value="orden.id">
+                    Orden #{{ orden.id }} - {{ orden.descripcion }}
+                  </option>
+                </select>
+              </div>
+
+              <v-text-field
+                v-model="form.fechaEntrega"
+                label="Fecha de Entrega"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <div class="form-group">
+                <label for="servicioRealizado">Servicio Realizado</label>
+                <select id="servicioRealizado" v-model="form.servicioProporcionado">
+                  <option value="" disabled selected>Seleccione un servicio</option>
+                  <option v-for="servicio in servicios" :key="servicio.id" :value="servicio.value">
+                    {{ servicio.text }}
+                  </option>
+                </select>
+              </div>
+
+              <v-text-field
+                v-model="form.costoManoObra"
+                label="Costo de Mano de Obra"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="form.diasGarantia"
+                label="Días de Garantía"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="form.nombreRefaccion"
+                label="Nombre de Refacción"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="form.marca"
+                label="Marca de Refacción"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="form.cantidad"
+                label="Cantidad"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="form.precio"
+                label="Precio"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <div class="form-group">
+                <label for="comprador">Comprador</label>
+                <select id="comprador" v-model="form.comprador">
+                  <option value="" disabled selected>Seleccione un comprador</option>
+                  <option v-for="comprador in compradores" :key="comprador" :value="comprador">
+                    {{ comprador }}
+                  </option>
+                </select>
+              </div>
+
+              <v-btn color="#1a1a1a" @click="submit">
+                Registrar
+              </v-btn>
+            </v-form>
+          </v-container>
+        </v-card-text>
+      </v-card>
+    </div>
+  </v-app>
+</template>
+
 <style scoped>
-#fondo-video {
-  position: fixed;
-  width: 100%;
+html, body, #app {
   height: 100%;
-  top: 0;
-  left: 0;
-  object-fit: cover;
-  z-index: -1;
+  margin: 0;
 }
 
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
-  padding-top: 80px; 
-  background-color: rgba(255, 255, 255, 10); /* Fondo blanco semi-transparente */
-  border-radius: 8px; /* Bordes redondeados */
-}
-
-.header {
-  background-color:#1a1a1a;
-  color: white;
-  padding: 16px;
   display: flex;
+  height: 100%;
+  justify-content: center;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  height: 64px;
+  background-color: gray;
+  padding: 20px;
 }
 
+.Card {
+  width: 100%;
+  max-width: 600px;
+  background-color: rgb(223, 223, 223);
+  padding: 20px;
+  border-radius: 8px;
+}
 
-.header-text {
-  flex-grow: 1;
+#titulo {
+  background-color: #1a1a1a;
+  color: white;
   text-align: center;
-  font-weight: bold;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-radius: 8px;
 }
 
-.back-btn {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.form-field {
+.form-group {
   margin-bottom: 16px;
 }
 
-.submit-btn {
-  margin-top: 16px;
+select,
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+  .Card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Card {
+    padding: 12px;
+  }
 }
 </style>
