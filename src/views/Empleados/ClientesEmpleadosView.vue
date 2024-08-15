@@ -18,7 +18,6 @@ onMounted(() => {
   mostrarinfo();
 });
 
-const showFormulario = ref(false);
 const showEditFormulario = ref(false);
 
 const selectedCliente = ref({
@@ -26,12 +25,9 @@ const selectedCliente = ref({
   Correo: '',
   Telefono: '',
   Tipo: '',
-  PersonaID: '' // Asegúrate de incluir PersonaID
+  PersonaID: '' 
 });
 
-const mostrarFormulario = () => {
-  showFormulario.value = !showFormulario.value;
-};
 
 const mostrarEditFormulario = (cliente) => {
   selectedCliente.value = { ...cliente };
@@ -153,9 +149,9 @@ const headers = [
 
 #guindo-btn {
   background-color: #1a1a1a;
-  color: white; /* Color del icono */
-  margin-left: 10px; /* Margen izquierdo */
-  border-radius: 30%; /* Redondear el botón */
+  color: white;
+  margin-left: 10px; 
+  border-radius: 30%; 
 }
 
 .BtnGuindo {

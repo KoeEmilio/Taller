@@ -1,16 +1,17 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { computed } from 'vue';
+import { onMounted, ref,computed } from 'vue';
 
 
 
 const dialog = ref(false)
 const valorDialog = ref()
 const estadoEstatus = ref('Pendiente')
+const selectedIndex = ref(null);
 
-const MostrarDialog = (pago) => {
-  valorDialog.value = pago
+const MostrarDialog = (pago, index) => {
+  valorDialog.value = { ...pago }
   estadoEstatus.value = pago.Estatus_del_pago; 
+  selectedIndex.value = index;
 
   if (dialog.value === false) {
     dialog.value = true
@@ -20,18 +21,20 @@ const MostrarDialog = (pago) => {
   }
 }
 
-// Métodos para cambiar el estado del estatus
+// cambiar el estado del estatus
 const liberarPago = () => {
-  estadoEstatus.value = 'Pagado';
+  if (selectedIndex.value !== null) {
+    datos.value[selectedIndex.value].Estatus_del_pago = 'Pagado';
+    estadoEstatus.value = 'Pagado';
+  }
 }
 
 const cancelarPago = () => {
-  estadoEstatus.value = 'Cancelado';
+  if (selectedIndex.value !== null) {
+    datos.value[selectedIndex.value].Estatus_del_pago = 'Cancelado';
+    estadoEstatus.value = 'Cancelado';
+  }
 }
-
-
-
-
 
 
 
@@ -110,7 +113,7 @@ const filteredDatos = computed(() => {
                       <br>
                       <br>
                       <v-row class="scrolling-row"> 
-                        <h5 @click="MostrarDialog(pago)"  title="Toca para ver más." class="servicios"> Servicio(s): {{ pago.Servicios }} </h5>
+                        <h5 @click="MostrarDialog(pago, index)"  title="Toca para ver más." class="servicios"> Servicio(s): {{ pago.Servicios }} </h5>
                       </v-row>
                       <br>
                       <br>
@@ -164,15 +167,15 @@ const filteredDatos = computed(() => {
                         </v-row>
                         <br>
                         <br>
-                          <p>Fecha: {{ valorDialog.Fecha }}</p>
+                          <h4>Fecha: {{ valorDialog.Fecha }}</h4>
                           <br>
-                          <p>Servicios: {{ valorDialog.Servicios }}</p>
+                          <h4>Servicios: {{ valorDialog.Servicios }}</h4>
                           <br>
-                          <p>Forma de pago: {{ valorDialog.Forma_Pago }}</p>
+                          <h4>Forma de pago: {{ valorDialog.Forma_Pago }}</h4>
                           <br>
-                          <p>Monto: {{ valorDialog.Cantidad_Total }}</p>
+                          <h4>Monto: {{ valorDialog.Cantidad_Total }}</h4>
                           <br>
-                          <p>Estado de pago: {{ valorDialog.Estatus_del_pago }}</p>
+                          <h4 class="estatus">Estado de pago: <h4 :class="['estatus', estadoEstatus.toLowerCase()]"> &nbsp; {{ valorDialog.Estatus_del_pago }} </h4> </h4>
                       </v-col>
                     </v-row>
                     
@@ -231,6 +234,7 @@ const filteredDatos = computed(() => {
 }
 
 .estatus{
+  display: flex;
   border-radius: 10px;
   margin-top: 2px;
   color: black;
