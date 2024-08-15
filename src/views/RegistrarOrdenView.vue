@@ -19,13 +19,6 @@
               <v-date-input label="Fecha de Ingreso"></v-date-input>
 
               <div>
-                <label for="horarioSeleccionado">Ingrese una hora:</label>
-                <select id="horarioSeleccionado">
-                  <option value="" disabled selected>Seleccione un horario:</option>
-                </select>
-              </div>
-
-              <div>
                 <label for="empleado">Seleccione un empleado:</label>
                 <select id="empleado">
                   <option value="" disabled selected>Seleccione un empleado</option>
