@@ -23,8 +23,10 @@ const showEditFormulario = ref(false);
 const selectedVehiculo = ref({
   Marca: '',
   Modelo: '',
-  Año: '',
-  Placa: '',
+  Anio: '',
+  Matricula:'',
+  Color: '',
+  Tipo_de_Transmision:'',
   Propietario: '',
   VehiculoID: ''
 });
@@ -60,8 +62,10 @@ const editarVehiculo = async () => {
 const headers = [
   { text: 'Marca', value: 'Marca' },
   { text: 'Modelo', value: 'Modelo' },
-  { text: 'Año', value: 'Año' },
-  { text: 'Placa', value: 'Placa' },
+  { text: 'Anio', value: 'Anio' },
+  { text: 'Matricula', value: 'Matricula' },
+  { text: 'Color', value: 'Color' },
+  { text: 'Tipo_de_Transmision', value: 'Tipo_de_Transmision' },
   { text: 'Propietario', value: 'Propietario' },
   { text: 'Acciones', value: 'action', sortable: false }
 ];
@@ -73,7 +77,7 @@ const headers = [
       <router-link to="Vehiculos">
         <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="text-center w-100">VEHÍCULOS REGISTRADOS</h1>
+      <h1 class="titulo-vehiculos text-center w-100">VEHÍCULOS REGISTRADOS</h1>
     </v-app-bar>
 
     <v-main>
@@ -98,7 +102,6 @@ const headers = [
             <template v-slot:[`item.action`]="{ item }">
               <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
                 <v-icon left>mdi-pencil</v-icon> 
-                Editar
               </v-btn>
             </template>
           </v-data-table>
@@ -111,9 +114,11 @@ const headers = [
               <v-card-text class="scrollable-content">
                 <v-text-field label="Marca" v-model="selectedVehiculo.Marca"></v-text-field>
                 <v-text-field label="Modelo" v-model="selectedVehiculo.Modelo"></v-text-field>
-                <v-text-field label="Año" v-model="selectedVehiculo.Año" type="number"></v-text-field>
-                <v-text-field label="Placa" v-model="selectedVehiculo.Placa"></v-text-field>
-                <v-text-field label="Propietario" v-model="selectedVehiculo.Propietario"></v-text-field>
+                <v-text-field label="Año" v-model="selectedVehiculo.Anio" type="number"></v-text-field>
+                <v-text-field label="Matricula" v-model="selectedVehiculo.Matricula"></v-text-field>
+                <v-text-field label="Color" v-model="selectedVehiculo.Color"></v-text-field>
+                <v-text-field label="Tipo_de_Transmision" v-model="selectedVehiculo.Tipo_de_Transmision"></v-text-field>
+                
                 <v-btn color="#1a1a1a" @click="editarVehiculo">
                   <v-icon left>mdi-content-save</v-icon> 
                   Guardar
@@ -138,5 +143,17 @@ const headers = [
 
 .v-data-table {
   margin-top: 10px;
+}
+
+.titulo-vehiculos{
+  font-size: 20px;
+  padding-right: 40px;
+}
+
+@media (min-width: 768px) {
+  .titulo-vehiculos{
+  font-size: 40px;
+  align-items: center;
+}
 }
 </style>

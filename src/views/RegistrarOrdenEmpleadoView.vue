@@ -108,7 +108,7 @@ onMounted(() => {
 <template>
   <v-app>
     <VAppBar app color="#1a1a1a" dark>
-      <router-link to="MenuOrdenesEmpleado">
+      <router-link to="MenuPrincipal">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
       <h1 class="text-center w-100">REGISTRAR ORDEN</h1>
@@ -211,3 +211,4 @@ select, input[type="text"] {
   border: 1px solid #ccc;
 }
 </style>
+

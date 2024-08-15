@@ -12,7 +12,7 @@
             icon="mdi-arrow-left-bold-circle-outline"
         ></v-btn>
         </router-link>
-        <h1 class="text-center w-100">VER DETALLE</h1>
+        <h1 class="titulo-detalle text-center w-100">VER DETALLE</h1>
     </v-app-bar>
     <v-container></v-container>
     <v-container></v-container>
@@ -29,5 +29,14 @@
     </v-app>
 </template>
 <style scoped>
+.titulo-detalle{
+  padding-right: 40px;
+}
 
+@media (min-width: 768px) {
+  .titulo-detalel{
+  font-size: 40px;
+  align-items: center;
+}
+}
 </style>

@@ -36,6 +36,7 @@ mostrarinfo()
 </script>
 
 <template>
+<<<<<<< HEAD
 <div >
 
 
@@ -89,6 +90,32 @@ mostrarinfo()
         </v-app>
     </div>   
 </div>                  
+=======
+    <v-app>
+    <v-app-bar app color="#1a1a1a" dark>
+        <router-link to="MenuOrdenes">
+        <v-btn
+            class="ma-3"
+            color="white"
+            icon="mdi-arrow-left-bold-circle-outline"
+        ></v-btn>
+        </router-link>
+        <h1 class="texto-ordenes text-center w-100">VER ORDEN</h1>
+    </v-app-bar>
+    <v-container></v-container>
+    <v-container></v-container>
+    <v-card>
+    <template v-slot:text>
+    </template>
+
+    <v-data-table
+    :headers="headers"
+    :items="desserts"
+    :search="search"
+    ></v-data-table>
+</v-card>
+    </v-app>
+>>>>>>> 037e688da7eb67310e608f5f1398142b320b4695
 </template>
 
 <style scoped>
@@ -132,5 +159,15 @@ mostrarinfo()
 .BtnGuindo{
     background-color: #1a1a1a;
     color: white ;
+}
+
+.texto-ordenes{
+  padding-right: 40px;
+}
+
+@media (min-width: 768px) {
+  .texto-ordenes{
+  align-items: center;
+}
 }
 </style>

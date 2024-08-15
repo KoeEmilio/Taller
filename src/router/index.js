@@ -45,6 +45,8 @@ import PagosEmpleadosView from '@/views/PagosEmpleadosView.vue'
 import VerOrdenesEmpleadosView from '@/views/VerOrdenesEmpleadosView.vue'
 import VerDetalleEmpleadoView from '@/views/VerDetalleEmpleadoView.vue'
 
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
