@@ -44,183 +44,158 @@ export default {
       this.showDialog = false;
     },
     submitForm() {
-  if (this.selectedDate && this.selectedTime) {
-    alert(`Cita agendada para el ${this.selectedDate} a las ${this.selectedTime}`);
-    this.closeDialog();
-  } else {
-    alert("Por favor, completa todos los campos.");
-  }
-}
-
+      if (this.selectedDate && this.selectedTime) {
+        alert(`Cita agendada para el ${this.selectedDate} a las ${this.selectedTime}`);
+        this.closeDialog();
+      } else {
+        alert("Por favor, completa todos los campos.");
+      }
     }
   }
+}
 </script>
 
 <template>
-
   <div class="page-container"> 
-            <header id="inicio">
-  
-              <div class="header__contenedor">
-                  <div class="contenedor__imagen" >
-                    <v-img id="logo" src="src/img/logo blanco.png" @click="clicklogo"> </v-img>
-                  </div>
-                  <div class="navegacion">
-                    <v-btn variant="plain" class="navegacion__letras" @click="clicklogo">Inicio</v-btn>
-                    <v-btn variant="plain" class="navegacion__letras" @click="clickconocenos">Conocenos</v-btn>
-                    <v-btn variant="plain" class="navegacion__letras" @click="clickcitas">Citas</v-btn>
-                    <v-btn variant="plain" class="navegacion__letras" @click="clickcontacto">Contacto</v-btn>
-                  </div>
-                <div class="usuario">
-  
-                    <a  href="#" class="usuario__icon">
-                      <router-link to="/Login" >
-                            <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                            </svg>
-                      </router-link>
-                    </a> 
-  
-  
-  
-              </div>
+    <header id="inicio">
+      <div class="header__contenedor">
+        <div class="contenedor__imagen">
+          <v-img id="logo" src="src/img/logo blanco.png" @click="clicklogo"></v-img>
+        </div>
+        <div class="navegacion">
+          <v-btn variant="plain" class="navegacion__letras" @click="clicklogo">Inicio</v-btn>
+          <v-btn variant="plain" class="navegacion__letras" @click="clickconocenos">Conocenos</v-btn>
+          <v-btn variant="plain" class="navegacion__letras" @click="clickcitas">Citas</v-btn>
+          <v-btn variant="plain" class="navegacion__letras" @click="clickcontacto">Contacto</v-btn>
+        </div>
+        <div class="usuario">
+          <a href="#" class="usuario__icon">
+            <router-link to="/Login">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+              </svg>
+            </router-link>
+          </a> 
+        </div>
+      </div>
+
+      <div class="somos">
+        <h2>EN</h2>
+        <h2>DE LA ROSA MOTORS</h2>
+        <h2>SOMOS TU MEJOR</h2>
+        <h2>OPCIÓN</h2>
+      </div>
+    </header>
+
+    <main class="contenedor">
+      <section class="servicios">
+        <div class="servicios__informacion">
+          <div class="servicios_informacion_texto">
+            <h2 class="informacion-titulo centrar-texto">AQUÍ EN DE LA ROSA MOTORS SOMOS EXPERTOS EN AUTOS.</h2>
+            <ul class="servicios_informacion_texto--lista">
+              <li>Mecánica en general</li>
+              <li>Afineaciones</li>
+              <li>Frenos</li>
+              <li>Suspensiones</li>
+              <li>Transmisiones y direcciones</li>
+              <li>Reparación de motores</li>
+              <li>Clutch</li>
+              <li>Distribución</li>
+              <li>Fuel injection</li>
+              <li>Servicio de escáner</li>
+              <li>Restauración de motores</li>
+            </ul>
+          </div>
+          <div class="informacion__imagen">
+            <img src="@/img/image.png" alt="informacion-imagen">
+          </div>
+        </div>
+      </section>
+
+      <section id="conocenos">
+        <div class="contenedor-conocenos">
+          <h1 class="centrar-texto">CONOCE UN POCO DE NUESTRA HISTORIA...</h1>
+          <p class="texto-principal centrar-texto">
+            La historia comienza en 1978 con un joven Manuel De La Rosa...
+          </p>
+        </div>
+        <div class="contenedor__imagenes_taller">
+          <img class="imagen_taller" src="@/img/taller1.jpeg" alt="">
+          <img class="imagen_taller" src="@/img/taller2.jpeg" alt="">
+          <img class="imagen_taller" src="@/img/taller3.jpeg" alt="">
+        </div>
+      </section>
+
+      <section id="citas">
+        <div class="cita__contenedor">
+          <div class="cita__contenedor--texto">
+            <h1 class="titulo-cita centrar-texto">Agenda Tu Cita</h1>
+            <p class="centrar-texto">Agenda una cita con Nosotros</p>
+            <p class="centrar-texto">Tenemos estos Horarios Disponibles:</p>
+            <p class="centrar-texto">De 3 p.m a 5 p.m</p>
+            <div class="contenedor-boton">
+              <v-btn class="boton-agendar" @click="openDialog">Agendar Cita</v-btn>
             </div>
-  
-            <div class="somos">
-                          <h2>EN</h2>
-                          <h2>DE LA ROSA MOTORS </h2>
-                          <h2 >SOMOS TU MEJOR</h2>
-                          <h2>OPCIÓN</h2>
-                        </div>
-          </header>
-  
-            <main class="contenedor">
-  
-                <section class="servicios">
-  
-                <div class="servicios__informacion">
-                  <div class="servicios_informacion_texto">
-                  <h2 class="informacion-titulo centrar-texto">AQUÍ EN DE LA ROSA MOTORS SOMOS EXPERTOS EN AUTOS.</h2>
-                  <ul class="servicios_informacion_texto--lista">
-                    <li>Mecánica en general</li>
-                    <li>Afineaciones</li>
-                    <li>Frenos</li>
-                    <li>Suspensiones</li>
-                    <li>Transmisiones y direcciones</li>
-                    <li>Reparación de motores</li>
-                    <li>Clutch</li>
-                    <li>Distribución</li>
-                    <li>Fuel injection</li>
-                    <li>Servicio de escáner</li>
-                    <li>Restauración de motores</li>
-                  </ul>
-                </div>
-                  <div class="informacion__imagen">
-                    <img  src="@/img/image.png" alt="informacion-imagen">
-                  </div>
-              </div>
-            </section>
-  
-  
-  
-              <section id="conocenos">
-  
-  
-                <div class="contenedor-conocenos">
-  
-                        <h1 class="centrar-texto">CONOCE UN POCO DE NUESTRA HISTORIA...</h1>
-  
-                        <p class="texto-principal centrar-texto">
-                          La historia comienza en 1978 con un joven Manuel De La Rosa.
-                          Para sacar adelante a su familia con sus habilidades en atención al detalle, dando soluciones a pequeñas reparaciones de automóviles y motocicletas,
-                          así como la resolución de complejos problemas electrónicos con un enfoque amigable, flexible y adaptable en su propio taller mecánico.
-                          Desde entonces, se han enfocado en ofrecer servicios de reparación, revisiones generales, asistencia en carretera y mantenimiento preventivo.
-                        </p>
-                        <p class="texto-principal centrar-texto">
-                          Con el paso del tiempo, y el arduo trabajo y dedicación, fueron ganando prestigio en la comunidad.
-                          Siguiendo el ejemplo de su fundador, sus hijos decidieron formarse en mecánica automotriz para continuar con el legado de su padre.
-                          Hoy en día, los hijos de Manuel De La Rosa,
-                          habiendo aprendido todas sus habilidades y contando con conocimientos en nuevas tecnologías,
-                          están al frente del negocio ofreciendo soluciones eficientes y manteniendo la misma atención al detalle que caracterizaba a su padre.
-                        </p>
-                  </div>
-  
-  
-  
-                  <div class="contenedor__imagenes_taller">
-                    <img class="imagen_taller" src="@/img/taller1.jpeg" alt="">
-                    <img class="imagen_taller" src="@/img/taller2.jpeg" alt="">
-                    <img class="imagen_taller" src="@/img/taller3.jpeg" alt="">
-                      </div>
-              </section>
-  
-  
-  
-              <section id="citas">
-                  <div class="cita__contenedor">
-                    <div class="cita__contenedor--texto">
-                      <h1 class="titulo-cita centrar-texto">Agenda Tu Cita</h1>
-                      <p class="centrar-texto">Agenda una cita con Nosotros</p>
-                      <p class="centrar-texto">Tenemos estos Horarios Disponibles:</p>
-                      <p class="centrar-texto">De 3 p.m a 5 p.m</p>
-                      <div class="contenedor-boton">
-                      <v-btn class="boton-agendar" @click="openDialog">Agendar Cita</v-btn>
-                    </div>
-                    <p class="informacion-cita">Para poder hacer una cita tienes que tener un perfil creado en la pagina, si necesitas mas informacion por favor contactanos</p>
-                  </div>
-  
-                  <div class="contenedor__imagen--cita">
-                    <img src="@/img/car-parts-repair-garage.jpg" alt="">
-                  </div>
-  
-                </div>
-                </section>
-  
-  
-        <section id="contactos">
-  
-                <h1 class=" titulo-c centrar-texto"> Contacto</h1>
-              <div class="contacto">
-                <div class="contacto__informacion">
-                  <div class="contacto__informacion--texto">
-                  <p class="contacto-titulo">Direccion</p>
-                  <p>Tlahuacas 290, Santa María, 27020, Torreón, Coah.</p>
-                </div>
-                <div class="contacto__informacion--texto">
-                  <p class="contacto-titulo">Correo Electronico</p>
-                  <p>Delarosamotors@gmail.com</p>
-                </div>
-                  <div class="contacto__informacion--texto">
-                  <p class="contacto-titulo">Telefonos</p>
-                  <p>871-896-7175</p>
-                  <p>871-220-1575</p>
-                </div>
-                  <div class="contacto__informacion--texto">
-                  <p class="contacto-titulo">Horarios</p>
-                  <p>Lunes-Viernes: 10:30 AM a 6:00 PM</p>
-                  <p>Sabado: 10:30 AM a 1:00 PM</p>
-                </div>
-                </div>
-  
-                <div class="contacto__mapa">
-                  <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d899.8647938548273!2d-103.42430253048818!3d25.55638590848562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868fdbb4681aac8b%3A0x1649ebebea998f9!2sTlahuacas%20220%2C%20Santa%20Mar%C3%ADa%2C%2027020%20Torre%C3%B3n%2C%20Coah.!5e0!3m2!1ses-419!2smx!4v1722271861156!5m2!1ses-419!2smx" width="300" height="300" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-              </div>
-  
-         </section>
-  
-            </main>
-  
-            <footer class="footer">
-                  <div class="contenedor__footer">
-                    <h3  class="centrar-texto"> CONTACTANOS</h3>
-                    <h3  class="centrar-texto"> Telefono: 871-220-1575</h3>
-                    <h3  class="centrar-texto"> Correo: Delarosamotors@gmail.com</h3>
-                  </div>
-              </footer>
-  
+            <p class="informacion-cita">Para poder hacer una cita tienes que tener un perfil creado en la página. Si necesitas más información por favor contáctanos.</p>
+          </div>
+          <div class="contenedor__imagen--cita">
+            <img src="@/img/car-parts-repair-garage.jpg" alt="">
+          </div>
+        </div>
+      </section>
+
+      <section id="contactos">
+        <h1 class="titulo-c centrar-texto">Contacto</h1>
+        <div class="contacto">
+          <div class="contacto__informacion">
+            <div class="contacto__informacion--texto">
+              <p class="contacto-titulo">Dirección</p>
+              <p>Tlahuacas 290, Santa María, 27020, Torreón, Coah.</p>
+            </div>
+            <div class="contacto__informacion--texto">
+              <p class="contacto-titulo">Correo Electrónico</p>
+              <p>Delarosamotors@gmail.com</p>
+            </div>
+            <div class="contacto__informacion--texto">
+              <p class="contacto-titulo">Teléfonos</p>
+              <p>871-896-7175</p>
+              <p>871-220-1575</p>
+            </div>
+            <div class="contacto__informacion--texto">
+              <p class="contacto-titulo">Horarios</p>
+              <p>Lunes-Viernes: 10:30 AM a 6:00 PM</p>
+              <p>Sábado: 10:30 AM a 1:00 PM</p>
+            </div>
+          </div>
+          <div class="contacto__mapa">
+            <iframe class="mapa" src="https://www.google.com/maps/embed?pb=..."></iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="contenedor__footer">
+        <div class="contenedor__texto">
+          <h3 class="texto-footer centrar-texto">CONTACTANOS</h3>
+          <h3 class="texto-footer centrar-texto">Telefono: 871-220-1575</h3>
+          <h3 class="texto-footer centrar-texto">Correo: Delarosamotors@gmail.com</h3>
+        </div>
+        <div class="footer-redes">
+          <h3 class="titulo-redes">Nuestras Redes Sociales</h3>
+          <a href="https://www.facebook.com/profile.php?id=100064141721206" class="contenedor-letras-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="30" height="30" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+            </svg>
+            <p class="letras-redes">FACEBOOK</p>
+          </a>
+        </div>
+        <p class="derechos"> Derechos Reservados 2024 ®</p>
+      </div>
+    </footer>
   </div>
   
   <!-- Modal de agendar cita -->
@@ -247,8 +222,6 @@ export default {
                 required>
               </v-select>
             </v-col>
-            <v-col cols="12">
-            </v-col>
           </v-row>
         </v-container>
       </v-card-text>
@@ -259,12 +232,10 @@ export default {
       </v-card-actions>
     </v-card>
   </v-dialog>
-  
-  </template>
-  
+</template>
 
 <style scoped>
- /** Globales **/
+ /* Globales */
  main {
   flex: 1;
 }
@@ -301,7 +272,7 @@ export default {
   padding-bottom: 60px; /* Espacio para el footer */
 }
 /* --------------------------------------------------------------------------- */
-/* Headwer */
+/* Header */
 .contenedor__imagen{
   height: 90px;
   margin:10px;
@@ -312,7 +283,7 @@ export default {
 }
 #logo {
   height: 120px;
-  width: 100x;
+  width: 70px;
 }
 @media (min-width: 768px) {
   .contenedor__imagen{
@@ -326,33 +297,33 @@ export default {
 }
 #inicio{
   background-image: url(@/img/tools-tool-tray-repairing-cars.jpg);
-    height: 600px;
-    width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-   padding-bottom:30px;
+  height: 600px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding-bottom:30px;
 }
 @media (min-width: 768px) {
   .header{
-  background-image: url(@/img/tools-tool-tray-repairing-cars.jpg);
+    background-image: url(@/img/tools-tool-tray-repairing-cars.jpg);
     height: 600px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-   padding-bottom:30px;
-}
+    padding-bottom:30px;
+  }
 }
 .header__contenedor{
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns:1fr 3fr 1fr ;
-    width: 100%;
-    align-items: center;
-    background-color:#1A1A1A;
-    position: fixed;
- }
- .navegacion {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns:1fr 3fr 1fr;
+  width: 100%;
+  align-items: center;
+  background-color:#1A1A1A;
+  position: fixed;
+}
+.navegacion {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -361,22 +332,22 @@ export default {
 }
 @media (min-width:768px) {
   .navegacion {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
   }
 }
- .navegacion__letras{
+.navegacion__letras{
   text-align: center;
   color: white;
   font-weight: 700;
   font-size: 20px;
   padding: 5px;
   cursor: pointer;
- }
- .navegacion__letras:hover{
+}
+.navegacion__letras:hover{
   cursor: pointer;
   background-color: white;
   color: black;
@@ -384,10 +355,10 @@ export default {
 .usuario{
   display: grid;
   grid-template-columns: repeat(3,1fr);
- }
- .usuario__icon:hover{
+}
+.usuario__icon:hover{
   cursor: pointer;
- }
+}
 .usuario__icon{
   max-width:60px;
   grid-column: 3 / 4;
@@ -403,13 +374,13 @@ export default {
 @media (min-width: 768px) {
   .somos{
     color: white;
-  padding-top: 250px;
-  padding-left: 50px;
-    }
+    padding-top: 250px;
+    padding-left: 50px;
+  }
 }
 
 .servicios{
-padding-top:120px ;
+  padding-top:120px;
 }
 .informacion-titulo{
   font-size: 25px;
@@ -425,30 +396,31 @@ padding-top:120px ;
 }
 @media (min-width: 768px) {
   .servicios__informacion{
-  background-color: #1A1A1A;
-  color: white;
-  display: grid;
-  font-size: 20px;
-  padding-left: 30px;
-  grid-template-columns: repeat(2,1fr);
-  gap: 20px;
-  padding-bottom: 120px;
+    background-color: #1A1A1A;
+    color: white;
+    display: grid;
+    font-size: 20px;
+    padding-left: 30px;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+    padding-bottom: 120px;
+  }
 }
-}
-.servicios__informacion__texto--lista{
+
+.servicios_informacion_texto--lista{
   padding-left: 20px;
   padding-top:10px; 
   font-size: 20px;
 }
 .informacion__imagen{
-align-items: center;
-margin: 20px;
+  align-items: center;
+  margin: 20px;
 }
 @media (min-width: 768px) {
   .informacion__imagen{
-  padding-top: 50px;
-padding-right: 50px;
-}
+    padding-top: 50px;
+    padding-right: 50px;
+  }
 }
 /* --------------------------------------------------------------------------- */
 /* Conocenos */
@@ -459,22 +431,22 @@ padding-right: 50px;
   display: grid;
   color: white;
   padding-top: 60px;
-padding-bottom: 20px;
+  padding-bottom: 20px;
   background-color: #1A1A1A
 }
 .texto-principal{
   font-size: 15px;
-  padding-bottom:20px ;
+  padding-bottom:20px;
   color: white;
-  margin: 20px
+  margin: 20px;
 }
 @media (min-width:768px) {
   .texto-principal{
-  font-size: 20px;
-  padding-bottom:20px ;
-  color: white;
-  margin: 20px
-}
+    font-size: 20px;
+    padding-bottom:20px;
+    color: white;
+    margin: 20px;
+  }
 }
 
 #citas{
@@ -487,33 +459,34 @@ padding-bottom: 20px;
 }
 @media (min-width: 768px) {
   .cita__contenedor{
-  background-color: #1A1A1A;
-  color: white;
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-}
+    background-color: #1A1A1A;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
 }
 .titulo-cita{
   padding-bottom: 20px;
 }
 .cita__contenedor--texto{
   padding-top: 50px;
-  padding-right:40px ;
+  padding-right:40px;
   padding-bottom: 20px;
   font-size: 10px;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
-  padding-left:30px ;
+  padding-left:30px;
 }
 @media (min-width: 768px) {
-}.cita__contenedor--texto{
-  padding-top: 50px;
-  padding-right:40px ;
-  padding-bottom: 20px;
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: white;
-  padding-left:30px ;
+  .cita__contenedor--texto{
+    padding-top: 50px;
+    padding-right:40px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    padding-left:30px;
+  }
 }
 .contenedor__imagen--cita{
   display: flex;
@@ -523,14 +496,14 @@ padding-bottom: 20px;
 }
 @media (min-width: 768px) {
   .contenedor__imagen--cita img{
-  padding: 20px;
-}
+    padding: 20px;
+  }
 }
 .contenedor-boton {
-align-items: center;
-text-align: center;
-padding-top: 20px;
-padding-bottom: 20px;
+  align-items: center;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 .boton-agendar {
   text-decoration: none;
@@ -570,38 +543,38 @@ padding-bottom: 20px;
 }
 @media (min-width: 768px) {
   .contacto{
-  background-color: #1A1A1A;
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap:20px;
-  align-items: center;
-  padding-bottom: 80px;
-}
+    background-color: #1A1A1A;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:20px;
+    align-items: center;
+    padding-bottom: 80px;
+  }
 }
 .titulo-c{
-padding-top: 20px;
-background-color: #1A1A1A;
-color: white;
+  padding-top: 20px;
+  background-color: #1A1A1A;
+  color: white;
 }
 .contacto-titulo{
-font-weight: bold;
-color: white;
+  font-weight: bold;
+  color: white;
 }
 .contacto__informacion--texto{
   padding-bottom: 20px;
-  font-size: 10px;
+  font-size: 15px;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
-  padding-left:30px ;
+  padding-left:30px;
 }
 @media (min-width: 768px) {
   .contacto__informacion--texto{
-  padding-bottom: 20px;
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: white;
-  padding-left:30px ;
-}
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    padding-left:30px;
+  }
 }
 .contacto__mapa{
   display: grid;
@@ -623,6 +596,8 @@ color: white;
   bottom: 0;
 }
 .contenedor__footer{
+  display: flex;
+  flex-direction: column;
   width: 100%;  
   padding:30px;
   background-color: #1A1A1A;
@@ -631,11 +606,97 @@ color: white;
 }
 @media (min-width: 768px) {
   .contenedor__footer{
-  width: 100%;  
-  padding:30px;
-  font-size: 15px;
-  background-color: #1A1A1A;
-  color: white;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
+    width: 100%;  
+    padding:30px;
+    background-color:#1A1A1A;
+    font-size: 15px;
+    color: white;
+  }
 }
+.titulo-redes{
+  padding-top: 30px;
+}
+@media (min-width: 768px) {
+  .titulo-redes{
+    padding-top: 0;
+    font-size: 20px;
+  }
+}
+.texto-footer{
+  grid-column: 1 / 2;
+}
+
+.footer-redes{
+  grid-column: 2 / 3;
+}
+.letras-redes{
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
+  padding-left: 10px;
+  font-weight: 700;
+}
+@media (min-width: 768px) {
+  .letras-redes{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    padding-left: 10px;
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+.contenedor-letras-logo{
+  padding-top: 5px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  padding-left:80px; 
+  text-decoration: none;
+}
+
+@media (min-width:767px) {
+  .contenedor-letras-logo{
+    padding-top: 20px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    padding-left:80px; 
+    text-decoration: none;
+    font-size: 20px;
+  }
+}
+@media (min-width: 1000px) {
+  .contenedor-letras-logo{
+    padding-top: 20px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    padding-left:200px; 
+    text-decoration: none;
+    font-size: 20px;
+  }
+}
+
+
+.derechos{
+  font-size: 15px;
+  padding-top: 50px;
+  text-align: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .derechos{
+    font-size: 25px;
+    padding-top: 50px;
+    grid-column: 1/ 3;
+    grid-row: 2 / 3;
+  }
 }
 </style>

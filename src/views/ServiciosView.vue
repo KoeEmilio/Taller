@@ -1,45 +1,85 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 
-import { ref, onMounted } from 'vue'
+const datos = ref([]);
+const search = ref('');
 
-const datos = ref([])
-
-    const mostrarinfo  = () =>{
-        fetch('http://pruebapdo.com/Servicios')
+const mostrarinfo = () => {
+    fetch('http://testpdo.com/Servicios')
         .then(response => response.json())
         .then(json => {
-            if(json.status=200){
-                datos.value = json.data
+            if (json.status === 200) {
+                datos.value = json.data;
             }
-        })
-    }
-
+        });
+};
 
 onMounted(() => {
-mostrarinfo()
-})
+    mostrarinfo();
+});
 
+const headers = ref([
+    { text: 'ID Servicio', value: 'ServicioID' },
+    { text: 'Nombre', value: 'Nombre_Servicio' },
+    { text: 'Descripción', value: 'Descripcion' },
+    { text: 'Costo', value: 'Costo_Servicio' },
+    { text: 'Tipo de Servicio', value: 'Tipo_ServicioID' },
+    { text: 'Acciones', value: 'actions', sortable: false }
+]);
+
+const editarServicio = (item) => {
+    // Aquí puedes manejar la lógica para editar el servicio
+    console.log('Editar servicio:', item);
+};
+
+const eliminarServicio = (item) => {
+    // Aquí puedes manejar la lógica para eliminar el servicio
+    console.log('Eliminar servicio:', item);
+};
 </script>
 
 <template>
-        <v-app>
-    <v-app-bar app color="#1a1a1a" dark>
-        <router-link to="/Vehiculos">
-        <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
-        </router-link>
-        <h1 class="text-center w-100">SERVICIOS</h1>
-    </v-app-bar>
+    <v-app>
+        <v-container></v-container>
+        <v-container></v-container>
+        <v-app-bar app color="#1a1a1a" dark>
+            <router-link to="/Vehiculos">
+                <v-btn
+                    class="ma-3"
+                    color="white"
+                    icon="mdi-arrow-left-bold-circle-outline"
+                ></v-btn>
+            </router-link>
+            <h1 class="text-center w-100">SERVICIOS</h1>
+        </v-app-bar>
 
-    <v-main>
         <v-container>
-        <v-data-table :items="datos" :headers="headers" class="elevation-1"></v-data-table>
+            <v-text-field
+                v-model="search"
+                label="Search"
+                prepend-inner-icon="mdi-magnify"
+                variant="outlined"
+                hide-details
+                single-line
+            ></v-text-field>
+
+            <v-data-table
+                :headers="headers"
+                :items="datos"
+                :search="search"
+                class="elevation-1"
+            >
+                <template v-slot:item.actions="{ item }">
+                    <v-btn icon @click="editarServicio(item)">
+                        <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                    <v-btn icon @click="eliminarServicio(item)">
+                        <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                </template>
+            </v-data-table>
         </v-container>
-    </v-main>
-</v-app>
+    </v-app>
 </template>
 
 <style scoped>
