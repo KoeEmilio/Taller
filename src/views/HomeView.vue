@@ -276,7 +276,7 @@ export default {
   
 
 <style scoped>
- /** Globales **/
+ /* Globales */
  main {
   flex: 1;
 }
@@ -324,7 +324,7 @@ export default {
 }
 #logo {
   height: 120px;
-  width: 100x;
+  width: 70px;
 }
 @media (min-width: 768px) {
   .contenedor__imagen{
@@ -447,7 +447,7 @@ padding-top:120px ;
   padding-bottom: 120px;
 }
 }
-.servicios__informacion__texto--lista{
+.servicios_informacion_texto--lista{
   padding-left: 20px;
   padding-top:10px; 
   font-size: 20px;
