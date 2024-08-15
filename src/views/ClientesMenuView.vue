@@ -43,7 +43,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document</v-icon>
-                <h2>Ordenes</h2>
+                <h2>ÓRDENES</h2>
             </div>
             </VBtn>
         </RouterLink>

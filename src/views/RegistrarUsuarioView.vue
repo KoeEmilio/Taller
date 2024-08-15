@@ -1,15 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-<<<<<<< HEAD
-const Nombre = ref('');
-const Direccion = ref('');
-const Telefono = ref();
-const Correo = ref('');
-const RFC = ref('');
-const Num_Seguro_Social = ref();
-const CURP = ref('');
-=======
 const nombre = ref('');
 const direccion = ref('');
 const numTelefono = ref('');
@@ -24,7 +15,6 @@ const Correo = ref('');
 const RFC = ref('');
 const Num_Seguro_Social = ref('');
 const Curp = ref('');
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
 const puestoPersona = ref('');
 const esCliente = computed(() => puestoPersona.value === 'cliente');
 const esEmpleado = computed(() => puestoPersona.value === 'empleado');
@@ -32,14 +22,10 @@ const esEmpleado = computed(() => puestoPersona.value === 'empleado');
 const Tipo_Cliente = ref('');
 const Nombre_empresa = ref('');
 
-<<<<<<< HEAD
-// Valor del campo de contraseña
-=======
 const tipoCliente = ref('');
 const nombreEmpresa = ref('');
 
 // Campos para usuario y contraseña
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
 const Usuario = ref('');
 const Contrasena = ref('');
 
@@ -55,22 +41,6 @@ const valid = ref(false);
 const form = ref(null);
 
 const submit = async () => {
-<<<<<<< HEAD
-  if (valid.value && puestoPersona.value === 'empleado') {
-    const data = {
-      Nombre: Nombre.value,
-      Direccion: Direccion.value,
-      Telefono: Telefono.value,
-      Correo: Correo.value,
-      Usuario: Usuario.value,
-      Contrasena: Contrasena.value,
-      RFC: RFC.value,
-      Num_Seguro_Social: Num_Seguro_Social.value,
-      CURP: CURP.value,
-    };
-    try {
-      const response = await fetch('http://testpdo.com/registrousuario', {
-=======
   if (form.value.validate()) {
     const data = {
       Usuario: Usuario.value,
@@ -87,28 +57,12 @@ const submit = async () => {
 
     try {
       const response = await fetch('http://testpdo.com/registroUsuarios', {
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
-<<<<<<< HEAD
-      const responseText = await response.text();
-      console.log('Respuesta del servidor:', responseText);
-      try {
-        const responseData = JSON.parse(responseText);
-        if (response.ok) {
-          console.log('Vehículo registrado exitosamente', responseData);
-        } else {
-          console.error('Error al registrar el vehículo:', responseData);
-        }
-      } catch (error) {
-        console.error('Error al analizar la respuesta como JSON:', error);
-      }
-    } catch (error) {
-=======
 
       if (response.ok) {
         const responseData = await response.json();
@@ -132,7 +86,6 @@ const submit = async () => {
       }
     } catch (error) {
       alert('Error de red: No se pudo conectar con el servidor.');
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
       console.error('Error de red:', error);
     }
   }
@@ -197,12 +150,9 @@ const submit = async () => {
                   <v-text-field
                     variant="solo"
                     v-model="Usuario"
-<<<<<<< HEAD
-=======
                     :rules="[v => !!v || 'Usuario es requerido']"
                     label="Usuario"
                     required
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
                   ></v-text-field>
                 </v-col>
                 <v-col>
@@ -217,8 +167,6 @@ const submit = async () => {
                 </v-col>
               </v-row>
 
-<<<<<<< HEAD
-=======
               <v-text-field
                 v-model="Direccion"
                 :rules="[v => !!v || 'Dirección es requerida']"
@@ -243,7 +191,6 @@ const submit = async () => {
                 required
               ></v-text-field>
 
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
               <v-form v-if="esEmpleado" ref="form" v-model="valid">
                 <v-text-field
                   v-model="RFC"
@@ -260,20 +207,12 @@ const submit = async () => {
                 ></v-text-field>
 
                 <v-text-field
-<<<<<<< HEAD
-                  v-model="CURP"
-=======
                   v-model="Curp"
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
                   :rules="[v => !!v || 'CURP es requerida', v => v.length === 18 || 'CURP debe tener 18 caracteres', v => /^[A-Z0-9]{18}$/.test(v) || 'La CURP debe tener exactamente 18 caracteres y solo contener letras y números']"
                   label="CURP"
                   variant="solo"
                 ></v-text-field>
-<<<<<<< HEAD
-              </v-form>  
-=======
               </v-form>
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
 
               <v-form v-if="esCliente" ref="form" v-model="valid">
                 <v-select
@@ -285,11 +224,7 @@ const submit = async () => {
                 ></v-select>
 
                 <v-text-field
-<<<<<<< HEAD
-                  v-if="Tipo_Cliente === 'Moral'"
-=======
                   v-if="tipoCliente === 'Moral'"
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
                   v-model="Nombre_empresa"
                   :rules="[v => !!v || 'Nombre de la empresa es requerido']"
                   label="Nombre de la empresa"
@@ -300,10 +235,6 @@ const submit = async () => {
               <v-btn id="btn-registrar" :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
               </v-btn>
-<<<<<<< HEAD
-
-=======
->>>>>>> a2ea61a8cd46ca723810e6e267fd62c908a20aa3
             </v-form>
           </v-container>
         </v-card-text>
