@@ -406,10 +406,7 @@ export default {
     padding-bottom: 120px;
   }
 }
-<<<<<<< HEAD
-}
-=======
->>>>>>> d4bbba0268df414b923d8fa9e9c8c32447153a4e
+
 .servicios_informacion_texto--lista{
   padding-left: 20px;
   padding-top:10px; 
