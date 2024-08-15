@@ -66,7 +66,7 @@ const headers = [
   <v-container></v-container>
   <v-app>
     <v-app-bar app color="#1a1a1a" dark>
-      <router-link to="MenuEmpleados">
+      <router-link to="MenuClientesEmpleados">
         <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
       <h1 class="text-center w-100">CLIENTES REGISTRADOS</h1>

@@ -108,10 +108,10 @@ onMounted(() => {
 <template>
   <v-app>
     <VAppBar app color="#1a1a1a" dark>
-      <router-link to="/MenuOrdenes">
+      <router-link to="MenuPrincipal">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="texto-ordenes text-center w-100">REGISTRAR ORDEN</h1>
+      <h1 class="text-center w-100">REGISTRAR ORDEN</h1>
     </VAppBar>
 
     <div class="container">
@@ -209,17 +209,6 @@ select, input[type="text"] {
   margin-top: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
-}
-.texto-ordenes{
-  padding-right: 40px;
-  font-size: 20px;
-}
-
-@media (min-width: 768px) {
-  .texto-ordenes{
-  align-items: center;
-  font-size: 30px;
-}
 }
 </style>
 

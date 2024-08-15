@@ -12,7 +12,7 @@ import { RouterLink, RouterView } from 'vue-router'
         icon="mdi-arrow-left-bold-circle-outline"
       ></v-btn>
       </router-link>
-      <h1 class="text-center w-100">CLIENTESㅤㅤ</h1>
+      <h1 class="texto-clientes text-center w-100">CLIENTES</h1>
     </VAppBar>
     <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">
@@ -100,5 +100,9 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 .my-4 {
   margin: 1rem 0;
+}
+
+.texto-clientes{
+  padding-right: 40px;
 }
 </style>

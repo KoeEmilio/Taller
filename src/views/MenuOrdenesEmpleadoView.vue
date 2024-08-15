@@ -1,9 +1,10 @@
 <script setup>
-import { RouterLink } from 'vue-router'</script>
+import { RouterLink } from 'vue-router'
+</script>
 
 <template>
   <VApp>
-    <v-app-bar app color="#7D0100">
+    <v-app-bar app color="#1a1a1a">
         <router-link to="/ClientesEmpleados">
         <v-btn
             class="ma-3"
@@ -11,26 +12,39 @@ import { RouterLink } from 'vue-router'</script>
             icon="mdi-arrow-left-bold-circle-outline"
         ></v-btn>
         </router-link>
-        <h1 class="text-center w-100">ORDENES</h1>
+        <h1 class="text-center w-100">ÓRDENES</h1>
         </v-app-bar>
+        <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">
-      <VImg src="/src/img/logo.jpg" alt="logo" width="150" height="100" class="my-4" />
+      <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/OrdenEmpleado" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+          <RouterLink to="/RegistrarOrdenEmpleado" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-multiple</v-icon>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-plus</v-icon>
                 <br>
-                <h1>VER</h1>
-                <h1>ORDENES</h1>
+                <h1>REGISTRAR</h1>
+                <h1>ORDEN</h1>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/DetalleOrdenEmpleado" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+          <RouterLink to="/VerOrdenesEmpleados" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-multiple</v-icon>
+                <br>
+                <h1>VER</h1>
+                <h1>ÓRDENES</h1>
+              </div>
+            </VBtn>
+          </RouterLink>
+        </VCol>
+        <VCol cols="12" sm="3" class="d-flex justify-center">
+          <RouterLink to="/DetallesOrdenEmpleado" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document-plus</v-icon>
                 <h1>DETALLAR</h1>
@@ -41,7 +55,7 @@ import { RouterLink } from 'vue-router'</script>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/VerDetalleEmpleado" class="menu-button text-decoration-none">
-            <VBtn color="#7d0100" dark class="w-100 h-100">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
                 <h1>VER</h1>

@@ -38,6 +38,14 @@ import IngresosView from '@/views/IngresosView.vue'
 import RegistrarOrdenView from '@/views/RegistrarOrdenView.vue'
 import VistaCitasClientesView from '@/views/VistaCitasClientesView.vue'
 import PagosView from '@/views/PagosView.vue'
+import CitasVistaClientesView from '@/views/CitasVistaClientesView.vue'
+import MenuClientesEmpleadosView from '@/views/MenuClientesEmpleadosView.vue'
+import RegistrarOrdenEmpleadoView from '@/views/RegistrarOrdenEmpleadoView.vue'
+import PagosEmpleadosView from '@/views/PagosEmpleadosView.vue'
+import VerOrdenesEmpleadosView from '@/views/VerOrdenesEmpleadosView.vue'
+import VerDetalleEmpleadoView from '@/views/VerDetalleEmpleadoView.vue'
+
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -222,6 +230,12 @@ const router = createRouter({
       name: 'VerDetalle',
       component: VerDetalleView
     },
+    {
+      //VISTA DE ADMINISTRADOR (ORDENES)
+      path: '/VerDetalleEmpleado',
+      name: 'VerDetalleEmpleado',
+      component: VerDetalleEmpleadoView
+    },
     //REGISTRO DE USUARIO
     {
       path: '/RegistrarUsuario',
@@ -249,9 +263,19 @@ const router = createRouter({
       component: RegistrarOrdenView
     },
     {
+      path: '/RegistrarOrdenEmpleado',
+      name: 'RegistrarOrdenEmpleado',
+      component: RegistrarOrdenEmpleadoView
+    },
+    {
       path: '/Pagos',
       name: 'Pagos',
       component: PagosView
+    },
+    {
+      path: '/PagosEmpleados',
+      name: 'PagosEmpleados',
+      component: PagosEmpleadosView
     },
     {
       path: '/VistaCliente',
@@ -273,6 +297,11 @@ const router = createRouter({
           path: 'detalleDeMisOrdenes',
           name: 'detalleDeMisOrdenes',
           component: DetalleDeMisOrdenesView
+        },
+        {
+          path: 'MisCitas',
+          name: 'MisCitas',
+          component: CitasVistaClientesView
         }
       ]
     },
@@ -280,6 +309,16 @@ const router = createRouter({
       path:'/VistaCitasClientes',
       name:'VistaCitasClientes',
       component: VistaCitasClientesView
+    },
+    {
+      path:'/MenuClientesEmpleados',
+      name:'MenuClientesEmpleados',
+      component: MenuClientesEmpleadosView
+    },
+    {
+      path:'/VerOrdenesEmpleados',
+      name:'VerOrdenesEmpleados',
+      component: VerOrdenesEmpleadosView
     },
     
     

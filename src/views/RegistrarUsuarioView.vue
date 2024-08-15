@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 
+<<<<<<< HEAD
 const nombre = ref('');
 const direccion = ref('');
 const numTelefono = ref('');
@@ -15,24 +16,39 @@ const Correo = ref('');
 const RFC = ref('');
 const Num_Seguro_Social = ref('');
 const Curp = ref('');
+=======
+
+const Nombre = ref('');
+const Direccion = ref('');
+const Telefono = ref();
+const Correo = ref('');
+const RFC = ref('');
+const Num_Seguro_Social = ref();
+const CURP = ref('');
+
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
 const puestoPersona = ref('');
 const esCliente = computed(() => puestoPersona.value === 'cliente');
 const esEmpleado = computed(() => puestoPersona.value === 'empleado');
 
 const Tipo_Cliente = ref('');
 const Nombre_empresa = ref('');
+<<<<<<< HEAD
 
 const tipoCliente = ref('');
 const nombreEmpresa = ref('');
 
 // Campos para usuario y contraseña
+=======
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
 const Usuario = ref('');
+
 const Contrasena = ref('');
 
-// Controla si la contraseña debe ser visible o no
+
 const showPassword = ref(false);
 
-// Función para alternar la visibilidad de la contraseña
+
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
@@ -40,6 +56,7 @@ const togglePasswordVisibility = () => {
 const valid = ref(false);
 const form = ref(null);
 
+<<<<<<< HEAD
 const submit = async () => {
   if (form.value.validate()) {
     const data = {
@@ -57,10 +74,29 @@ const submit = async () => {
 
     try {
       const response = await fetch('http://testpdo.com/registroUsuarios', {
+=======
+const submit = async () => 
+{if (valid.value && puestoPersona.value === 'empleado') {
+    const data = 
+    {
+      Nombre: Nombre.value,
+      Direccion: Direccion.value,
+      Telefono: Telefono.value,
+      Correo: Correo.value,
+      Usuario: Usuario.value,
+      Contrasena: Contrasena.value,
+      RFC: RFC.value,
+      Num_Seguro_Social: Num_Seguro_Social.value,
+      CURP: CURP.value,
+    };
+    try 
+    {const response = await fetch('http://testpdo.com/registrousuario', {
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+<<<<<<< HEAD
         body: JSON.stringify(data),
       });
 
@@ -88,6 +124,24 @@ const submit = async () => {
       alert('Error de red: No se pudo conectar con el servidor.');
       console.error('Error de red:', error);
     }
+=======
+        body: JSON.stringify(data),});
+      const responseText = await response.text();
+      console.log('Respuesta del servidor:', responseText);
+      try 
+      {
+        const responseData = JSON.parse(responseText);
+        if (response.ok) {
+          console.log('Vehículo registrado exitosamente', responseData);
+        } else {
+          console.error('Error al registrar el vehículo:', responseData);
+        }
+      } catch (error) 
+      {
+        console.error('Error al analizar la respuesta como JSON:', error);
+      }
+    } catch (error) {console.error('Error de red:', error);}
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
   }
 };
 </script>
@@ -150,9 +204,12 @@ const submit = async () => {
                   <v-text-field
                     variant="solo"
                     v-model="Usuario"
+<<<<<<< HEAD
                     :rules="[v => !!v || 'Usuario es requerido']"
                     label="Usuario"
                     required
+=======
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
                   ></v-text-field>
                 </v-col>
                 <v-col>
@@ -166,6 +223,7 @@ const submit = async () => {
                   ></v-text-field>
                 </v-col>
               </v-row>
+<<<<<<< HEAD
 
               <v-text-field
                 v-model="Direccion"
@@ -191,6 +249,8 @@ const submit = async () => {
                 required
               ></v-text-field>
 
+=======
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
               <v-form v-if="esEmpleado" ref="form" v-model="valid">
                 <v-text-field
                   v-model="RFC"
@@ -207,12 +267,20 @@ const submit = async () => {
                 ></v-text-field>
 
                 <v-text-field
+<<<<<<< HEAD
                   v-model="Curp"
+=======
+                  v-model="CURP"
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
                   :rules="[v => !!v || 'CURP es requerida', v => v.length === 18 || 'CURP debe tener 18 caracteres', v => /^[A-Z0-9]{18}$/.test(v) || 'La CURP debe tener exactamente 18 caracteres y solo contener letras y números']"
                   label="CURP"
                   variant="solo"
                 ></v-text-field>
+<<<<<<< HEAD
               </v-form>
+=======
+              </v-form>  
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
 
               <v-form v-if="esCliente" ref="form" v-model="valid">
                 <v-select
@@ -224,7 +292,11 @@ const submit = async () => {
                 ></v-select>
 
                 <v-text-field
+<<<<<<< HEAD
                   v-if="tipoCliente === 'Moral'"
+=======
+                  v-if="Tipo_Cliente === 'Moral'"
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
                   v-model="Nombre_empresa"
                   :rules="[v => !!v || 'Nombre de la empresa es requerido']"
                   label="Nombre de la empresa"
@@ -235,6 +307,11 @@ const submit = async () => {
               <v-btn id="btn-registrar" :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
               </v-btn>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
             </v-form>
           </v-container>
         </v-card-text>

@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'</script>
+import { RouterLink } from 'vue-router'</script>
 
 <template>
   <VApp>
@@ -18,7 +18,7 @@ import { RouterLink, RouterView } from 'vue-router'</script>
       <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="ClientesEmpleados" class="menu-button text-decoration-none">
+          <RouterLink to="MenuClientesEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account</v-icon>
