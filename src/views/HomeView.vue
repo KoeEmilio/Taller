@@ -215,9 +215,21 @@ export default {
   
             <footer class="footer">
                   <div class="contenedor__footer">
-                    <h3  class="centrar-texto"> CONTACTANOS</h3>
-                    <h3  class="centrar-texto"> Telefono: 871-220-1575</h3>
-                    <h3  class="centrar-texto"> Correo: Delarosamotors@gmail.com</h3>
+                    <div class="contenedor__texto">
+                    <h3  class="texto-footer centrar-texto"> CONTACTANOS</h3>
+                    <h3  class="texto-footer centrar-texto"> Telefono: 871-220-1575</h3>
+                    <h3  class="texto-footer centrar-texto"> Correo: Delarosamotors@gmail.com</h3>
+                    </div>  
+                    <div class="footer-redes">
+                      <h3 class="titulo-redes">Nuestras Redes Socialas</h3>
+                      <a href="https://www.facebook.com/profile.php?id=100064141721206" class="contenedor-letras-logo" >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="30" height="30" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
+                      <p  class="letras-redes">FACEBOOK</p>
+                    </a>
+                    </div>
+                    <p class="derechos"> Derechos Reservados 2024 ®</p>
+
                   </div>
               </footer>
   
@@ -589,7 +601,7 @@ color: white;
 }
 .contacto__informacion--texto{
   padding-bottom: 20px;
-  font-size: 10px;
+  font-size: 15px;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
   padding-left:30px ;
@@ -623,6 +635,8 @@ color: white;
   bottom: 0;
 }
 .contenedor__footer{
+  display: flex;
+  flex-direction: column;
   width: 100%;  
   padding:30px;
   background-color: #1A1A1A;
@@ -631,11 +645,97 @@ color: white;
 }
 @media (min-width: 768px) {
   .contenedor__footer{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-template-rows: repeat(2,1fr);
   width: 100%;  
   padding:30px;
+  background-color:#1A1A1A;
   font-size: 15px;
-  background-color: #1A1A1A;
   color: white;
+}
+}
+.titulo-redes{
+  padding-top: 30px;
+}
+@media (min-width: 768px) {
+  .titulo-redes{
+  padding-top: 0;
+  font-size: 20px;
+}
+}
+.texto-footer{
+grid-column: 1 / 2;
+}
+
+.footer-redes{
+  grid-column: 2 / 3;
+  }
+  .letras-redes{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    padding-left: 10px;
+    font-weight: 700;
+  }
+  @media (min-width: 768px) {
+    .letras-redes{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    padding-left: 10px;
+    font-weight: 700;
+    font-size: 20px;
+  }
+  }
+.contenedor-letras-logo{
+  padding-top: 5px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  padding-left:80px; 
+  text-decoration: none;
+}
+
+@media (min-width:767px) {
+  .contenedor-letras-logo{
+  padding-top: 20px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  padding-left:80px; 
+  text-decoration: none;
+  font-size: 20px;
+}
+}
+@media (min-width: 1000px) {
+  .contenedor-letras-logo{
+  padding-top: 20px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  padding-left:200px; 
+  text-decoration: none;
+  font-size: 20px;
+}
+}
+
+
+.derechos{
+  font-size: 15px;
+  padding-top: 50px;
+  text-align: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .derechos{
+  font-size: 25px;
+  padding-top: 50px;
+  grid-column: 1/ 3;
+  grid-row: 2 / 3;
 }
 }
 </style>
