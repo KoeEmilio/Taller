@@ -22,7 +22,7 @@ const menu = ref(false);
             </RouterLink>
           </v-list-item>
           <v-list-item>
-            <RouterLink to="/CerrarSesion" class="texto-menu text-decoration-none">
+            <RouterLink to="/login" class="texto-menu text-decoration-none">
               <v-list-item-title>Cerrar sesión</v-list-item-title>
             </RouterLink>
           </v-list-item>

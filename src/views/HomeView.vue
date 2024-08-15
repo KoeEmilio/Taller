@@ -117,10 +117,21 @@ export default {
       <section id="conocenos">
         <div class="contenedor-conocenos">
           <h1 class="centrar-texto">CONOCE UN POCO DE NUESTRA HISTORIA...</h1>
-          <p class="texto-principal centrar-texto">
-            La historia comienza en 1978 con un joven Manuel De La Rosa...
-          </p>
-        </div>
+  
+  <p class="texto-principal centrar-texto">
+    La historia comienza en 1978 con un joven Manuel De La Rosa.
+    Para sacar adelante a su familia con sus habilidades en atención al detalle, dando soluciones a pequeñas reparaciones de automóviles y motocicletas,
+    así como la resolución de complejos problemas electrónicos con un enfoque amigable, flexible y adaptable en su propio taller mecánico.
+    Desde entonces, se han enfocado en ofrecer servicios de reparación, revisiones generales, asistencia en carretera y mantenimiento preventivo.
+  </p>
+  <p class="texto-principal centrar-texto">
+    Con el paso del tiempo, y el arduo trabajo y dedicación, fueron ganando prestigio en la comunidad.
+    Siguiendo el ejemplo de su fundador, sus hijos decidieron formarse en mecánica automotriz para continuar con el legado de su padre.
+    Hoy en día, los hijos de Manuel De La Rosa,
+    habiendo aprendido todas sus habilidades y contando con conocimientos en nuevas tecnologías,
+    están al frente del negocio ofreciendo soluciones eficientes y manteniendo la misma atención al detalle que caracterizaba a su padre.
+  </p>
+</div>
         <div class="contenedor__imagenes_taller">
           <img class="imagen_taller" src="@/img/taller1.jpeg" alt="">
           <img class="imagen_taller" src="@/img/taller2.jpeg" alt="">
@@ -170,8 +181,7 @@ export default {
             </div>
           </div>
           <div class="contacto__mapa">
-            <iframe class="mapa" src="https://www.google.com/maps/embed?pb=..."></iframe>
-          </div>
+            <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.4590670152584!2d-103.42623372554552!3d25.556389517060214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868fdbb4681aac8b%3A0x1649ebebea998f9!2sTlahuacas%20220%2C%20Santa%20Mar%C3%ADa%2C%2027020%20Torre%C3%B3n%2C%20Coah.!5e0!3m2!1ses-419!2smx!4v1723701188637!5m2!1ses-419!2smx" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>          </div>
         </div>
       </section>
     </main>
@@ -222,6 +232,8 @@ export default {
                 required>
               </v-select>
             </v-col>
+            <v-col cols="12">
+            </v-col>
           </v-row>
         </v-container>
       </v-card-text>
@@ -232,6 +244,7 @@ export default {
       </v-card-actions>
     </v-card>
   </v-dialog>
+  
 </template>
 
 <style scoped>
@@ -322,6 +335,7 @@ export default {
   align-items: center;
   background-color:#1A1A1A;
   position: fixed;
+  z-index: 1000;
 }
 .navegacion {
   display: flex;
@@ -472,7 +486,7 @@ export default {
   padding-top: 50px;
   padding-right:40px;
   padding-bottom: 20px;
-  font-size: 10px;
+  font-size: 15px;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
   padding-left:30px;
@@ -514,6 +528,7 @@ export default {
   padding: 10px;
   cursor: pointer;
   text-align: center;
+  z-index: 10;
 }
 .contenedor-informacion-cita{
   padding: 20px;
