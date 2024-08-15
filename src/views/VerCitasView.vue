@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://testpdo.com/citas')
+  fetch('http://miproyecto.com/citas')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
@@ -21,11 +21,12 @@ onMounted(() => {
 const showEditFormulario = ref(false);
 
 const selectedCita = ref({
-  Cliente: '',
-  Fecha: '',
-  Hora: '',
+  NombreCliente: '',
+  Fecha_Cita: '',
+  Hora:'',
   Estado: '',
-  CitaID: ''
+  Cita: '',
+  NombreEmpleado:''
 });
 
 const mostrarEditFormulario = (cita) => {
@@ -55,12 +56,13 @@ const actualizarCita = async (estado) => {
   }
 };
 
-const headers = [
-  { text: 'Cliente', value: 'Cliente' },
-  { text: 'Fecha', value: 'Fecha' },
-  { text: 'Hora', value: 'Hora' },
-  { text: 'Estado', value: 'Estado' },
-  { text: 'Acciones', value: 'action', sortable: false }
+const headers = [ 
+  { text: 'Cliente', value: 'NombreCliente' }, // Encabezado para el nombre del cliente.
+  { text: 'Fecha', value: 'Fecha_Cita' }, 
+  {text: 'Hora', value: 'Hora'},
+  { text: 'Estado', value: 'Estado' }, 
+  { text: 'Empleado', value: 'NombreEmpleado' }, 
+  { text: 'Acciones', value: 'action', sortable: false } 
 ];
 </script>
 
@@ -87,26 +89,28 @@ const headers = [
               class="mx-4"
             ></v-text-field>
           </v-card-text>
-          <v-data-table
-            :headers="headers"
-            :items="datos"
-            :search="search"
-          >
-            <template v-slot:[`item.action`]="{ item }">
-              <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
-                <v-icon left>mdi-pencil</v-icon> 
-                Editar
-              </v-btn>
-              <v-btn color="green" @click="actualizarCita('Confirmada')">
-                <v-icon left>mdi-check-circle-outline</v-icon> 
-                Aceptar
-              </v-btn>
-              <v-btn color="red" @click="actualizarCita('Cancelada')">
-                <v-icon left>mdi-cancel"></v-icon> 
-                Rechazar
-              </v-btn>
-            </template>
-          </v-data-table>
+          <div class="container-table">
+
+            <v-row>
+              <v-col cols="10" offset="1">
+                <v-data-table-virtual
+                  :headers="headers"
+                  :items="datos"
+                  :search="search" 
+                  >
+                    <template  v-slot:[`item.action`]="{ item }">
+                      <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
+                        <v-icon left>mdi-pencil</v-icon> 
+                        Editar
+                      </v-btn>
+                    </template>
+                  </v-data-table-virtual>
+              </v-col>
+                  
+                
+            </v-row>
+            
+          </div>              
         </v-card>
         
         <v-dialog v-model="showEditFormulario" max-width="500px">
@@ -153,4 +157,12 @@ const headers = [
   align-items: center;
 }
 }
+.container-table{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+}
+
+
 </style>

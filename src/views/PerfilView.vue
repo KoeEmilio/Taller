@@ -73,12 +73,13 @@ function Agregar() {
 .first-container{
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
+
 }
 
 .card{
     grid-column: 2;
     background-color: white;
-    width: 56vw;
+    width: 60vw;
     height: 100vh;
     overflow-y: auto;
 }

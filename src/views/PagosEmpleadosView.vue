@@ -84,12 +84,14 @@ const filteredDatos = computed(() => {
         <v-container class="container">
           <v-col>
             <v-text-field
-            v-model="search"
-            label="Buscar cliente"
-            class="my-4"
-            append-icon="mdi-magnify"
-
-          ></v-text-field>
+              v-model="search"
+              label="Buscar cliente"
+              prepend-inner-icon="mdi-magnify"
+              variant="outlined"
+              hide-details
+              single-line
+              class="mx-4"
+            ></v-text-field>
           <v-row  >
             <v-card  class="card" v-for="(pago,index) in filteredDatos" :key="index" >
               <div>
@@ -210,6 +212,7 @@ const filteredDatos = computed(() => {
   width: 272px;
   height: 390px;
   margin: 10px;
+  margin-top: 30px;
   border-radius: 10px;
   flex-wrap: wrap;
   overflow: hidden; /* Evita que el contenido se salga de la tarjeta */

@@ -85,7 +85,7 @@ const submit = async () => {
 
     if (response.ok) {
       const data = await response.json();
-      alert('Registro exitoso');
+      alert('Registro exitoso' + data.message);
       resetForm();
     } else {
       console.error('Error en el registro');
@@ -221,7 +221,9 @@ html, body, #app {
   height: 100%;
   margin: 0;
 }
-
+select{
+  background-color: white;
+}
 .container {
   display: flex;
   height: 100%;

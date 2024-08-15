@@ -185,7 +185,7 @@ onMounted(() => {
 }
 .card{
     grid-column: 2;
-    width: 56vw;
+    width: 60vw;
     height: 100vh;
     overflow-y: auto;
 }

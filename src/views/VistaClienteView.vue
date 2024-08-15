@@ -182,7 +182,7 @@ const triggerFileInput = () => {
 .container-right{
   width: 100vw;
   height: 100vh;
-  background-color: rgb(247, 249, 255);
+  background-color: rgb(216, 216, 216);
 }
 .dialog{
   display: flex;

@@ -12,15 +12,7 @@ import { RouterLink } from 'vue-router'
             icon="mdi-arrow-left-bold-circle-outline"
         ></v-btn>
         </router-link>
-<<<<<<< HEAD
-        <h1 class="text-center w-100">ÓRDENES</h1>
-=======
-<<<<<<< HEAD
-        <h1 class="text-center w-100">ÓRDENES</h1>
-=======
         <h1 class="texto-ordenes text-center w-100">ORDENES</h1>
->>>>>>> 037e688da7eb67310e608f5f1398142b320b4695
->>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
         </v-app-bar>
         <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">

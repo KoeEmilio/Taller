@@ -29,14 +29,12 @@ onMounted (() => {
             <v-col>
                 <v-row>
                     <v-col>
-
                         <v-data-table-virtual
                         :headers="headers"
                         :items="datosVehicuos"
                         height="400"
                         item-value="name"
                         ></v-data-table-virtual>
-
                     </v-col>
                 </v-row>
             </v-col>
@@ -52,7 +50,7 @@ onMounted (() => {
 }
 .card{
     grid-column: 2; /* Coloca la tarjeta en la segunda columna */
-    width: 56vw;
+    width: 60vw;
     height: 100vh;
     overflow-y: auto;
 }

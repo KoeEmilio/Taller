@@ -67,7 +67,7 @@ const router = createRouter({
       name: 'Clientes',
       component: ClientesMenuView,
     },
-    {
+    { 
       //VISTA ADMINISTRADOR (VER CLIENTES)
       path: '/InfoClientes',
       name: 'InfoClientes',
