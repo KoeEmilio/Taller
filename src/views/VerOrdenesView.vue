@@ -36,8 +36,7 @@ mostrarinfo()
 </script>
 
 <template>
-<<<<<<< HEAD
-<div >
+<div class="principal">
 
 
     <div class="container">
@@ -50,7 +49,7 @@ mostrarinfo()
                     icon="mdi-arrow-left-bold-circle-outline"
                 > </v-btn>
                 </router-link>
-                <h1 class="text-center w-100">VER ÓRDENES</h1>
+                <h1 class="text-center w-100">VER ORDENES</h1>
             </v-app-bar>
             
             <v-main>
@@ -66,7 +65,7 @@ mostrarinfo()
                             <v-dialog v-model="showFormulario" max-width="500px">
                                 <div v-show="showFormulario === true" >
                                     <v-card class="pa-5">
-                                        <v-card-title>REGISTRAR ORDEN</v-card-title>
+                                        <v-card-title>Registrar Orden</v-card-title>
                                         <v-card-text class="scrollable-content">
                                            <v-date-input label="Fecha de Ingreso" v-model="fechaIngreso"></v-date-input>
                                             <v-select label="Empleado" :items="empleados" v-model="empleado"></v-select>
@@ -89,34 +88,7 @@ mostrarinfo()
             </v-main>
         </v-app>
     </div>   
-</div>                  
-=======
-    <v-app>
-    <v-app-bar app color="#1a1a1a" dark>
-        <router-link to="MenuOrdenes">
-        <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
-        </router-link>
-        <h1 class="texto-ordenes text-center w-100">VER ORDEN</h1>
-    </v-app-bar>
-    <v-container></v-container>
-    <v-container></v-container>
-    <v-card>
-    <template v-slot:text>
-    </template>
-
-    <v-data-table
-    :headers="headers"
-    :items="desserts"
-    :search="search"
-    ></v-data-table>
-</v-card>
-    </v-app>
->>>>>>> 037e688da7eb67310e608f5f1398142b320b4695
-</template>
+</div>                  </template>
 
 <style scoped>
 
@@ -133,6 +105,8 @@ mostrarinfo()
     width: 87vw;
     height: 100vh;
     justify-content:space-around; 
+  
+
 }
 
 .agregar-text {
@@ -150,24 +124,13 @@ mostrarinfo()
 }
 
 #guindo-btn{
-  background-color: #1a1a1a ; /* Color guindo */
-  color: white ; /* Color del icono */
-  margin-left: 10px; /* Margen izquierdo */
-  border-radius: 30%; /* Redondear el botón */
+  background-color: #1a1a1a ; 
+  color: white ; 
+  margin-left: 10px; 
+  border-radius: 30%; 
 }
 
 .BtnGuindo{
     background-color: #1a1a1a;
-    color: white ;
-}
-
-.texto-ordenes{
-  padding-right: 40px;
-}
-
-@media (min-width: 768px) {
-  .texto-ordenes{
-  align-items: center;
-}
-}
+    color: white ;}
 </style>

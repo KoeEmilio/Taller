@@ -70,7 +70,7 @@ const submit = async () => {
     };
 
     try {
-      const response = await fetch('http://testpdo.com/registroordenes', {
+      const response = await fetch('http://testpdocrud.com/registroordenes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

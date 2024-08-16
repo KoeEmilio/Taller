@@ -15,18 +15,18 @@ const MostrarDialog = (orden) =>{
 
 const datos = ref([])
 const showDetails = () => {
-    fetch('http://miproyecto.com/detalles')
+    fetch('http://testpdocrud.com/detalles')
         .then(response => response.json())
         .then(json => {
             if (json.status === 200) {
                 datos.value = json.data
             }
              else {
-                console.error('Error en la respuesta:', json.msg); // Mostrar mensaje de error si el status no es 200
+                console.error('Error en la respuesta:', json.msg); 
             }
         })
         .catch(error => {
-            console.error('Error fetching data:', error); // Manejar errores
+            console.error('Error fetching data:', error); 
         });
 }
 onMounted(() => {
@@ -185,7 +185,7 @@ onMounted(() => {
 }
 .card{
     grid-column: 2;
-    width: 60vw;
+    width: 56vw;
     height: 100vh;
     overflow-y: auto;
 }
@@ -210,10 +210,10 @@ onMounted(() => {
     height: 70px;
     margin-bottom:10px;
     background-color: rgb(238, 238, 238);
-    transition: transform 0.2s ease; /* Transición suave */
+    transition: transform 0.2s ease; 
 }
 .card-interna:hover{
-    transform: translateY(4px); /* Desplazamiento hacia arriba al pasar el ratón */
+    transform: translateY(4px); 
 }
 .card-interna v-card-text{
     overflow: hidden;
