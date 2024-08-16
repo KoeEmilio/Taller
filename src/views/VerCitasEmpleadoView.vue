@@ -36,7 +36,7 @@ const mostrarEditFormulario = (cita) => {
 const actualizarCita = async (estado) => {
   try {
     selectedCita.value.Estado = estado;
-    const response = await fetch(`http://testpdo.com/actualizarcita`, {
+    const response = await fetch(`http://testpdocrud.com/actualizarcita`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

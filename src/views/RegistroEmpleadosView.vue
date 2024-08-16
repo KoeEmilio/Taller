@@ -22,12 +22,12 @@ const submit = async () => {
       Num_Seguro_Social: socialSecurityNumber.value,
       CURP: curp.value,
       correo: email.value,
-      Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual
+      Fecha_Ingreso: new Date().toISOString().slice(0, 10), 
       Estado: 'LIBRE'
     };
 
     try {
-      const response = await fetch('http://testpdo.com/empleado', {
+      const response = await fetch('http://testpdocrud.com/empleado', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

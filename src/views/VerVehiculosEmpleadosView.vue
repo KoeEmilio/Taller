@@ -38,7 +38,7 @@ const mostrarEditFormulario = (vehiculo) => {
 const editarVehiculo = async () => {
   try {
     console.log("Datos enviados para actualizar:", JSON.stringify(selectedVehiculo.value));
-    const response = await fetch(`http://testpdo.com/actualizarvehiculos`, {
+    const response = await fetch(`http://testpdocrud.com/actualizarvehiculos`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

@@ -1,17 +1,16 @@
 <script setup>
-import { onMounted, ref,computed } from 'vue';
+import { onMounted, ref } from 'vue';
+import { computed } from 'vue';
 
 
 
 const dialog = ref(false)
 const valorDialog = ref()
 const estadoEstatus = ref('Pendiente')
-const selectedIndex = ref(null);
 
-const MostrarDialog = (pago, index) => {
-  valorDialog.value = { ...pago }
+const MostrarDialog = (pago) => {
+  valorDialog.value = pago
   estadoEstatus.value = pago.Estatus_del_pago; 
-  selectedIndex.value = index;
 
   if (dialog.value === false) {
     dialog.value = true
@@ -21,27 +20,14 @@ const MostrarDialog = (pago, index) => {
   }
 }
 
-// cambiar el estado del estatus
+
 const liberarPago = () => {
-  if (selectedIndex.value !== null) {
-    datos.value[selectedIndex.value].Estatus_del_pago = 'Pagado';
-    estadoEstatus.value = 'Pagado';
-  }
-}
-
-const cancelarPago = () => {
-  if (selectedIndex.value !== null) {
-    datos.value[selectedIndex.value].Estatus_del_pago = 'Cancelado';
-    estadoEstatus.value = 'Cancelado';
-  }
-}
-
-
-
-
+  estadoEstatus.value = 'Pagado';}
+const cancelarPago = () => {estadoEstatus.value = 'Cancelado';
+};
 const datos = ref([])
 const mostrarPagos = () => {
-  fetch('http://miproyecto.com/pagos')
+  fetch('http://testpdocrud.com/pagos')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
@@ -55,7 +41,7 @@ onMounted(() => {
   mostrarPagos()
 });
 
-// Propiedad computada para filtrar los datos basados en la búsqueda
+
 const search = ref('');
 const filteredDatos = computed(() => {
   if (!search.value) return datos.value;
@@ -84,16 +70,12 @@ const filteredDatos = computed(() => {
         <v-container class="container">
           <v-col>
             <v-text-field
-              v-model="search"
-              label="Buscar cliente"
-              prepend-inner-icon="mdi-magnify"
-              variant="outlined"
-              hide-details
-              single-line
-              class="mx-4"
-            ></v-text-field>
-          <v-row  >
-            
+            v-model="search"
+            label="Buscar cliente"
+            class="my-4"
+            append-icon="mdi-magnify"
+
+          ></v-text-field><v-row  >
             <v-card  class="card" v-for="(pago,index) in filteredDatos" :key="index" >
               <div>
                 <v-col>
@@ -116,7 +98,7 @@ const filteredDatos = computed(() => {
                       <br>
                       <br>
                       <v-row class="scrolling-row"> 
-                        <h5 @click="MostrarDialog(pago, index)"  title="Toca para ver más." class="servicios"> Servicio(s): {{ pago.Servicios }} </h5>
+                        <h5 @click="MostrarDialog(pago)"  title="Toca para ver más." class="servicios"> Servicio(s): {{ pago.Servicios }} </h5>
                       </v-row>
                       <br>
                       <br>
@@ -170,15 +152,15 @@ const filteredDatos = computed(() => {
                         </v-row>
                         <br>
                         <br>
-                          <h4>Fecha: {{ valorDialog.Fecha }}</h4>
+                          <p>Fecha: {{ valorDialog.Fecha }}</p>
                           <br>
-                          <h4>Servicios: {{ valorDialog.Servicios }}</h4>
+                          <p>Servicios: {{ valorDialog.Servicios }}</p>
                           <br>
-                          <h4>Forma de pago: {{ valorDialog.Forma_Pago }}</h4>
+                          <p>Forma de pago: {{ valorDialog.Forma_Pago }}</p>
                           <br>
-                          <h4>Monto: {{ valorDialog.Cantidad_Total }}</h4>
+                          <p>Monto: {{ valorDialog.Cantidad_Total }}</p>
                           <br>
-                          <h4 class="estatus">Estado de pago: <h4 :class="['estatus', estadoEstatus.toLowerCase()]"> &nbsp; {{ valorDialog.Estatus_del_pago }} </h4> </h4>
+                          <p>Estado de pago: {{ valorDialog.Estatus_del_pago }}</p>
                       </v-col>
                     </v-row>
                     
@@ -212,15 +194,13 @@ const filteredDatos = computed(() => {
   color: rgb(80, 80, 80);
   width: 272px;
   height: 390px;
-  margin: 10px;
-  margin-top: 30px;
-  border-radius: 10px;
+  margin: 10px;border-radius: 10px;
   flex-wrap: wrap;
-  overflow: hidden; /* Evita que el contenido se salga de la tarjeta */
+  overflow: hidden; 
   cursor:context-menu;
 }
 .card:hover{
-  filter: brightness(96%); /* Oscurece la tarjeta al pasar el ratón */
+  filter: brightness(96%); 
 }
 .titulo{
   justify-content: center;
@@ -231,24 +211,24 @@ const filteredDatos = computed(() => {
 
 
 .servicios {
-  overflow: hidden; /* Oculta el contenido que se desborda */
-  text-overflow: ellipsis; /* Muestra '...' si el texto es demasiado largo */
-  white-space: nowrap; /* Evita el salto de línea */
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap;
   cursor: pointer;
 }
 
-.estatus{
-  display: flex;
+.estatus
+{
   border-radius: 10px;
   margin-top: 2px;
   color: black;
 }
 .estatus.pagado {
-  color: green; /* Color para 'Pagado' */
+  color: green; 
 }
 
 .estatus.cancelado {
-  color: red; /* Color para 'Cancelado' */
+  color: red; 
 }
 
 #container-botones{
@@ -261,17 +241,17 @@ const filteredDatos = computed(() => {
   cursor: pointer;
 }
 .btn:hover{
-  filter: brightness(99%); /* Oscurece la tarjeta al pasar el ratón */
+  filter: brightness(99%); 
     
 }
 #btn-liberar:hover {
-  color: #4caf50; /* Color de fondo para 'Liberar' */
+  color: #4caf50; 
 }
 #btn-cancelar:hover{
-  color: #f30000; /* Color de fondo para 'Cancelar' */
+  color: #f30000; 
 }
 #btn-abonar:hover {
-  color: #21dbf3; /* Color de fondo para 'Abonar' */
+  color: #21dbf3; 
 }
 .container-dialog{
   width: 400px;

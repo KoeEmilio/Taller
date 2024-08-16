@@ -4,18 +4,18 @@ import { onMounted, ref } from 'vue';
 
 const datos = ref([])
 const showDetails = () => {
-    fetch('http://miproyecto.com/citas')
+    fetch('http://testpdocrud.com/citas')
         .then(response => response.json())
         .then(json => {
             if (json.status === 200) {
                 datos.value = json.data
             }
              else {
-                console.error('Error en la respuesta:', json.msg); // Mostrar mensaje de error si el status no es 200
+                console.error('Error en la respuesta:', json.msg); 
             }
         })
         .catch(error => {
-            console.error('Error fetching data:', error); // Manejar errores
+            console.error('Error fetching data:', error); 
         });
 }
 
