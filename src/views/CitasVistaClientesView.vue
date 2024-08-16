@@ -26,83 +26,22 @@ onMounted(() => {
 <template>
     <div class="container-principal">
         <v-card class="first-card">
-            <v-card-title class="card-title">Mis Citas</v-card-title>
-            <v-divider></v-divider>
-             <br>
-                <v-row> 
-                    <v-col cols="10" offset="1">
-                        <div id="nombre-columnas">
+          <v-card-title id="card-title"> Mis Citas </v-card-title>
+          <v-divider></v-divider>
+          <br>
 
-                            <v-col class="column">
-                                <v-row>
-                                    <v-card-text>N° Cita</v-card-text>
-                                </v-row>
-                            </v-col>
-
-                            <v-col class="column">
-                                <v-row>
-                                    <v-card-text>Cliente</v-card-text>
-                                </v-row>
-                            </v-col>
-
-                            <v-col class="column">
-                                <v-row>
-                                    <v-card-text>Fecha cita</v-card-text>                                    
-                                </v-row>
-                            </v-col>
-                            <v-col class="column">
-                                <v-row>
-                                    <v-card-text>Hora</v-card-text>                                    
-                                </v-row>
-                            </v-col>
-                            <v-col class="column">
-                                <v-row>
-                                    <v-card-text>Estado</v-card-text>                                    
-                                </v-row>
-                            </v-col>
-                            <v-col class="column">
-                                <v-row>
-                                    <v-card-text>Empleado</v-card-text>                                    
-                                </v-row>
-                            </v-col>
-                            
-
-                        </div>
-
-                        <v-row>
-                            <v-col>
-                                <v-divider ></v-divider>
-                            </v-col>
-                        </v-row>
-
-                        <v-row id="acomodado-interno"> 
-                            
-                                <template  v-for="cita in datos" :key="cita['N°Cita']"  >
-                                        <div class="card-interna"  >
-                                            <v-col >
-                                                <v-card-text> {{ cita['N°Cita'] }} </v-card-text>
-                                            </v-col>
-                                            <v-col >
-                                                <v-card-text>{{ cita['NombreCliente'] }} </v-card-text>
-                                            </v-col>
-                                            <v-col >
-                                                <v-card-text> {{ cita['Fecha_Cita'] }}  </v-card-text> 
-                                            </v-col> 
-                                            <v-col >
-                                                <v-card-text> {{ cita['Hora'] }}  </v-card-text> 
-                                            </v-col>  
-                                            <v-col >
-                                                <v-card-text> {{ cita['Estado'] }}  </v-card-text> 
-                                            </v-col>
-                                            <v-col >
-                                                <v-card-text> {{ cita['NombreEmpleado'] }}  </v-card-text> 
-                                            </v-col>                                                                        
-                                        </div>   
-                                </template>
-                            
-                        </v-row>
-                    </v-col>
-                </v-row>
+          <v-data-table-virtual
+            :headers="headers"
+            :items="datos"
+            :search="search"
+          >
+          <template v-slot:[`item.action`]="{ item }">
+            <v-btn class="boton-separado" color="#1a1a1a" @click="mostrarEditFormulario(item)">
+              <v-icon left>mdi-pencil</v-icon> 
+              Editar
+            </v-btn>
+          </template>
+          </v-data-table-virtual>
         </v-card>
     </div>
 </template>
@@ -118,7 +57,7 @@ onMounted(() => {
     height: 100vh;
     overflow-y: auto;
 }
-.card-title{
+#card-title{
     font-size: xx-large;
     margin-top: 10px;
 }

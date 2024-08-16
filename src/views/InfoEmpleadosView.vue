@@ -74,11 +74,7 @@ const headers = [
       <router-link to="MenuPrincipal">
         <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-<<<<<<< HEAD
-      <h1 class="text-center w-100">EMPLEADOS REGISTRADOS</h1>
-=======
       <h1 class="titulo-empleados text-center w-100">Empleados Registrados</h1>
->>>>>>> a2bc1318339d7c1fe5e73450c47f1d3dbaf3e908
     </v-app-bar>
 
     <v-main>

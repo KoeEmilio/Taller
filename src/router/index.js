@@ -44,7 +44,7 @@ import RegistrarOrdenEmpleadoView from '@/views/RegistrarOrdenEmpleadoView.vue'
 import PagosEmpleadosView from '@/views/PagosEmpleadosView.vue'
 import VerOrdenesEmpleadosView from '@/views/VerOrdenesEmpleadosView.vue'
 import VerDetalleEmpleadoView from '@/views/VerDetalleEmpleadoView.vue'
-
+import RegistrarServicioView from '@/views/RegistrarServicioView.vue'
 
 
 const router = createRouter({
@@ -179,6 +179,7 @@ const router = createRouter({
       component: RegistroClientesEmpleadoView
     },
     {
+      
       //VISTA DE EMPLEADOS (ORDENES)
       path: '/OrdenEmpleado',
       name: 'OrdenEmpleado',
@@ -267,6 +268,13 @@ const router = createRouter({
       name: 'RegistrarOrdenEmpleado',
       component: RegistrarOrdenEmpleadoView
     },
+    {
+      
+      path: '/RegistrarServicio',
+      name:'RegistrarVehiculo',
+      component: RegistrarServicioView
+    }
+    ,
     {
       path: '/Pagos',
       name: 'Pagos',

@@ -94,11 +94,11 @@ const headers = [
             :search="search"
           >
           <template v-slot:[`item.action`]="{ item }">
-  <v-btn class="boton-separado" color="#1a1a1a" @click="mostrarEditFormulario(item)">
-    <v-icon left>mdi-pencil</v-icon> 
-    Editar
-  </v-btn>
-</template>
+            <v-btn class="boton-separado" color="#1a1a1a" @click="mostrarEditFormulario(item)">
+              <v-icon left>mdi-pencil</v-icon> 
+              Editar
+            </v-btn>
+          </template>
           </v-data-table>
         </v-card>
         
