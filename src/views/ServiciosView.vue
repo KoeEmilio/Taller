@@ -60,23 +60,28 @@ const eliminarServicio = (item) =>
                 hide-details
                 single-line ></v-text-field>
             <v-data-table
-                :headers="headers"
+                :headers="headers.value"
                 :items="datos"
                 :search="search"
                 class="elevation-1"
             >
                 <template v-slot:item.actions="{ item }">
-                <v-btn icon @click="editarServicio(item)">
-                    <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-                <v-btn icon @click="eliminarServicio(item)">
-                    <v-icon>mdi-delete</v-icon>
-                </v-btn>
-            </template>
+                    <v-btn icon @click="editarServicio(item)">
+                        <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                    <v-btn icon @click="eliminarServicio(item)">
+                        <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                </template>
 
             </v-data-table>
         </v-container>
     </v-app>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-data-table {
+    margin-top: 20px;
+}
+
+</style>
