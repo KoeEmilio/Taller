@@ -14,7 +14,7 @@ const form = ref(null);
 
 const fetchEmpleados = async () => {
   try {
-    const response = await fetch('http://testpdo.com/empleados');
+    const response = await fetch('http://18.117.184.23/empleados');
     if (response.ok) {
       const json = await response.json();
       Empleados.value = json.data; 

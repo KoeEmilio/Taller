@@ -16,7 +16,7 @@ const mostrarFormulario = () =>{
 }
 
 const mostrarinfo = () =>{
-        fetch('http://miproyecto.com/ordenes')
+        fetch('http://18.117.184.23/ordenes')
         .then(response => response.json())
         .then(json => {
             if(json.status===200){

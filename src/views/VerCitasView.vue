@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://miproyecto.com/citas')
+  fetch('http://18.117.184.23/citas')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {

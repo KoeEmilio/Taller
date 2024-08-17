@@ -15,7 +15,7 @@ const MostrarDialog = (orden) =>{
 
 const datos = ref([])
 const showDetails = () => {
-    fetch('http://miproyecto.com/detalles')
+    fetch('http://18.117.184.23/detalles')
         .then(response => response.json())
         .then(json => {
             if (json.status === 200) {

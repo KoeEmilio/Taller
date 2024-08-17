@@ -27,7 +27,7 @@ const submit = async () => {
     };
 
     try {
-      const response = await fetch('http://testpdo.com/empleado', {
+      const response = await fetch('http://localhost:5174/empleado', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

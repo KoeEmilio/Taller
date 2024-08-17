@@ -20,7 +20,7 @@ const registrarOrden = () => {
 const datos = ref([])
 
     const mostrarinfo  = () =>{
-        fetch('http://pruebapdo.com/Ordenes')
+        fetch('http://18.117.184.23/Ordenes')
         .then(response => response.json())
         .then(json => {
             if(json.status===200){

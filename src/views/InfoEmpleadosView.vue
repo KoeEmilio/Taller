@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://testpdo.com/empleados')
+  fetch('http://18.117.184.23/empleados')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {

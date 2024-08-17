@@ -46,7 +46,7 @@ const submit = async () =>
       CURP: CURP.value,
     };
     try 
-    {const response = await fetch('http://testpdo.com/registrousuario', {
+    {const response = await fetch('http://localhost:5174/registrousuario', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

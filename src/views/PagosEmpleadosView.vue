@@ -41,7 +41,7 @@ const cancelarPago = () => {
 
 const datos = ref([])
 const mostrarPagos = () => {
-  fetch('http://miproyecto.com/pagos')
+  fetch('http://18.117.184.23/pagos')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
