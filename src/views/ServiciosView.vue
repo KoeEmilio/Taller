@@ -5,15 +5,6 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-<<<<<<< HEAD
-  fetch('http://testpdocrud.com/servicios')
-    .then(response => response.json())
-    .then(json => {
-      if (json.status === 200) {
-        datos.value = json.data;
-      }
-    });
-=======
     fetch('http://testpdocrud.com/Servicios')
         .then(response => response.json())
         .then(json => {
@@ -21,7 +12,6 @@ const mostrarinfo = () => {
                 datos.value = json.data;
             }
         });
->>>>>>> 4961e85a7a40a3922d4bee37df05c56ffe38b5fa
 };
 
 onMounted(() => {
@@ -29,11 +19,11 @@ onMounted(() => {
 });
 
 const headers = ref([
-    { text: 'ID Servicio', value: 'ServicioID' },
-    { text: 'Nombre', value: 'Nombre_Servicio' },
+    
+    { text: 'Servicio', value: 'Servicio' },
     { text: 'Descripción', value: 'Descripcion' },
-    { text: 'Costo', value: 'Costo_Servicio' },
-    { text: 'Tipo de Servicio', value: 'Tipo_ServicioID' },
+    { text: 'Tipo', value: 'Tipo' },
+    { text: 'Costo', value: 'Costo' },
     { text: 'Acciones', value: 'actions', sortable: false }
 ]);
 
@@ -75,14 +65,15 @@ const eliminarServicio = (item) =>
                 :search="search"
                 class="elevation-1"
             >
-                <template v-slot:item. actions="{ item }">
-                    <v-btn icon @click="editarServicio(item)">
-                        <v-icon>mdi-pencil</v-icon>
-                    </v-btn>
-                    <v-btn icon @click="eliminarServicio(item)">
-                        <v-icon>mdi-delete</v-icon>
-                    </v-btn>
-                </template>
+                <template v-slot:item.actions="{ item }">
+                <v-btn icon @click="editarServicio(item)">
+                    <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn icon @click="eliminarServicio(item)">
+                    <v-icon>mdi-delete</v-icon>
+                </v-btn>
+            </template>
+
             </v-data-table>
         </v-container>
     </v-app>
