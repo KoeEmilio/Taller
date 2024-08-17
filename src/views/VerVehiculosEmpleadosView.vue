@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://18.117.184.23/vehiculos')
+  fetch('http://testpdocrud.com/vehiculos')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
@@ -38,7 +38,7 @@ const mostrarEditFormulario = (vehiculo) => {
 const editarVehiculo = async () => {
   try {
     console.log("Datos enviados para actualizar:", JSON.stringify(selectedVehiculo.value));
-    const response = await fetch(`http://testpdo.com/actualizarvehiculos`, {
+    const response = await fetch(`http://testpdocrud.com/actualizarvehiculos`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

@@ -35,7 +35,7 @@ const mostrarEditFormulario = (cliente) => {
 };
 
 const editarCliente = () => {
-  fetch(`http://testpdo.com/actualizarclientes`, {
+  fetch(`http://testpdocrud.com/actualizarclientes`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'

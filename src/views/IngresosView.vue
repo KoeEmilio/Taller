@@ -1,3 +1,50 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import { isWithinInterval, subDays, subMonths } from 'date-fns'
+
+const ordenes = ref([])
+const ordenesFiltradas = ref([])
+const total = ref(0)
+
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat('es-MX', {
+    style: 'currency',
+    currency: 'MXN',
+  }).format(value)
+}
+
+const mostrarinfo = () => {
+  fetch('http://pruebapdo.com/Ordenes')
+    .then(response => response.json())
+    .then(json => {
+      if (json.status === 200) {
+        ordenes.value = json.data
+        verResumen('semana')  
+      }
+    })
+}
+
+const verResumen = (periodo) => {
+  const ahora = new Date()
+  let inicioPeriodo
+
+  if (periodo === 'semana') {
+    inicioPeriodo = subDays(ahora, 7)
+  } else if (periodo === 'mes') {
+    inicioPeriodo = subMonths(ahora, 1)}
+
+  ordenesFiltradas.value = ordenes.value.filter(orden => {
+    return isWithinInterval(new Date(orden.fecha), { start: inicioPeriodo, end: ahora })})
+
+  total.value = ordenesFiltradas.value.reduce((acc, orden) => acc + orden.costo, 0)}
+
+const ordenesCliente = (cliente) => {
+  return ordenes.value.filter(orden => orden.cliente === cliente)}
+onMounted(() => {
+  mostrarinfo()
+})
+</script>
+
 <template>
   <v-app>
     <v-container class="container">
@@ -41,48 +88,6 @@
     </v-container>
   </v-app>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { isWithinInterval, subDays, subMonths } from 'date-fns'
-
-const ordenes = ref([
-  { id: 1, servicio: 'Cambio de Aceite', fecha: '2024-08-05', costo: 500, tecnico: 'Pepinillo Rick', detalles: 'Se realizó un cambio de aceite completo con filtro nuevo.', cliente: 'Juan Perez' },
-  { id: 2, servicio: 'Alineación y Balanceo', fecha: '2024-08-12', costo: 800, tecnico: 'Homero Simpson', detalles: 'Se alinearon y balancearon las 4 ruedas.', cliente: 'María Lopez' },
-  { id: 3, servicio: 'Cambio de Bujías', fecha: '2024-08-10', costo: 400, tecnico: 'Sr. Kenarvan', detalles: 'Se cambiaron todas las bujías del motor.', cliente: 'Juan Perez' },
-])
-
-const ordenesFiltradas = ref([])
-const total = ref(0)
-
-const verResumen = (periodo) => {
-  const ahora = new Date()
-  let inicioPeriodo
-
-  if (periodo === 'semana') {
-    inicioPeriodo = subDays(ahora, 7)
-  } else if (periodo === 'mes') {
-    inicioPeriodo = subMonths(ahora, 1)
-  }
-
-  ordenesFiltradas.value = ordenes.value.filter(orden => {
-    return isWithinInterval(new Date(orden.fecha), { start: inicioPeriodo, end: ahora })
-  })
-
-  total.value = ordenesFiltradas.value.reduce((acc, orden) => acc + orden.costo, 0)
-}
-
-const formatCurrency = (value) => {
-  return new Intl.NumberFormat('es-MX', {
-    style: 'currency',
-    currency: 'MXN',
-  }).format(value)
-}
-
-const ordenesCliente = (cliente) => {
-  return ordenes.value.filter(orden => orden.cliente === cliente)
-}
-</script>
 
 <style scoped>
 .container {

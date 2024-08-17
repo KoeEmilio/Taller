@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://18.117.184.23/citas')
+  fetch('http://testpdocrud.com/citas')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
@@ -36,7 +36,7 @@ const mostrarEditFormulario = (cita) => {
 const actualizarCita = async (estado) => {
   try {
     selectedCita.value.Estado = estado;
-    const response = await fetch(`http://testpdo.com/actualizarcita`, {
+    const response = await fetch(`http://testpdocrud.com/actualizarcita`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
