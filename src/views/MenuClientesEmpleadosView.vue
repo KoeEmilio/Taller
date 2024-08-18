@@ -19,7 +19,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
     <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="3" class="d-flex justify-center">
-        <RouterLink to="ClientesEmpleados" class="menu-button text-decoration-none">
+        <RouterLink to="VerClientesEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-account-eye</v-icon>
@@ -39,11 +39,13 @@ import { RouterLink, RouterView } from 'vue-router'
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-        <RouterLink to="MenuOrdenesEmpleado" class="menu-button text-decoration-none">
+        <RouterLink to="MenuOrdenDetalleEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
             <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document</v-icon>
-                <h2>Ordenes</h2>
+                <h3>ÓRDENES</h3>
+                <h3>Y</h3>
+                <h3>DETALLES</h3>
             </div>
             </VBtn>
         </RouterLink>
