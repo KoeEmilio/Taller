@@ -12,32 +12,52 @@ import { RouterLink } from 'vue-router'
             icon="mdi-arrow-left-bold-circle-outline"
         ></v-btn>
         </router-link>
-        <h1 class="texto-ordenes text-center w-100">ORDENES</h1>
+        <h1 class="texto-ordenes text-center w-100">DETALLES</h1>
         </v-app-bar>
         <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/RegistrarOrden" class="menu-button text-decoration-none">
+          <RouterLink to="/DetallesOrden" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-file-document-plus</v-icon>
-                <br>
-                <h1>REGISTRAR</h1>
+                <h1>DETALLAR</h1>
                 <h1>ORDEN</h1>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/InfoOrdenes" class="menu-button text-decoration-none">
+          <RouterLink to="/VerDetalle" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-multiple</v-icon>
-                <br>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
                 <h1>VER</h1>
-                <h1>ÓRDENES</h1>
+                <h1>DETALLES</h1>
+              </div>
+            </VBtn>
+          </RouterLink>
+        </VCol>
+          <VCol cols="12" sm="3" class="d-flex justify-center">
+          <RouterLink to="/RegistrarDetalleRefaccion" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
+                <h1>DETALLAR</h1>
+                <h1>REFACCIÓN</h1>
+              </div>
+            </VBtn>
+          </RouterLink>
+        </VCol>
+        <VCol cols="12" sm="3" class="d-flex justify-center">
+          <RouterLink to="/VerDetalleRefaccion" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
+                <h1>VER DETALLE</h1>
+                <h1>REFACCIÓN</h1>
               </div>
             </VBtn>
           </RouterLink>

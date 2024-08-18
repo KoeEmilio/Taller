@@ -12,7 +12,7 @@
             icon="mdi-arrow-left-bold-circle-outline"
         ></v-btn>
         </router-link>
-        <h1 class="titulo-detalle text-center w-100">VER DETALLE</h1>
+        <h1 class="titulo-detalle text-center w-100">VER DETALLE REFACCION</h1>
     </v-app-bar>
     <v-container></v-container>
     <v-container></v-container>

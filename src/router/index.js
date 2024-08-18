@@ -44,6 +44,10 @@ import RegistrarOrdenEmpleadoView from '@/views/RegistrarOrdenEmpleadoView.vue'
 import PagosEmpleadosView from '@/views/PagosEmpleadosView.vue'
 import VerOrdenesEmpleadosView from '@/views/VerOrdenesEmpleadosView.vue'
 import VerDetalleEmpleadoView from '@/views/VerDetalleEmpleadoView.vue'
+import MenuOrdenDetalleView from '@/views/MenuOrdenDetalleView.vue'
+import MenuDetallesView from '@/views/MenuDetallesView.vue'
+import VerDetalleRefaccionView from '@/views/VerDetalleRefaccionView.vue'
+import RegistrarDetalleRefaccionView from '@/views/RegistrarDetalleRefaccionView.vue'
 import RegistrarServicioView from '@/views/RegistrarServicioView.vue'
 
 
@@ -327,6 +331,33 @@ const router = createRouter({
       path:'/VerOrdenesEmpleados',
       name:'VerOrdenesEmpleados',
       component: VerOrdenesEmpleadosView
+    },
+    {
+      path:'/VerOrdenesEmpleados',
+      name:'VerOrdenesEmpleados',
+      component: VerOrdenesEmpleadosView
+    },
+    {
+      path:'/MenuOrdenDetalle',
+      name:'MenuOrdenDetalle',
+      component: MenuOrdenDetalleView
+    },
+    {
+      path:'/MenuDetalles',
+      name:'MenuDetalles',
+      component: MenuDetallesView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (ORDENES)
+      path: '/VerDetalleRefaccion',
+      name: 'VerDetalleRefaccion',
+      component: VerDetalleRefaccionView
+    },
+    {
+      //VISTA DE ADMINISTRADOR (ORDENES)
+      path: '/RegistrarDetalleRefaccion',
+      name: 'RegistrarDetalleRefaccion',
+      component: RegistrarDetalleRefaccionView
     },
     
     
