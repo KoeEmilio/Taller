@@ -109,7 +109,8 @@ const headers = [
             </v-dialog>
 
           </v-row>
-          <v-data-table
+          <v-row>
+            <v-data-table
             :headers="headers"
             :items="datos"
             :search="search"
@@ -120,6 +121,8 @@ const headers = [
               </v-btn>
             </template>
           </v-data-table>
+          </v-row>
+          
         </v-card>
       </v-container>
     </v-main>

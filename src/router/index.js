@@ -51,7 +51,6 @@ import RegistrarDetalleRefaccionView from '@/views/RegistrarDetalleRefaccionView
 import RegistrarServicioView from '@/views/RegistrarServicioView.vue'
 
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

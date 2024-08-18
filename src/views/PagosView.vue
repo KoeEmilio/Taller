@@ -1,30 +1,10 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { computed } from 'vue';
+
+const search = ref('')
 
 
 
-const dialog = ref(false)
-const valorDialog = ref()
-const estadoEstatus = ref('Pendiente')
-
-const MostrarDialog = (pago) => {
-  valorDialog.value = pago
-  estadoEstatus.value = pago.Estatus_del_pago; 
-
-  if (dialog.value === false) {
-    dialog.value = true
-  }
-  else if (dialog.value === true) {
-    dialog.value = false
-  }
-}
-
-
-const liberarPago = () => {
-  estadoEstatus.value = 'Pagado';}
-const cancelarPago = () => {estadoEstatus.value = 'Cancelado';
-};
 const datos = ref([])
 const mostrarPagos = () => {
   fetch('http://testpdocrud.com/pagos')
@@ -42,14 +22,6 @@ onMounted(() => {
 });
 
 
-const search = ref('');
-const filteredDatos = computed(() => {
-  if (!search.value) return datos.value;
-  return datos.value.filter(pago =>
-    pago.Cliente.toLowerCase().includes(search.value.toLowerCase())
-  );
-});
-
 </script>
 
 <template>
@@ -64,122 +36,36 @@ const filteredDatos = computed(() => {
         </router-link>
         <h1 class="text-center w-100">Pagos</h1>
         </v-app-bar>
-        <br>
-        <br>
-        <br>
-        <v-container class="container">
-          <v-col>
-            <v-text-field
-            v-model="search"
-            label="Buscar cliente"
-            class="my-4"
-            append-icon="mdi-magnify"
 
-          ></v-text-field><v-row  >
-            <v-card  class="card" v-for="(pago,index) in filteredDatos" :key="index" >
-              <div>
+        <main>
+          <v-container>
+            <br>
+            <br>
+            <v-card flat>
+              <v-card-text>
+                <v-text-field
+                v-model="search"
+                label="Buscar"
+                prepend-inner-icon="mdi-magnify"
+                variant="outlined"
+                hide-details
+                single-line
+                class="mx-4"
+                ></v-text-field>
+              </v-card-text>
+              <v-row justfy="start">
                 <v-col>
-                  <v-row class="titulo">
-                    <h3>{{ pago.Cliente }}</h3>
-                  </v-row>
-                  <v-row>
-                    <v-divider></v-divider>
-                  </v-row>
+                  <v-data-table
+                  :headers="headers"
+                  :items="datos"
+                  :search="search"
+                ></v-data-table>
                 </v-col>
-
-
-                <v-col>
-                  <div>
-                    <br>
-                    <v-col>
-                      <v-row > 
-                        <h5>Fecha: {{ pago.Fecha }}</h5>
-                      </v-row>
-                      <br>
-                      <br>
-                      <v-row class="scrolling-row"> 
-                        <h5 @click="MostrarDialog(pago)"  title="Toca para ver más." class="servicios"> Servicio(s): {{ pago.Servicios }} </h5>
-                      </v-row>
-                      <br>
-                      <br>
-                      <v-row>
-                        <h5>Forma de pago: {{ pago.Forma_Pago }}</h5>
-                      </v-row>
-                      <br>
-                      <br>
-                      <v-row>
-                        <h5>Monto: {{ pago.Cantidad_Total}}</h5>
-                      </v-row>
-                      <br>
-                      <br>
-                      <v-row>
-                        <v-col>
-                        <v-row class="estatus">Estado de pago: <h4 :class="['estatus', estadoEstatus.toLowerCase()]">&nbsp;  {{ estadoEstatus }}</h4> </v-row>
-
-                        </v-col>
-                        <br>
-                        <br>
-                        <br>
-                      </v-row>
-                      <v-row id="container-botones">
-                        <p class="btn" id="btn-liberar" @click="liberarPago">Liberar</p>
-                        <p class="btn" id="btn-cancelar" @click="cancelarPago">Cancelar</p>
-                        <p class="btn" id="btn-abonar">Abonar</p>
-                      </v-row>
-                    </v-col>
-                  </div>
-                </v-col>
-              </div>            
-          </v-card>
-          </v-row>
-          </v-col>
-        </v-container>
-
+              </v-row>
+            </v-card>
+          </v-container>
+        </main>
         
-        <v-dialog class="container-dialog" v-model="dialog">
-          <v-card class="card-dialog"> 
-            <v-row>
-              <v-col>
-                <v-row>
-                  <v-col  cols="11" > 
-                    <v-row>
-                      <v-col class="contenedor-datos-dialog">
-                        <br>
-                        <h2 class="cliente-dialog"> {{ valorDialog.Cliente }} </h2>
-                        <br>
-                        <v-row>
-                          <v-divider></v-divider>
-                        </v-row>
-                        <br>
-                        <br>
-                          <p>Fecha: {{ valorDialog.Fecha }}</p>
-                          <br>
-                          <p>Servicios: {{ valorDialog.Servicios }}</p>
-                          <br>
-                          <p>Forma de pago: {{ valorDialog.Forma_Pago }}</p>
-                          <br>
-                          <p>Monto: {{ valorDialog.Cantidad_Total }}</p>
-                          <br>
-                          <p>Estado de pago: {{ valorDialog.Estatus_del_pago }}</p>
-                      </v-col>
-                    </v-row>
-                    
-                  </v-col>
-                  <v-row>
-                    
-               
-               
-                  </v-row>
-                  
-                </v-row>
-
-                
-              </v-col>
-            </v-row>
-            
-
-          </v-card>
-        </v-dialog>
   </v-app>
 </template>
 

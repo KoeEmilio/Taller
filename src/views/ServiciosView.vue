@@ -59,8 +59,9 @@ const eliminarServicio = (item) =>
                 variant="outlined"
                 hide-details
                 single-line ></v-text-field>
+            
             <v-data-table
-                :headers="headers.value"
+                :headers="headers"
                 :items="datos"
                 :search="search"
                 class="elevation-1"
