@@ -13,11 +13,7 @@ const mostrarFormulario = () =>{
         showFormulario.value = false}}
 
 const mostrarinfo = () =>{
-<<<<<<< HEAD
-        fetch('http://18.117.184.23/ordenes')
-=======
         fetch('http://testpdocrud.com/ordenes')
->>>>>>> ad9c8f74232bf2ae70bc0aa9514bf5729fc00c17
         .then(response => response.json())
         .then(json => {
             if(json.status===200){

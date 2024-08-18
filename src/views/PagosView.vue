@@ -27,11 +27,7 @@ const cancelarPago = () => {estadoEstatus.value = 'Cancelado';
 };
 const datos = ref([])
 const mostrarPagos = () => {
-<<<<<<< HEAD
-  fetch('http://18.117.184.23/pagos')
-=======
   fetch('http://testpdocrud.com/pagos')
->>>>>>> ad9c8f74232bf2ae70bc0aa9514bf5729fc00c17
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {

@@ -44,15 +44,12 @@ import RegistrarOrdenEmpleadoView from '@/views/RegistrarOrdenEmpleadoView.vue'
 import PagosEmpleadosView from '@/views/PagosEmpleadosView.vue'
 import VerOrdenesEmpleadosView from '@/views/VerOrdenesEmpleadosView.vue'
 import VerDetalleEmpleadoView from '@/views/VerDetalleEmpleadoView.vue'
-<<<<<<< HEAD
 import MenuOrdenDetalleView from '@/views/MenuOrdenDetalleView.vue'
 import MenuDetallesView from '@/views/MenuDetallesView.vue'
 import VerDetalleRefaccionView from '@/views/VerDetalleRefaccionView.vue'
 import RegistrarDetalleRefaccionView from '@/views/RegistrarDetalleRefaccionView.vue'
-
-=======
 import RegistrarServicioView from '@/views/RegistrarServicioView.vue'
->>>>>>> ad9c8f74232bf2ae70bc0aa9514bf5729fc00c17
+
 
 
 const router = createRouter({
@@ -363,7 +360,11 @@ const router = createRouter({
       name: 'RegistrarDetalleRefaccion',
       component: RegistrarDetalleRefaccionView
     },
-    
+    {
+      path: '/RegistrarServicio',
+      name: 'RegistrarServicio',
+      component: RegistrarServicioView
+    },
     
   ]
 })

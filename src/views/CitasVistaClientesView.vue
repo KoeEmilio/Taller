@@ -4,11 +4,7 @@ import { onMounted, ref } from 'vue';
 
 const datos = ref([])
 const showDetails = () => {
-<<<<<<< HEAD
     fetch('http:/testpdocrud.com/citas')
-=======
-    fetch('http://testpdocrud.com/citas')
->>>>>>> ad9c8f74232bf2ae70bc0aa9514bf5729fc00c17
         .then(response => response.json())
         .then(json => {
             if (json.status === 200) {

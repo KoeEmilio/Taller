@@ -4,11 +4,7 @@ import { onMounted, ref } from 'vue';
 const datosVehicuos = ref([])
 
 const ShowAutos = () =>{
-<<<<<<< HEAD
-    fetch('http://18.117.184.23/misVehiculos')
-=======
     fetch('http://testpdocrud.com/misVehiculos')
->>>>>>> ad9c8f74232bf2ae70bc0aa9514bf5729fc00c17
     .then(response => response.json())
     .then(json=>{
         if(json.status === 200){
