@@ -25,14 +25,15 @@ const selectedCliente = ref({
   Correo: '',
   Telefono: '',
   Tipo_Cliente: '',
-  PersonaID: '' // Se incluye PersonaID aquí, pero no se muestra en el formulario
+  PersonaID: '' 
 })
 
 const mostrarEditFormulario = (cliente) => {
   selectedCliente.value = { ...cliente };
-  console.log("Cliente seleccionado para edición:", selectedCliente.value) // Aquí se obtiene el PersonaID
+  console.log("Cliente seleccionado para edición:", selectedCliente.value)
   showEditFormulario.value = true;
 }
+
 
 const editarCliente = async () => {
   try {
@@ -68,10 +69,10 @@ const headers = [
 <template>
   <v-app>
     <v-app-bar app color="#1a1a1a" dark>
-      <router-link to="Clientes">
+      <router-link to="MenuPrincipal">
         <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="titulo-clientes text-center w-100">CLIENTES REGISTRADOS</h1>
+      <h1 class="text-center w-100">CLIENTES REGISTRADOS</h1>
     </v-app-bar>
 
     <v-main>
@@ -136,20 +137,5 @@ const headers = [
 }
 
 .v-data-table {
-  margin-top: 10px;
-}
-
-.titulo-clientes{
-  font-size: 20px;
-  padding-right: 40px;
-  align-items: center;
-
-}
-
-@media (min-width: 768px) {
-  .titulo-clientes{
-  font-size: 40px;
-  align-items: center;
-}
-}
+  margin-top: 10px;}
 </style>

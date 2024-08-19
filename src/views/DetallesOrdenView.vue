@@ -3,19 +3,10 @@ import { ref, onMounted } from 'vue';
 
 const form = ref({
   noOrden: '',
-  fechaEntrega: '',
   servicioProporcionado: '',
   costoManoObra: '',
-  diasGarantia: '',
-  ordenID: '',
-  nombreRefaccion: '',
-  marca: '',
-  cantidad: '',
-  precio: '',
-  comprador: '',
 });
 
-const compradores = ref(['Cliente', 'Taller']);
 const servicios = ref([]);
 const ordenes = ref([]);
 
@@ -62,16 +53,8 @@ onMounted(() => {
 const submit = async () => {
   const datosRegistro = {
     noOrden: form.value.noOrden,
-    fechaEntrega: form.value.fechaEntrega,
     servicioProporcionado: form.value.servicioProporcionado,
     costoManoObra: form.value.costoManoObra,
-    diasGarantia: form.value.diasGarantia,
-    ordenID: form.value.ordenID,
-    nombreRefaccion: form.value.nombreRefaccion,
-    marca: form.value.marca,
-    cantidad: form.value.cantidad,
-    precio: form.value.precio,
-    comprador: form.value.comprador,
   };
 
   try {
@@ -85,7 +68,7 @@ const submit = async () => {
 
     if (response.ok) {
       const data = await response.json();
-      alert('Registro exitoso');
+      alert('Registro exitoso: ' + data.message);
       resetForm();
     } else {
       console.error('Error en el registro');
@@ -98,16 +81,8 @@ const submit = async () => {
 const resetForm = () => {
   form.value = {
     noOrden: '',
-    fechaEntrega: '',
     servicioProporcionado: '',
     costoManoObra: '',
-    diasGarantia: '',
-    ordenID: '',
-    nombreRefaccion: '',
-    marca: '',
-    cantidad: '',
-    precio: '',
-    comprador: '',
   };
 };
 </script>
@@ -115,10 +90,10 @@ const resetForm = () => {
 <template>
   <v-app>
     <v-app-bar app color="#1a1a1a" dark>
-      <router-link to="/MenuOrdenes">
+      <router-link to="/MenuDetalles">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="texto-ordenes text-center w-100">REGISTRAR DETALLE</h1>
+      <h1 class="texto-ordenes text-center w-100">REGISTRAR DETALLEㅤㅤ</h1>
     </v-app-bar>
 
     <div class="container">
@@ -135,13 +110,6 @@ const resetForm = () => {
                   </option>
                 </select>
               </div>
-
-              <v-text-field
-                v-model="form.fechaEntrega"
-                label="Fecha de Entrega"
-                variant="solo"
-                required
-              ></v-text-field>
 
               <div class="form-group">
                 <label for="servicioRealizado">Servicio Realizado</label>
@@ -160,51 +128,6 @@ const resetForm = () => {
                 required
               ></v-text-field>
 
-              <v-text-field
-                v-model="form.diasGarantia"
-                label="Días de Garantía"
-                variant="solo"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                v-model="form.nombreRefaccion"
-                label="Nombre de Refacción"
-                variant="solo"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                v-model="form.marca"
-                label="Marca de Refacción"
-                variant="solo"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                v-model="form.cantidad"
-                label="Cantidad"
-                variant="solo"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                v-model="form.precio"
-                label="Precio"
-                variant="solo"
-                required
-              ></v-text-field>
-
-              <div class="form-group">
-                <label for="comprador">Comprador</label>
-                <select id="comprador" v-model="form.comprador">
-                  <option value="" disabled selected>Seleccione un comprador</option>
-                  <option v-for="comprador in compradores" :key="comprador" :value="comprador">
-                    {{ comprador }}
-                  </option>
-                </select>
-              </div>
-
               <v-btn color="#1a1a1a" @click="submit">
                 Registrar
               </v-btn>
@@ -221,7 +144,9 @@ html, body, #app {
   height: 100%;
   margin: 0;
 }
-
+select {
+  background-color: white;
+}
 .container {
   display: flex;
   height: 100%;
@@ -276,14 +201,9 @@ input[type="date"] {
   }
 }
 
-.texto-ordenes{
-  padding-right: 30px;
-  font-size: 20px;
-}
-
 @media (min-width: 768px) {
-  .texto-ordenes{
-  align-items: center;
-}
+  .texto-ordenes {
+    align-items: center;
+  }
 }
 </style>

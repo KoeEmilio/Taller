@@ -5,10 +5,11 @@ import { ref, onMounted } from 'vue'
 const datos = ref([])
 
     const mostrarinfo  = () =>{
-        fetch('http://pruebapdo.com/ruta')
+        fetch('http://testpdocrud.com/ruta')
         .then(response => response.json())
         .then(json => {
-            if(json.status=200){
+            if(json.status===200)
+            {
                 datos.value = json.data
             }
         })

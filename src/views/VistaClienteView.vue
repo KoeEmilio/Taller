@@ -58,8 +58,6 @@ const triggerFileInput = () => {
 };
 
 
-
-
 </script>
 
 
@@ -105,16 +103,17 @@ const triggerFileInput = () => {
             <v-list-item prepend-icon="mdi-folder-multiple" title="Detalles de mis ordenes" value="account"></v-list-item>
           </router-link>
 
+          <router-link to="/VistaCliente/MisCitas">
+            <v-list-item prepend-icon="mdi-calendar" title="Mis Citas" value="appointment"></v-list-item>
+          </router-link>
+
         </v-list>
         <v-list class="btn-home" density="compact" nav>
           <router-link to="/">
             <v-list-item prepend-icon="mdi-home" title="Ir a Inicio" value="home"></v-list-item>
           </router-link>
             <v-list-item prepend-icon="mdi-logout" title="Cerrar sesión" value="logout"></v-list-item>
-
         </v-list>
-       
-        
 
       </v-navigation-drawer>
 
@@ -183,7 +182,7 @@ const triggerFileInput = () => {
 .container-right{
   width: 100vw;
   height: 100vh;
-  background-color: rgb(247, 249, 255);
+  background-color: rgb(216, 216, 216);
 }
 .dialog{
   display: flex;
@@ -230,6 +229,6 @@ const triggerFileInput = () => {
 }
 .btn-home{
   width: 100vw;
-  margin-top: 300px;
+  margin-top: 260px;
 }
 </style>

@@ -2,30 +2,16 @@
 import { ref, onMounted } from 'vue';
 
 const form = ref({
+  nombreRefaccion: '',
+  marca: '',
+  cantidad: '',
+  precio: '',
   noOrden: '',
-  servicioProporcionado: '',
-  costoManoObra: '',
+  comprador: '',
 });
 
-const servicios = ref([]);
 const ordenes = ref([]);
-
-// Obtener la lista de servicios disponibles
-const fetchServicios = async () => {
-  try {
-    const response = await fetch('/api/servicios', {
-      method: 'GET',
-    });
-    const data = await response.json();
-    if (response.ok) {
-      servicios.value = data.servicios;
-    } else {
-      alert('Error al obtener servicios: ' + data.message);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+const compradores = ref(['Cliente', 'Taller']);
 
 // Obtener la lista de órdenes disponibles
 const fetchOrdenes = async () => {
@@ -44,21 +30,23 @@ const fetchOrdenes = async () => {
   }
 };
 
-// Ejecutar fetchServicios y fetchOrdenes cuando el componente se monte
+// Ejecutar fetchOrdenes cuando el componente se monte
 onMounted(() => {
-  fetchServicios();
   fetchOrdenes();
 });
 
 const submit = async () => {
   const datosRegistro = {
+    nombreRefaccion: form.value.nombreRefaccion,
+    marca: form.value.marca,
+    cantidad: form.value.cantidad,
+    precio: form.value.precio,
     noOrden: form.value.noOrden,
-    servicioProporcionado: form.value.servicioProporcionado,
-    costoManoObra: form.value.costoManoObra,
+    comprador: form.value.comprador,
   };
 
   try {
-    const response = await fetch('/api/detalle-orden', {
+    const response = await fetch('/api/detalle-refaccion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -80,20 +68,24 @@ const submit = async () => {
 
 const resetForm = () => {
   form.value = {
+    nombreRefaccion: '',
+    marca: '',
+    cantidad: '',
+    precio: '',
     noOrden: '',
-    servicioProporcionado: '',
-    costoManoObra: '',
+    comprador: '',
   };
 };
 </script>
 
 <template>
+    <v-container></v-container>
   <v-app>
     <v-app-bar app color="#1a1a1a" dark>
-      <router-link to="/MenuDetallesEmpleado">
+      <router-link to="/MenuDetalles">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="texto-ordenes text-center w-100">REGISTRAR DETALLE</h1>
+      <h1 class="texto-refacciones text-center w-100">REGISTRAR DETALLE DE REFACCIÓN</h1>
     </v-app-bar>
 
     <div class="container">
@@ -111,22 +103,43 @@ const resetForm = () => {
                 </select>
               </div>
 
-              <div class="form-group">
-                <label for="servicioRealizado">Servicio Realizado</label>
-                <select id="servicioRealizado" v-model="form.servicioProporcionado">
-                  <option value="" disabled selected>Seleccione un servicio</option>
-                  <option v-for="servicio in servicios" :key="servicio.id" :value="servicio.value">
-                    {{ servicio.text }}
-                  </option>
-                </select>
-              </div>
-
               <v-text-field
-                v-model="form.costoManoObra"
-                label="Costo de Mano de Obra"
+                v-model="form.nombreRefaccion"
+                label="Nombre de Refacción"
                 variant="solo"
                 required
               ></v-text-field>
+
+              <v-text-field
+                v-model="form.marca"
+                label="Marca de Refacción"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="form.cantidad"
+                label="Cantidad"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="form.precio"
+                label="Precio"
+                variant="solo"
+                required
+              ></v-text-field>
+
+              <div class="form-group">
+                <label for="comprador">Comprador</label>
+                <select id="comprador" v-model="form.comprador">
+                  <option value="" disabled selected>Seleccione un comprador</option>
+                  <option v-for="comprador in compradores" :key="comprador" :value="comprador">
+                    {{ comprador }}
+                  </option>
+                </select>
+              </div>
 
               <v-btn color="#1a1a1a" @click="submit">
                 Registrar
@@ -201,8 +214,13 @@ input[type="date"] {
   }
 }
 
+.texto-refacciones {
+  padding-right: 30px;
+  font-size: 20px;
+}
+
 @media (min-width: 768px) {
-  .texto-ordenes {
+  .texto-refacciones {
     align-items: center;
   }
 }

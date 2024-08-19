@@ -21,11 +21,12 @@ onMounted(() => {
 const showEditFormulario = ref(false);
 
 const selectedCita = ref({
-  Cliente: '',
-  Fecha: '',
-  Hora: '',
+  NombreCliente: '',
+  Fecha_Cita: '',
+  Hora:'',
   Estado: '',
-  CitaID: ''
+  Cita: '',
+  NombreEmpleado:''
 });
 
 const mostrarEditFormulario = (cita) => {
@@ -92,20 +93,12 @@ const headers = [
             :items="datos"
             :search="search"
           >
-            <template v-slot:[`item.action`]="{ item }">
-              <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
-                <v-icon left>mdi-pencil</v-icon> 
-                
-              </v-btn>
-              <v-btn color="green" @click="actualizarCita('Confirmada')">
-                <v-icon left>mdi-check-circle-outline</v-icon> 
-                
-              </v-btn>
-              <v-btn color="red" @click="actualizarCita('Cancelada')">
-                <v-icon left>mdi-cancel"></v-icon> 
-                
-              </v-btn>
-            </template>
+          <template v-slot:[`item.action`]="{ item }">
+            <v-btn class="boton-separado" color="#1a1a1a" @click="mostrarEditFormulario(item)">
+              <v-icon left>mdi-pencil</v-icon> 
+              Editar
+            </v-btn>
+          </template>
           </v-data-table>
         </v-card>
         
@@ -115,7 +108,7 @@ const headers = [
               <v-card-title>Editar Cita</v-card-title>
               <v-card-text class="scrollable-content">
                 <v-text-field label="Cliente" v-model="selectedCita.Cliente"></v-text-field>
-                <v-text-field label="Fecha" v-model="selectedCita.Fecha" type="date"></v-text-field>
+                <v-text-field label="Fecha_Cita" v-model="selectedCita.Fecha" type="date"></v-text-field>
                 <v-text-field label="Hora" v-model="selectedCita.Hora" type="time"></v-text-field>
                 <v-text-field label="Estado" v-model="selectedCita.Estado" readonly></v-text-field>
                 <v-btn color="#1a1a1a" @click="actualizarCita(selectedCita.value.Estado)">
@@ -136,6 +129,8 @@ const headers = [
   background: #f5f5f5;
 }
 
+
+
 .v-card {
   margin-top: 20px;
 }
@@ -147,10 +142,22 @@ const headers = [
 .texto-citas{
   padding-right: 40px;
 }
+.boton-separado {
+  margin-right: 10px; 
+  
+}
 
 @media (min-width: 768px) {
   .texto-citas{
   align-items: center;
 }
 }
+.container-table{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+}
+
+
 </style>

@@ -1,20 +1,18 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { VDateInput } from 'vuetify/labs/VDateInput'
+import {VDateInput} from 'vuetify/labs/VDateInput'
 
 const showFormulario = ref(false)
 const mostrarFormulario = () => {
     showFormulario.value = !showFormulario.value
 }
 
-const registrarOrden = () => {
-    mostrarFormulario()
-}
+const registrarOrden = () => { mostrarFormulario()}
 
 const datos = ref([])
 
 const mostrarinfo  = () =>{
-    fetch('http://pruebapdo.com/Ordenes')
+    fetch('http://testpdocrud.com/Ordenes')
     .then(response => response.json())
     .then(json => {
         if(json.status===200){
@@ -27,10 +25,11 @@ onMounted(() => {
     mostrarinfo()
 })
 
-// Nuevas variables y funciones
+
 const selectedDate = ref('')
 const selectedTime = ref('')
-const times = ref(['09:00', '10:00', '11:00', '12:00', '13:00', '14:00']) // Ejemplo de horas disponibles
+const times = ref(['09:00', '10:00', '11:00', '12:00', '13:00', '14:00']) 
+
 
 function submitForm() {
   if (selectedDate.value && selectedTime.value) {
@@ -147,10 +146,10 @@ function submitForm() {
 }
 
 #guindo-btn{
-  background-color: #1a1a1a ; /* Color guindo */
-  color: white ; /* Color del icono */
-  margin-left: 10px; /* Margen izquierdo */
-  border-radius: 30%; /* Redondear el botón */
+  background-color: #1a1a1a ; 
+  color: white ; 
+  margin-left: 10px; 
+  border-radius: 30%; 
 }
 
 .BtnGuindo{

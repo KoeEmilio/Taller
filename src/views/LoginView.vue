@@ -201,7 +201,7 @@ const login = async () => {
 }
 
 #logo {
-  width: 60%; /* Ajusta el tamaño del logo según tus necesidades */
+  width: 60%; 
   margin: 0 auto;
 }
 

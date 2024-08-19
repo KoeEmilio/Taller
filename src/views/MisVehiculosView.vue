@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue';
 const datosVehicuos = ref([])
 
 const ShowAutos = () =>{
-    fetch('http://miproyecto.com/misVehiculos')
+    fetch('http://testpdocrud.com/misVehiculos')
     .then(response => response.json())
     .then(json=>{
         if(json.status === 200){
@@ -51,7 +51,7 @@ onMounted (() => {
     height: 100vh;
 }
 .card{
-    grid-column: 2; /* Coloca la tarjeta en la segunda columna */
+    grid-column: 2; 
     width: 56vw;
     height: 100vh;
     overflow-y: auto;

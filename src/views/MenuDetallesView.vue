@@ -1,70 +1,63 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { ref } from 'vue';
-const menu = ref(false)
-
 </script>
-
 
 <template>
   <VApp>
-    <VAppBar app color="#1a1a1a" dark>
-       <h1 class="text-center w-100 TITULO">INICIO</h1>
-      <VMenu v-model="menu" offset-y>
-        <template #activator="{ props }">
-          <v-app-bar-nav-icon v-bind="props"></v-app-bar-nav-icon>
-        </template>
-        <v-list>
-          <v-list-item>
-            <RouterLink to="/login" class="texto-menu text-decoration-none">
-              <v-list-item-title>Cerrar sesión</v-list-item-title>
-            </RouterLink>
-          </v-list-item>
-        </v-list>
-      </VMenu>
-    
-    </VAppBar>
-    <v-container></v-container>
+    <v-app-bar app color="#1a1a1a">
+        <router-link to="/MenuOrdenDetalle">
+        <v-btn
+            class="ma-3"
+            color="white"
+            icon="mdi-arrow-left-bold-circle-outline"
+        ></v-btn>
+        </router-link>
+        <h1 class="texto-ordenes text-center w-100">DETALLES</h1>
+        </v-app-bar>
+        <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="MenuClientesEmpleados" class="menu-button text-decoration-none">
+          <RouterLink to="/DetallesOrden" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account</v-icon>
-                <h1>CLIENTE</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-plus</v-icon>
+                <h1>DETALLAR</h1>
+                <h1>ORDEN</h1>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/VehiculosEmpleados" class="menu-button text-decoration-none">
+          <RouterLink to="/VerDetalle" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-car-back</v-icon>
-                <h1>Vehiculos</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
+                <h1>VER</h1>
+                <h1>DETALLES</h1>
+              </div>
+            </VBtn>
+          </RouterLink>
+        </VCol>
+          <VCol cols="12" sm="3" class="d-flex justify-center">
+          <RouterLink to="/RegistrarDetalleRefaccion" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
+                <h1>DETALLAR</h1>
+                <h1>REFACCIÓN</h1>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/VerCitasEmpleado" class="menu-button text-decoration-none">
+          <RouterLink to="/VerDetalleRefaccion" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-calendar-range</v-icon>
-                <h1>Citas</h1>
-              </div>
-            </VBtn>
-          </RouterLink>
-        </VCol>
-        <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/RegistrarUsuarioEmpleado" class="menu-button text-decoration-none">
-            <VBtn color="#1a1a1a" dark class="w-100 h-100">
-              <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-account-plus</v-icon>
-                <h1>REGISTRAR</h1>
-                <h1>USUARIO</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
+                <h1>VER DETALLE</h1>
+                <h1>REFACCIÓN</h1>
               </div>
             </VBtn>
           </RouterLink>
@@ -72,7 +65,7 @@ const menu = ref(false)
       </VRow>
     </VContainer>
   </VApp>
-</template>
+  </template>
 
 <style scoped>
 .text-center {
@@ -111,7 +104,14 @@ const menu = ref(false)
 .my-4 {
   margin: 1rem 0;
 }
-.texto-menu{
-  color: black;
+
+.texto-ordenes{
+  padding-right: 40px;
+}
+
+@media (min-width: 768px) {
+  .texto-ordenes{
+  align-items: center;
+}
 }
 </style>
