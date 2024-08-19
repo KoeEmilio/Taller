@@ -52,7 +52,7 @@ const submit = async () => {
       });
 
       const responseText = await response.text(); // Obtener la respuesta como texto
-
+      
       try {
         const responseData = JSON.parse(responseText); // Intentar analizar como JSON
         if (response.ok) {

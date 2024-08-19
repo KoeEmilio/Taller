@@ -73,7 +73,7 @@ function Agregar() {
 .first-container{
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-
+    height: 100vh;
 }
 
 .card{

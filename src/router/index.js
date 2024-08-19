@@ -171,6 +171,7 @@ const router = createRouter({
       component: ServiciosEmpleadosView
     },
     {
+      
       //VISTA DE EMPLEADOS (VER CLIENTES)
       path: '/VerClientesEmpleados',
       name: 'VerClientesEmpleados',

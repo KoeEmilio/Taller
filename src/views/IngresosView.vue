@@ -1,48 +1,45 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { isWithinInterval, subDays, subMonths } from 'date-fns'
 
-const ordenes = ref([])
-const ordenesFiltradas = ref([])
-const total = ref(0)
 
-const formatCurrency = (value) => {
-  return new Intl.NumberFormat('es-MX', {
-    style: 'currency',
-    currency: 'MXN',
-  }).format(value)
+const snackbar = ref(false) // Estado del snackbar
+const mensaje = ref('Selecciona el mes por el que filtraras los datos')
+
+const datos = ref([])
+const showIngresos = () => {
+    fetch('http://testpdocrud.com/Ingresos')
+        .then(response => response.json())
+        .then(json => {
+            if (json.status === 200) {
+              datos.value = json.data
+            }
+             else {
+                console.error('Error en la respuesta:', json.msg); 
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error); 
+        });
 }
 
-const mostrarinfo = () => {
-  fetch('http://pruebapdo.com/Ordenes')
-    .then(response => response.json())
-    .then(json => {
-      if (json.status === 200) {
-        ordenes.value = json.data
-        verResumen('semana')  
-      }
-    })
-}
-
-const verResumen = (periodo) => {
-  const ahora = new Date()
-  let inicioPeriodo
-
-  if (periodo === 'semana') {
-    inicioPeriodo = subDays(ahora, 7)
-  } else if (periodo === 'mes') {
-    inicioPeriodo = subMonths(ahora, 1)}
-
-  ordenesFiltradas.value = ordenes.value.filter(orden => {
-    return isWithinInterval(new Date(orden.fecha), { start: inicioPeriodo, end: ahora })})
-
-  total.value = ordenesFiltradas.value.reduce((acc, orden) => acc + orden.costo, 0)}
-
-const ordenesCliente = (cliente) => {
-  return ordenes.value.filter(orden => orden.cliente === cliente)}
 onMounted(() => {
-  mostrarinfo()
-})
+    showIngresos();
+});
+
+const months = [
+  { text: 'Enero', value: '01' },
+  { text: 'Febrero', value: '02' },
+  { text: 'Marzo', value: '03' },
+  { text: 'Abril', value: '04' },
+  { text: 'Mayo', value: '05' },
+  { text: 'Junio', value: '06' },
+  { text: 'Julio', value: '07' },
+  { text: 'Agosto', value: '08' },
+  { text: 'Septiembre', value: '09' },
+  { text: 'Octubre', value: '10' },
+  { text: 'Noviembre', value: '11' },
+  { text: 'Diciembre', value: '12' }
+];
 </script>
 
 <template>
@@ -58,66 +55,73 @@ onMounted(() => {
         </router-link>
         <h1 class="text-center w-100">INGRESOS</h1>
       </v-app-bar>
+      <v-col>
+        <v-row>
+          <v-btn class="boton-ayuda" size="small" density="compact" icon @click="snackbar = true">
+            <v-icon size="13px">mdi-help</v-icon> 
+          </v-btn>
+          <v-snackbar v-model="snackbar" class="mensaje" :timeout="2000"> 
+             {{ mensaje }}
+          </v-snackbar>
+          <br>
+          <br>
+        </v-row>
 
-      <v-row class="summary-options" justify="center">
-        <v-btn @click="verResumen('semana')">Resumen de la Semana</v-btn>
-        <v-btn @click="verResumen('mes')">Resumen del Mes</v-btn>
-      </v-row>
-
-      <v-card class="total-card" outlined>
-        <v-card-title>Total: {{ formatCurrency(total) }}</v-card-title>
-      </v-card>
-
-      <v-card class="income-card" v-for="orden in ordenesFiltradas" :key="orden.id">
-        <v-card-title>{{ orden.servicio }}</v-card-title>
-        <v-card-subtitle>Fecha: {{ orden.fecha }}</v-card-subtitle>
-        <v-card-text>
-          <div>Costo: {{ formatCurrency(orden.costo) }}</div>
-          <div>Realizado por: {{ orden.tecnico }}</div>
-          <div>Detalles: {{ orden.detalles }}</div>
-          <div v-if="ordenesCliente(orden.cliente).length > 1">
-            <strong>Más órdenes de este cliente:</strong>
-            <ul>
-              <li v-for="otraOrden in ordenesCliente(orden.cliente)" :key="otraOrden.id">
-                {{ otraOrden.servicio }} - {{ otraOrden.fecha }}
-              </li>
-            </ul>
-          </div>
-        </v-card-text>
-      </v-card>
+        <v-row class="contenedor-botones">
+          <p>Selecciona un mes: </p> &nbsp;
+          <select v-model="selectedMonth" class="select">
+            <option value="" disabled selected>Meses</option>
+            <option>Ninguno</option>
+            <option v-for="month in months" :key="month.value" :value="month.value">
+              {{ month.text }}
+            </option>
+          </select>
+        </v-row>
+        <v-row class="contenedor-tabla">
+          <v-data-table-virtual
+          :headers="headers"
+          :items="datos"
+          ></v-data-table-virtual>
+        </v-row>
+      </v-col>  
     </v-container>
   </v-app>
 </template>
 
 <style scoped>
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
-  padding-top: 100px;
+  display: flex;
+  width: 100vw;
+  padding-top: 90px;
 }
-
-.summary-options {
-  margin-top: -4px; 
-  margin-bottom: 20px;
-  padding-top: 4px; 
+.contenedor-interno{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
 }
-
-.summary-options v-btn {
-  margin: 0 10px;
+.boton-ayuda{
+  background: black;
+  color: white;
 }
-
-.total-card {
-  margin-top: 20px;
-  padding: 16px;
-  border: 2px solid black;
-  border-radius: 8px;
+.contenedor-botones{
+  display: flex;
+  justify-content: start;
+  width: 86vw;
+}
+.select{
   text-align: center;
+  width: 200px;
+  background: rgb(255, 255, 255);
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.mensaje{
+  display: flex;
+  justify-content: center;
+}
+.contenedor-tabla{
+  width: 94vw;
+  margin-left: -70px;
 }
 
-.income-card {
-  margin-top: 20px;
-  border: 2px solid black;
-  border-radius: 8px;
-}
 </style>
