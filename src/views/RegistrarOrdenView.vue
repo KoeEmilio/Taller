@@ -1,20 +1,21 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-const empleadoSeleccionado = ref(null);
-const vehiculoSeleccionado = ref(null);
-const motivo = ref('');
-const citaSeleccionada = ref(null);
-const estadoSeleccionado = ref('');
+const Empleado_Que_Atendera = ref(null);
+const Vehiculo = ref(null);
+const Motivo = ref('');
+const Cita = ref(null);
+const Estado = ref('');
 const valid = ref(false);
 const Empleados = ref([]);
 const Vehiculos = ref([]);
 const Citas = ref([]);
 const form = ref(null);
+const tieneCita = ref(''); // Nueva referencia para el radio button
 
 const fetchEmpleados = async () => {
   try {
-    const response = await fetch('http://testpdo.com/empleados');
+    const response = await fetch('http://testpdocrudo.com/empleados');
     if (response.ok) {
       const json = await response.json();
       Empleados.value = json.data; 
@@ -29,7 +30,7 @@ const fetchEmpleados = async () => {
 
 const fetchVehiculos = async () => {
   try {
-    const response = await fetch('http://testpdo.com/vehiculos');
+    const response = await fetch('http://testpdocrudo.com/vehiculos');
     if (response.ok) {
       const json = await response.json();
       Vehiculos.value = json.data; 
@@ -44,7 +45,7 @@ const fetchVehiculos = async () => {
 
 const fetchCitas = async () => {
   try {
-    const response = await fetch('http://testpdo.com/citas');
+    const response = await fetch('http://testpdocrudo.com/vercitas');
     if (response.ok) {
       const json = await response.json();
       Citas.value = json.data; 
@@ -62,15 +63,15 @@ const submit = async () => {
 
   if (isValid) {
     const data = {
-      Empleado: empleadoSeleccionado.value,
-      Vehiculo: vehiculoSeleccionado.value,
-      Motivo: motivo.value,
-      Cita: citaSeleccionada.value,
-      Estado: estadoSeleccionado.value,
+      Empleado_Que_Atendera: Empleado_Que_Atendera.value,
+      Vehiculo: Vehiculo.value,
+      Motivo: Motivo.value,
+      Cita: Cita.value,
+      Estado: Estado.value,
     };
 
     try {
-      const response = await fetch('http://testpdo.com/registroordenes', {
+      const response = await fetch('http://testpdocrudo.com/registrarorden', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -121,17 +122,17 @@ onMounted(() => {
             <v-form ref="form" v-model="valid">
               <div>
                 <label for="empleado">Seleccione un empleado:</label>
-                <select id="empleado" v-model="empleadoSeleccionado">
+                <select id="empleado" v-model="Empleado_Que_Atendera">
                   <option value="" disabled selected></option>
                   <option v-for="option in Empleados" :key="option.EmpleadoID" :value="option.EmpleadoID">
-                    {{ option.Nombre }}
+                    {{ option.Nombre }} - {{ option.Estado }}
                   </option>
                 </select>
               </div>
 
               <div>
                 <label for="vehiculo">Vehículo:</label>
-                <select id="vehiculo" v-model="vehiculoSeleccionado">
+                <select id="vehiculo" v-model="Vehiculo">
                   <option value="" disabled selected></option>
                   <option v-for="option in Vehiculos" :key="option.VehiculoID" :value="option.VehiculoID">
                     {{ option.Marca }} - {{ option.Modelo }} - {{ option.Matricula }}
@@ -141,12 +142,18 @@ onMounted(() => {
 
               <div>
                 <label for="motivo">Motivo:</label>
-                <input type="text" id="motivo" v-model="motivo" placeholder="">
+                <input type="text" id="motivo" v-model="Motivo" placeholder="">
               </div>
 
-              <div>
+              <v-radio-group v-model="tieneCita" inline> Tiene Cita:
+                <v-radio label="Si" value="si"></v-radio>
+                <v-radio label="No" value="no"></v-radio>
+              </v-radio-group>
+
+              <!-- Mostrar solo si tieneCita es "si" -->
+              <div v-if="tieneCita === 'si'">
                 <label for="cita">Seleccione una cita:</label>
-                <select id="cita" v-model="citaSeleccionada">
+                <select id="cita" v-model="Cita">
                   <option value="" disabled selected></option>
                   <option v-for="option in Citas" :key="option.CitaID" :value="option.CitaID">
                     {{ option.Fecha }} - {{ option.Hora }}
@@ -154,15 +161,6 @@ onMounted(() => {
                 </select>
               </div>
 
-              <div>
-                <label for="estado">Estado de la orden:</label>
-                <select id="estado" v-model="estadoSeleccionado">
-                  <option value="" disabled selected></option>
-                  <option value="Pendiente">Pendiente</option>
-                  <option value="En Proceso">En Proceso</option>
-                  <option value="Completada">Completada</option>
-                </select>
-              </div>
 
               <v-btn id="btn-registrar" :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
@@ -222,4 +220,3 @@ select, input[type="text"] {
 }
 }
 </style>
-

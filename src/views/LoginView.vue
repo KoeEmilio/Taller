@@ -2,46 +2,72 @@
 import { ref } from 'vue';
 import logo from '@/img/logonegro.png';
 import video from '../video/taller.mp4';  
-import { useUserStore } from '@/stores/userStorage';
+import { useUserStore } from '@/stores/userStore';
 import router from '@/router';
-
 
 const userStore = useUserStore();
 const Usuario = ref('');
 const Contrasena = ref('');
-
-;
 const showPassword = ref(false);
 
 const login = async () => {
   try {
-    const response = await fetch('http://testpdo.com/login', {
+    const loginData = {
+      Usuario: Usuario.value,
+      Contrasena: Contrasena.value      
+    };
+
+    console.log('Datos enviados:', loginData);
+
+    const response = await fetch('http://testpdocrudo.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        Usuario: Usuario.value,
-        Contrasena: Contrasena.value      
-      })
+      body: JSON.stringify(loginData)
     });
 
+    // Revisa el status de la respuesta para asegurar que sea 200 OK
     if (!response.ok) {
-      throw new Error('Error en la autenticación');
+      throw new Error(`Error en la respuesta de la API: ${response.statusText}`);
     }
 
     const data = await response.json();
+    console.log('Respuesta de la API:', data);
 
-    if (data.msg === 'success') {
-      userStore.setUsuario(data.data.usuario);
-      userStore.setToken(data.data._token);
-      router.push({
-        name:'MenuPrincipal',
-      })
+    // Verifica la estructura de la respuesta
+    if (data && data.status === 200 && data.msg === 'success' && data.data) {
+      const usuario = data.data.usuario;
+      const token = data.data._token;
+
+      if (usuario && token) {
+        userStore.setUsuario(usuario);
+        userStore.setToken(token);
+
+        // Verifica si el rol está presente
+        if (usuario.Rol) {
+          // Redirige según el rol del usuario
+          if (usuario.Rol === 'Administrador') {
+            router.push({ name: 'MenuPrincipal' });
+          } else if (usuario.Rol === 'Empleado') {
+            router.push({ name: 'MenuEmpleados' });
+          } else if (usuario.Rol === 'Cliente') {
+            router.push({ name: 'VistaCliente' });
+          } else {
+            throw new Error('Rol de usuario desconocido.');
+          }
+        } else {
+          throw new Error('Rol del usuario no está definido.');
+        }
+      } else {
+        throw new Error('Respuesta de la API no contiene datos de usuario o token.');
+      }
+    } else {
+      throw new Error('Respuesta de la API no contiene datos válidos.');
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('TONOTO');
+    alert('Error en la autenticación. Verifica tus credenciales.');
   }
 };
 </script>
@@ -120,14 +146,16 @@ const login = async () => {
 }
 
 .contenedor-inicio-sesion{
-width: 90%;
-height: 100%;
+  width: 90%;
+  height: 100%;
 }
+
 @media (min-width: 768px) {
-  .contenedor-inicio-sesion{
-width: 400px;
-} 
+  .contenedor-inicio-sesion {
+    width: 400px;
+  } 
 }
+
 .transparente {
   background-color: rgba(255, 255, 255, 0.6) !important;
   box-shadow: none !important;

@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://testpdo.com/citas')
+  fetch('http://testpdocrudo.com/citass')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
@@ -36,7 +36,7 @@ const mostrarEditFormulario = (cita) => {
 const actualizarCita = async (estado) => {
   try {
     selectedCita.value.Estado = estado;
-    const response = await fetch(`http://testpdo.com/actualizarcita`, {
+    const response = await fetch(`http://testpdocrudo.com/actualizarcita`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ const actualizarCita = async (estado) => {
 
 const headers = [
   { text: 'Cliente', value: 'Cliente' },
-  { text: 'Fecha', value: 'Fecha' },
+  { text: 'Fecha_Cita', value: 'Fecha_Cita' },
   { text: 'Hora', value: 'Hora' },
   { text: 'Estado', value: 'Estado' },
   { text: 'Acciones', value: 'action', sortable: false }
@@ -95,15 +95,15 @@ const headers = [
             <template v-slot:[`item.action`]="{ item }">
               <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
                 <v-icon left>mdi-pencil</v-icon> 
-                Editar
+                
               </v-btn>
               <v-btn color="green" @click="actualizarCita('Confirmada')">
                 <v-icon left>mdi-check-circle-outline</v-icon> 
-                Aceptar
+                
               </v-btn>
               <v-btn color="red" @click="actualizarCita('Cancelada')">
                 <v-icon left>mdi-cancel"></v-icon> 
-                Rechazar
+                
               </v-btn>
             </template>
           </v-data-table>

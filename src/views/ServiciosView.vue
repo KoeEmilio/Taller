@@ -8,9 +8,9 @@ const mostrarinfo = () => {
   fetch('http://testpdo.com/servicios')
     .then(response => response.json())
     .then(json => {
-      if (json.status === 200) {
+    if (json.status === 200) {
         datos.value = json.data;
-      }
+    }
     });
 };
 
@@ -25,6 +25,7 @@ Nombre_Servicio: '',
 Descripcion: '',
 Costo_Servicio: '',
 Nombre_TS: '',
+Tipo_ServicioID: '',
 ServicioID: '' 
 })
 
