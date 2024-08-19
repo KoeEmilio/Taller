@@ -18,53 +18,6 @@ onMounted(() => {
   mostrarinfo();
 });
 
-const showEditFormulario = ref(false);
-
-const selectedVehiculo = ref({
-  Marca: '',
-  Modelo: '',
-  Año: '',
-  Placa: '',
-  Propietario: '',
-  VehiculoID: ''
-});
-
-const mostrarEditFormulario = (vehiculo) => {
-  selectedVehiculo.value = { ...vehiculo };
-  console.log("Vehículo seleccionado para edición:", selectedVehiculo.value);
-  showEditFormulario.value = true;
-};
-
-const editarVehiculo = async () => {
-  try {
-    console.log("Datos enviados para actualizar:", JSON.stringify(selectedVehiculo.value));
-    const response = await fetch(`http://testpdocrud.com/actualizarvehiculos`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(selectedVehiculo.value)
-    });
-
-    if (response.ok) {
-      mostrarinfo();
-      showEditFormulario.value = false;
-    } else {
-      console.error('Error updating vehicle:', response.statusText);
-    }
-  } catch (error) {
-    console.error('Error occurred during fetch:', error);
-  }
-};
-
-const headers = [
-  { text: 'Marca', value: 'Marca' },
-  { text: 'Modelo', value: 'Modelo' },
-  { text: 'Año', value: 'Año' },
-  { text: 'Placa', value: 'Placa' },
-  { text: 'Propietario', value: 'Propietario' },
-  { text: 'Acciones', value: 'action', sortable: false }
-];
 </script>
 
 <template>
@@ -95,12 +48,6 @@ const headers = [
             :items="datos"
             :search="search"
           >
-            <template v-slot:[`item.action`]="{ item }">
-              <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
-                <v-icon left>mdi-pencil</v-icon> 
-                Editar
-              </v-btn>
-            </template>
           </v-data-table>
         </v-card>
         

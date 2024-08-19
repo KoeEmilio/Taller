@@ -22,10 +22,10 @@ onMounted(() => {
 <template>
   <v-app>
     <v-app-bar app color="#1a1a1a" dark>
-      <router-link to="MenuDetalles">
+      <router-link to="MenuDetallesEmpleado">
         <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="text-center w-100">VER DETALLES</h1>
+      <h1 class="text-center w-100">VER DETALLES DE REFACCIÓN</h1>
     </v-app-bar>
 
     <v-main>

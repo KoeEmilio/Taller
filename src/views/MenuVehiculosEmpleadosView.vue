@@ -17,7 +17,7 @@ import { RouterLink} from 'vue-router'</script>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
-        <VCol cols="12" sm="4" class="d-flex justify-center">
+        <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/RegistroVehiculosEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
@@ -28,7 +28,7 @@ import { RouterLink} from 'vue-router'</script>
             </VBtn>
           </RouterLink>
         </VCol>
-        <VCol cols="12" sm="4" class="d-flex justify-center">
+        <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/VerVehiculosEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
@@ -39,12 +39,23 @@ import { RouterLink} from 'vue-router'</script>
             </VBtn>
           </RouterLink>
         </VCol>
-        <VCol cols="12" sm="4" class="d-flex justify-center">
+        <VCol cols="12" sm="3" class="d-flex justify-center">
           <RouterLink to="/ServiciosEmpleados" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
                 <v-icon :style="{ fontSize: '48px' }">mdi-car-wrench</v-icon>
                 <h1>SERVICIOS</h1>
+              </div>
+            </VBtn>
+          </RouterLink>
+        </VCol>
+        <VCol cols="12" sm="3" class="d-flex justify-center">
+          <RouterLink to="/RegistrarServicioEmpleado" class="menu-button text-decoration-none">
+            <VBtn color="#1a1a1a" dark class="w-100 h-100">
+              <div class="text-center">
+                <v-icon :style="{ fontSize: '48px' }">mdi-car-wrench</v-icon>
+                <h2> AGREGAR</h2>
+                <h2>SERVICIOS</h2>
               </div>
             </VBtn>
           </RouterLink>

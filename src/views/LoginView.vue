@@ -49,7 +49,7 @@ const login = async () => {
           // Redirige según el rol del usuario
           if (usuario.Rol === 'Administrador') {
             router.push({ name: 'MenuPrincipal' });
-          } else if (usuario.Rol === 'Trabajador') {
+          } else if (usuario.Rol === 'Empleado') {
             router.push({ name: 'MenuEmpleados' });
           } else if (usuario.Rol === 'Cliente') {
             router.push({ name: 'VistaCliente' });

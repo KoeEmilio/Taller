@@ -5,39 +5,36 @@ import { RouterLink } from 'vue-router'
 <template>
   <VApp>
     <v-app-bar app color="#1a1a1a">
-        <router-link to="/MenuOrdenDetalleEmpleado">
+        <router-link to="/MenuClientesEmpleados">
         <v-btn
             class="ma-3"
             color="white"
             icon="mdi-arrow-left-bold-circle-outline"
         ></v-btn>
         </router-link>
-        <h1 class="texto-ordenes text-center w-100">ORDENES</h1>
+        <h1 class="texto-ordenes text-center w-100">ÓRDENES Y DETALLES</h1>
         </v-app-bar>
         <v-container></v-container>
     <VContainer class="d-flex flex-column align-center fill-height">
       <VImg src="/src/img/logonegro.png" alt="logo" width="150" height="100" class="my-4" />
       <VRow class="menu flex-grow-1">
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/RegistrarOrdenEmpleado" class="menu-button text-decoration-none">
+          <RouterLink to="/MenuOrdenesEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-plus</v-icon>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document</v-icon>
                 <br>
-                <h1>REGISTRAR</h1>
-                <h1>ORDEN</h1>
+                <h1>ÓRDENES</h1>
               </div>
             </VBtn>
           </RouterLink>
         </VCol>
         <VCol cols="12" sm="3" class="d-flex justify-center">
-          <RouterLink to="/VerOrdenesEmpleados" class="menu-button text-decoration-none">
+          <RouterLink to="/MenuDetallesEmpleado" class="menu-button text-decoration-none">
             <VBtn color="#1a1a1a" dark class="w-100 h-100">
               <div class="text-center">
-                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-multiple</v-icon>
-                <br>
-                <h1>VER</h1>
-                <h1>ÓRDENES</h1>
+                <v-icon :style="{ fontSize: '48px' }">mdi-file-document-check</v-icon>
+                <h1>DETALLES</h1>
               </div>
             </VBtn>
           </RouterLink>
@@ -45,7 +42,7 @@ import { RouterLink } from 'vue-router'
       </VRow>
     </VContainer>
   </VApp>
-  </template>
+</template>
 
 <style scoped>
 .text-center {

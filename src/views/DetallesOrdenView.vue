@@ -93,7 +93,7 @@ const resetForm = () => {
       <router-link to="/MenuDetalles">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="texto-ordenes text-center w-100">REGISTRAR DETALLE</h1>
+      <h1 class="texto-ordenes text-center w-100">REGISTRAR DETALLEㅤㅤ</h1>
     </v-app-bar>
 
     <div class="container">
@@ -199,11 +199,6 @@ input[type="date"] {
   .Card {
     padding: 12px;
   }
-}
-
-.texto-ordenes {
-  padding-right: 30px;
-  font-size: 20px;
 }
 
 @media (min-width: 768px) {

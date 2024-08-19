@@ -17,51 +17,6 @@ const mostrarinfo = () => {
 onMounted(() => {
   mostrarinfo();
 });
-
-const showEditFormulario = ref(false);
-
-const selectedCita = ref({
-  Cliente: '',
-  Fecha: '',
-  Hora: '',
-  Estado: '',
-  CitaID: ''
-});
-
-const mostrarEditFormulario = (cita) => {
-  selectedCita.value = { ...cita };
-  showEditFormulario.value = true;
-};
-
-const actualizarCita = async (estado) => {
-  try {
-    selectedCita.value.Estado = estado;
-    const response = await fetch(`http://testpdocrud.com/actualizarcita`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(selectedCita.value)
-    });
-
-    if (response.ok) {
-      mostrarinfo();
-      showEditFormulario.value = false;
-    } else {
-      console.error('Error al actualizar cita:', response.statusText);
-    }
-  } catch (error) {
-    console.error('Ocurrió un error durante la actualización:', error);
-  }
-};
-
-const headers = [
-  { text: 'Cliente', value: 'Cliente' },
-  { text: 'Fecha', value: 'Fecha' },
-  { text: 'Hora', value: 'Hora' },
-  { text: 'Estado', value: 'Estado' },
-  { text: 'Acciones', value: 'action', sortable: false }
-];
 </script>
 
 <template>
@@ -92,40 +47,8 @@ const headers = [
             :items="datos"
             :search="search"
           >
-            <template v-slot:[`item.action`]="{ item }">
-              <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
-                <v-icon left>mdi-pencil</v-icon> 
-                Editar
-              </v-btn>
-              <v-btn color="green" @click="actualizarCita('Confirmada')">
-                <v-icon left>mdi-check-circle-outline</v-icon> 
-                Aceptar
-              </v-btn>
-              <v-btn color="red" @click="actualizarCita('Cancelada')">
-                <v-icon left>mdi-cancel"></v-icon> 
-                Rechazar
-              </v-btn>
-            </template>
           </v-data-table>
         </v-card>
-        
-        <v-dialog v-model="showEditFormulario" max-width="500px">
-          <div v-show="showEditFormulario === true">
-            <v-card class="pa-5">
-              <v-card-title>Editar Cita</v-card-title>
-              <v-card-text class="scrollable-content">
-                <v-text-field label="Cliente" v-model="selectedCita.Cliente"></v-text-field>
-                <v-text-field label="Fecha" v-model="selectedCita.Fecha" type="date"></v-text-field>
-                <v-text-field label="Hora" v-model="selectedCita.Hora" type="time"></v-text-field>
-                <v-text-field label="Estado" v-model="selectedCita.Estado" readonly></v-text-field>
-                <v-btn color="#1a1a1a" @click="actualizarCita(selectedCita.value.Estado)">
-                  <v-icon left>mdi-content-save</v-icon> 
-                  Guardar
-                </v-btn>
-              </v-card-text>
-            </v-card>
-          </div>
-        </v-dialog>
       </v-container>
     </v-main>
   </v-app>
