@@ -65,26 +65,10 @@ const months = [
         <h1 class="text-center w-100">INGRESOS</h1>
       </v-app-bar>
 
-      <v-main>
-        <v-container class="py-5">
-          <v-row class="summary-options" justify="center">
-            <v-col cols="12" md="4">
-              <v-text-field 
-                label="Fecha" 
-                type="date" 
-                v-model="selectedDate"
-                :max="new Date().toISOString().substr(0, 10)"
-                required>
-              </v-text-field>
-            </v-col>
-
-            <v-col cols="12" md="4">
-              <v-btn block @click="verResumen('semana')">Resumen de la Semana</v-btn>
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-btn block @click="verResumen('mes')">Resumen del Mes</v-btn>
-            </v-col>
-          </v-row>
+      <v-row class="summary-options" justify="center">
+        <v-btn @click="verResumen('semana')">Resumen de la Semana</v-btn>
+        <v-btn @click="verResumen('mes')">Resumen del Mes</v-btn>
+      </v-row>
 
       <v-card class="total-card" outlined>
         <v-card-title>Total: {{ formatCurrency(total) }}</v-card-title>
