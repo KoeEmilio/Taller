@@ -13,7 +13,16 @@ const imagenUrl = computed(() => store.profileImage);
 const tempImagen = ref(imagenUrl.value)
 const dialog = ref(false)
 
+const dialogg = ref(false)
 
+const mostrarDialog = () => {
+  if (dialogg.value === false) {
+    dialogg.value=true
+  }
+  else {
+    dialogg.value=false
+  }
+}
 
 const openDialog = () => {
   tempImagen.value = imagenUrl.value  // Cargar la URL actual en el campo de entrada
@@ -56,6 +65,9 @@ const fileInput = ref(null)
 const triggerFileInput = () => {
   fileInput.value.click();
 };
+
+
+const selectedDate = ref(new Date().toISOString().substr(0, 10));
 
 
 </script>
@@ -104,8 +116,10 @@ const triggerFileInput = () => {
           </router-link>
 
           <router-link to="/VistaCliente/MisCitas">
-            <v-list-item prepend-icon="mdi-calendar" title="Mis Citas" value="appointment"></v-list-item>
+            <v-list-item prepend-icon="mdi-calendar" title="Mis citas" value="appointment"></v-list-item>
           </router-link>
+
+            <v-list-item @click="mostrarDialog" prepend-icon="mdi-calendar-clock" title="Agendar cita" value=""></v-list-item>
 
         </v-list>
         <v-list class="btn-home" density="compact" nav>
@@ -168,6 +182,36 @@ const triggerFileInput = () => {
     </v-row>
      
     </v-dialog>
+    <v-dialog v-model="dialogg" max-width="800px" >
+      <v-card class="card-dialog">
+         <v-col>
+          <v-row class="contenedor-formularios">
+            <h2>Agenda tu cita</h2>
+          </v-row>
+          <v-row class="contenedor-formularios">
+            <v-text-field 
+                class="formCita"
+                label="Fecha" 
+                type="date" 
+                v-model="selectedDate"
+                :min="new Date().toISOString().substr(0, 10)"
+                required>
+            </v-text-field>
+          </v-row>
+          <v-row class="contenedor-formularios">
+            <v-select 
+            class="formCita"
+            label="Selecciona un horario"
+            ></v-select>
+          </v-row>
+          <v-row class="contenedor-btn">
+            <v-btn class="boton">Agendar</v-btn>
+            
+          </v-row>
+        </v-col>
+        
+      </v-card>
+    </v-dialog>
 
 
   </div>
@@ -229,6 +273,25 @@ const triggerFileInput = () => {
 }
 .btn-home{
   width: 100vw;
-  margin-top: 260px;
+  margin-top: 220px;
 }
+.formCita{
+  max-width: 600px;
+  margin-top: 10px;
+}
+.card-dialog{
+  height: 300px;
+}
+.contenedor-formularios{
+  justify-content: center;
+}
+.contenedor-btn{
+  margin-left: 90px;
+}
+.boton{
+  width: 100px;
+  margin-top: 20px;
+  background-color:rgb(220, 224, 245);
+}
+
 </style>

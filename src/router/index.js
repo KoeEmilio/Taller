@@ -49,7 +49,6 @@ import MenuOrdenDetalleEmpleadoView from '@/views/MenuOrdenDetalleEmpleadoView.v
 import RegistrarDetalleRefaccionEmpleadoView from '@/views/RegistrarDetalleRefaccionEmpleadoView.vue'
 import VerDetalleRefaccionEmpleadoView from '@/views/VerDetalleRefaccionEmpleadoView.vue'
 import RegistrarServicioEmpleadoView from '@/views/RegistrarServicioEmpleadoView.vue'
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -281,7 +280,7 @@ const router = createRouter({
           path: 'MisCitas',
           name: 'MisCitas',
           component: CitasVistaClientesView
-        }
+        },
       ]
     },
     {
