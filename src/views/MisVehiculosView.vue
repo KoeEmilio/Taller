@@ -51,10 +51,11 @@ onMounted(() => {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     height: 100vh;
+    
 }
 .card{
     grid-column: 2; 
-    width: 56vw;
+    width: 60vw;
     height: 100vh;
     overflow-y: auto;
 }

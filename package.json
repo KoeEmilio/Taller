@@ -16,8 +16,10 @@
     "pinia": "^2.2.0",
     "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.4.29",
+    "vue-date-fns": "^2.0.2",
     "vue-router": "^4.3.3",
-    "vuetify": "^3.6.11"
+    "vue3-datepicker": "^0.4.0",
+    "vuetify": "^3.7.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",

@@ -1,48 +1,54 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { isWithinInterval, subDays, subMonths } from 'date-fns'
+import { ref, onMounted,watch } from 'vue'
 
-const ordenes = ref([])
-const ordenesFiltradas = ref([])
-const total = ref(0)
 
-const formatCurrency = (value) => {
-  return new Intl.NumberFormat('es-MX', {
-    style: 'currency',
-    currency: 'MXN',
-  }).format(value)
+const snackbar = ref(false) // Estado del snackbar
+const mensaje = ref('Selecciona el mes por el que filtraras los datos')
+const selectedMonth = ref('')
+
+const datos = ref([])
+const showIngresos = (mes = '') => {
+    let url = 'http://testpdocrud.com/Ingresos';
+    if (mes) {
+        url += `/${mes}`;  // Añadimos el parámetro del mes a la URL
+    }
+
+    fetch(url)
+        .then(response => response.json())
+        .then(json => {
+            if (json.status === 200) {
+              datos.value = json.data
+            } else {
+                console.error('Error en la respuesta:', json.msg); 
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error); 
+        });
 }
-
-const mostrarinfo = () => {
-  fetch('http://pruebapdo.com/Ordenes')
-    .then(response => response.json())
-    .then(json => {
-      if (json.status === 200) {
-        ordenes.value = json.data
-        verResumen('semana')  
-      }
-    })
-}
-
-const verResumen = (periodo) => {
-  const ahora = new Date()
-  let inicioPeriodo
-
-  if (periodo === 'semana') {
-    inicioPeriodo = subDays(ahora, 7)
-  } else if (periodo === 'mes') {
-    inicioPeriodo = subMonths(ahora, 1)}
-
-  ordenesFiltradas.value = ordenes.value.filter(orden => {
-    return isWithinInterval(new Date(orden.fecha), { start: inicioPeriodo, end: ahora })})
-
-  total.value = ordenesFiltradas.value.reduce((acc, orden) => acc + orden.costo, 0)}
-
-const ordenesCliente = (cliente) => {
-  return ordenes.value.filter(orden => orden.cliente === cliente)}
 onMounted(() => {
-  mostrarinfo()
-})
+    showIngresos();
+});
+
+// Escuchar cambios en `selectedMonth` para filtrar los datos
+watch(selectedMonth, (newMonth) => {
+    showIngresos(newMonth);  // Filtra los datos según el mes seleccionado
+});
+
+const months = [
+  { text: 'Enero', value: '01' },
+  { text: 'Febrero', value: '02' },
+  { text: 'Marzo', value: '03' },
+  { text: 'Abril', value: '04' },
+  { text: 'Mayo', value: '05' },
+  { text: 'Junio', value: '06' },
+  { text: 'Julio', value: '07' },
+  { text: 'Agosto', value: '08' },
+  { text: 'Septiembre', value: '09' },
+  { text: 'Octubre', value: '10' },
+  { text: 'Noviembre', value: '11' },
+  { text: 'Diciembre', value: '12' }
+];
 </script>
 
 <template>
@@ -80,62 +86,65 @@ onMounted(() => {
             </v-col>
           </v-row>
 
-          <v-card class="total-card mb-5" outlined>
-            <v-card-title>Total: {{ formatCurrency(total) }}</v-card-title>
-          </v-card>
+      <v-card class="total-card" outlined>
+        <v-card-title>Total: {{ formatCurrency(total) }}</v-card-title>
+      </v-card>
 
-          <v-card class="income-card mb-3" v-for="orden in ordenesFiltradas" :key="orden.id">
-            <v-card-title>{{ orden.servicio }}</v-card-title>
-            <v-card-subtitle>Fecha: {{ orden.fecha }}</v-card-subtitle>
-            <v-card-text>
-              <div>Costo: {{ formatCurrency(orden.costo) }}</div>
-              <div>Realizado por: {{ orden.tecnico }}</div>
-              <div>Detalles: {{ orden.detalles }}</div>
-              <div v-if="ordenesCliente(orden.cliente).length > 1">
-                <strong>Más órdenes de este cliente:</strong>
-                <ul>
-                  <li v-for="otraOrden in ordenesCliente(orden.cliente)" :key="otraOrden.id">
-                    {{ otraOrden.servicio }} - {{ otraOrden.fecha }}
-                  </li>
-                </ul>
-              </div>
-            </v-card-text>
-          </v-card>
-        </v-container>
-      </v-main>
+      <v-card class="income-card" v-for="orden in ordenesFiltradas" :key="orden.id">
+        <v-card-title>{{ orden.servicio }}</v-card-title>
+        <v-card-subtitle>Fecha: {{ orden.fecha }}</v-card-subtitle>
+        <v-card-text>
+          <div>Costo: {{ formatCurrency(orden.costo) }}</div>
+          <div>Realizado por: {{ orden.tecnico }}</div>
+          <div>Detalles: {{ orden.detalles }}</div>
+          <div v-if="ordenesCliente(orden.cliente).length > 1">
+            <strong>Más órdenes de este cliente:</strong>
+            <ul>
+              <li v-for="otraOrden in ordenesCliente(orden.cliente)" :key="otraOrden.id">
+                {{ otraOrden.servicio }} - {{ otraOrden.fecha }}
+              </li>
+            </ul>
+          </div>
+        </v-card-text>
+      </v-card>
     </v-container>
   </v-app>
 </template>
 
 <style scoped>
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
-  padding-top: 100px;
+  display: flex;
+  width: 100vw;
+  padding-top: 90px;
 }
-
-.summary-options {
-  margin-top: -4px; 
-  margin-bottom: 20px;
-  padding-top: 4px; 
+.contenedor-interno{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
 }
-
-.summary-options v-btn {
-  margin: 0 10px;
+.boton-ayuda{
+  background: black;
+  color: white;
 }
-
-.total-card {
-  margin-top: 20px;
-  padding: 16px;
-  border: 2px solid black;
-  border-radius: 8px;
+.contenedor-botones{
+  display: flex;
+  justify-content: start;
+  width: 86vw;
+}
+.select{
   text-align: center;
+  width: 200px;
+  background: rgb(255, 255, 255);
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.mensaje{
+  display: flex;
+  justify-content: center;
+}
+.contenedor-tabla{
+  width: 94vw;
+  margin-left: -70px;
 }
 
-.income-card {
-  margin-top: 20px;
-  border: 2px solid black;
-  border-radius: 8px;
-}
 </style>

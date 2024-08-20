@@ -44,13 +44,12 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 0 20px; /* Ajusta este valor para el padding lateral */
 }
-
-.data-table-card {
-    width: 100%;
-    max-width: 1200px; /* Controla el ancho máximo de la tabla */
-    padding: 20px; /* Padding interno de la tarjeta */
+.card{
+    grid-column: 2;
+    width: 56vw;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 #card-title {
