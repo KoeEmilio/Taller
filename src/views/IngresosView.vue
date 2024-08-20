@@ -64,33 +64,35 @@ const months = [
         </router-link>
         <h1 class="text-center w-100">INGRESOS</h1>
       </v-app-bar>
+      <v-col>
+        <v-row>
+          <v-btn class="boton-ayuda" size="small" density="compact" icon @click="snackbar = true">
+            <v-icon size="13px">mdi-help</v-icon> 
+          </v-btn>
+          <v-snackbar v-model="snackbar" class="mensaje" :timeout="2000"> 
+             {{ mensaje }}
+          </v-snackbar>
+          <br>
+          <br>
+        </v-row>
 
-      <v-row class="summary-options" justify="center">
-        <v-btn @click="verResumen('semana')">Resumen de la Semana</v-btn>
-        <v-btn @click="verResumen('mes')">Resumen del Mes</v-btn>
-      </v-row>
-
-      <v-card class="total-card" outlined>
-        <v-card-title>Total: {{ formatCurrency(total) }}</v-card-title>
-      </v-card>
-
-      <v-card class="income-card" v-for="orden in ordenesFiltradas" :key="orden.id">
-        <v-card-title>{{ orden.servicio }}</v-card-title>
-        <v-card-subtitle>Fecha: {{ orden.fecha }}</v-card-subtitle>
-        <v-card-text>
-          <div>Costo: {{ formatCurrency(orden.costo) }}</div>
-          <div>Realizado por: {{ orden.tecnico }}</div>
-          <div>Detalles: {{ orden.detalles }}</div>
-          <div v-if="ordenesCliente(orden.cliente).length > 1">
-            <strong>Más órdenes de este cliente:</strong>
-            <ul>
-              <li v-for="otraOrden in ordenesCliente(orden.cliente)" :key="otraOrden.id">
-                {{ otraOrden.servicio }} - {{ otraOrden.fecha }}
-              </li>
-            </ul>
-          </div>
-        </v-card-text>
-      </v-card>
+        <v-row class="contenedor-botones">
+          <p>Selecciona un mes: </p> &nbsp;
+          <select v-model="selectedMonth" class="select">
+            <option value="" disabled selected>Meses</option>
+            <option value="">Ninguno</option>
+            <option v-for="month in months" :key="month.value" :value="month.value">
+              {{ month.text }}
+            </option>
+          </select>
+        </v-row>
+        <v-row class="contenedor-tabla">
+          <v-data-table-virtual
+          :headers="headers"
+          :items="datos"
+          ></v-data-table-virtual>
+        </v-row>
+      </v-col>  
     </v-container>
   </v-app>
 </template>
