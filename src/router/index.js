@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/userStorage'
 import HomeView from '../views/HomeView.vue'
 import ClientesMenuView from '@/views/ClientesMenuView.vue'
 import InfoEmpleadosView from '@/views/InfoEmpleadosView.vue'
@@ -31,7 +32,6 @@ import DetalleDeMisOrdenesView from '@/views/DetalleDeMisOrdenesView.vue'
 import VistaClienteView from '@/views/VistaClienteView.vue'
 import IngresosView from '@/views/IngresosView.vue'
 import RegistrarOrdenView from '@/views/RegistrarOrdenView.vue'
-import VistaCitasClientesView from '@/views/VistaCitasClientesView.vue'
 import PagosView from '@/views/PagosView.vue'
 import CitasVistaClientesView from '@/views/CitasVistaClientesView.vue'
 import MenuClientesEmpleadosView from '@/views/MenuClientesEmpleadosView.vue'
@@ -69,141 +69,161 @@ const router = createRouter({
       path: '/Clientes',
       name: 'Clientes',
       component: ClientesMenuView,
+      meta: { requiresAuth: true }
     },
     { 
       //VISTA ADMINISTRADOR (VER INFORMACION DE LOS CLIENTES)
       path: '/InfoClientes',
       name: 'InfoClientes',
-      component: ClientesInfoView
+      component: ClientesInfoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (VER LAS ÓRDENES DE SERVICIO)
       path: '/InfoOrdenes',
       name: 'InfoOrdenes',
-      component: VerOrdenesView
+      component: VerOrdenesView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DEL ADMINISTRADOR (VER LA INFORMACIÓN DE LOS EMPLEADOS)
       path: '/InfoEmpleados',
       name: 'InfoEmpleados',
-      component: InfoEmpleadosView
+      component: InfoEmpleadosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DEL ADMINISTRADOR (MENU DEL APARTADO DE VEHICULOS)
       path: '/Vehiculos',
       name: 'Vehiculos',
       component: VehiculosMenuView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DEL ADMINISTRADOR (REGISTRAR VEHICULOS)
       path: '/RegistroVehiculo',
       name: 'RegistroVehiculo',
       component: RegistroVehiculoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DEL ADMINISTRADOR (VER SERVICIOS)
       path: '/Servicios',
       name: 'Servicios',
       component: ServiciosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR  (VER VEHICULOS)
       path: '/VehiculosInfo',
       name: 'VehiculosInfo',
       component: VehiculosInfoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (MENU PRINCIPAL DE CUANDO SE INICIA COMO EMPLEADO)
       path: '/MenuEmpleados',
       name: 'MenuEmpleados',
       component: MenuEmpleadosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS  (MENU DEL APARTADO DE VEHICULOS CUANDO SE INICIA COMO EMPLEADO)
       path: '/VehiculosEmpleados',
       name: 'VehiculosEmpleados',
       component: MenuVehiculosEmpleadosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (REGISTRO DE VEHICULOS)
       path: '/RegistroVehiculosEmpleados',
       name: 'RegistroVehiculosEmpleados',
       component: RegistroVehiculoEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (VER LOS VEHICULOS)
       path: '/VerVehiculosEmpleados',
       name: 'VerVehiculosEmpleados',
-      component: VerVehiculosEmpleadosView
+      component: VerVehiculosEmpleadosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (VER LOS SERVICIOS)
       path: '/ServiciosEmpleados',
       name: 'ServiciosEmpleados',
-      component: ServiciosEmpleadosView
+      component: ServiciosEmpleadosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (VER CLIENTES)
       path: '/VerClientesEmpleados',
       name: 'VerClientesEmpleados',
-      component: VerClientesEmpleadosView
+      component: VerClientesEmpleadosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (DETALLES DE ORDENES)
       path: '/DetallesOrden',
       name: 'DetallesOrden',
-      component: DetallesOrdenView
+      component: DetallesOrdenView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (CITAS)
       path: '/VerCitas',
       name: 'VerCitas',
-      component: VerCitasView
+      component: VerCitasView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADO (CITAS)
       path: '/VerCitasEmpleado',
       name: 'VerCitasEmpleado',
-      component: VerCitasEmpleadoView
+      component: VerCitasEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (INICIO)
       path: '/MenuPrincipal',
       name: 'MenuPrincipal',
-      component: MenuPrincipalView
+      component: MenuPrincipalView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (MENU DE LAS ORDENES)
       path: '/MenuOrdenes',
       name: 'MenuOrdenes',
-      component: MenuOrdenesView
+      component: MenuOrdenesView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADO (MENU DE LAS ORDENES)
       path: '/MenuOrdenesEmpleado',
       name: 'MenuOrdenesEmpleado',
-      component: MenuOrdenesEmpleadoView
-
-
+      component: MenuOrdenesEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (VER LOS DETALLES DE ORDEN)
       path: '/VerDetalle',
       name: 'VerDetalle',
-      component: VerDetalleView
+      component: VerDetalleView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADO (VER DETALLES DE ORDEN)
       path: '/VerDetalleEmpleado',
       name: 'VerDetalleEmpleado',
-      component: VerDetalleEmpleadoView
+      component: VerDetalleEmpleadoView,
+      meta: { requiresAuth: true }
     },
-
-    //VISTA DE ADMINISTRADOR (REGISTRO DE USUARIO)
     {
+      //VISTA DE ADMINISTRADOR (REGISTRO DE USUARIO)
       path: '/RegistrarUsuario',
       name: 'RegistrarUsuario',
-      component: RegistrarUsuarioView
+      component: RegistrarUsuarioView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA PARA TODOS (LOGIN INICIO DE SESION)
@@ -215,44 +235,50 @@ const router = createRouter({
       //VISTA PARA ADMINISTRADOR (REPORTE DE INGRESOS)
       path: '/Ingresos',
       name: 'Ingresos',
-      component: IngresosView
+      component: IngresosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA PARA EMPLEADOS (REGISTRAR USUARIO)
       path: '/RegistrarUsuarioEmpleado',
       name: 'RegistrarUsuarioEmpleado',
-      component: RegistrarUsuarioEmpleadoView
+      component: RegistrarUsuarioEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA PARA ADMINISTRADOR (REGISTRAR ORDEN)
       path: '/RegistrarOrden',
       name: 'RegistrarOrden',
-      component: RegistrarOrdenView
+      component: RegistrarOrdenView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA PARA EMPLEADO (REGISTRAR ORDEN)
       path: '/RegistrarOrdenEmpleado',
       name: 'RegistrarOrdenEmpleado',
-      component: RegistrarOrdenEmpleadoView
+      component: RegistrarOrdenEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (REGISTRAR SERVICIO)
       path: '/RegistrarServicio',
-      name:'RegistrarVehiculo',
-      component: RegistrarServicioView
-    }
-    ,
+      name: 'RegistrarVehiculo',
+      component: RegistrarServicioView,
+      meta: { requiresAuth: true }
+    },
     {
       //VISTA DE ADMINISTRADOR (PAGOS)
       path: '/Pagos',
       name: 'Pagos',
-      component: PagosView
+      component: PagosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (PAGOS)
       path: '/PagosEmpleados',
       name: 'PagosEmpleados',
-      component: PagosEmpleadosView
+      component: PagosEmpleadosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DEL CLIENTE (PERFIL, VEHICULOS, ORDENES Y CITAS)
@@ -260,114 +286,136 @@ const router = createRouter({
       name: 'VistaCliente',
       redirect: '/VistaCliente/perfil',
       component: VistaClienteView,
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'perfil',
           name: 'perfil',
-          component: PerfilView
+          component: PerfilView,
+          meta: { requiresAuth: true }
         },
         {
           path: 'misVehiculos',
           name: 'misVehiculos',
-          component: MisVehiculosView
+          component: MisVehiculosView,
+          meta: { requiresAuth: true }
         },
         {
           path: 'detalleDeMisOrdenes',
           name: 'detalleDeMisOrdenes',
-          component: DetalleDeMisOrdenesView
+          component: DetalleDeMisOrdenesView,
+          meta: { requiresAuth: true }
         },
         {
           path: 'MisCitas',
           name: 'MisCitas',
-          component: CitasVistaClientesView
+          component: CitasVistaClientesView,
+          meta: { requiresAuth: true }
         }
       ]
     },
     {
-      //ESTA CREO QUE SE ELIMINA
-      path:'/VistaCitasClientes',
-      name:'VistaCitasClientes',
-      component: VistaCitasClientesView
-    },
-    {
       //VISTA DE EMPLEADOS (MENU DEL APARTADO CLIENTES)
-      path:'/MenuClientesEmpleados',
-      name:'MenuClientesEmpleados',
-      component: MenuClientesEmpleadosView
+      path: '/MenuClientesEmpleados',
+      name: 'MenuClientesEmpleados',
+      component: MenuClientesEmpleadosView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (VER ORDENES)
-      path:'/VerOrdenesEmpleados',
-      name:'VerOrdenesEmpleados',
-      component: VerOrdenesEmpleadosView
+      path: '/VerOrdenesEmpleados',
+      name: 'VerOrdenesEmpleados',
+      component: VerOrdenesEmpleadosView,
+      meta: { requiresAuth: true }
     },
     {
-      //VISTA DE ADMINISTRADOR (MENU DE LAS ORDENES Y DETALLES
-      path:'/MenuOrdenDetalle',
-      name:'MenuOrdenDetalle',
-      component: MenuOrdenDetalleView
+      //VISTA DE ADMINISTRADOR (MENU DE LAS ORDENES Y DETALLES)
+      path: '/MenuOrdenDetalle',
+      name: 'MenuOrdenDetalle',
+      component: MenuOrdenDetalleView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADO (MENU DE LAS ORDENES Y DETALLES)
-      path:'/MenuOrdenDetalleEmpleado',
-      name:'MenuOrdenDetalleEmpleado',
-      component: MenuOrdenDetalleEmpleadoView
+      path: '/MenuOrdenDetalleEmpleado',
+      name: 'MenuOrdenDetalleEmpleado',
+      component: MenuOrdenDetalleEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (MENU DE LOS DETALLES)
-      path:'/MenuDetalles',
-      name:'MenuDetalles',
-      component: MenuDetallesView
+      path: '/MenuDetalles',
+      name: 'MenuDetalles',
+      component: MenuDetallesView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (VER DETALLES DE REFACCIONES)
       path: '/VerDetalleRefaccion',
       name: 'VerDetalleRefaccion',
-      component: VerDetalleRefaccionView
+      component: VerDetalleRefaccionView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADO (VER DETALLE DE REFACCION))
       path: '/VerDetalleRefaccionEmpleado',
       name: 'VerDetalleRefaccionEmpleado',
-      component: VerDetalleRefaccionEmpleadoView
+      component: VerDetalleRefaccionEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (REGISTRAR DETALLES DE REFACCION)
       path: '/RegistrarDetalleRefaccion',
       name: 'RegistrarDetalleRefaccion',
-      component: RegistrarDetalleRefaccionView
+      component: RegistrarDetalleRefaccionView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE ADMINISTRADOR (REGISTRAR SERVICIOS)
       path: '/RegistrarServicio',
       name: 'RegistrarServicio',
-      component: RegistrarServicioView
+      component: RegistrarServicioView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADO (MENU DE DETALLES DE ORDEN)
-      path:'/MenuDetallesEmpleado',
-      name:'MenuDetallesEmpleado',
-      component: MenuDetallesEmpleadoView
+      path: '/MenuDetallesEmpleado',
+      name: 'MenuDetallesEmpleado',
+      component: MenuDetallesEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (REGISTRAR DETALLE DE ORDEN)
       path: '/DetallesOrdenEmpleado',
       name: 'DetallesOrdenEmpleado',
-      component: DetalleOrdenEmpleadoView
+      component: DetalleOrdenEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADOS (REGISTRAR DETALLES DE REFACCIONES)
       path: '/RegistrarDetalleRefaccionEmpleado',
       name: 'RegistrarDetalleRefaccionEmpleado',
-      component: RegistrarDetalleRefaccionEmpleadoView
+      component: RegistrarDetalleRefaccionEmpleadoView,
+      meta: { requiresAuth: true }
     },
     {
       //VISTA DE EMPLEADO (REGISTRAR SERVICIOS)
       path: '/RegistrarServicioEmpleado',
       name: 'RegistrarServicioEmpleado',
-      component: RegistrarServicioEmpleadoView
-    },
+      component: RegistrarServicioEmpleadoView,
+      meta: { requiresAuth: true }
+    }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore(); // Obtén el store del usuario
+
+  if (to.meta.requiresAuth && !userStore.usuario) {
+    next({ name: 'Login' });
+  } else {
+    next();
+  }
+});
 
 export default router

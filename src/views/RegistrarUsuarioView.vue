@@ -46,7 +46,7 @@ const submit = async () =>
       CURP: CURP.value,
     };
     try 
-    {const response = await fetch('http://localhost:5174/registrousuario', {
+    {const response = await fetch('http://testpdocrudo.com/registrousuario', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,6 +69,45 @@ const submit = async () =>
     } catch (error) {console.error('Error de red:', error);}
   }
 };
+
+const submit2 = async () => 
+{if (valid.value && puestoPersona.value === 'cliente') {
+    const data = 
+    {
+      Nombre: Nombre.value,
+      Direccion: Direccion.value,
+      Telefono: Telefono.value,
+      Correo: Correo.value,
+      Usuario: Usuario.value,
+      Contrasena: Contrasena.value,
+      Tipo_Cliente: Tipo_Cliente.value,
+      Nombre_empresa: Nombre_empresa.value
+    };
+    try 
+    {const response = await fetch('http://testpdocrudo.com/registrousuarioC', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),});
+      const responseText = await response.text();
+      console.log('Respuesta del servidor:', responseText);
+      try 
+      {
+        const responseData = JSON.parse(responseText);
+        if (response.ok) {
+          console.log('Vehículo registrado exitosamente', responseData);
+        } else {
+          console.error('Error al registrar el vehículo:', responseData);
+        }
+      } catch (error) 
+      {
+        console.error('Error al analizar la respuesta como JSON:', error);
+      }
+    } catch (error) {console.error('Error de red:', error);}
+  }
+};
+
 </script>
 
 <template>
@@ -183,8 +222,13 @@ const submit = async () =>
                 ></v-text-field>
               </v-form>
 
-              <v-btn id="btn-registrar" :disabled="!valid" color="#1a1a1a" @click="submit">
-                Registrar
+              <v-btn 
+                id="btn-registrar" 
+                :disabled="!valid" 
+                color="#1a1a1a" 
+                @click="puestoPersona.value === 'empleado' ? submit() : submit2()"
+              >
+              Registrar
               </v-btn>
 
 

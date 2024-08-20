@@ -71,7 +71,7 @@ const submit = async () => {
     };
 
     try {
-      const response = await fetch('http://testpdocrudo.com/registrarorden', {
+      const response = await fetch('http://testpdocrudo.com/registrarOrden', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

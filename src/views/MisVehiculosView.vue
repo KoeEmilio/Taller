@@ -1,21 +1,23 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { useProfileStore } from '@/stores/counter';
 
-const datosVehicuos = ref([])
+const store = useProfileStore();
+const datosVehicuos = ref([]);
 
-const ShowAutos = () =>{
-    fetch('http://testpdocrud.com/misVehiculos')
+const ShowAutos = () => {
+    fetch(`http://testpdocrud.com/misVehiculos?userId=${store.userId}`)
     .then(response => response.json())
-    .then(json=>{
+    .then(json => {
         if(json.status === 200){
-            datosVehicuos.value = json.data
+            datosVehicuos.value = json.data;
         }
-    })
+    });
 }
 
-onMounted (() => {
-    ShowAutos()
-})
+onMounted(() => {
+    ShowAutos();
+});
 
 </script>
 

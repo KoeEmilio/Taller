@@ -1,4 +1,4 @@
-// src/stores/userStore.js
+
 import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('userStore', {
@@ -18,5 +18,5 @@ export const useUserStore = defineStore('userStore', {
       this.token = null;
     }
 },
-  persist: true, // Esto permite que el estado persista en localStorage
+  persist: true, 
 });

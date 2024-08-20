@@ -147,7 +147,9 @@ export default {
             <p class="centrar-texto">Tenemos estos Horarios Disponibles:</p>
             <p class="centrar-texto">De 3 p.m a 5 p.m</p>
             <div class="contenedor-boton">
-              <v-btn class="boton-agendar" @click="openDialog">Agendar Cita</v-btn>
+              <router-link to="/VistaCliente">
+                <v-btn class="boton-agendar" @click="openDialog">Agendar Cita</v-btn>
+              </router-link>
             </div>
             <p class="informacion-cita">Para poder hacer una cita tienes que tener un perfil creado en la página. Si necesitas más información por favor contáctanos.</p>
           </div>

@@ -1,238 +1,61 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { useProfileStore } from '@/stores/counter';
 
+const store = useProfileStore();
+const datos = ref([]);
 
-const dialog = ref(false)
-const ordenSeleccionada = ref(null)
-
-
-const MostrarDialog = (orden) =>{
-    ordenSeleccionada.value = orden;
-    dialog.value = !dialog.value;
-}
-
-
-
-const datos = ref([])
 const showDetails = () => {
-    fetch('http://testpdocrud.com/detalles')
-        .then(response => response.json())
-        .then(json => {
-            if (json.status === 200) {
-                datos.value = json.data
-            }
-             else {
-                console.error('Error en la respuesta:', json.msg); 
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error); 
-        });
+    fetch(`http://testpdocrudo.com/misordenes?userId=${store.userId}`)
+    .then(response => response.json())
+    .then(json => {
+        if (json.status === 200) {
+            datos.value = json.data;
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error); 
+    });
 }
+
 onMounted(() => {
     showDetails();
-})
-
+});
 </script>
 
 <template>
-    <div id="container">
-        <v-card class="card"> 
-            <v-card-title id="card-title">Mis Ordenes</v-card-title>
-            <v-divider></v-divider>
-            <br>
-                <v-row> 
-                    <v-col cols="10" offset="1">
-                        <div id="nombre-columnas">
-
-                            <v-col class="column" cols=3>
-                                <v-row>
-                                    <v-card-text>N° Orden</v-card-text>
-                                </v-row>
-                            </v-col>
-
-                            <v-col class="column" cols="3">
-                                <v-row>
-                                    <v-card-text>Fecha De Entrega</v-card-text>
-                                </v-row>
-                            </v-col>
-
-                            <v-col class="column" cols="6" offset="2">
-                                <v-row>
-                                    <v-card-text>Servicio</v-card-text>                                    
-                                </v-row>
-                            </v-col>
-
-                        </div>
-
-                        <v-row>
-                            <v-col>
-                                <v-divider ></v-divider>
-                            </v-col>
-                        </v-row>
-
-                        <v-row id="acomodado-interno"> 
-                            <v-tooltip  v-for="orden in datos" :key="orden['N° Orden']" location="end bottom" text="Tocar para ver más detalles">
-                                <template #activator="{props}">
-                                        <v-card class="card-interna" v-bind="props" @click="MostrarDialog(orden)" >
-
-                                            <v-col cols="3">
-                                                <v-card-text> {{ orden['N° Orden'] }} </v-card-text>
-                                            </v-col>
-                                            <v-col cols="3">
-                                                <v-card-text>{{ orden['Fecha de Entrega'] }} </v-card-text>
-                                            </v-col>
-                                            <v-col cols="6">
-                                                <v-card-text> {{ orden['Servicio'] }}  </v-card-text> 
-                                            </v-col>  
-                                            
-                                        </v-card>   
-                                </template>
-                            </v-tooltip>
-                            
-                        </v-row>
-                    </v-col>
-                </v-row>
-                    
-
-                    <v-dialog class="container-dialog" v-model="dialog" >
-                        <v-card class="text-center" height="150">
-                            <v-card-text>
-
-                            <div>
-                                <v-row v-if="ordenSeleccionada">
-                                    <v-col>
-                                        <div id="dialog">
-
-                                            <v-col>
-                                                <v-row>
-                                                    <v-col>
-                                                        <p>N° Orden</p>
-                                                        <v-divider></v-divider>
-                                                        <v-card-text> {{ ordenSeleccionada['N° Orden'] }} </v-card-text>
-                                                    </v-col>
-                                                </v-row>
-                                            </v-col>
-                                            
-                                            <v-col>
-                                                <v-row>
-                                                    <v-col> 
-                                                        <p>Fecha De Entrega</p>
-                                                        <v-divider></v-divider>
-                                                        <v-card-text>{{ ordenSeleccionada['Fecha de Entrega'] }} </v-card-text>
-                                                    </v-col>
-                                                </v-row>
-                                            </v-col>
-
-                                            <v-col>
-                                                <v-row> 
-                                                    <v-col>
-                                                        <p>Servicio</p>
-                                                        <v-divider></v-divider>
-                                                        <v-card-text> {{ ordenSeleccionada['Servicio'] }}  </v-card-text>
-                                                    </v-col>
-                                                    
-                                                </v-row>
-                                            </v-col>
-
-                                            <v-col>
-                                                <v-row>
-                                                    <v-col>
-                                                        <p>Mano De Obra</p>
-                                                        <v-divider></v-divider>
-                                                        <v-card-text> {{ ordenSeleccionada['Costo de mano de obra'] }}</v-card-text>
-                                                    </v-col>
-                                                                                                
-                                                </v-row>
-                                            </v-col>
-
-                                            <v-col>
-                                                <v-row>
-                                                    <v-col>
-                                                        <p>Fin Garantía</p>
-                                                        <v-divider></v-divider>
-                                                        <v-card-text cols="4"> {{ ordenSeleccionada['Fecha Fin De Garantía'] }}</v-card-text>
-                                                    </v-col>
-                                                    
-                                                </v-row>
-                                            </v-col>
-                                            
-                                        </div>
-                                        
-                                    </v-col>
-
-                                </v-row>                                                   
-                            </div>
-
-                            </v-card-text>
-                        </v-card>
-                    </v-dialog>
-            
-            </v-card>
-    </div>
+  <div class="container">
+    <v-card class="data-table-card">
+      <v-card-title id="card-title">Mis Órdenes</v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="datos"
+        :search="search"
+        class="elevation-1"
+      >
+      </v-data-table>
+    </v-card>
+  </div>
 </template>
+
 <style scoped>
-#acomodado-interno{
-    width: 100%;
-    height: 100%;
+.container {
+    display: flex;
     justify-content: center;
-    margin-left: 1px;
-}
-#container{
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    align-items: center;
     height: 100vh;
+    padding: 0 20px; /* Ajusta este valor para el padding lateral */
 }
-.card{
-    grid-column: 2;
-    width: 56vw;
-    height: 100vh;
-    overflow-y: auto;
+
+.data-table-card {
+    width: 100%;
+    max-width: 1200px; /* Controla el ancho máximo de la tabla */
+    padding: 20px; /* Padding interno de la tarjeta */
 }
-#card-title{
-    margin-top: 10px;
+
+#card-title {
     text-align: start;  
     font-size: xx-large;
+    margin-bottom: 20px;
 }
-#nombre-columnas{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    flex-wrap: nowrap;
-}
-.column{
-    display: flex;
-    flex-wrap: nowrap;
-}
-.card-interna{
-    display: flex;
-    width: 630px;
-    height: 70px;
-    margin-bottom:10px;
-    background-color: rgb(238, 238, 238);
-    transition: transform 0.2s ease; 
-}
-.card-interna:hover{
-    transform: translateY(4px); 
-}
-.card-interna v-card-text{
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.text-center{
-    background-color: rgb(238, 238, 238);
-}
-
-#dialog{
-    display: flex;
-    width: 100%;
-    height: 100%;
-}
-.container-dialog{
-    display: flex;
-    width: 1000px;
-}
-
 </style>

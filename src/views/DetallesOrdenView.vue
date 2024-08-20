@@ -10,10 +10,9 @@ const form = ref({
 const servicios = ref([]);
 const ordenes = ref([]);
 
-// Obtener la lista de servicios disponibles
 const fetchServicios = async () => {
   try {
-    const response = await fetch('/api/servicios', {
+    const response = await fetch('http://testpdocrudo.com/detalles', {
       method: 'GET',
     });
     const data = await response.json();
@@ -27,7 +26,6 @@ const fetchServicios = async () => {
   }
 };
 
-// Obtener la lista de órdenes disponibles
 const fetchOrdenes = async () => {
   try {
     const response = await fetch('/api/ordenes', {
@@ -44,7 +42,6 @@ const fetchOrdenes = async () => {
   }
 };
 
-// Ejecutar fetchServicios y fetchOrdenes cuando el componente se monte
 onMounted(() => {
   fetchServicios();
   fetchOrdenes();

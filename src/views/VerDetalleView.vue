@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://testpdocrud.com/clientes')
+  fetch('http://testpdocrudo.com/detalles')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
