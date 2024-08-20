@@ -1,19 +1,24 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted,watch } from 'vue'
 
 
 const snackbar = ref(false) // Estado del snackbar
 const mensaje = ref('Selecciona el mes por el que filtraras los datos')
+const selectedMonth = ref('')
 
 const datos = ref([])
-const showIngresos = () => {
-    fetch('http://testpdocrud.com/Ingresos')
+const showIngresos = (mes = '') => {
+    let url = 'http://testpdocrud.com/Ingresos';
+    if (mes) {
+        url += `/${mes}`;  // Añadimos el parámetro del mes a la URL
+    }
+
+    fetch(url)
         .then(response => response.json())
         .then(json => {
             if (json.status === 200) {
               datos.value = json.data
-            }
-             else {
+            } else {
                 console.error('Error en la respuesta:', json.msg); 
             }
         })
@@ -21,9 +26,13 @@ const showIngresos = () => {
             console.error('Error fetching data:', error); 
         });
 }
-
 onMounted(() => {
     showIngresos();
+});
+
+// Escuchar cambios en `selectedMonth` para filtrar los datos
+watch(selectedMonth, (newMonth) => {
+    showIngresos(newMonth);  // Filtra los datos según el mes seleccionado
 });
 
 const months = [
@@ -71,7 +80,7 @@ const months = [
           <p>Selecciona un mes: </p> &nbsp;
           <select v-model="selectedMonth" class="select">
             <option value="" disabled selected>Meses</option>
-            <option>Ninguno</option>
+            <option value="">Ninguno</option>
             <option v-for="month in months" :key="month.value" :value="month.value">
               {{ month.text }}
             </option>
