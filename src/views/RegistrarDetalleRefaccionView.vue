@@ -13,15 +13,14 @@ const form = ref({
 const ordenes = ref([]);
 const compradores = ref(['Cliente', 'Taller']);
 
-// Obtener la lista de órdenes disponibles
 const fetchOrdenes = async () => {
   try {
-    const response = await fetch('/api/ordenes', {
+    const response = await fetch('http://testpdocrudo.com/ordenes', {
       method: 'GET',
     });
     const data = await response.json();
     if (response.ok) {
-      ordenes.value = data.ordenes;
+      ordenes.value = data.data; 
     } else {
       alert('Error al obtener órdenes: ' + data.message);
     }
@@ -30,41 +29,55 @@ const fetchOrdenes = async () => {
   }
 };
 
-// Ejecutar fetchOrdenes cuando el componente se monte
 onMounted(() => {
   fetchOrdenes();
 });
 
 const submit = async () => {
   const datosRegistro = {
-    nombreRefaccion: form.value.nombreRefaccion,
-    marca: form.value.marca,
-    cantidad: form.value.cantidad,
-    precio: form.value.precio,
-    noOrden: form.value.noOrden,
-    comprador: form.value.comprador,
+    Nombre_Refaccion: form.value.nombreRefaccion,
+    Marca: form.value.marca,
+    Cantidad: form.value.cantidad,
+    Precio: form.value.precio,
+    OrdenID: form.value.noOrden,
+    Comprador: form.value.comprador,
   };
 
+  console.log("Datos a enviar:", datosRegistro); // Añadir esta línea para depurar
+
   try {
-    const response = await fetch('/api/detalle-refaccion', {
+    const response = await fetch('http://testpdocrudo.com/registrarDetalle', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      
       body: JSON.stringify(datosRegistro),
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      alert('Registro exitoso: ' + data.message);
-      resetForm();
-    } else {
-      console.error('Error en el registro');
+    const responseText = await response.text(); // Obtén la respuesta como texto
+
+    console.log("Respuesta del servidor:", responseText); // Añadir esta línea para depurar
+
+    // Intenta parsear la respuesta como JSON
+    try {
+      const data = JSON.parse(responseText);
+      if (response.ok) {
+        alert('Registro exitoso: ' + data.message);
+        resetForm();
+      } else {
+        alert('Error en el registro: ' + data.message);
+      }
+    } catch (e) {
+      console.error('Error al parsear JSON:', e);
+      alert('Error en el registro. Respuesta del servidor no es JSON.');
     }
   } catch (error) {
     console.error('Error al conectar con el servidor:', error);
+    alert('Error al conectar con el servidor.');
   }
 };
+
 
 const resetForm = () => {
   form.value = {
@@ -79,7 +92,6 @@ const resetForm = () => {
 </script>
 
 <template>
-    <v-container></v-container>
   <v-app>
     <v-app-bar app color="#1a1a1a" dark>
       <router-link to="/MenuDetalles">
@@ -97,8 +109,8 @@ const resetForm = () => {
                 <label for="noOrden">Seleccionar Número de Orden</label>
                 <select id="noOrden" v-model="form.noOrden">
                   <option value="" disabled selected>Seleccione una orden</option>
-                  <option v-for="orden in ordenes" :key="orden.id" :value="orden.id">
-                    Orden #{{ orden.id }} - {{ orden.descripcion }}
+                  <option v-for="orden in ordenes" :key="orden.OrdenID" :value="orden.OrdenID">
+                    Orden #{{ orden.Marca }} - {{ orden.Modelo }} - {{ orden.Motivo }}
                   </option>
                 </select>
               </div>
@@ -151,6 +163,7 @@ const resetForm = () => {
     </div>
   </v-app>
 </template>
+
 
 <style scoped>
 html, body, #app {
@@ -214,10 +227,6 @@ input[type="date"] {
   }
 }
 
-.texto-refacciones {
-  padding-right: 30px;
-  font-size: 20px;
-}
 
 @media (min-width: 768px) {
   .texto-refacciones {

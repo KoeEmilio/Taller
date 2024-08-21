@@ -15,7 +15,7 @@ const Propietarios = ref([]);
 
 const fetchPropietarios = async () => {
   try {
-    const response = await fetch('http://localhost:5174/clientes');
+    const response = await fetch('http://testpdocrud.com/clientes');
     if (response.ok) {
       const json = await response.json();
       Propietarios.value = json.data; 
@@ -43,7 +43,7 @@ const submit = async () => {
     };
 
     try {
-      const response = await fetch('http://testpdo.com/registrovehiculos', {
+      const response = await fetch('http://testpdocrud.com/registrovehiculos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,4 +1,3 @@
-// src/services/AuthService.js
 
 export default {
     getUserRole() {

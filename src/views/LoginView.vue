@@ -19,7 +19,7 @@ const login = async () => {
 
     console.log('Datos enviados:', loginData);
 
-    const response = await fetch('http:/testpdocrud.com/login', {
+    const response = await fetch('http://18.222.114.51/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -27,7 +27,6 @@ const login = async () => {
       body: JSON.stringify(loginData)
     });
 
-    // Revisa el status de la respuesta para asegurar que sea 200 OK
     if (!response.ok) {
       throw new Error(`Error en la respuesta de la API: ${response.statusText}`);
     }
@@ -35,7 +34,6 @@ const login = async () => {
     const data = await response.json();
     console.log('Respuesta de la API:', data);
 
-    // Verifica la estructura de la respuesta
     if (data && data.status === 200 && data.msg === 'success' && data.data) {
       const usuario = data.data.usuario;
       const token = data.data._token;
@@ -44,12 +42,10 @@ const login = async () => {
         userStore.setUsuario(usuario);
         userStore.setToken(token);
 
-        // Verifica si el rol está presente
         if (usuario.Rol) {
-          // Redirige según el rol del usuario
           if (usuario.Rol === 'Administrador') {
             router.push({ name: 'MenuPrincipal' });
-          } else if (usuario.Rol === 'Empleado') {
+          } else if (usuario.Rol === 'Trabajador') {
             router.push({ name: 'MenuEmpleados' });
           } else if (usuario.Rol === 'Cliente') {
             router.push({ name: 'VistaCliente' });

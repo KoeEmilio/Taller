@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://testpdocrud.com/clientes')
+  fetch('http://3.129.72.102/clientes')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
@@ -38,7 +38,7 @@ const mostrarEditFormulario = (cliente) => {
 const editarCliente = async () => {
   try {
     console.log("Datos enviados para actualizar:", JSON.stringify(selectedCliente.value));
-    const response = await fetch(`http://testpdocrud.com/actualizarclientes`, {
+    const response = await fetch(`http://3.129.72.102/actualizarclientes`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

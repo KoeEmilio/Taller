@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-    fetch('http://testpdocrud.com/Servicios')
+    fetch('http://testpdocrudo.com/Servicios')
         .then(response => response.json())
         .then(json => {
             if (json.status === 200) {
@@ -27,11 +27,14 @@ const headers = ref([
     { text: 'Acciones', value: 'actions', sortable: false }
 ]);
 
-const editarServicio = (item) => 
-{
-    
-    console.log('Editar servicio:', item);
-};
+const selectedCliente = ref({
+Nombre_Servicio: '',
+Descripcion: '',
+Costo_Servicio: '',
+Nombre_TS: '',
+Tipo_ServicioID: '',
+ServicioID: '' 
+})
 
 const eliminarServicio = (item) => 
 { console.log('Eliminar servicio:', item);};

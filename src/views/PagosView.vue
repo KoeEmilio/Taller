@@ -7,7 +7,7 @@ const search = ref('')
 
 const datos = ref([])
 const mostrarPagos = () => {
-  fetch('http://testpdocrud.com/pagos')
+  fetch('http:/testpdocrudo.com/pagos')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {

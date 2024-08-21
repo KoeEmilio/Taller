@@ -1,7 +1,23 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 
+const datos = ref([]);
+const search = ref('');
+
+const mostrarinfo = () => {
+  fetch('http://testpdocrudo.com/refacciones')
+    .then(response => response.json())
+    .then(json => {
+      if (json.status === 200) {
+        datos.value = json.data;
+      }
+    });
+};
+
+onMounted(() => {
+  mostrarinfo();
+});
 </script>
-
 <template>
     <v-app>
     <v-app-bar app color="#1a1a1a" dark>
@@ -22,7 +38,7 @@
 
     <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="datos"
     :search="search"
     ></v-data-table>
 </v-card>

@@ -53,7 +53,7 @@ const months = [
 
 <template>
   <v-app>
-    <v-container class="container">
+    <v-container class="container" fluid>
       <v-app-bar app color="#1a1a1a">
         <router-link to="/Clientes">
           <v-btn
