@@ -6,7 +6,7 @@ const store = useProfileStore();
 const datosVehicuos = ref([]);
 
 const ShowAutos = () => {
-    fetch(`http://testpdocrud.com/misVehiculos?userId=${store.userId}`)
+    fetch(`http://18.222.114.51/misVehiculos?userId=${store.userId}`)
     .then(response => response.json())
     .then(json => {
         if(json.status === 200){

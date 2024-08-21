@@ -1,8 +1,16 @@
 <script setup>
+import { useUsuarioStore } from '@/stores/UsuarioStore';
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
-// Estado para controlar el menú desplegable
+const UsuarioStore = useUsuarioStore();
+
+const cerrarSession = () => {
+  UsuarioStore.closeSession();
+  router.push('/Login');
+}
+
+
 const menu = ref(false);
 </script>
 
@@ -23,7 +31,7 @@ const menu = ref(false);
           </v-list-item>
           <v-list-item>
             <RouterLink to="/" class="texto-menu text-decoration-none">
-              <v-list-item-title>Cerrar sesión</v-list-item-title>
+              <v-list-item-title @click="cerrarSession">Cerrar sesión</v-list-item-title>
             </RouterLink>
           </v-list-item>
         </v-list>

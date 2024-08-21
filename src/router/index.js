@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/userStorage'
+import { useUsuarioStore } from '@/stores/UsuarioStore'
 import HomeView from '../views/HomeView.vue'
 import ClientesMenuView from '@/views/ClientesMenuView.vue'
 import InfoEmpleadosView from '@/views/InfoEmpleadosView.vue'
@@ -49,11 +49,12 @@ import MenuOrdenDetalleEmpleadoView from '@/views/MenuOrdenDetalleEmpleadoView.v
 import RegistrarDetalleRefaccionEmpleadoView from '@/views/RegistrarDetalleRefaccionEmpleadoView.vue'
 import VerDetalleRefaccionEmpleadoView from '@/views/VerDetalleRefaccionEmpleadoView.vue'
 import RegistrarServicioEmpleadoView from '@/views/RegistrarServicioEmpleadoView.vue'
+import UnauthorizedView from '@/views/UnauthorizedView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      //INICIO DE LA PAGINA
       path: '/',
       name: 'Home',
       component: HomeView
@@ -64,357 +65,363 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      //VISTA DE ADMINISTRADOR (MENU CLIENTES)
       path: '/Clientes',
       name: 'Clientes',
       component: ClientesMenuView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     { 
-      //VISTA ADMINISTRADOR (VER INFORMACION DE LOS CLIENTES)
       path: '/InfoClientes',
       name: 'InfoClientes',
       component: ClientesInfoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (VER LAS ÓRDENES DE SERVICIO)
       path: '/InfoOrdenes',
       name: 'InfoOrdenes',
       component: VerOrdenesView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador', 'Empleado'] }
     },
     {
-      //VISTA DEL ADMINISTRADOR (VER LA INFORMACIÓN DE LOS EMPLEADOS)
       path: '/InfoEmpleados',
       name: 'InfoEmpleados',
       component: InfoEmpleadosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DEL ADMINISTRADOR (MENU DEL APARTADO DE VEHICULOS)
       path: '/Vehiculos',
       name: 'Vehiculos',
       component: VehiculosMenuView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DEL ADMINISTRADOR (REGISTRAR VEHICULOS)
       path: '/RegistroVehiculo',
       name: 'RegistroVehiculo',
       component: RegistroVehiculoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DEL ADMINISTRADOR (VER SERVICIOS)
       path: '/Servicios',
       name: 'Servicios',
       component: ServiciosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE ADMINISTRADOR  (VER VEHICULOS)
       path: '/VehiculosInfo',
       name: 'VehiculosInfo',
       component: VehiculosInfoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE EMPLEADOS (MENU PRINCIPAL DE CUANDO SE INICIA COMO EMPLEADO)
       path: '/MenuEmpleados',
       name: 'MenuEmpleados',
       component: MenuEmpleadosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE EMPLEADOS  (MENU DEL APARTADO DE VEHICULOS CUANDO SE INICIA COMO EMPLEADO)
       path: '/VehiculosEmpleados',
       name: 'VehiculosEmpleados',
       component: MenuVehiculosEmpleadosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE EMPLEADOS (REGISTRO DE VEHICULOS)
       path: '/RegistroVehiculosEmpleados',
       name: 'RegistroVehiculosEmpleados',
       component: RegistroVehiculoEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE EMPLEADOS (VER LOS VEHICULOS)
       path: '/VerVehiculosEmpleados',
       name: 'VerVehiculosEmpleados',
       component: VerVehiculosEmpleadosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE EMPLEADOS (VER LOS SERVICIOS)
       path: '/ServiciosEmpleados',
       name: 'ServiciosEmpleados',
       component: ServiciosEmpleadosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      
-      //VISTA DE EMPLEADOS (VER CLIENTES)
       path: '/VerClientesEmpleados',
       name: 'VerClientesEmpleados',
       component: VerClientesEmpleadosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE EMPLEADOS (DETALLES DE ORDENES)
       path: '/DetallesOrden',
       name: 'DetallesOrden',
       component: DetallesOrdenView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (CITAS)
       path: '/VerCitas',
       name: 'VerCitas',
       component: VerCitasView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE EMPLEADO (CITAS)
       path: '/VerCitasEmpleado',
       name: 'VerCitasEmpleado',
       component: VerCitasEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (INICIO)
       path: '/MenuPrincipal',
       name: 'MenuPrincipal',
       component: MenuPrincipalView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (MENU DE LAS ORDENES)
       path: '/MenuOrdenes',
       name: 'MenuOrdenes',
       component: MenuOrdenesView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE EMPLEADO (MENU DE LAS ORDENES)
       path: '/MenuOrdenesEmpleado',
       name: 'MenuOrdenesEmpleado',
       component: MenuOrdenesEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (VER LOS DETALLES DE ORDEN)
       path: '/VerDetalle',
       name: 'VerDetalle',
       component: VerDetalleView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE EMPLEADO (VER DETALLES DE ORDEN)
       path: '/VerDetalleEmpleado',
       name: 'VerDetalleEmpleado',
       component: VerDetalleEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (REGISTRO DE USUARIO)
       path: '/RegistrarUsuario',
       name: 'RegistrarUsuario',
       component: RegistrarUsuarioView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA PARA TODOS (LOGIN INICIO DE SESION)
       path: '/Login',
       name: 'Login',
       component: LoginView
     },
     {
-      //VISTA PARA ADMINISTRADOR (REPORTE DE INGRESOS)
       path: '/Ingresos',
       name: 'Ingresos',
       component: IngresosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA PARA EMPLEADOS (REGISTRAR USUARIO)
       path: '/RegistrarUsuarioEmpleado',
       name: 'RegistrarUsuarioEmpleado',
       component: RegistrarUsuarioEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA PARA ADMINISTRADOR (REGISTRAR ORDEN)
       path: '/RegistrarOrden',
       name: 'RegistrarOrden',
       component: RegistrarOrdenView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA PARA EMPLEADO (REGISTRAR ORDEN)
       path: '/RegistrarOrdenEmpleado',
       name: 'RegistrarOrdenEmpleado',
       component: RegistrarOrdenEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (REGISTRAR SERVICIO)
       path: '/RegistrarServicio',
       name: 'RegistrarVehiculo',
       component: RegistrarServicioView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (PAGOS)
       path: '/Pagos',
       name: 'Pagos',
       component: PagosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE EMPLEADOS (PAGOS)
       path: '/PagosEmpleados',
       name: 'PagosEmpleados',
       component: PagosEmpleadosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DEL CLIENTE (PERFIL, VEHICULOS, ORDENES Y CITAS)
       path: '/VistaCliente',
       name: 'VistaCliente',
       redirect: '/VistaCliente/perfil',
       component: VistaClienteView,
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: true, roles: ['Cliente'] },
       children: [
         {
           path: 'perfil',
           name: 'perfil',
           component: PerfilView,
-          meta: { requiresAuth: true }
+          meta: { requiresAuth: true, roles: ['Cliente'] }
         },
         {
           path: 'misVehiculos',
           name: 'misVehiculos',
           component: MisVehiculosView,
-          meta: { requiresAuth: true }
+          meta: { requiresAuth: true, roles: ['Cliente'] }
         },
         {
           path: 'detalleDeMisOrdenes',
           name: 'detalleDeMisOrdenes',
           component: DetalleDeMisOrdenesView,
-          meta: { requiresAuth: true }
+          meta: { requiresAuth: true, roles: ['Cliente'] }
         },
         {
           path: 'MisCitas',
           name: 'MisCitas',
           component: CitasVistaClientesView,
-          meta: { requiresAuth: true }
+          meta: { requiresAuth: true, roles: ['Cliente'] }
         }
       ]
     },
     {
-      //VISTA DE EMPLEADOS (MENU DEL APARTADO CLIENTES)
       path: '/MenuClientesEmpleados',
       name: 'MenuClientesEmpleados',
       component: MenuClientesEmpleadosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE EMPLEADOS (VER ORDENES)
       path: '/VerOrdenesEmpleados',
       name: 'VerOrdenesEmpleados',
       component: VerOrdenesEmpleadosView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (MENU DE LAS ORDENES Y DETALLES)
       path: '/MenuOrdenDetalle',
       name: 'MenuOrdenDetalle',
       component: MenuOrdenDetalleView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE EMPLEADO (MENU DE LAS ORDENES Y DETALLES)
       path: '/MenuOrdenDetalleEmpleado',
       name: 'MenuOrdenDetalleEmpleado',
       component: MenuOrdenDetalleEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (MENU DE LOS DETALLES)
       path: '/MenuDetalles',
       name: 'MenuDetalles',
       component: MenuDetallesView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (VER DETALLES DE REFACCIONES)
       path: '/VerDetalleRefaccion',
       name: 'VerDetalleRefaccion',
       component: VerDetalleRefaccionView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE EMPLEADO (VER DETALLE DE REFACCION))
       path: '/VerDetalleRefaccionEmpleado',
       name: 'VerDetalleRefaccionEmpleado',
       component: VerDetalleRefaccionEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (REGISTRAR DETALLES DE REFACCION)
       path: '/RegistrarDetalleRefaccion',
       name: 'RegistrarDetalleRefaccion',
       component: RegistrarDetalleRefaccionView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE ADMINISTRADOR (REGISTRAR SERVICIOS)
       path: '/RegistrarServicio',
       name: 'RegistrarServicio',
       component: RegistrarServicioView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
-      //VISTA DE EMPLEADO (MENU DE DETALLES DE ORDEN)
       path: '/MenuDetallesEmpleado',
       name: 'MenuDetallesEmpleado',
       component: MenuDetallesEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE EMPLEADOS (REGISTRAR DETALLE DE ORDEN)
       path: '/DetallesOrdenEmpleado',
       name: 'DetallesOrdenEmpleado',
       component: DetalleOrdenEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE EMPLEADOS (REGISTRAR DETALLES DE REFACCIONES)
       path: '/RegistrarDetalleRefaccionEmpleado',
       name: 'RegistrarDetalleRefaccionEmpleado',
       component: RegistrarDetalleRefaccionEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
     },
     {
-      //VISTA DE EMPLEADO (REGISTRAR SERVICIOS)
       path: '/RegistrarServicioEmpleado',
       name: 'RegistrarServicioEmpleado',
       component: RegistrarServicioEmpleadoView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['Empleado'] }
+    },
+    {
+      path: '/Unauthorized',
+      name: 'Unauthorized',
+      component: UnauthorizedView,
+      
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  const userStore = useUserStore(); // Obtén el store del usuario
+  const UsuarioStore = useUsuarioStore();
+  const authToken = UsuarioStore.usuario._token;
+  const rol = UsuarioStore.usuario.rol;
 
-  if (to.meta.requiresAuth && !userStore.usuario) {
-    next({ name: 'Login' });
+  console.log(`Intentando navegar a: ${to.name}`);
+  console.log(`Token actual: ${authToken}`);
+  console.log(`Rol del usuario: ${rol}`);
+
+  if (to.name === 'Login' && authToken) {
+    console.log('Usuario autenticado intentando acceder al login.');
+
+    if (rol === 'Administrador') {
+      console.log('Redirigiendo al MenuPrincipal.');
+      next({ name: 'MenuPrincipal' });
+    } else if (rol === 'Empleado') {
+      console.log('Redirigiendo al MenuEmpleados.');
+      next({ name: 'MenuEmpleados' });
+    } else if (rol === 'Cliente') {
+      console.log('Redirigiendo a VistaCliente.');
+      next({ name: 'VistaCliente' });
+    } else {
+      console.log('Rol desconocido, redirigiendo a Unauthorized.');
+      next('/unauthorized');
+    }
+  } else if (to.matched.some((route) => route.meta.requiresAuth)) {
+    console.log(`La ruta ${to.name} requiere autenticación.`);
+
+    if (authToken) {
+      console.log('Usuario autenticado con token válido.');
+
+      if (to.meta.roles && to.meta.roles.length > 0) {
+        console.log(`Roles permitidos en la ruta: ${to.meta.roles}`);
+        console.log(`Rol del usuario: ${rol}`);
+
+        if (to.meta.roles.includes(rol)) {
+          console.log('Acceso permitido, redirigiendo a la ruta solicitada.');
+          next(); // Permitir el acceso
+        } else {
+          console.log('Acceso denegado, redirigiendo a Unauthorized.');
+          next('/unauthorized'); // Redirigir a página no autorizada
+        }
+      } else {
+        console.log('No se especifican roles en la ruta, acceso permitido.');
+        next(); // Permitir acceso si no se especifican roles
+      }
+    } else {
+      console.log('Token no válido o no presente, redirigiendo al Login.');
+      next('/Login'); // Redirigir al login si no está autenticado
+    }
   } else {
-    next();
+    console.log('La ruta no requiere autenticación, acceso permitido.');
+    next(); // Permitir acceso si la ruta no requiere autenticación
   }
 });
 

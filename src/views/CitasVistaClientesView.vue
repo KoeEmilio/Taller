@@ -3,14 +3,14 @@ import { onMounted, ref } from 'vue';
 import { useProfileStore } from '@/stores/counter';
 
 const store = useProfileStore();
-const datosOrdenes = ref([]);
+const datosCitas = ref([]);
 
 const ShowAutos = () => {
-    fetch(`http://testpdocrud.com/misordenes?userId=${store.userId}`)
+    fetch(`http://18.222.114.51/miscitas?userId=${store.userId}`)
     .then(response => response.json())
     .then(json => {
         if(json.status === 200){
-            datosOrdenes.value = json.data;
+            datosCitas.value = json.data;
         }
     });
 }
@@ -34,7 +34,7 @@ onMounted(() => {
 
                         <v-data-table-virtual
                         :headers="headers"
-                        :items="datosOrdenes"
+                        :items="datosCitas"
                         height="400"
                         item-value="name"
                         ></v-data-table-virtual>

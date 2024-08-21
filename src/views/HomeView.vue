@@ -1,4 +1,6 @@
 <script>
+import { useUsuarioStore } from '@/stores/UsuarioStore'; // Importa el store
+
 export default {
   data() {
     return {
@@ -43,13 +45,18 @@ export default {
     closeDialog() {
       this.showDialog = false;
     },
+    
     submitForm() {
-      if (this.selectedDate && this.selectedTime) {
-        alert(`Cita agendada para el ${this.selectedDate} a las ${this.selectedTime}`);
-        this.closeDialog();
+      const userStore = useUsuarioStore(); 
+
+      if (userStore.usuario._token) {
+
+        this.$router.push({ name: 'VistaCliente' });
       } else {
-        alert("Por favor, completa todos los campos.");
+
+        this.$router.push({ name: 'Login' });
       }
+
     }
   }
 }
@@ -148,7 +155,7 @@ export default {
             <p class="centrar-texto">De 3 p.m a 5 p.m</p>
             <div class="contenedor-boton">
               <router-link to="/VistaCliente">
-                <v-btn class="boton-agendar" @click="openDialog">Agendar Cita</v-btn>
+                <v-btn class="boton-agendar" @click="submitForm">Agendar Cita</v-btn>
               </router-link>
             </div>
             <p class="informacion-cita">Para poder hacer una cita tienes que tener un perfil creado en la página. Si necesitas más información por favor contáctanos.</p>

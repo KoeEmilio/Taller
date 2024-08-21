@@ -6,7 +6,7 @@ const store = useProfileStore();
 const datos = ref([]);
 
 const showDetails = () => {
-    fetch(`http://testpdocrudo.com/misordenes?userId=${store.userId}`)
+    fetch(`http://18.222.114.51/misordenes?userId=${store.userId}`)
     .then(response => response.json())
     .then(json => {
         if (json.status === 200) {

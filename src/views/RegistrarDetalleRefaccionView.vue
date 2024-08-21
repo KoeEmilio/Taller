@@ -46,7 +46,7 @@ const submit = async () => {
   console.log("Datos a enviar:", datosRegistro); // Añadir esta línea para depurar
 
   try {
-    const response = await fetch('http://testpdocrudo.com/registrarDetalle', {
+    const response = await fetch('http://18.222.114.51/registrarDetalle', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
