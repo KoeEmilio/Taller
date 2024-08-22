@@ -3,9 +3,11 @@ import { ref } from 'vue';
 import logo from '@/img/logonegro.png';
 import video from '../video/taller.mp4';  
 import { useUsuarioStore } from '@/stores/UsuarioStore';
+import { useClientesStore } from '@/stores/clientesStore';
 import router from '@/router';
 
 const UsuarioStore = useUsuarioStore();
+const ClientesStore = useClientesStore();
 const Usuario = ref('');
 const Contrasena = ref('');
 const showPassword = ref(false);
@@ -32,7 +34,6 @@ const login = async () => {
     }
 
     const data = await response.json();
-    console.log('Respuesta de la API:', data);
 
     if (data && data.status === 200 && data.msg === 'success' && data.data) {
       const usuario = data.data.usuario;
@@ -50,6 +51,8 @@ const login = async () => {
           } else if (usuario.Rol === 'Empleado') {
             router.push({ name: 'MenuEmpleados' });
           } else if (usuario.Rol === 'Cliente') {
+            // Almacenar la información del cliente logueado
+            ClientesStore.setClienteLogueado(usuario);
             router.push({ name: 'VistaCliente' });
           } else {
             throw new Error('Rol de usuario desconocido.');
