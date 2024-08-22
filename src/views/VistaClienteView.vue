@@ -1,7 +1,17 @@
 <script setup>
 import { useProfileStore } from '@/stores/counter';
+import { useUsuarioStore } from '@/stores/UsuarioStore';
 import { computed, ref} from 'vue';
 import { RouterLink } from 'vue-router';
+
+const UsuarioStore = useUsuarioStore()
+
+
+const cerrarSession = () => {
+  UsuarioStore.closeSession();
+  router.push('/Login');
+}
+
 
 const drawer = ref(true);
 const rail = ref(true);
@@ -124,9 +134,8 @@ const selectedDate = ref(new Date().toISOString().substr(0, 10));
         </v-list>
         <v-list class="btn-home" density="compact" nav>
           <router-link to="/">
-            <v-list-item prepend-icon="mdi-home" title="Ir a Inicio" value="home"></v-list-item>
+            <v-list-item prepend-icon="mdi-logout" title="Cerrar Sesion" value="home" @click="cerrarSession"></v-list-item>
           </router-link>
-            <v-list-item prepend-icon="mdi-logout" title="Cerrar sesión" value="logout"></v-list-item>
         </v-list>
 
       </v-navigation-drawer>

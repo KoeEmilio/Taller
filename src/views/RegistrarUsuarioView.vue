@@ -226,7 +226,7 @@ const submit2 = async () =>
                 id="btn-registrar" 
                 :disabled="!valid" 
                 color="#1a1a1a" 
-                @click="puestoPersona.value === 'empleado' ? submit() : submit2()"
+                @click="submit"
               >
               Registrar
               </v-btn>

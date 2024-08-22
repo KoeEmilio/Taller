@@ -1,7 +1,15 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue';
+import { useUsuarioStore } from '@/stores/UsuarioStore';
 const menu = ref(false)
+
+const UsuarioStore = useUsuarioStore();
+
+function cerrarSession() {
+  UsuarioStore.closeSession();
+  router.push('/login');
+}
 
 </script>
 
@@ -17,7 +25,7 @@ const menu = ref(false)
         <v-list>
           <v-list-item>
             <RouterLink to="/login" class="texto-menu text-decoration-none">
-              <v-list-item-title>Cerrar sesión</v-list-item-title>
+              <v-list-item-title @click="cerrarSession">Cerrar sesión</v-list-item-title>
             </RouterLink>
           </v-list-item>
         </v-list>

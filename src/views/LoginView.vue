@@ -2,10 +2,12 @@
 import { ref } from 'vue';
 import logo from '@/img/logonegro.png';
 import video from '../video/taller.mp4';  
-import { useUserStore } from '@/stores/userStore';
+import { useUsuarioStore } from '@/stores/UsuarioStore';
+import { useClientesStore } from '@/stores/clientesStore';
 import router from '@/router';
 
-const userStore = useUserStore();
+const UsuarioStore = useUsuarioStore();
+const ClientesStore = useClientesStore();
 const Usuario = ref('');
 const Contrasena = ref('');
 const showPassword = ref(false);
@@ -19,7 +21,7 @@ const login = async () => {
 
     console.log('Datos enviados:', loginData);
 
-    const response = await fetch('http://18.222.114.51/login', {
+    const response = await fetch('http://testpdocrudo.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -32,22 +34,25 @@ const login = async () => {
     }
 
     const data = await response.json();
-    console.log('Respuesta de la API:', data);
 
     if (data && data.status === 200 && data.msg === 'success' && data.data) {
       const usuario = data.data.usuario;
       const token = data.data._token;
 
       if (usuario && token) {
-        userStore.setUsuario(usuario);
-        userStore.setToken(token);
+        UsuarioStore.setUser({ ...usuario, rol: usuario.Rol });
+        UsuarioStore.setToken(token);
+
+        console.log('Datos almacenados en UsuarioStore:', UsuarioStore.usuario);
 
         if (usuario.Rol) {
           if (usuario.Rol === 'Administrador') {
             router.push({ name: 'MenuPrincipal' });
-          } else if (usuario.Rol === 'Trabajador') {
+          } else if (usuario.Rol === 'Empleado') {
             router.push({ name: 'MenuEmpleados' });
           } else if (usuario.Rol === 'Cliente') {
+            // Almacenar la información del cliente logueado
+            ClientesStore.setClienteLogueado(usuario);
             router.push({ name: 'VistaCliente' });
           } else {
             throw new Error('Rol de usuario desconocido.');
