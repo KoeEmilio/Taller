@@ -5,11 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-<<<<<<< HEAD
   fetch('http://testpdocrudtwo.com/clientes')
-=======
-  fetch('http://testpdocrudo.com/clientes')
->>>>>>> a3b8a352e6615e4043c1bd59a7191a0ebcad1e42
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
