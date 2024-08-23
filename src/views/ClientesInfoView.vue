@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-  fetch('http://18.222.114.51/clientes')
+  fetch('http://testpdocrudtwo.com/clientes')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
@@ -33,6 +33,7 @@ const mostrarEditFormulario = (cliente) => {
   console.log("Cliente seleccionado para edición:", selectedCliente.value)
   showEditFormulario.value = true;
 }
+
 
 
 const editarCliente = async () => {
