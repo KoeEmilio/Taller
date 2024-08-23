@@ -4,12 +4,7 @@ import { onMounted, ref } from 'vue';
 
 const store = useClientesStore();
 const datosVehiculos = ref([]);
-const headers = ref([
-  { text: 'Marca', value: 'Marca' },
-  { text: 'Modelo', value: 'Modelo' },
-  { text: 'Año', value: 'Anio' },
-  { text: 'Color', value: 'Color' },
-]);
+
 
 const loadVehiculos = async () => {
     const local = JSON.parse(localStorage.getItem('clienteLogueado'));

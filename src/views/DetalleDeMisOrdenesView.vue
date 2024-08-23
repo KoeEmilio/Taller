@@ -4,14 +4,7 @@ import { onMounted, ref } from 'vue';
 
 const store = useClientesStore();
 const datosOrdenes = ref([]);
-const headers = ref([
-  { text: 'Fecha_Ingreso', value: 'Fecha_Ingreso' },
-  { text: 'Marca', value: 'Marca' },
-  { text: 'Modelo', value: 'Modelo' },
-  { text: 'Motivo', value: 'Motivo' },
-  { text: 'Estado', value: 'Estado' },
 
-]);
 
 
 const loadOrdenes = async () => {
