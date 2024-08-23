@@ -5,7 +5,7 @@ import { ref, onMounted } from 'vue'
 const datos = ref([])
 
     const mostrarinfo  = () =>{
-        fetch('http://18.222.114.51/ordenespendientes')
+        fetch('http://testpdocrudo.com/ordenespendientes')
         .then(response => response.json())
         .then(json => {
             if(json.status===200){

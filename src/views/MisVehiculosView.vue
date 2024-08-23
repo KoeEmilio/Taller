@@ -4,18 +4,15 @@ import { onMounted, ref } from 'vue';
 
 const store = useClientesStore();
 const datosVehiculos = ref([]);
-const headers = ref([
-  { text: 'Marca', value: 'marca' },
-  { text: 'Modelo', value: 'modelo' },
-  { text: 'Año', value: 'anio' },
-  { text: 'Color', value: 'color' },
-]);
+
 
 const loadVehiculos = async () => {
+    const local = JSON.parse(localStorage.getItem('clienteLogueado'));
 try {
-    if (store.clienteLogueado && store.clienteLogueado.PersonaID) {
+    if (local.UsuarioID) {
     await store.fetchVehiculos();
-    datosVehiculos.value = store.vehiculosPorCliente;
+    datosVehiculos.value = store.vehiculos;
+    console.log(datosVehiculos.value);
     } else {
     console.log('Cliente no está logueado o no tiene ID');
     }

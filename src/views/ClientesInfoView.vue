@@ -5,7 +5,11 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
+<<<<<<< HEAD
   fetch('http://testpdocrudtwo.com/clientes')
+=======
+  fetch('http://testpdocrudo.com/clientes')
+>>>>>>> a3b8a352e6615e4043c1bd59a7191a0ebcad1e42
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
@@ -39,7 +43,7 @@ const mostrarEditFormulario = (cliente) => {
 const editarCliente = async () => {
   try {
     console.log("Datos enviados para actualizar:", JSON.stringify(selectedCliente.value));
-    const response = await fetch(`http://18.222.114.51/actualizarclientes`, {
+    const response = await fetch(`http://testpdocrudo.com/actualizarclientes`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
