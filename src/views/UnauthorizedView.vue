@@ -14,7 +14,6 @@ const cerrarSession = () => {
 <template>
     
     <div class="Contenedor">
-        <img src="@/img/FBIOPENUP.jpg" alt="">
     </div> 
     <button @click="cerrarSession">Cerrar</button>
 </template>

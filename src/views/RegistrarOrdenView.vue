@@ -15,7 +15,7 @@ const tieneCita = ref(''); // Nueva referencia para el radio button
 
 const fetchEmpleados = async () => {
   try {
-    const response = await fetch('http://testpdocrudo.com/empleados');
+    const response = await fetch('http://testpdocrudo.com/empleadoss');
     if (response.ok) {
       const json = await response.json();
       Empleados.value = json.data; 
@@ -45,7 +45,7 @@ const fetchVehiculos = async () => {
 
 const fetchCitas = async () => {
   try {
-    const response = await fetch('http://testpdocrudo.com/vercitas');
+    const response = await fetch('http://testpdocrudo.com/citasconfirmadas');
     if (response.ok) {
       const json = await response.json();
       Citas.value = json.data; 
@@ -71,7 +71,7 @@ const submit = async () => {
     };
 
     try {
-      const response = await fetch('http://18.222.114.51/registrarOrden', {
+      const response = await fetch('http://testpdocrudo.com/registrarOrden', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ onMounted(() => {
                 <select id="cita" v-model="Cita">
                   <option value="" disabled selected></option>
                   <option v-for="option in Citas" :key="option.CitaID" :value="option.CitaID">
-                    {{ option.Fecha }} - {{ option.Hora }}
+                  {{ option.Nombre_Persona }} - {{ option.Fecha_Cita }} - {{ option.Hora_Cita }}
                   </option>
                 </select>
               </div>

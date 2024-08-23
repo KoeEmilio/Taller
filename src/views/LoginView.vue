@@ -51,7 +51,6 @@ const login = async () => {
           } else if (usuario.Rol === 'Empleado') {
             router.push({ name: 'MenuEmpleados' });
           } else if (usuario.Rol === 'Cliente') {
-            // Almacenar la información del cliente logueado
             ClientesStore.setClienteLogueado(usuario);
             router.push({ name: 'VistaCliente' });
           } else {
@@ -81,7 +80,7 @@ const login = async () => {
         <v-row id="Contenedor-login">
           <v-card  class="contenedor-inicio-sesion transparente">  
             <v-card-title id="titulo" class="transparente-titulo" style="text-align: center;">
-              <img :src="logo" alt="Logo" id="logo">  
+              <router-link to="/"><img :src="logo" alt="Logo" id="logo" title="IR A INICIO"></router-link>
             </v-card-title>
             <div id="contenedor-formulario" class="transparente">
               <v-card-title id="titulo-formulario" style="text-align: center;">INICIA SESIÓN</v-card-title>

@@ -1,157 +1,143 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
-const search = ref('')
+const datos = ref([]);
+const search = ref('');
 
-
-
-const datos = ref([])
-const mostrarPagos = () => {
-  fetch('http:/testpdocrudo.com/pagos')
+const mostrarinfo = () => {
+  fetch('http://testpdocrudo.com/pagos')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
         datos.value = json.data;
-        console.log(datos)
       }
-    })
-}
+    });
+};
 
 onMounted(() => {
-  mostrarPagos()
+  mostrarinfo();
 });
 
+const showEditFormulario = ref(false);
 
+const selectedCliente = ref({
+  Nombre: '',
+  Correo: '',
+  Telefono: '',
+  Tipo_Cliente: '',
+  PersonaID: '' 
+})
+
+const mostrarEditFormulario = (cliente) => {
+  selectedCliente.value = { ...cliente };
+  console.log("Cliente seleccionado para edición:", selectedCliente.value)
+  showEditFormulario.value = true;
+}
+
+
+const editarCliente = async () => {
+  try {
+    console.log("Datos enviados para actualizar:", JSON.stringify(selectedCliente.value));
+    const response = await fetch(`http://testpdocrudo.com/actualizarclientes`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(selectedCliente.value)
+    });
+
+    if (response.ok) {
+      mostrarinfo();
+      showEditFormulario.value = false;
+    } else {
+      console.error('Error updating client:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error occurred during fetch:', error);
+  }
+}
+
+const headers = [
+  { text: 'Vehiculo', value: 'Vehiculo' },
+  { text: 'Fecha_de_pago', value: 'Fecha_de_pago' },
+  { text: 'Estado', value: 'Estado' },
+  { text: 'Cantidad_Abonada', value: 'Cantidad_Abonada' },
+  { text: 'Cantidad_Restante', value: 'Cantidad_Restante' },
+  { text: 'Cantidad_Total', value: 'Cantidad_Total' },
+  { text: 'Acciones', value: 'action', sortable: false }
+];
 </script>
 
 <template>
   <v-app>
-    <v-app-bar app color="#1a1a1a">
-        <router-link to="/Clientes">
-        <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
-        </router-link>
-        <h1 class="text-center w-100">Pagos</h1>
-        </v-app-bar>
+    <v-app-bar app color="#1a1a1a" dark>
+      <router-link to="MenuPrincipal">
+        <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
+      </router-link>
+      <h1 class="text-center w-100">Pagos</h1>
+    </v-app-bar>
 
-        <main>
-          <v-container>
-            <br>
-            <br>
-            <v-card flat>
-              <v-card-text>
-                <v-text-field
-                v-model="search"
-                label="Buscar"
-                prepend-inner-icon="mdi-magnify"
-                variant="outlined"
-                hide-details
-                single-line
-                class="mx-4"
-                ></v-text-field>
-              </v-card-text>
-              <v-row justfy="start">
-                <v-col>
-                  <v-data-table
-                  :headers="headers"
-                  :items="datos"
-                  :search="search"
-                ></v-data-table>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-container>
-        </main>
-        
+    <v-main>
+      <v-container>
+        <v-card flat>
+          <v-card-text>
+            <v-text-field
+              v-model="search"
+              label="Buscar"
+              prepend-inner-icon="mdi-magnify"
+              variant="outlined"
+              hide-details
+              single-line
+              class="mx-4"
+            ></v-text-field>
+          </v-card-text>
+          <v-row justify="start">
+
+            <v-dialog v-model="showEditFormulario" max-width="500px">
+              <div v-show="showEditFormulario === true">
+                <v-card class="pa-5">
+                  <v-card-title>Editar Cliente</v-card-title>
+                  <v-card-text class="scrollable-content">
+                    <v-text-field label="Nombre Completo" v-model="selectedCliente.Nombre"></v-text-field>
+                    <v-text-field label="Correo" v-model="selectedCliente.Correo" type="email"></v-text-field>
+                    <v-text-field label="Telefono" v-model="selectedCliente.Telefono" type="number"></v-text-field>
+                    <v-radio-group v-model="selectedCliente.Tipo_Cliente" label="Tipo de Cliente">
+                      <v-radio label="Físico" value="Fisico"></v-radio>
+                      <v-radio label="Moral" value="Moral"></v-radio>
+                    </v-radio-group>
+                    <v-btn class="BtnGuindo" @click="editarCliente">Guardar</v-btn>
+                  </v-card-text>
+                </v-card>
+              </div>
+            </v-dialog>
+
+          </v-row>
+          <v-data-table
+            :headers="headers"
+            :items="datos"
+            :search="search"
+          >
+            <template v-slot:[`item.action`]="{ item }">
+              <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
+                <v-icon left>mdi-pencil</v-icon> 
+              </v-btn>
+            </template>
+          </v-data-table>
+        </v-card>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
 <style scoped>
-.container{
-  display: flex;
-  height:99vh;
-  width:100vw;
-}
-.card{
-  background-color: rgb(245, 245, 245);
-  color: rgb(80, 80, 80);
-  width: 272px;
-  height: 390px;
-  margin: 10px;border-radius: 10px;
-  flex-wrap: wrap;
-  overflow: hidden; 
-  cursor:context-menu;
-}
-.card:hover{
-  filter: brightness(96%); 
-}
-.titulo{
-  justify-content: center;
-  align-items:center ;
-  height: 50px;
-  color: black ;
+.v-application {
+  background: #f5f5f5;
 }
 
-
-.servicios {
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  white-space: nowrap;
-  cursor: pointer;
+.v-card {
+  margin-top: 20px;
 }
 
-.estatus
-{
-  border-radius: 10px;
-  margin-top: 2px;
-  color: black;
-}
-.estatus.pagado {
-  color: green; 
-}
-
-.estatus.cancelado {
-  color: red; 
-}
-
-#container-botones{
-  display: flex;
-  text-align: center;  
-}
-
-.btn{
-  width: 80px;
-  cursor: pointer;
-}
-.btn:hover{
-  filter: brightness(99%); 
-    
-}
-#btn-liberar:hover {
-  color: #4caf50; 
-}
-#btn-cancelar:hover{
-  color: #f30000; 
-}
-#btn-abonar:hover {
-  color: #21dbf3; 
-}
-.container-dialog{
-  width: 400px;
-}
-.card-dialog{
-  background-color: rgb(223, 223, 223);
-  height: 500px;
-  width: 360px;
-}
-.contenedor-datos-dialog{
-  margin-left: 30px;
-}
-.cliente-dialog{
-  text-align: center;
-}
-
+.v-data-table {
+  margin-top: 10px;}
 </style>

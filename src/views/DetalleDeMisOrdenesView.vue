@@ -1,25 +1,37 @@
 <script setup>
+import { useClientesStore } from '@/stores/clientesStore';
 import { onMounted, ref } from 'vue';
-import { useProfileStore } from '@/stores/counter';
 
-const store = useProfileStore();
-const datos = ref([]);
+const store = useClientesStore();
+const datosOrdenes = ref([]);
+const headers = ref([
+  { text: 'Fecha_Ingreso', value: 'Fecha_Ingreso' },
+  { text: 'Marca', value: 'Marca' },
+  { text: 'Modelo', value: 'Modelo' },
+  { text: 'Motivo', value: 'Motivo' },
+  { text: 'Estado', value: 'Estado' },
 
-const showDetails = () => {
-    fetch(`http://18.222.114.51/misordenes?userId=${store.userId}`)
-    .then(response => response.json())
-    .then(json => {
-        if (json.status === 200) {
-            datos.value = json.data;
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error); 
-    });
+]);
+
+
+const loadOrdenes = async () => {
+    const local = JSON.parse(localStorage.getItem('clienteLogueado'));
+try {
+    if (local.UsuarioID) {
+    await store.fetchOrdenes();
+    datosOrdenes.value = store.ordenes;
+    } else {
+    console.log('Cliente no está logueado o no tiene ID');
+    }
+} catch (error) {
+    console.error('Error al cargar los vehículos:', error);
+
+    datosOrdenes.value = []; 
 }
+};
 
 onMounted(() => {
-    showDetails();
+loadOrdenes();
 });
 </script>
 
@@ -29,7 +41,7 @@ onMounted(() => {
       <v-card-title id="card-title">Mis Órdenes</v-card-title>
       <v-data-table
         :headers="headers"
-        :items="datos"
+        :items="datosOrdenes"
         :search="search"
         class="elevation-1"
       >
