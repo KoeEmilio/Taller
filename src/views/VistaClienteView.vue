@@ -282,7 +282,7 @@ const selectedDate = ref(new Date().toISOString().substr(0, 10));
 }
 .btn-home{
   width: 100vw;
-  margin-top: 220px;
+  margin-top: 340px;
 }
 .formCita{
   max-width: 600px;

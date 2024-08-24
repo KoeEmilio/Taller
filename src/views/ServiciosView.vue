@@ -5,7 +5,7 @@ const datos = ref([]);
 const search = ref('');
 
 const mostrarinfo = () => {
-    fetch('http://testpdocrudo.com/Servicios')
+    fetch('http://testpdocrudo.com/servicios')
         .then(response => response.json())
         .then(json => {
             if (json.status === 200) {
@@ -20,10 +20,10 @@ onMounted(() => {
 
 const headers = ref([
     
-    { text: 'Servicio', value: 'Servicio' },
+    { text: 'Nombre_Servicio', value: 'Nombre_Servicio' },
     { text: 'Descripción', value: 'Descripcion' },
-    { text: 'Tipo', value: 'Tipo' },
-    { text: 'Costo', value: 'Costo' },
+    { text: 'Tipo_Servicio', value: 'Tipo_Servicio' },
+    { text: 'Costo_Servicio', value: 'Costo_Servicio' },
     { text: 'Acciones', value: 'actions', sortable: false }
 ]);
 

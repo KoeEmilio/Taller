@@ -152,7 +152,7 @@ const router = createRouter({
       path: '/DetallesOrden',
       name: 'DetallesOrden',
       component: DetallesOrdenView,
-      meta: { requiresAuth: true, roles: ['Empleado'] }
+      meta: { requiresAuth: true, roles: ['Administrador'] }
     },
     {
       path: '/VerCitas',

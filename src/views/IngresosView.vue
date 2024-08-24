@@ -5,15 +5,11 @@ import { ref, onMounted,watch } from 'vue'
 const snackbar = ref(false) // Estado del snackbar
 const mensaje = ref('Selecciona el mes por el que filtraras los datos')
 const selectedMonth = ref('')
+const selectedYear = ref('')
 
 const datos = ref([])
-const showIngresos = (mes = '') => {
-    let url = 'http://testpdocrud.com/Ingresos';
-    if (mes) {
-        url += `/${mes}`;  // Añadimos el parámetro del mes a la URL
-    }
-
-    fetch(url)
+const showIngresos = () => {    
+    fetch('http://testpdocrudtwo.com/ingresos')
         .then(response => response.json())
         .then(json => {
             if (json.status === 200) {
@@ -30,10 +26,6 @@ onMounted(() => {
     showIngresos();
 });
 
-// Escuchar cambios en `selectedMonth` para filtrar los datos
-watch(selectedMonth, (newMonth) => {
-    showIngresos(newMonth);  // Filtra los datos según el mes seleccionado
-});
 
 const months = [
   { text: 'Enero', value: '01' },
@@ -49,6 +41,24 @@ const months = [
   { text: 'Noviembre', value: '11' },
   { text: 'Diciembre', value: '12' }
 ];
+
+watch(selectedYear, (newYear) => {
+  showIngresos(newYear)
+})
+
+const years = [
+  { text:'2022', value: 2022 },
+  { text:'2023', value: 2023 },
+  { text:'2024', value: 2024 },  
+  { text:'2025', value: 2025 },  
+  { text:'2026', value: 2026 },  
+  { text:'2027', value: 2027 },  
+  { text:'2028', value: 2028 },  
+  { text:'2029', value: 2029 },  
+  { text:'2030', value: 2030 },  
+  { text:'2031', value: 2031 },  
+  { text:'2032', value: 2032 }
+]
 </script>
 
 <template>
@@ -80,17 +90,29 @@ const months = [
           <p>Selecciona un mes: </p> &nbsp;
           <select v-model="selectedMonth" class="select">
             <option value="" disabled selected>Meses</option>
-            <option value="">Ninguno</option>
             <option v-for="month in months" :key="month.value" :value="month.value">
               {{ month.text }}
             </option>
           </select>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <p>Selecciona un año: </p>&nbsp;
+          <select v-model="selectedYear" class="select">
+            <option value="" disabled selected>Años</option>
+            <option v-for="year in years" :key="year.value" :value="year.value">
+              {{ year.text }}
+            </option>
+          </select>
+          
         </v-row>
         <v-row class="contenedor-tabla">
-          <v-data-table-virtual
-          :headers="headers"
-          :items="datos"
-          ></v-data-table-virtual>
+          <v-col>
+            <v-data-table-virtual
+            :headers="headers"
+            :items="datos"
+            ></v-data-table-virtual>
+          </v-col>          
         </v-row>
       </v-col>  
     </v-container>
@@ -130,7 +152,7 @@ const months = [
 }
 .contenedor-tabla{
   width: 94vw;
-  margin-left: -70px;
+  justify-content: center;
 }
 
 </style>

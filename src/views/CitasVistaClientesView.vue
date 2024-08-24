@@ -1,43 +1,49 @@
 <script setup>
+import { useClientesStore } from '@/stores/clientesStore';
 import { onMounted, ref } from 'vue';
-import { useProfileStore } from '@/stores/counter';
 
-const store = useProfileStore();
+const store = useClientesStore();
 const datosCitas = ref([]);
 
-const ShowAutos = () => {
-    fetch(`http://18.222.114.51/miscitas?userId=${store.userId}`)
-    .then(response => response.json())
-    .then(json => {
-        if(json.status === 200){
-            datosCitas.value = json.data;
-        }
-    });
+
+
+const loadCitas = async () => {
+    const local = JSON.parse(localStorage.getItem('clienteLogueado'));
+try {
+    if (local.UsuarioID) {
+    await store.fetchCitas();
+    datosCitas.value = store.citas;
+    } else {
+    console.log('Cliente no está logueado o no tiene ID');
+    }
+} catch (error) {
+    console.error('Error al cargar los vehículos:', error);
+
+    datosVehiculos.value = []; 
 }
+};
 
 onMounted(() => {
-    ShowAutos();
+loadCitas();
 });
-
 </script>
 
 
 <template>
     <div id="container">
         <v-card class="card">
-            <v-card-title id="card-title">Citas</v-card-title>
+            <v-card-title id="card-title"><strong>CITAS</strong></v-card-title>
             <v-divider></v-divider>
             <br>
             <v-col>
                 <v-row>
                     <v-col>
 
-                        <v-data-table-virtual
+                        <v-data-table
                         :headers="headers"
                         :items="datosCitas"
-                        height="400"
                         item-value="name"
-                        ></v-data-table-virtual>
+                        ></v-data-table>
 
                     </v-col>
                 </v-row>
@@ -59,8 +65,9 @@ onMounted(() => {
     overflow-y: auto;
 }
 #card-title{
-    margin-top: 10px;
-    text-align:start;
+    background-color: #1a1a1a;
+    text-align:center;
+    color: white;
     font-size: xx-large;
 }
 </style>

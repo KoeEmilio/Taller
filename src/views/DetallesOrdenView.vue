@@ -12,7 +12,7 @@ const ordenes = ref([]);
 
 const fetchServicios = async () => {
   try {
-    const response = await fetch('http://testpdocrudo.com/detalles', {
+    const response = await fetch('http://testpdocrudo.com/servicios', {
       method: 'GET',
     });
     const data = await response.json();
@@ -28,7 +28,7 @@ const fetchServicios = async () => {
 
 const fetchOrdenes = async () => {
   try {
-    const response = await fetch('/api/ordenes', {
+    const response = await fetch('http://testpdocrudo.com/ordenes', {
       method: 'GET',
     });
     const data = await response.json();
