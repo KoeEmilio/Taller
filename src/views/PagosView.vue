@@ -1,157 +1,238 @@
+<template>
+  <v-app>
+    <v-app-bar app color="#1a1a1a" dark>
+      <router-link to="MenuPrincipal">
+        <v-btn class="ma-3" color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
+      </router-link>
+      <h1 class="text-center w-100">PAGOS</h1>
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <v-card flat>
+          <v-card-text>
+            <v-text-field
+              v-model="search"
+              label="Buscar"
+              prepend-inner-icon="mdi-magnify"
+              variant="outlined"
+              hide-details
+              single-line
+              class="mx-4"
+            ></v-text-field>
+          </v-card-text>
+
+          <v-row justify="start">
+            <v-dialog v-model="showPagoPagadoAlert" max-width="500px">
+              <v-card>
+                <v-card-title class="headline">¡Pago ya abonado!</v-card-title>
+                <v-card-text>
+                  Este pago ya ha sido marcado como pagado. No se puede realizar más acciones sobre él.
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn color="green" @click="showPagoPagadoAlert = false">Aceptar</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
+            <v-dialog v-model="showEditFormulario" max-width="500px">
+              <v-card>
+                <v-card-actions>
+                  <v-col class="d-flex flex-column">
+                    <v-btn v-if="parseFloat(selectedPago.Cantidad_Restante) > 0" class="mb-2" color="secondary" @click="abrirDialogoAbonar">Abonar</v-btn>
+                    <v-btn v-if="selectedPago.Estado !== 'Pagado'" color="red" @click="cancelarEdicion">Cancelar</v-btn>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
+            <v-dialog v-model="showAbonarDialogo" max-width="400px">
+              <v-card>
+                <v-card-title>Abonar</v-card-title>
+                <v-card-text>
+                  <v-text-field 
+                    label="Cantidad a Abonar" 
+                    v-model="cantidadAbono" 
+                    type="text"
+                    :error-messages="[errorAbono]"
+                  ></v-text-field>
+                </v-card-text>
+                <v-card-actions>
+                  <v-col class="d-flex flex-column">
+                    <v-btn class="mb-2" color="green" @click="submitAbono">Abonar</v-btn>
+                    <v-btn color="red" @click="showAbonarDialogo = false">Salir</v-btn>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+
+          <v-data-table
+            :headers="headers"
+            :items="datos"
+            :search="search"
+          >
+            <template v-slot:item.actions="{ item }">
+              <v-btn color="#1a1a1a" @click="mostrarEditFormulario(item)">
+                <v-icon left>mdi-pencil</v-icon> 
+              </v-btn>
+            </template>
+          </v-data-table>
+        </v-card>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
-const search = ref('')
+const datos = ref([]);
+const search = ref('');
 
-
-
-const datos = ref([])
-const mostrarPagos = () => {
-  fetch('http:/testpdocrudo.com/pagos')
+const mostrarinfo = () => {
+  fetch('http://testpdocrudo.com/pagos')
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
         datos.value = json.data;
-        console.log(datos)
       }
-    })
-}
+    });
+};
 
 onMounted(() => {
-  mostrarPagos()
+  mostrarinfo();
 });
 
+const showEditFormulario = ref(false);
+const showAbonarDialogo = ref(false);
+const showPagoPagadoAlert = ref(false);
+const cantidadAbono = ref('');
+const errorAbono = ref('');
 
+const selectedPago = ref({
+  Vehiculo: '',
+  Fecha_de_pago: '',
+  Estado: '',
+  Cantidad_Abonada: '',
+  Cantidad_Restante: '',
+  Cantidad_Total: '',
+  OrdenID: '' 
+});
+
+const mostrarEditFormulario = (pago) => {
+  selectedPago.value = { ...pago };
+  console.log("Pago seleccionado para edición:", selectedPago.value);
+
+  if (selectedPago.value.Estado === 'Pagado') {
+    showPagoPagadoAlert.value = true;
+  } else {
+    showEditFormulario.value = true;
+  }
+};
+
+const cancelarEdicion = () => {
+  showEditFormulario.value = false;
+};
+
+const abrirDialogoAbonar = () => {
+  cantidadAbono.value = '';
+  errorAbono.value = ''; // Reset error message
+  showAbonarDialogo.value = true;
+};
+
+const submitAbono = () => {
+  realizarAbono();
+};
+
+const realizarAbono = () => {
+  const cantidad = parseFloat(cantidadAbono.value);
+
+  errorAbono.value = '';
+
+  if (isNaN(cantidad) || cantidad <= 0) {
+    errorAbono.value = 'La cantidad a abonar debe ser un número mayor que 0.';
+  } else if (cantidad > parseFloat(selectedPago.value.Cantidad_Restante)) {
+    errorAbono.value = 'La cantidad a abonar no puede exceder la cantidad restante.';
+  } else {
+    fetch('http://testpdocrudo.com/abonado', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        OrdenID: selectedPago.value.OrdenID,
+        CantidadAbono: cantidad
+      }),
+    })
+    .then(response => response.text()) // Leer la respuesta como texto
+    .then(text => {
+      try {
+        const json = JSON.parse(text); // Intentar parsear como JSON
+        if (json.status === 'success') { // Verificar estado de éxito
+          // Actualizar datos del pago
+          selectedPago.value.Cantidad_Abonada = parseFloat(selectedPago.value.Cantidad_Abonada) + cantidad;
+          selectedPago.value.Cantidad_Restante = parseFloat(selectedPago.value.Cantidad_Restante) - cantidad;
+
+          // Verificar si la cantidad restante es 0 para cambiar el estado a 'Pagado'
+          if (selectedPago.value.Cantidad_Restante <= 0) {
+            selectedPago.value.Estado = 'Pagado';
+            selectedPago.value.Cantidad_Restante = 0; // Asegurarse de que la cantidad restante sea 0
+          }
+
+          showAbonarDialogo.value = false;
+          editarPago();
+        } else {
+          console.error('Error al realizar el abono:', json.message);
+        }
+      } catch (e) {
+        console.error('Error al parsear JSON:', e);
+        console.error('Respuesta no válida:', text);
+      }
+    })
+    .catch(error => {
+      console.error('Error de red:', error);
+    });
+  }
+};
+
+const editarPago = () => {
+  datos.value = datos.value.map(pago => 
+    pago.OrdenID === selectedPago.value.OrdenID ? selectedPago.value : pago
+  );
+};
+
+const headers = [
+  { text: 'Vehiculo', value: 'Vehiculo' },
+  { text: 'Fecha de pago', value: 'Fecha_de_pago' },
+  { text: 'Estado', value: 'Estado' },
+  { text: 'Cantidad Abonada', value: 'Cantidad_Abonada' },
+  { text: 'Cantidad Restante', value: 'Cantidad_Restante' },
+  { text: 'Cantidad Total', value: 'Cantidad_Total' },
+  { text: 'Acciones', value: 'actions', sortable: false }
+];
 </script>
 
-<template>
-  <v-app>
-    <v-app-bar app color="#1a1a1a">
-        <router-link to="/Clientes">
-        <v-btn
-            class="ma-3"
-            color="white"
-            icon="mdi-arrow-left-bold-circle-outline"
-        ></v-btn>
-        </router-link>
-        <h1 class="text-center w-100">Pagos</h1>
-        </v-app-bar>
-
-        <main>
-          <v-container>
-            <br>
-            <br>
-            <v-card flat>
-              <v-card-text>
-                <v-text-field
-                v-model="search"
-                label="Buscar"
-                prepend-inner-icon="mdi-magnify"
-                variant="outlined"
-                hide-details
-                single-line
-                class="mx-4"
-                ></v-text-field>
-              </v-card-text>
-              <v-row justfy="start">
-                <v-col>
-                  <v-data-table
-                  :headers="headers"
-                  :items="datos"
-                  :search="search"
-                ></v-data-table>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-container>
-        </main>
-        
-  </v-app>
-</template>
-
 <style scoped>
-.container{
+.v-application { 
+  background: #f5f5f5;
+}
+
+.v-card {
+  margin-top: 20px;
+}
+
+.v-data-table {
+  margin-top: 10px;
+}
+
+.editar{
   display: flex;
-  height:99vh;
-  width:100vw;
-}
-.card{
-  background-color: rgb(245, 245, 245);
-  color: rgb(80, 80, 80);
-  width: 272px;
-  height: 390px;
-  margin: 10px;border-radius: 10px;
-  flex-wrap: wrap;
-  overflow: hidden; 
-  cursor:context-menu;
-}
-.card:hover{
-  filter: brightness(96%); 
-}
-.titulo{
   justify-content: center;
-  align-items:center ;
-  height: 50px;
-  color: black ;
 }
 
-
-.servicios {
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.estatus
-{
-  border-radius: 10px;
-  margin-top: 2px;
-  color: black;
-}
-.estatus.pagado {
-  color: green; 
-}
-
-.estatus.cancelado {
-  color: red; 
-}
-
-#container-botones{
+.v-col {
   display: flex;
-  text-align: center;  
+  flex-direction: column;
 }
-
-.btn{
-  width: 80px;
-  cursor: pointer;
-}
-.btn:hover{
-  filter: brightness(99%); 
-    
-}
-#btn-liberar:hover {
-  color: #4caf50; 
-}
-#btn-cancelar:hover{
-  color: #f30000; 
-}
-#btn-abonar:hover {
-  color: #21dbf3; 
-}
-.container-dialog{
-  width: 400px;
-}
-.card-dialog{
-  background-color: rgb(223, 223, 223);
-  height: 500px;
-  width: 360px;
-}
-.contenedor-datos-dialog{
-  margin-left: 30px;
-}
-.cliente-dialog{
-  text-align: center;
-}
-
 </style>
