@@ -35,6 +35,7 @@ const mostrarEditFormulario = (cliente) => {
 }
 
 
+
 const editarCliente = async () => {
   try {
     console.log("Datos enviados para actualizar:", JSON.stringify(selectedCliente.value));
