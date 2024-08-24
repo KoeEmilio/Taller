@@ -1,10 +1,35 @@
 <script setup>
+import { useClientesStore } from '@/stores/clientesStore';
 import { useProfileStore } from '@/stores/counter';
 import { useUsuarioStore } from '@/stores/UsuarioStore';
+
+
 import { computed, ref} from 'vue';
 import { RouterLink } from 'vue-router';
 
+const store = useProfileStore()
 const UsuarioStore = useUsuarioStore()
+const ClientesStore = useClientesStore()
+const datosPerfil = ref([])
+
+
+const loadPerfil = async () => {
+    const local = JSON.parse(localStorage.getItem('clienteLogueado'));
+try {
+    if (local.UsuarioID) {
+    await ClientesStore.fetchPerfil();
+    datosPerfil.value = ClientesStore.perfil;
+    console.log(datosPerfil.value);
+    } else {
+    console.log('Cliente no está logueado o no tiene ID');
+    }
+} catch (error) {
+    console.error('Error al cargar el perfil:', error);
+
+    datosPerfil.value = []; 
+}
+};
+
 
 
 const cerrarSession = () => {
@@ -16,8 +41,7 @@ const cerrarSession = () => {
 const drawer = ref(true);
 const rail = ref(true);
 
-const store = useProfileStore()
-const nombreUsuario = computed(() => store.title); // Computed para reflejar el estado reactivo
+
 
 const imagenUrl = computed(() => store.profileImage);
 const tempImagen = ref(imagenUrl.value)
@@ -35,7 +59,7 @@ const mostrarDialog = () => {
 }
 
 const openDialog = () => {
-  tempImagen.value = imagenUrl.value  // Cargar la URL actual en el campo de entrada
+  tempImagen.value = imagenUrl.value  
   dialog.value = true
 }
 
@@ -44,7 +68,7 @@ const closeDialog = () => {
 }
 
 const updateImage = () => {
-  store.setImagenPerfil(tempImagen.value); // Actualizar el perfil con la nueva URL
+  store.setImagenPerfil(tempImagen.value); 
   closeDialog();
 };
 
@@ -53,25 +77,22 @@ const onImageChange = (event) => {
   if (file) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      tempImagen.value = e.target.result; // Actualizar la vista previa de la imagen
+      tempImagen.value = e.target.result; 
     };
     reader.readAsDataURL(file);
   }
 };
 
-// Función para manejar el cierre del diálogo sin guardar cambios
+
 const handleCloseDialog = () => {
-  // Revertir la vista previa a la imagen original si se cancela
   tempImagen.value = imagenUrl.value;
   closeDialog();
 };
 
 
 
-// Referencia al input file oculto
 const fileInput = ref(null)
 
-// Función para abrir el input file
 const triggerFileInput = () => {
   fileInput.value.click();
 };
@@ -94,20 +115,7 @@ const selectedDate = ref(new Date().toISOString().substr(0, 10));
         @click="rail = false"
       >
       
-        <v-list-item 
-          :prepend-avatar="imagenUrl"
-          :title="nombreUsuario"
-          nav
-          @click="openDialog"
-        >
-          <template v-slot:append>
-            <v-btn
-              icon="mdi-chevron-left"
-              variant="text"
-              @click.stop="rail = !rail"
-            ></v-btn>
-          </template>
-        </v-list-item>
+  
 
         <v-divider></v-divider>
 
@@ -264,18 +272,18 @@ const selectedDate = ref(new Date().toISOString().substr(0, 10));
   background-color: rgb(255, 106, 106);
   color: white;
   width: 100px;    
-  transition: transform 0.2s ease; /* Transición suave */
+  transition: transform 0.2s ease; 
 
 }
 .btn-cancelar:hover{
-  transform: translateY(4px); /* Desplazamiento hacia arriba al pasar el ratón */
+  transform: translateY(4px); 
 }
 
 .btn-aceptar{
   background-color: rgb(94, 146, 94);
   color: white;
   width: 100px;
-  transition: transform 0.2s ease; /* Transición suave */
+  transition: transform 0.2s ease; 
 }
 .btn-aceptar:hover{
   transform: translateY(4px);

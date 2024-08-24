@@ -5,19 +5,16 @@ import { ref, onMounted,watch } from 'vue'
 const snackbar = ref(false) // Estado del snackbar
 const mensaje = ref('Selecciona el mes por el que filtraras los datos')
 const selectedMonth = ref('')
+const selectedYear = ref('')
 
 const datos = ref([])
-const showIngresos = (mes = '') => {
-    let url = 'http://testpdocrud.com/Ingresos';
-    if (mes) {
-        url += `/${mes}`;  // Añadimos el parámetro del mes a la URL
-    }
-
-    fetch(url)
+const showIngresos = (month , year ) => {    
+    fetch(`http://testpdocrudo.com/ingresos/${month}/${year}`)
         .then(response => response.json())
         .then(json => {
             if (json.status === 200) {
               datos.value = json.data
+              calcularTotal();
             } else {
                 console.error('Error en la respuesta:', json.msg); 
             }
@@ -26,29 +23,56 @@ const showIngresos = (mes = '') => {
             console.error('Error fetching data:', error); 
         });
 }
+
+const total = ref(0)
+
+const calcularTotal = () => {
+    total.value = datos.value.reduce((acc, item) => acc + parseFloat(item.Total), 0);
+}
+
 onMounted(() => {
-    showIngresos();
+  if (selectedMonth.value && selectedYear.value) {
+    showIngresos(selectedMonth.value, selectedYear.value);
+  }
 });
 
-// Escuchar cambios en `selectedMonth` para filtrar los datos
-watch(selectedMonth, (newMonth) => {
-    showIngresos(newMonth);  // Filtra los datos según el mes seleccionado
+
+// Reaccionar a cambios en selectedMonth y selectedYear
+watch([selectedMonth, selectedYear], ([newMonth, newYear]) => {
+    if (newMonth && newYear) {
+        showIngresos(newMonth, newYear);
+    }
 });
+
 
 const months = [
-  { text: 'Enero', value: '01' },
-  { text: 'Febrero', value: '02' },
-  { text: 'Marzo', value: '03' },
-  { text: 'Abril', value: '04' },
-  { text: 'Mayo', value: '05' },
-  { text: 'Junio', value: '06' },
-  { text: 'Julio', value: '07' },
-  { text: 'Agosto', value: '08' },
-  { text: 'Septiembre', value: '09' },
-  { text: 'Octubre', value: '10' },
-  { text: 'Noviembre', value: '11' },
-  { text: 'Diciembre', value: '12' }
+  { text: 'Enero', value: 1 },
+  { text: 'Febrero', value: 2 },
+  { text: 'Marzo', value: 3 },
+  { text: 'Abril', value: 4 },
+  { text: 'Mayo', value: 5 },
+  { text: 'Junio', value: 6 },
+  { text: 'Julio', value: 7 },
+  { text: 'Agosto', value: 8 },
+  { text: 'Septiembre', value: 9 },
+  { text: 'Octubre', value: 10 },
+  { text: 'Noviembre', value: 11 },
+  { text: 'Diciembre', value: 12 }
 ];
+
+const years = [
+  { text:'2022', value: 2022 },
+  { text:'2023', value: 2023 },
+  { text:'2024', value: 2024 },  
+  { text:'2025', value: 2025 },  
+  { text:'2026', value: 2026 },  
+  { text:'2027', value: 2027 },  
+  { text:'2028', value: 2028 },  
+  { text:'2029', value: 2029 },  
+  { text:'2030', value: 2030 },  
+  { text:'2031', value: 2031 },  
+  { text:'2032', value: 2032 }
+]
 </script>
 
 <template>
@@ -77,20 +101,43 @@ const months = [
         </v-row>
 
         <v-row class="contenedor-botones">
-          <p>Selecciona un mes: </p> &nbsp;
-          <select v-model="selectedMonth" class="select">
-            <option value="" disabled selected>Meses</option>
-            <option value="">Ninguno</option>
-            <option v-for="month in months" :key="month.value" :value="month.value">
-              {{ month.text }}
-            </option>
-          </select>
+          <v-col cols="9" >
+            <v-row>
+              <p>Selecciona un mes: </p> &nbsp;
+              <select v-model="selectedMonth" class="select">
+                <option value="" disabled selected>Meses</option>
+                <option v-for="month in months" :key="month.value" :value="month.value">
+                  {{ month.text }}
+                </option>
+              </select>
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              <p>Selecciona un año: </p>&nbsp;
+              <select v-model="selectedYear" class="select">
+                <option value="" disabled selected>Años</option>
+                <option v-for="year in years" :key="year.value" :value="year.value">
+                  {{ year.text }}
+                </option>
+              </select>
+            </v-row>
+            
+          </v-col>
+          <v-col cols="3">
+            <v-card>
+              <v-card-title>Total: </v-card-title>
+              <v-card-title >${{ total }}</v-card-title>
+            </v-card>
+          </v-col>
+          
         </v-row>
         <v-row class="contenedor-tabla">
-          <v-data-table-virtual
-          :headers="headers"
-          :items="datos"
-          ></v-data-table-virtual>
+          <v-col>
+            <v-data-table-virtual
+            :headers="headers"
+            :items="datos"
+            ></v-data-table-virtual>
+          </v-col>          
         </v-row>
       </v-col>  
     </v-container>
@@ -130,7 +177,7 @@ const months = [
 }
 .contenedor-tabla{
   width: 94vw;
-  margin-left: -70px;
+  justify-content: center;
 }
 
 </style>

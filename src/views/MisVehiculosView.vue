@@ -31,7 +31,7 @@ loadVehiculos();
 <template>
   <div id="container">
     <v-card class="card">
-      <v-card-title id="card-title">Vehículos</v-card-title>
+      <v-card-title id="card-title"><strong>VEHICULOS</strong></v-card-title>
       <v-divider></v-divider>
       <br>
       <v-col>
@@ -64,8 +64,9 @@ loadVehiculos();
 }
 
 #card-title {
-  margin-top: 10px;
-  text-align: start;
-  font-size: xx-large;
+background-color: #1a1a1a;
+color: white;
+text-align: center;
+font-size: xx-large;
 }
 </style>

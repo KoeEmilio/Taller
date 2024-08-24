@@ -3,11 +3,12 @@ import { reactive } from 'vue';
 import { useUsuarioStore } from './UsuarioStore';
 
 export const useClientesStore = defineStore('clientesStore', {
-  state: () => ({
+state: () => ({
     clienteLogueado: reactive(JSON.parse(localStorage.getItem('clienteLogueado.PersonaID')) || {}),
     vehiculos: [],
     citas: [],
     ordenes:[],
+    perfil: []
 }),
 actions: {
     setClienteLogueado(cliente) {
@@ -113,11 +114,44 @@ actions: {
         } else {
         console.warn('ClienteID no disponible en clienteLogueado');
         }
+    },
+
+    async fetchPerfil() {
+        const local = JSON.parse(localStorage.getItem('clienteLogueado'));
+        const user = local.UsuarioID
+        console.log(user)
+        const usuarioStore = useUsuarioStore(); 
+        
+        if (user) {
+        try {
+            const response = await fetch(`http://testpdocrudo.com/miperfil/${user}`, {
+            headers: {
+                'Authorization': `Bearer ${usuarioStore.token}` 
+            }
+            });
+            if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
+            }
+
+            const data = await response.json();
+
+            if (data.data) {
+            this.perfil = data.data;
+            } else {
+            console.error('Datos inesperados:', data);
+            }
+        } catch (error) {
+            console.error('Error al obtener los vehículos:', error);
+        }
+        } else {
+        console.warn('ClienteID no disponible en clienteLogueado');
+        }
     }
 },
 getters: {
     vehiculosPorCliente: (state) => state.vehiculos,
     citasPorCliente: (state) => state.citas,
     ordenesPorCliente: (state) => state.ordenes,
+    perfilPorCliente: (state) => state.perfil
 },
 });

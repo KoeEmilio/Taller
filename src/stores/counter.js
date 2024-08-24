@@ -1,31 +1,31 @@
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
+  import { ref } from 'vue'
+  import { defineStore } from 'pinia'
 
-export const useProfileStore = defineStore('profile', () => {
-  const title = ref('')
-  const profileImage = ref('') // Aquí se almacenará la URL de la imagen
+  export const useProfileStore = defineStore('profile', () => {
+    const title = ref('')
+    const profileImage = ref('') 
 
 
-  // Cargar la imagen desde Local Storage al iniciar
-   const initialize = () => {
-    const storedImage = localStorage.getItem('profileImage');
-    if (storedImage) {
-      profileImage.value = storedImage;
+    
+    const initialize = () => {
+      const storedImage = localStorage.getItem('profileImage');
+      if (storedImage) {
+        profileImage.value = storedImage;
+      }
+    };
+    
+    
+    initialize();
+
+    function setTitle(newTitle) {
+      title.value = newTitle
     }
-   };
-  
-   // Ejecuta la inicialización del store
-  initialize();
-
-  function setTitle(newTitle) {
-    title.value = newTitle
-  }
 
 
-  function setImagenPerfil(newImage) {
-    profileImage.value = newImage; // Actualizar el estado del store
-    localStorage.setItem('profileImage', newImage) // Guardar en Local Storage
-  }
+    function setImagenPerfil(newImage) {
+      profileImage.value = newImage; 
+      localStorage.setItem('profileImage', newImage) 
+    }
 
-  return { title, setTitle,profileImage,setImagenPerfil }
-})
+    return { title, setTitle,profileImage,setImagenPerfil }
+  })

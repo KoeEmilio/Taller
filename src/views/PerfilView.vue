@@ -1,74 +1,103 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { useProfileStore } from '@/stores/counter';
-
+import { ref, onMounted } from 'vue';
+import { useClientesStore } from '@/stores/clientesStore';
 const tipoPersona = ref(['Fisico','Moral'])
 const seleccionTipoPersona = ref('')
 
-const store = useProfileStore()
+const store = useClientesStore()
+const datosPerfil = ref([]);
 
-const title = computed ({
-    get: () => store.title, // Obtén el valor actual del título desde la tienda
-    set: (newTitle) => store.setTitle(newTitle) // Actualiza el título en la tienda
-})
 
-function Agregar() {
-    console.log('Clickeado')
+const loadPerfil = async () => {
+    const local = JSON.parse(localStorage.getItem('clienteLogueado'));
+try {
+    if (local.UsuarioID) {
+    await store.fetchPerfil();
+    datosPerfil.value = store.perfil;
+    console.log(datosPerfil.value);
+    } else {
+    console.log('Cliente no está logueado o no tiene ID');
+    }
+} catch (error) {
+    console.error('Error al cargar los vehículos:', error);
+
+    datosPerfil.value = []; 
 }
+};
+
+onMounted(() => {
+loadPerfil();
+});
+
 
 </script>
 
 <template>
     <div>
-        
         <div class="first-container">
-            
-            <v-card class="card">  
+            <v-card class="card">
                 <v-card-title id="card-title">Perfil</v-card-title>
-                            <v-divider></v-divider>
-
-                    <v-col>
-                        <v-row>
-                            <v-col>
-
-                                <v-card-text>Nombre Completo</v-card-text>
-                                <v-text-field variant="solo" v-model="title"></v-text-field>
-                                
-                            </v-col>
-                            <v-col>
-                                <v-card-text>Teléfono</v-card-text>
-                                <v-text-field variant="solo"></v-text-field>   
-                            </v-col>
-                            
-                        </v-row>
-
-                        <v-row>
-                            <v-col>
-                                <v-card-text> Direccion</v-card-text>       
-                                <v-text-field variant="solo"></v-text-field>   
-                            </v-col>
-                        </v-row>
-
-                        <v-row>
-                            <v-col>
-                                <v-card-text >Tipo De Cliente</v-card-text>
-                                <v-select variant="solo" :items="tipoPersona" density="default" label="Persona" v-model="seleccionTipoPersona"> </v-select>                               
-                                
-                                <v-card-text v-if="seleccionTipoPersona === 'Moral'">Nombre De la Empresa</v-card-text>
-                                <v-text-field variant="solo" v-if="seleccionTipoPersona === 'Moral'" > </v-text-field>
-                                
-                                <v-btn class="btn-agregar" title="Pulsa para agregar" @click="Agregar">Agregar</v-btn> 
-                               
-                            </v-col>
-                        </v-row>
-
-                    </v-col>
-                
+                <v-divider></v-divider>
+                <v-col>
+                    <v-row>
+                        <v-col>
+                            <v-card-text>Nombre Completo</v-card-text>
+                            <v-text-field
+                                variant="solo"
+                                v-if="datosPerfil[0]"
+                                v-model="datosPerfil[0].Nombre"
+                                disabled
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-card-text>Teléfono</v-card-text>
+                            <v-text-field
+                                variant="solo"
+                                v-if="datosPerfil[0]"
+                                v-model="datosPerfil[0].Telefono"
+                                disabled
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+                            <v-card-text>Direccion</v-card-text>
+                            <v-text-field
+                                variant="solo"
+                                v-if="datosPerfil[0]"
+                                v-model="datosPerfil[0].Direccion"
+                                disabled
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+                            <v-card-text>Tipo De Cliente</v-card-text>
+                            <v-select
+                                variant="solo"
+                                :items="tipoPersona"
+                                density="default"
+                                label="Persona"
+                                v-if="datosPerfil[0]"
+                                v-model="datosPerfil[0].Tipo_Cliente"
+                                disabled
+                            ></v-select>
+                            <v-card-text v-if="seleccionTipoPersona === 'Moral'">
+                                Nombre De la Empresa
+                            </v-card-text>
+                            <v-text-field
+                                variant="solo"
+                                v-if="seleccionTipoPersona === 'Moral'"
+                            ></v-text-field>
+                        
+                        </v-col>
+                    </v-row>
+                </v-col>
             </v-card>
         </div>
     </div>
-   
 </template>
+
 <style scoped>
 .first-container{
     display: grid;

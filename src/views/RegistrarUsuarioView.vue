@@ -1,7 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-
 const Nombre = ref('');
 const Direccion = ref('');
 const Telefono = ref();
@@ -17,12 +16,9 @@ const esEmpleado = computed(() => puestoPersona.value === 'empleado');
 const Tipo_Cliente = ref('');
 const Nombre_empresa = ref('');
 const Usuario = ref('');
-
 const Contrasena = ref('');
 
-
 const showPassword = ref(false);
-
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
@@ -31,83 +27,94 @@ const togglePasswordVisibility = () => {
 const valid = ref(false);
 const form = ref(null);
 
-const submit = async () => 
-{if (valid.value && puestoPersona.value === 'empleado') {
-    const data = 
-    {
-      Nombre: Nombre.value,
-      Direccion: Direccion.value,
-      Telefono: Telefono.value,
-      Correo: Correo.value,
-      Usuario: Usuario.value,
-      Contrasena: Contrasena.value,
-      RFC: RFC.value,
-      Num_Seguro_Social: Num_Seguro_Social.value,
-      CURP: CURP.value,
-    };
-    try 
-    {const response = await fetch('http://testpdocrudo.com/registrousuario', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),});
-      const responseText = await response.text();
-      console.log('Respuesta del servidor:', responseText);
-      try 
-      {
-        const responseData = JSON.parse(responseText);
-        if (response.ok) {
-          console.log('Vehículo registrado exitosamente', responseData);
-        } else {
-          console.error('Error al registrar el vehículo:', responseData);
-        }
-      } catch (error) 
-      {
-        console.error('Error al analizar la respuesta como JSON:', error);
-      }
-    } catch (error) {console.error('Error de red:', error);}
+const handleSubmit = async () => {
+  if (valid.value) {
+    if (esEmpleado.value) {
+      await submitEmpleado();
+    } else if (esCliente.value) {
+      await submitCliente();
+    }
   }
 };
 
-const submit2 = async () => 
-{if (valid.value && puestoPersona.value === 'cliente') {
-    const data = 
-    {
-      Nombre: Nombre.value,
-      Direccion: Direccion.value,
-      Telefono: Telefono.value,
-      Correo: Correo.value,
-      Usuario: Usuario.value,
-      Contrasena: Contrasena.value,
-      Tipo_Cliente: Tipo_Cliente.value,
-      Nombre_empresa: Nombre_empresa.value
-    };
-    try 
-    {const response = await fetch('http://testpdocrudo.com/registrousuarioC', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),});
-      const responseText = await response.text();
-      console.log('Respuesta del servidor:', responseText);
-      try 
-      {
-        const responseData = JSON.parse(responseText);
-        if (response.ok) {
-          console.log('Vehículo registrado exitosamente', responseData);
-        } else {
-          console.error('Error al registrar el vehículo:', responseData);
-        }
-      } catch (error) 
-      {
-        console.error('Error al analizar la respuesta como JSON:', error);
+const submitEmpleado = async () => {
+  const data = {
+    Nombre: Nombre.value,
+    Direccion: Direccion.value,
+    Telefono: Telefono.value,
+    Correo: Correo.value,
+    Usuario: Usuario.value,
+    Contrasena: Contrasena.value,
+    RFC: RFC.value,
+    Num_Seguro_Social: Num_Seguro_Social.value,
+    CURP: CURP.value,
+  };
+
+  try {
+    const response = await fetch('http://testpdocrudo.com/registrousuario', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const responseText = await response.text();
+    console.log('Respuesta del servidor:', responseText);
+
+    try {
+      const responseData = JSON.parse(responseText);
+      if (response.ok) {
+        console.log('Usuario registrado exitosamente', responseData);
+      } else {
+        console.error('Error al registrar el usuario:', responseData);
       }
-    } catch (error) {console.error('Error de red:', error);}
+    } catch (error) {
+      console.error('Error al analizar la respuesta como JSON:', error);
+    }
+  } catch (error) {
+    console.error('Error de red:', error);
   }
 };
 
+const submitCliente = async () => {
+  const data = {
+    Nombre: Nombre.value,
+    Direccion: Direccion.value,
+    Telefono: Telefono.value,
+    Correo: Correo.value,
+    Usuario: Usuario.value,
+    Contrasena: Contrasena.value,
+    Tipo_Cliente: Tipo_Cliente.value,
+    Nombre_empresa: Nombre_empresa.value,
+  };
+
+  try {
+    const response = await fetch('http://testpdocrudo.com/registrousuarioC', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const responseText = await response.text();
+    console.log('Respuesta del servidor:', responseText);
+
+    try {
+      const responseData = JSON.parse(responseText);
+      if (response.ok) {
+        console.log('Usuario registrado exitosamente', responseData);
+      } else {
+        console.error('Error al registrar el usuario:', responseData);
+      }
+    } catch (error) {
+      console.error('Error al analizar la respuesta como JSON:', error);
+    }
+  } catch (error) {
+    console.error('Error de red:', error);
+  }
+};
 </script>
 
 <template>
@@ -181,6 +188,7 @@ const submit2 = async () =>
                   ></v-text-field>
                 </v-col>
               </v-row>
+
               <v-form v-if="esEmpleado" ref="form" v-model="valid">
                 <v-text-field
                   v-model="RFC"
@@ -226,12 +234,10 @@ const submit2 = async () =>
                 id="btn-registrar" 
                 :disabled="!valid" 
                 color="#1a1a1a" 
-                @click="submit"
+                @click="handleSubmit"
               >
               Registrar
               </v-btn>
-
-
             </v-form>
           </v-container>
         </v-card-text>

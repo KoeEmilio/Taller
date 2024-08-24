@@ -375,7 +375,6 @@ router.beforeEach((to, from, next) => {
   const rol = UsuarioStore.usuario.rol;
 
   console.log(`Intentando navegar a: ${to.name}`);
-  console.log(`Token actual: ${authToken}`);
   console.log(`Rol del usuario: ${rol}`);
 
   if (to.name === 'Login' && authToken) {
@@ -406,22 +405,22 @@ router.beforeEach((to, from, next) => {
 
         if (to.meta.roles.includes(rol)) {
           console.log('Acceso permitido, redirigiendo a la ruta solicitada.');
-          next(); // Permitir el acceso
+          next(); 
         } else {
           console.log('Acceso denegado, redirigiendo a Unauthorized.');
-          next('/unauthorized'); // Redirigir a página no autorizada
+          next('/unauthorized'); 
         }
       } else {
         console.log('No se especifican roles en la ruta, acceso permitido.');
-        next(); // Permitir acceso si no se especifican roles
+        next(); 
       }
     } else {
       console.log('Token no válido o no presente, redirigiendo al Login.');
-      next('/Login'); // Redirigir al login si no está autenticado
+      next('/Login'); 
     }
   } else {
     console.log('La ruta no requiere autenticación, acceso permitido.');
-    next(); // Permitir acceso si la ruta no requiere autenticación
+    next();
   }
 });
 

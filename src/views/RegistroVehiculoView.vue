@@ -15,7 +15,7 @@ const Propietarios = ref([]);
 
 const fetchPropietarios = async () => {
   try {
-    const response = await fetch('http://testpdocrud.com/clientes');
+    const response = await fetch('http://testpdocrudo.com/clientes');
     if (response.ok) {
       const json = await response.json();
       Propietarios.value = json.data; 
@@ -43,7 +43,7 @@ const submit = async () => {
     };
 
     try {
-      const response = await fetch('http://testpdocrud.com/registrovehiculos', {
+      const response = await fetch('http://testpdo.com/registrovehiculos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,14 +51,14 @@ const submit = async () => {
         body: JSON.stringify(data),
       });
 
-      const responseText = await response.text(); // Obtener la respuesta como texto
-      
+      const responseText = await response.text(); 
+
       try {
-        const responseData = JSON.parse(responseText); // Intentar analizar como JSON
+        const responseData = JSON.parse(responseText); 
         if (response.ok) {
           console.log('Vehículo registrado exitosamente', responseData);
         } else {
-          // Manejo específico para el error de matrícula duplicada
+          
           if (responseData.message === 'Ya existe un vehículo con los mismos datos y matrícula. No se puede duplicar.') {
             alert('Error: Ya existe un vehículo con los mismos datos y matrícula.');
           } else {
@@ -89,10 +89,10 @@ onMounted(() => {
 <template>
   <v-app>  
     <VAppBar app color="#1a1a1a" dark>
-      <router-link to="/Vehiculos">
+      <router-link to="MenuPrincipal">
         <v-btn color="white" icon="mdi-arrow-left-bold-circle-outline"></v-btn>
       </router-link>
-      <h1 class="titulo-vehiculos text-center w-100">REGISTRAR VEHÍCULO</h1>
+      <h1 class="text-center w-100">REGISTRAR VEHÍCULO</h1>
     </VAppBar>
 
     <div class="container">
@@ -156,19 +156,29 @@ onMounted(() => {
               <br>
 
               <v-select
-                v-model="Tipo_de_vehiculo_Empresarial"
-                :items="['Camión', 'Camioneta', 'Automóvil']"
-                label="Tipo de Auto Empresarial"
-                :rules="[v => !!v || 'Tipo de Auto Empresarial es requerido']"
+                v-model="tipoPropietario"
+                :items="['Físico', 'Moral']"
+                label="Tipo de Propietario"
+                :rules="[v => !!v || 'Tipo de Propietario es requerido']"
                 variant="solo"
               ></v-select>
 
-              <v-text-field
-                v-model="Numero_de_Unidad"
-                :rules="[v => !!v || 'Número de Unidad es requerido', v => /^\d+$/.test(v) || 'Solo se aceptan números']"
-                label="Número de Unidad"
-                variant="solo"
-              ></v-text-field>
+              <v-form v-if="tipoPropietario === 'Moral'" ref="form" v-model="valid">
+                <v-select
+                  v-model="Tipo_de_vehiculo_Empresarial"
+                  :items="['Camión', 'Camioneta', 'Automóvil']"
+                  label="Tipo de Auto Empresarial"
+                  :rules="[v => !!v || 'Tipo de Auto Empresarial es requerido']"
+                  variant="solo"
+                ></v-select>
+
+                <v-text-field
+                  v-model="Numero_de_Unidad"
+                  :rules="[v => !!v || 'Número de Unidad es requerido', v => /^\d+$/.test(v) || 'Solo se aceptan números']"
+                  label="Número de Unidad"
+                  variant="solo"
+                ></v-text-field>
+              </v-form>
 
               <v-btn id="btn-registrar" :disabled="!valid" color="#1a1a1a" @click="submit">
                 Registrar
@@ -187,7 +197,7 @@ onMounted(() => {
   width: 100vw;
   justify-content: center;
   align-items: center;
-  margin-top: 60px; /* Ajustar según la altura del VAppBar */
+  margin-top: 60px; 
   background-color: gray;
 }
 
@@ -199,11 +209,11 @@ onMounted(() => {
 }
 
 #btn-registrar{
-  transition: transform 0.2s ease; /* Transición suave */
+  transition: transform 0.2s ease;
 }
 
 #btn-registrar:hover{
-  transform: translateY(4px); /* Desplazamiento hacia arriba al pasar el ratón */
+  transform: translateY(4px); 
 }
 
 .propietario {
@@ -220,18 +230,5 @@ onMounted(() => {
 
 .opcion{
   background-color: gray;
-  border: black 1px solid;
-}
-
-.titulo-vehiculos{
-  font-size: 20px;
-  padding-right: 40px;
-}
-
-@media (min-width: 768px) {
-  .titulo-vehiculos{
-  font-size: 40px;
-  align-items: center;
-}
-}
+  border: black 1px solid;}
 </style>
