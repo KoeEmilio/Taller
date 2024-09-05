@@ -70,7 +70,7 @@ export default {
           <v-img id="logo" src="src/img/logo blanco.png" @click="clicklogo"></v-img>
         </div>
         <div class="navegacion">
-          <v-btn variant="plain" class="navegacion__letras" @click="clicklogo">Inicio</v-btn>
+          <v-btn variant="plain" class="navegacion__letras" @click="clicklogo">Iniciar</v-btn>
           <v-btn variant="plain" class="navegacion__letras" @click="clickconocenos">Conocenos</v-btn>
           <v-btn variant="plain" class="navegacion__letras" @click="clickcitas">Citas</v-btn>
           <v-btn variant="plain" class="navegacion__letras" @click="clickcontacto">Contacto</v-btn>
